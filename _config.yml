@@ -9,11 +9,11 @@ description:
 keywords:
 author: Sunny
 language:
-timezone: Shanghai
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://sunnyhll.github.io/mypages/
+url: https://sunnyhll.github.io/mypages
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -78,4 +78,6 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://github.com/sunnyhll/mypages.git
+  branch: master
