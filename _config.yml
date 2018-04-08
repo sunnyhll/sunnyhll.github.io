@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Sunny's Hexo blog
 subtitle:
 description:
 keywords:
-author: John Doe
+author: Sunny
 language:
-timezone:
+timezone: Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://sunnyhll.github.io/mypages/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
