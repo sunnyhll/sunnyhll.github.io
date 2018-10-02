@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="肉肉,DP," />
+  <meta name="keywords" content="DP,肉肉," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="ProblemGiven a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums">
-<meta name="keywords" content="肉肉,DP">
+<meta name="keywords" content="DP,肉肉">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode 523 Continuous Subarray Sum">
 <meta property="og:url" content="https://sunnyhll.github.io/2018/05/13/Leetcode-523-Continuous-Subarray-Sum/index.html">
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="ProblemGiven a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-13T14:00:25.766Z">
+<meta property="og:updated_time" content="2018-05-26T02:16:20.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 523 Continuous Subarray Sum">
 <meta name="twitter:description" content="ProblemGiven a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums">
@@ -386,7 +386,7 @@
 <p>长度为k的数组的所有子数组的后缀和计算，可以利用数组的前缀和计算出。a(k)情况下，其后缀和的集合为第k个前缀和减去第i个前缀和(0&lt;=i&lt;k)的数集。</p>
 <p>为求得所有k的子数组后缀和中值为K的整数倍-a[k+1]的个数，需要求出所有k的整倍数-a[k+1]的个数。循环终止于当k的倍数大于整个序列和。</p>
 <h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><p>本程序需要维护一个HashMap，每个key都是一个前缀和，value则是前缀和的子数组个数。从而在每步的计算中能够利用这个数据结构最优查找速度。</p>
-<p>每步的计算中需要找到第k后缀和中符合条件的解，也就是HashMap中key值为sum-K_multiple的value。计算公式推导如下：</p>
+<p>每步的运算设计思想是找到重复的子问题，从而能在一步一步地推中找到第n步的答案。每步的计算中需要找到第k后缀和中符合条件的解，也就是HashMap中key值为sum-K_multiple的value。计算公式推导如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第k后缀和中符合条件的解</span><br><span class="line">    =[所有K的整倍数a[k+1]-为a[k]后缀和的]value</span><br><span class="line">    =[所有K的整倍数-a[k+1]为(Sum(k)-Sum(i))]的value, i=0,1,...,k-2中某值</span><br><span class="line">    =[所有K的整倍数为(Sum(k+1)-Sum(i))]的value</span><br><span class="line">    =[Sum(i)中值为(Sum(k+1)-所有K的整数倍)]的value</span><br></pre></td></tr></table></figure>
 <p>本算法需要计算从0到n的所有子数组前缀和并进行O(1)的HashMap查找，所以最终的复杂度为O(n)。</p>
 <h3 id="实现技巧"><a href="#实现技巧" class="headerlink" title="实现技巧"></a>实现技巧</h3><p>边界条件考虑：</p>
@@ -424,9 +424,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/肉肉/" rel="tag"># 肉肉</a>
-          
             <a href="/tags/DP/" rel="tag"># DP</a>
+          
+            <a href="/tags/肉肉/" rel="tag"># 肉肉</a>
           
         </div>
       
@@ -448,6 +448,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/02/Angular-5-template-syntax/" rel="prev" title="Angular 5 Components & Templates">
+                Angular 5 Components & Templates <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -524,7 +528,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

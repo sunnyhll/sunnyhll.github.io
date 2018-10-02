@@ -249,6 +249,243 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/10/02/Angular-5-template-syntax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/02/Angular-5-template-syntax/" itemprop="url">Angular 5 Components & Templates</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-02T21:35:50+08:00">
+                2018-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Angular-binding-brief-introduction"><a href="#Angular-binding-brief-introduction" class="headerlink" title="Angular binding brief introduction"></a>Angular binding brief introduction</h1><p>This blog is talking about the template syntax of Angular 5. The reference topic is at <a href="https://angular.io/guide/template-syntax" target="_blank" rel="noopener">https://angular.io/guide/template-syntax</a>.</p>
+<h2 id="Angular-one-way-binding-with-DOM-elements"><a href="#Angular-one-way-binding-with-DOM-elements" class="headerlink" title="Angular one-way binding with DOM elements"></a>Angular one-way binding with DOM elements</h2><p>For DOM elmenets that does simple display, Angular one-way binding is very useful. For example, pure text, or un-editable tables, one-way binding can quick get rendered by directly binding the Angular variable or using *ngFor iteration. There are three examples of one-way binding in the html template. THe binding objective can be expression, which does not change variables.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello &#123;&#123;username&#125;&#125;.<span class="tag">&lt;/<span class="name">p</span>&gt;</span> <span class="comment">&lt;!-- pure one-way interpolation with &#123;&#123;&#125;&#125; syntax--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> [<span class="attr">value</span>]=<span class="string">"username"</span>&gt;</span> <span class="comment">&lt;!-- DOM property with [] binding --&gt;</span></span><br><span class="line">bind-target="expression" <span class="comment">&lt;!-- bind- prefix target binding--&gt;</span></span><br></pre></td></tr></table></figure>
+<p>** Remember to user [] brackets to make the DOM property actively linked with Angular variables, otherwise the binding is worked as string type initialization only.</p>
+<h2 id="Angular-two-way-binding-with-DOM-elements"><a href="#Angular-two-way-binding-with-DOM-elements" class="headerlink" title="Angular two-way binding with DOM elements"></a>Angular two-way binding with DOM elements</h2><p>For DOM elements that also can have user interactions like input elements, select elments, two-way binding or event binding is required to allow Angular know about the user action. The grammar to bind a two-way variable is to use [(target)].</p>
+<p>There are some examples of Angular two-way binding:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"username"</span>&gt;</span> <span class="comment">&lt;!-- property, like ngModel for form elements, with [()] syntax--&gt;</span></span><br><span class="line">bindon-target="expression" <span class="comment">&lt;!-- bindon- prefix target two-way binding--&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Angular-event-binding-with-DOM-elements"><a href="#Angular-event-binding-with-DOM-elements" class="headerlink" title="Angular event binding with DOM elements"></a>Angular event binding with DOM elements</h2><p>Some DOM elements are not interact with text but events link click or text change, Angular also provides sytax for event binding so it can track user’s behavior based on DOM events. Vairables, like #event template input variable (let here), and template reference variable (#heroForm), which can be passed to the event handlers. The grammar to bind a event of a DOM is to use parenthesis with Angular event like (click). Event handlers can only be statements like methods of the component instance.</p>
+<p>There are some examples of Angular event bindings:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(click)="click($event)" <span class="comment">&lt;!-- use DOM property binding with () syntax--&gt;</span></span><br><span class="line">on-target="statement"  <span class="comment">&lt;!-- use on- prefix target binding --&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Angular-template-binding-targets"><a href="#Angular-template-binding-targets" class="headerlink" title="Angular template binding targets"></a>Angular template binding targets</h1><p>It’s not hard to see, binding targets in Angular includes HTML properties and events as below table.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Target</th>
+<th style="text-align:left">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Property</td>
+<td style="text-align:left">Element property,<br>Component property,<br>Directive property</td>
+<td style="text-align:left"><code>&lt;img [src]=&quot;heroImageUrl&quot;&gt;</code><br><code>&lt;app-hero-detail [hero]=&quot;currentHero&quot;&gt;&lt;/app-hero-detail&gt;</code><br><code>&lt;div [ngClass]=&quot;{&#39;special&#39;: isSpecial}&quot;&gt;&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Event</td>
+<td style="text-align:left">Element event,<br>Component event,<br>Directive event</td>
+<td style="text-align:left"><code>&lt;button (click)=&quot;onSave()&quot;&gt;Save&lt;/button&gt;</code><br><code>&lt;app-hero-detail (deleteRequest)=&quot;deleteHero()&quot;&gt;&lt;/app-hero-detail&gt;</code><br><code>&lt;div (myClick)=&quot;clicked=$event&quot; clickable&gt;click me&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Two-way</td>
+<td style="text-align:left">Event and property</td>
+<td style="text-align:left"><code>&lt;input [(ngModel)]=&quot;name&quot;&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Attributes</td>
+<td style="text-align:left">Attribute (the exception)</td>
+<td style="text-align:left"><code>&lt;button [attr.aria-label]=&quot;help&quot;&gt;help&lt;/button&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Class</td>
+<td style="text-align:left">class property</td>
+<td style="text-align:left"><code>&lt;div [class.special]=&quot;isSpecial&quot;&gt;Special&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Style</td>
+<td style="text-align:left">style property</td>
+<td style="text-align:left"><code>&lt;button [style.color]=&quot;isSpecial ? &#39;red&#39; : &#39;green&#39;&quot;&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Besides, Angular also supports built-in directives as below table.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Directive Type</th>
+<th style="text-align:left">Target</th>
+<th style="text-align:left">Use Case</th>
+<th style="text-align:left">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Attribute</td>
+<td style="text-align:left">NgClass</td>
+<td style="text-align:left">add and remove a set of CSS classes</td>
+<td style="text-align:left"><code>&lt;!-- toggle the &quot;special&quot; class on/off with a property --&gt;</code><br><code>&lt;div [class.special]=&quot;isSpecial&quot;&gt;The class binding is special&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Attribute</td>
+<td style="text-align:left">NgStyle</td>
+<td style="text-align:left">add and remove a set of HTML styles</td>
+<td style="text-align:left"><code>&lt;button [style.color]=&quot;isSpecial ? &#39;red&#39; : &#39;green&#39;&quot;&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Attribute</td>
+<td style="text-align:left">NgModel</td>
+<td style="text-align:left">two-way data binding to an HTML form element</td>
+<td style="text-align:left"><code>&lt;input [(ngModel)]=&quot;name&quot;&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Structural</td>
+<td style="text-align:left">NgIf</td>
+<td style="text-align:left">conditionally add or remove an element from the DOM</td>
+<td style="text-align:left"><code>&lt;app-hero-detail *ngIf=&quot;isActive&quot;&gt;&lt;/app-hero-detail&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Structural</td>
+<td style="text-align:left">NgSwitch</td>
+<td style="text-align:left">a set of directives that switch among alternative views</td>
+<td style="text-align:left"><code>&lt;div *ngFor=&quot;let hero of heroes&quot;&gt;&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Structural</td>
+<td style="text-align:left">NgForOf</td>
+<td style="text-align:left">repeat a template for each item in a list</td>
+<td style="text-align:left"><code>&lt;div [ngSwitch]=&quot;currentHero.emotion&quot;&gt;</code><br><code>&lt;app-happy-hero    *ngSwitchCase=&quot;&#39;happy&#39;&quot;    [hero]=&quot;currentHero&quot;&gt;&lt;/app-happy-hero&gt;</code><br><code>&lt;app-sad-hero      *ngSwitchCase=&quot;&#39;sad&#39;&quot;      [hero]=&quot;currentHero&quot;&gt;&lt;/app-sad-hero&gt;</code><br><code>&lt;/div&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Template-reference-variables"><a href="#Template-reference-variables" class="headerlink" title="Template reference variables"></a>Template reference variables</h2><p>A template reference variable is often a reference to a DOM element within a template. It can also be a reference to an Angular component or directive or a web component.<br>Use the hash symbol (#) to declare a reference variable. The #phone declares a phone variable on an <code>&lt;input&gt;</code> element.</p>
+<p>Example:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> #<span class="attr">phone</span> <span class="attr">placeholder</span>=<span class="string">"phone number"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- lots of other elements --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- phone refers to the input element; pass its `value` to an event handler --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> (<span class="attr">click</span>)=<span class="string">"callPhone(phone.value)"</span>&gt;</span>Call<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Template-expression-operators"><a href="#Template-expression-operators" class="headerlink" title="Template expression operators"></a>Template expression operators</h2><p>The template expression language employs a subset of JavaScript syntax supplemented with a few special operators for specific scenarios. The next sections cover two of these operators: pipe and safe navigation operator.</p>
+<h3 id="The-pipe-operator"><a href="#The-pipe-operator" class="headerlink" title="The pipe operator ( | )"></a>The pipe operator ( | )</h3><p>Angular pipes are a good choice for small transformations such as these. Pipes are simple functions that accept an input value and return a transformed value. They’re easy to apply within template expressions, using the pipe operator (|):</p>
+<p>Example:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Title through uppercase pipe: &#123;&#123;title | uppercase&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="The-safe-navigation-operator-and-null-property-paths"><a href="#The-safe-navigation-operator-and-null-property-paths" class="headerlink" title="The safe navigation operator ( ?. ) and null property paths"></a>The safe navigation operator ( ?. ) and null property paths</h3><p>The Angular safe navigation operator (?.) is a fluent and convenient way to guard against null and undefined values in property paths. Here it is, protecting against a view render failure if the currentHero is null.</p>
+<p>Example:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The current hero's name is &#123;&#123;currentHero?.name&#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>The Angular non-null assertion operator (!) serves the same purpose in an Angular template.</p>
+<p>Example:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--No hero, no text --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngIf</span>=<span class="string">"hero"</span>&gt;</span></span><br><span class="line">  The hero's name is &#123;&#123;hero!.name&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="The-any-type-cast-function-any"><a href="#The-any-type-cast-function-any" class="headerlink" title="The $any type cast function ($any(  ))"></a>The $any type cast function ($any( <expression> ))</expression></h3><p>Sometimes a binding expression will be reported as a type error and it is not possible or difficult to fully specify the type. To silence the error, you can use the $any cast function to cast the expression to the any type.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Accessing an undeclared member --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  The hero's marker is &#123;&#123;$any(hero).marker&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="Angular-binding-different-component-properties"><a href="#Angular-binding-different-component-properties" class="headerlink" title="Angular binding different component properties"></a>Angular binding different component properties</h1><p>We usually binding a template to its own component class. In such binding expressions, the component’s property or method is to the right of the (=).</p>
+<p>The Angular compiler won’t bind to properties of a different component unless they are Input or Output properties. You can’t use the TypeScript public and private access modifiers to shape the component’s public binding API.</p>
+<h2 id="Declaring-Input-and-Output-properties"><a href="#Declaring-Input-and-Output-properties" class="headerlink" title="Declaring Input and Output properties"></a>Declaring Input and Output properties</h2><p>An Input property is a settable property annotated with an @Input decorator. Values flow into the property when it is data bound with a property binding<br>An Output property is an observable property annotated with an @Output decorator. The property almost always returns an Angular EventEmitter. Values flow out of the component as events bound with an event binding.</p>
+<p>Example:</p>
+<p>In the sample for this guide, the bindings to HeroDetailComponent do not fail because the data bound properties are annotated with @Input() and @Output() decorators.</p>
+<p>In src/app/app.component.html file, below code will through compile error as template of app component does not recognize the property of hero-detail component:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">app-hero-detail</span> [<span class="attr">hero</span>]=<span class="string">"currentHero"</span> (<span class="attr">deleteRequest</span>)=<span class="string">"deleteHero($event)"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">app-hero-detail</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>In src/app/hero-detail.component.ts file, set @Input and @Output decorator with corresponding properties. Then the error is resolved.</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  inputs: [<span class="string">'hero'</span>],</span><br><span class="line">  outputs: [<span class="string">'deleteRequest'</span>],</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Input</span>()  hero: Hero;</span><br><span class="line"><span class="meta">@Output</span>() deleteRequest = <span class="keyword">new</span> EventEmitter&lt;Hero&gt;();</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/05/13/Leetcode-523-Continuous-Subarray-Sum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -381,7 +618,7 @@
 <p>长度为k的数组的所有子数组的后缀和计算，可以利用数组的前缀和计算出。a(k)情况下，其后缀和的集合为第k个前缀和减去第i个前缀和(0&lt;=i&lt;k)的数集。</p>
 <p>为求得所有k的子数组后缀和中值为K的整数倍-a[k+1]的个数，需要求出所有k的整倍数-a[k+1]的个数。循环终止于当k的倍数大于整个序列和。</p>
 <h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><p>本程序需要维护一个HashMap，每个key都是一个前缀和，value则是前缀和的子数组个数。从而在每步的计算中能够利用这个数据结构最优查找速度。</p>
-<p>每步的计算中需要找到第k后缀和中符合条件的解，也就是HashMap中key值为sum-K_multiple的value。计算公式推导如下：</p>
+<p>每步的运算设计思想是找到重复的子问题，从而能在一步一步地推中找到第n步的答案。每步的计算中需要找到第k后缀和中符合条件的解，也就是HashMap中key值为sum-K_multiple的value。计算公式推导如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第k后缀和中符合条件的解</span><br><span class="line">    =[所有K的整倍数a[k+1]-为a[k]后缀和的]value</span><br><span class="line">    =[所有K的整倍数-a[k+1]为(Sum(k)-Sum(i))]的value, i=0,1,...,k-2中某值</span><br><span class="line">    =[所有K的整倍数为(Sum(k+1)-Sum(i))]的value</span><br><span class="line">    =[Sum(i)中值为(Sum(k+1)-所有K的整数倍)]的value</span><br></pre></td></tr></table></figure>
 <p>本算法需要计算从0到n的所有子数组前缀和并进行O(1)的HashMap查找，所以最终的复杂度为O(n)。</p>
 <h3 id="实现技巧"><a href="#实现技巧" class="headerlink" title="实现技巧"></a>实现技巧</h3><p>边界条件考虑：</p>
@@ -555,6 +792,14 @@
 <td style="text-align:left">&lt;&lt;明朝那些事儿&gt;&gt;</td>
 <td style="text-align:right">2013</td>
 </tr>
+<tr>
+<td style="text-align:left">&lt;&lt;卑鄙的圣人:曹操 1-6&gt;&gt;</td>
+<td style="text-align:right">2018-Jun</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt;力哥说理财：小白理财入门必修课&gt;&gt;</td>
+<td style="text-align:right">2018-Aug</td>
+</tr>
 </tbody>
 </table>
 <h3 id="Books-that-I-am-reading"><a href="#Books-that-I-am-reading" class="headerlink" title="Books that I am reading"></a>Books that I am reading</h3><table>
@@ -567,19 +812,29 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">&lt;&lt; CLR via C#&gt;&gt;</td>
-<td style="text-align:center"></td>
-<td style="text-align:right">2018-May</td>
+<td style="text-align:left">&lt;&lt;知乎：金钱有术&gt;&gt;</td>
+<td style="text-align:center">115/278</td>
+<td style="text-align:right">2018-Sep</td>
 </tr>
 <tr>
-<td style="text-align:left">&lt;&lt;深入理解C#&gt;&gt;</td>
+<td style="text-align:left">&lt;&lt;深入理解Java虚拟机JVM高级特性与最佳实践&gt;&gt;</td>
 <td style="text-align:center"></td>
-<td style="text-align:right">2017-Nov</td>
+<td style="text-align:right">2018-Sep</td>
 </tr>
 <tr>
-<td style="text-align:left">&lt;&lt;深入理解Java Web技术内幕&gt;&gt;</td>
+<td style="text-align:left">&lt;&lt;算法设计与分析基础 by Anany Levitin&gt;&gt;</td>
 <td style="text-align:center"></td>
-<td style="text-align:right">2018-Mar</td>
+<td style="text-align:right">2018-Sep</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt;张爱玲全集01：倾城之恋&gt;&gt;</td>
+<td style="text-align:center">40/1020</td>
+<td style="text-align:right">2018-Aug</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt;卑鄙的圣人:曹操 7&gt;&gt;</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">2018-Jul</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;算法设计与分析（王晓东）&gt;&gt;</td>
@@ -587,9 +842,19 @@
 <td style="text-align:right">2018-May</td>
 </tr>
 <tr>
-<td style="text-align:left">&lt;&lt;卑鄙的圣人:曹操&gt;&gt;</td>
+<td style="text-align:left">&lt;&lt; CLR via C#&gt;&gt;</td>
 <td style="text-align:center"></td>
 <td style="text-align:right">2018-May</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt;深入理解Java Web技术内幕&gt;&gt;</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">2018-Mar</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt;深入理解C#&gt;&gt;</td>
+<td style="text-align:center"></td>
+<td style="text-align:right">2017-Nov</td>
 </tr>
 </tbody>
 </table>
@@ -602,11 +867,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">&lt;&lt;深入理解Java虚拟机JVM高级特性与最佳实践&gt;&gt;</td>
-<td style="text-align:center">Java虚拟机底层技术</td>
-<td style="text-align:right"></td>
-</tr>
 <tr>
 <td style="text-align:left">&lt;&lt; Spring boot实战&gt;&gt;</td>
 <td style="text-align:center">Java现代开发</td>
@@ -621,6 +881,11 @@
 <td style="text-align:left">&lt;&lt;Web性能权威指南&gt;&gt;</td>
 <td style="text-align:center">网络项目编程优化</td>
 <td style="text-align:right"></td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt;巴菲特之道&gt;&gt;</td>
+<td style="text-align:center">理财启蒙</td>
+<td style="text-align:right">I</td>
 </tr>
 </tbody>
 </table>
@@ -1720,7 +1985,7 @@
           
             <h2 id="Welcome-to-Sunny’s-hexo-post"><a href="#Welcome-to-Sunny’s-hexo-post" class="headerlink" title="Welcome to Sunny’s hexo post"></a>Welcome to Sunny’s hexo post</h2><p>本文主要介绍一种常见的个人博客管理方式，利用现有的Hexo静态博客模板管理和生成静态博客文档，和github pages对git repo页面的原生发布功能进行博客展示。同时，博客文档也能在本地生成，部署，存档，较于现有的博客工具具有更好的功能扩展。</p>
 <h3 id="Prepare-Node-js"><a href="#Prepare-Node-js" class="headerlink" title="Prepare Node.js"></a>Prepare Node.js</h3><p>Hexo is Node.js based npm plugin, which provides many extensions and powerful blog management functionality.</p>
-<h3 id="Use-Hexo-to-manage-blogs"><a href="#Use-Hexo-to-manage-blogs" class="headerlink" title="Use Hexo to manage blogs"></a>Use Hexo to manage blogs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo --save</span><br><span class="line">$ hexo init</span><br><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="Use-Hexo-to-manage-blogs"><a href="#Use-Hexo-to-manage-blogs" class="headerlink" title="Use Hexo to manage blogs"></a>Use Hexo to manage blogs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo --save</span><br><span class="line">$ hexo init</span><br><span class="line">$ hexo new <span class="string">"My New Post"</span> <span class="comment"># hexo new draft "My New Draft"</span></span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <h3 id="Use-SSH-git-management"><a href="#Use-SSH-git-management" class="headerlink" title="Use SSH git management"></a>Use SSH git management</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"&#123;yourgithubaddress&#125;"</span></span><br><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 <h3 id="Create-username-github-io-repo-for-statics-hexo-pages"><a href="#Create-username-github-io-repo-for-statics-hexo-pages" class="headerlink" title="Create {username}.github.io repo for statics hexo pages"></a>Create {username}.github.io repo for statics hexo pages</h3><h3 id="Configure-config-yml-file-for-hexo-blogs-and-deployments"><a href="#Configure-config-yml-file-for-hexo-blogs-and-deployments" class="headerlink" title="Configure _config.yml file for hexo blogs and deployments"></a>Configure _config.yml file for hexo blogs and deployments</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span><br><span class="line">url: https://&#123;username&#125;.github.io/</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:&#123;username&#125;/&#123;username&#125;.githubm.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message: "Site updated: &#123;&#123; now('YYYY-MM-DD HH:mm:ss') &#125;&#125;"</span><br></pre></td></tr></table></figure>
 <h3 id="Deploy-hexo-static-files-to-target-repo"><a href="#Deploy-hexo-static-files-to-target-repo" class="headerlink" title="Deploy hexo static files to target repo"></a>Deploy hexo static files to target repo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
@@ -1806,7 +2071,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
