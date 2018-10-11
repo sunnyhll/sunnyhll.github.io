@@ -342,7 +342,7 @@
       
         
           
-            <p>#Problem<br>Write a class StockSpanner which collects daily price quotes for some stock, and returns the span of that stock’s price for the current day.</p>
+            <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p>Write a class StockSpanner which collects daily price quotes for some stock, and returns the span of that stock’s price for the current day.</p>
 <p>The span of the stock’s price today is defined as the maximum number of consecutive days (starting from today and going backwards) for which the price of the stock was less than or equal to today’s price.</p>
 <p>For example, if the price of a stock over the next 7 days were [100, 80, 60, 70, 60, 75, 85], then the stock spans would be [1, 1, 1, 2, 1, 4, 6].</p>
 <p>Example 1:</p>
@@ -357,8 +357,7 @@
 <li>There will be at most 150000 calls to StockSpanner.next across all test cases.</li>
 <li>The total time limit for this problem has been reduced by 75% for C++, and 50% for all other languages.</li>
 </ol>
-<p>#Solution</p>
-<p>##解题思路</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>##解题思路</p>
 <p>本题考验的是对Java Stack类的熟练使用。</p>
 <h2 id="O-n-复杂度思路"><a href="#O-n-复杂度思路" class="headerlink" title="O(n)复杂度思路"></a>O(n)复杂度思路</h2><p>不难发现，运用两个Stack可以灵活的将数组中的数字进行遍历比较，从而得出结果。但是由于Leetcode对于时间复杂度要求较高，因此同为O(n)算法，需要最大化的优化其系数，从而通过时间限制测试。</p>
 <p><strong>Leetcode solution中提出的一种简化计算的方法</strong></p>
