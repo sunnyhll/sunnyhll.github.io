@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JS,肉肉,Markdown," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,13 @@
 
 
 
-<meta name="description" content="Welcome to Sunny’s hexo post本文主要介绍一种常见的个人博客管理方式，利用现有的Hexo静态博客模板管理和生成静态博客文档，和github pages对git repo页面的原生发布功能进行博客展示。同时，博客文档也能在本地生成，部署，存档，较于现有的博客工具具有更好的功能扩展。 Prepare Node.jsHexo is Node.js based npm plugi">
-<meta name="keywords" content="JS,肉肉,Markdown">
-<meta property="og:type" content="article">
-<meta property="og:title" content="How to use Hexo on github pages.">
-<meta property="og:url" content="https://sunnyhll.github.io/2018/04/08/My-first-post/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="微观天下">
+<meta property="og:url" content="https://sunnyhll.github.io/page/2/index.html">
 <meta property="og:site_name" content="微观天下">
-<meta property="og:description" content="Welcome to Sunny’s hexo post本文主要介绍一种常见的个人博客管理方式，利用现有的Hexo静态博客模板管理和生成静态博客文档，和github pages对git repo页面的原生发布功能进行博客展示。同时，博客文档也能在本地生成，部署，存档，较于现有的博客工具具有更好的功能扩展。 Prepare Node.jsHexo is Node.js based npm plugi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-06T09:24:29.153Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="How to use Hexo on github pages.">
-<meta name="twitter:description" content="Welcome to Sunny’s hexo post本文主要介绍一种常见的个人博客管理方式，利用现有的Hexo静态博客模板管理和生成静态博客文档，和github pages对git repo页面的原生发布功能进行博客展示。同时，博客文档也能在本地生成，部署，存档，较于现有的博客工具具有更好的功能扩展。 Prepare Node.jsHexo is Node.js based npm plugi">
+<meta name="twitter:title" content="微观天下">
 
 
 
@@ -120,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="https://sunnyhll.github.io/2018/04/08/My-first-post/"/>
+  <link rel="canonical" href="https://sunnyhll.github.io/page/2/"/>
 
 
 
 
 
-  <title>How to use Hexo on github pages. | 微观天下</title>
+  <title>微观天下</title>
   
 
 
@@ -145,7 +140,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,9 +234,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -270,7 +266,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">How to use Hexo on github pages.</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/08/My-first-post/" itemprop="url">How to use Hexo on github pages.</a></h1>
         
 
         <div class="post-meta">
@@ -324,11 +322,6 @@
           
 
           
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
 
           
 
@@ -347,7 +340,9 @@
       
 
       
-        <h2 id="Welcome-to-Sunny’s-hexo-post"><a href="#Welcome-to-Sunny’s-hexo-post" class="headerlink" title="Welcome to Sunny’s hexo post"></a>Welcome to Sunny’s hexo post</h2><p>本文主要介绍一种常见的个人博客管理方式，利用现有的Hexo静态博客模板管理和生成静态博客文档，和github pages对git repo页面的原生发布功能进行博客展示。同时，博客文档也能在本地生成，部署，存档，较于现有的博客工具具有更好的功能扩展。</p>
+        
+          
+            <h2 id="Welcome-to-Sunny’s-hexo-post"><a href="#Welcome-to-Sunny’s-hexo-post" class="headerlink" title="Welcome to Sunny’s hexo post"></a>Welcome to Sunny’s hexo post</h2><p>本文主要介绍一种常见的个人博客管理方式，利用现有的Hexo静态博客模板管理和生成静态博客文档，和github pages对git repo页面的原生发布功能进行博客展示。同时，博客文档也能在本地生成，部署，存档，较于现有的博客工具具有更好的功能扩展。</p>
 <h3 id="Prepare-Node-js"><a href="#Prepare-Node-js" class="headerlink" title="Prepare Node.js"></a>Prepare Node.js</h3><p>Hexo is Node.js based npm plugin, which provides many extensions and powerful blog management functionality.</p>
 <h3 id="Use-Hexo-to-manage-blogs"><a href="#Use-Hexo-to-manage-blogs" class="headerlink" title="Use Hexo to manage blogs"></a>Use Hexo to manage blogs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo --save</span><br><span class="line">$ hexo init</span><br><span class="line">$ hexo new <span class="string">"My New Post"</span> <span class="comment"># hexo new draft "My New Draft"</span></span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <h3 id="Use-SSH-git-management"><a href="#Use-SSH-git-management" class="headerlink" title="Use SSH git management"></a>Use SSH git management</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"&#123;yourgithubaddress&#125;"</span></span><br><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure>
@@ -355,6 +350,8 @@
 <h3 id="Deploy-hexo-static-files-to-target-repo"><a href="#Deploy-hexo-static-files-to-target-repo" class="headerlink" title="Deploy hexo static files to target repo"></a>Deploy hexo static files to target repo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>Useful links:<br><a href="https://blog.csdn.net/android_msk/article/details/75040841" target="_blank" rel="noopener">Hexo with pictures</a>,<br><a href="https://bingyue.github.io/2017/03/08/%E4%BD%BF%E7%94%A8Github-Pages%E5%92%8CHexo%E6%9E%84%E5%BB%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">Hexo Deployment</a>,<br><a href="https://yq.aliyun.com/articles/72002" target="_blank" rel="noopener">Jekyll vs Hexo</a>,<br><a href="https://coding.net/help/doc/project/markdown.html" target="_blank" rel="noopener">Markdown</a>,<br><a href="https://www.jianshu.com/p/1e402922ee32/" target="_blank" rel="noopener">Markdown brief</a>,<br><a href="https://blog.csdn.net/u013553529/article/details/50629055" target="_blank" rel="noopener">Markdown highlights</a></p>
 
+          
+        
       
     </div>
     
@@ -369,40 +366,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/JS/" rel="tag"># JS</a>
-          
-            <a href="/tags/肉肉/" rel="tag"># 肉肉</a>
-          
-            <a href="/tags/Markdown/" rel="tag"># Markdown</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/12/Leetcode-60-Permutation-Sequence/" rel="prev" title="Leetcode 60: Permutation Sequence">
-                Leetcode 60: Permutation Sequence <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -412,11 +383,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -424,10 +398,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -448,17 +418,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,22 +479,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Welcome-to-Sunny’s-hexo-post"><span class="nav-number">1.</span> <span class="nav-text">Welcome to Sunny’s hexo post</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prepare-Node-js"><span class="nav-number">1.1.</span> <span class="nav-text">Prepare Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Hexo-to-manage-blogs"><span class="nav-number">1.2.</span> <span class="nav-text">Use Hexo to manage blogs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-SSH-git-management"><span class="nav-number">1.3.</span> <span class="nav-text">Use SSH git management</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-username-github-io-repo-for-statics-hexo-pages"><span class="nav-number">1.4.</span> <span class="nav-text">Create {username}.github.io repo for statics hexo pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-config-yml-file-for-hexo-blogs-and-deployments"><span class="nav-number">1.5.</span> <span class="nav-text">Configure _config.yml file for hexo blogs and deployments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-hexo-static-files-to-target-repo"><span class="nav-number">1.6.</span> <span class="nav-text">Deploy hexo static files to target repo</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -687,10 +632,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
