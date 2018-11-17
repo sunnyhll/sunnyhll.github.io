@@ -249,194 +249,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/14/ubuntu-subsystem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/14/ubuntu-subsystem/" itemprop="url">Ubuntu-subsystem</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-14T23:01:49+08:00">
-                2018-04-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Runbooks/" itemprop="url" rel="index">
-                    <span itemprop="name">Runbooks</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Ubuntu-on-Windows-10"><a href="#Ubuntu-on-Windows-10" class="headerlink" title="Ubuntu on Windows 10"></a>Ubuntu on Windows 10</h2><ol>
-<li>Enable Developer mode for Win 10<br><img src="/2018/04/14/ubuntu-subsystem/Developer-mode.PNG" alt="Developer-mode"></li>
-<li>Add Windows Linux subsystem<br><img src="/2018/04/14/ubuntu-subsystem/Linux-subsystem.PNG" alt="Linux-subsystem"></li>
-<li>Install Ubuntu/SUSE/*** from App Store<br><img src="/2018/04/14/ubuntu-subsystem/Install-ubuntu.PNG" alt="Install-ubuntu"></li>
-</ol>
-<h2 id="Update-package-sources"><a href="#Update-package-sources" class="headerlink" title="Update package sources"></a>Update package sources</h2><ol>
-<li>Edit /etc/apt/source.list<blockquote>
-<p>#中国数学物理大学源</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid main multiverse restricted universe</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-backports main multiverse restricted universe</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-proposed main multiverse restricted universe</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-security main multiverse restricted universe</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-updates main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-backports main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-proposed main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-security main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-updates main multiverse restricted universe</p>
-<p>#阿里云的源：</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid main restricted universe multiverse</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-security main restricted universe multiverse</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-updates main restricted universe multiverse</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-proposed main restricted universe multiverse</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-backports main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-security main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-updates main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-proposed main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-backports main restricted universe multiverse</p>
-</blockquote>
-</li>
-</ol>
-<p>作者：sarleon<br>链接：<a href="https://www.zhihu.com/question/41311332/answer/90517838" target="_blank" rel="noopener">https://www.zhihu.com/question/41311332/answer/90517838</a></p>
-<ol start="2">
-<li>Run apt to udpate<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Intall-Nodejs-and-npm"><a href="#Intall-Nodejs-and-npm" class="headerlink" title="Intall Nodejs and npm"></a>Intall Nodejs and npm</h2><ul>
-<li><p>Install from Ubuntu apt tool</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install nodejs nodejs-legacy npm</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>npm self update for npm</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g npm@latest</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>npm update nodejs using package n</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable <span class="comment">#get latest stable</span></span><br><span class="line">$ sudo n latest <span class="comment">#get latest version</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/12/Leetcode-60-Permutation-Sequence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -804,7 +616,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -888,7 +700,7 @@
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
     <span class="site-uv">
