@@ -393,7 +393,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-13 11:29:17" itemprop="dateModified" datetime="2018-12-13T11:29:17+08:00">2018-12-13</time>
+                <time title="修改时间：2018-12-13 11:45:36" itemprop="dateModified" datetime="2018-12-13T11:45:36+08:00">2018-12-13</time>
               
             
           </span>
@@ -492,7 +492,7 @@
 <ol start="4">
 <li>通过线程池（<a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html" target="_blank" rel="noopener">ExecutorService</a>接口下的实例）创建</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> POOL_NUM = <span class="number">5</span>;</span><br><span class="line"><span class="comment">// 通过 Executors 静态方法创建一个线程池</span></span><br><span class="line">ExecutorService es = Executors.newFixedThreadPool(POOL_NUM);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; POOL_NUM); i++) &#123;</span><br><span class="line">    es.execute(oneTask);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//类似Task in c#</span></span><br><span class="line"><span class="keyword">while</span>(oneTask.isDone())&#123;</span><br><span class="line">    System.out.println(oneTask.get());</span><br><span class="line">&#125;</span><br><span class="line">es.shutdown();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> POOL_NUM = <span class="number">5</span>;</span><br><span class="line"><span class="comment">// 通过 Executors 静态方法创建一个线程池</span></span><br><span class="line">ExecutorService es = Executors.newFixedThreadPool(POOL_NUM);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; POOL_NUM); i++) &#123;</span><br><span class="line">    es.execute(oneTask);</span><br><span class="line">    <span class="comment">//Future&lt;String&gt; anotherTask = es.submit(oneCallabe);也可以执行</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//类似Task in c#</span></span><br><span class="line"><span class="keyword">while</span>(oneTask.isDone())&#123;</span><br><span class="line">    System.out.println(oneTask.get());</span><br><span class="line">&#125;</span><br><span class="line">es.shutdown();</span><br></pre></td></tr></table></figure>
 <h3 id="多线程数据读写访问问题（同步问题）"><a href="#多线程数据读写访问问题（同步问题）" class="headerlink" title="多线程数据读写访问问题（同步问题）"></a>多线程数据读写访问问题（同步问题）</h3><h4 id="synchronized-关键字"><a href="#synchronized-关键字" class="headerlink" title="synchronized 关键字"></a>synchronized 关键字</h4><p>synchronized可以在两个地方使用，一种是在方法体内部，可以进行instance level或者class level(通过synchronized(AccountSync.Class))进行锁定。</p>
 <p>当synchronized锁定在（静态）方法级别，所有（静态）method只能有一个method被线程调用，其他线程需要等待。</p>
 <p>当synchronized锁定在instance级别时，取决于instance的状态，所有需要拿该instance的线程需要等待。</p>
@@ -577,10 +577,25 @@
 <h2 id="Multi-threading-Fundamentals"><a href="#Multi-threading-Fundamentals" class="headerlink" title="Multi-threading Fundamentals"></a>Multi-threading Fundamentals</h2><h3 id="Condition-类"><a href="#Condition-类" class="headerlink" title="Condition 类"></a>Condition 类</h3><h3 id="Fork-Join-框架"><a href="#Fork-Join-框架" class="headerlink" title="Fork/Join 框架"></a>Fork/Join 框架</h3><h3 id="同步器AQS框架"><a href="#同步器AQS框架" class="headerlink" title="同步器AQS框架"></a>同步器AQS框架</h3><blockquote>
 <p><a href="http://www.cnblogs.com/waterystone/p/4920797.html" target="_blank" rel="noopener">http://www.cnblogs.com/waterystone/p/4920797.html</a></p>
 </blockquote>
-<h3 id="Callable-Future-FutureTask"><a href="#Callable-Future-FutureTask" class="headerlink" title="Callable,Future,FutureTask"></a>Callable,Future,FutureTask</h3><h2 id="Java-asynchronized-programming"><a href="#Java-asynchronized-programming" class="headerlink" title="Java asynchronized programming"></a>Java asynchronized programming</h2><blockquote>
+<h2 id="Java-asynchronized-programming"><a href="#Java-asynchronized-programming" class="headerlink" title="Java asynchronized programming"></a>Java asynchronized programming</h2><blockquote>
 <p><a href="https://www.jianshu.com/p/dff9063e1ab6" target="_blank" rel="noopener">https://www.jianshu.com/p/dff9063e1ab6</a></p>
 </blockquote>
-<h3 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h3><p>通过静态方法产生CompletableFuture实例。</p>
+<h3 id="Callable-Future-和FutureTask"><a href="#Callable-Future-和FutureTask" class="headerlink" title="Callable,Future, 和FutureTask"></a>Callable,Future, 和FutureTask</h3><h3 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h3><p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，必须等待它返回的结果。java.util.concurrent.Future对象解决了这个问题。</p>
+<p>在线程池提交Callable任务后返回了一个Future对象，使用它可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法，等待Callable结束并获取它的执行结果。</p>
+<p>Callable与Runnable接口很相似，不同之处在于一个需要返回值，一个不需要。而且Callable可以抛出异常。</p>
+<h3 id="Future和FutureTask"><a href="#Future和FutureTask" class="headerlink" title="Future和FutureTask"></a>Future和FutureTask</h3><p>FutureTask是Future接口的一个唯一实现类。</p>
+<p>FutureTask类实现了RunnableFuture接口，RunnableFuture继承了Runnable接口和Future接口，所以它既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值。</p>
+<p><strong>Future接口的不足：</strong></p>
+<p>Future接口可以构建异步应用，但依然有其局限性。它很难直接表述多个Future 结果之间的依赖性。实际开发中，我们经常需要达成以下目的：</p>
+<ul>
+<li>将两个异步计算合并为一个——这两个异步计算之间相互独立，同时第二个又依赖于第<br>一个的结果。</li>
+<li>等待 Future 集合中的所有任务都完成。</li>
+<li>仅等待 Future 集合中最快结束的任务完成（有可能因为它们试图通过不同的方式计算同<br>一个值），并返回它的结果。</li>
+<li>通过编程方式完成一个 Future 任务的执行（即以手工设定异步操作结果的方式）。</li>
+<li>应对 Future 的完成事件（即当 Future 的完成事件发生时会收到通知，并能使用 Future<br>计算的结果进行下一步的操作，不只是简单地阻塞等待操作的结果）</li>
+</ul>
+<p>在CompletableFuture中，满足了上述的目的。</p>
+<h3 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="noopener">CompletableFuture</a></h3><p>通过静态方法产生CompletableFuture实例。</p>
 <table>
 <thead>
 <tr>
