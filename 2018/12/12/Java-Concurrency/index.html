@@ -117,7 +117,7 @@
 <meta property="og:description" content="Java ConcurrencyMulti-threading线程线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New)         : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/ThreadStatus.jpg">
-<meta property="og:updated_time" content="2018-12-12T09:21:07.245Z">
+<meta property="og:updated_time" content="2018-12-13T02:54:54.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Concurrency">
 <meta name="twitter:description" content="Java ConcurrencyMulti-threading线程线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New)         : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”">
@@ -383,6 +383,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-13 10:54:54" itemprop="dateModified" datetime="2018-12-13T10:54:54+08:00">2018-12-13</time>
+              
+            
           </span>
 
           
@@ -573,7 +589,62 @@
 <h3 id="Callable-Future-FutureTask"><a href="#Callable-Future-FutureTask" class="headerlink" title="Callable,Future,FutureTask"></a>Callable,Future,FutureTask</h3><h2 id="Java-asynchronized-programming"><a href="#Java-asynchronized-programming" class="headerlink" title="Java asynchronized programming"></a>Java asynchronized programming</h2><blockquote>
 <p><a href="https://www.jianshu.com/p/dff9063e1ab6" target="_blank" rel="noopener">https://www.jianshu.com/p/dff9063e1ab6</a></p>
 </blockquote>
-<h3 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h3><h3 id="Completable"><a href="#Completable" class="headerlink" title="Completable"></a>Completable</h3><h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><h1 id="题外话：C-多线程工具"><a href="#题外话：C-多线程工具" class="headerlink" title="题外话：C#多线程工具"></a>题外话：C#多线程工具</h1><h1 id="题外话-C-异步编程"><a href="#题外话-C-异步编程" class="headerlink" title="题外话: C#异步编程"></a>题外话: C#异步编程</h1>
+<h3 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a>CompletableFuture</h3><p>通过静态方法产生CompletableFuture实例。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">静态方法</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">runAsync(Runnable runnable)</td>
+<td style="text-align:center">使用ForkJoinPool.commonPool()作为它的线程池执行异步代码。</td>
+</tr>
+<tr>
+<td style="text-align:left">runAsync(Runnable runnable, Executor executor)</td>
+<td style="text-align:center">使用指定的thread pool执行异步代码。</td>
+</tr>
+<tr>
+<td style="text-align:left">supplyAsync(Supplier\<u> supplier)</u></td>
+<td style="text-align:center">使用ForkJoinPool.commonPool()作为它的线程池执行异步代码，异步操作有返回值</td>
+</tr>
+<tr>
+<td style="text-align:left">supplyAsync(Supplier\<u> supplier, Executor executor)</u></td>
+<td style="text-align:center">使用指定的thread pool执行异步代码，异步操作有返回值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CompletableFuture 在调用runAsync后会立刻执行，定义的Runnable输入参入与.NET中定义的Task.Run(Action a)很相似。</span></span><br><span class="line">CompletableFuture cf = CompletableFuture.runAsync(()=&gt; System.out.println(<span class="string">"Hello"</span>));</span><br><span class="line">CompletableFuture&lt;String&gt; cf2 = CompletableFuture.supplierAsync(()=&gt;<span class="string">"Hello"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// get()方法会阻塞执行当前的task，类似于.NET的Task.wait()方法。</span></span><br><span class="line">        cf.get();</span><br><span class="line">        System.out.println(cf2.get());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">实例方法</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">thenAccept(Comsummer&lt;? super T&gt; consummer)</td>
+<td style="text-align:center">在异步task执行完成后传入一个Action方法来处理输出参数,如果void输出是不需要thenAccept(**),也有async版本</td>
+</tr>
+<tr>
+<td style="text-align:left">thenApply(Function&lt;? super T, ? super E&gt; function)</td>
+<td style="text-align:center">在异步task执行完成后传入一个Func来处理输出参数，并且得出返回值，也有async版本</td>
+</tr>
+<tr>
+<td style="text-align:left">thenCombine(CompletionStage&lt;? extends U&gt; taskToBeCombined, Function&lt;? super T, ? super U&gt; function)</td>
+<td style="text-align:center">Task并联，两个都执行完成了再继续fucntion)</td>
+</tr>
+<tr>
+<td style="text-align:left">thenCompose(Function&lt;? extends U&gt; function, CompletionStage\<u> cf)</u></td>
+<td style="text-align:center">Task串联，本task执行完成后再执行下一步</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Completable"><a href="#Completable" class="headerlink" title="Completable"></a>Completable</h3><h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><h1 id="题外话：C-多线程工具"><a href="#题外话：C-多线程工具" class="headerlink" title="题外话：C#多线程工具"></a>题外话：C#多线程工具</h1><h1 id="题外话-C-异步编程"><a href="#题外话-C-异步编程" class="headerlink" title="题外话: C#异步编程"></a>题外话: C#异步编程</h1>
       
     </div>
 
