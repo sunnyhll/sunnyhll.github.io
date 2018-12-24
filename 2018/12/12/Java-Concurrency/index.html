@@ -117,7 +117,7 @@
 <meta property="og:description" content="Java ConcurrencyMulti-threading线程线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New)         : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/ThreadStatus.jpg">
-<meta property="og:updated_time" content="2018-12-17T09:05:27.611Z">
+<meta property="og:updated_time" content="2018-12-24T02:56:12.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Concurrency">
 <meta name="twitter:description" content="Java ConcurrencyMulti-threading线程线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New)         : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”">
@@ -396,7 +396,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-17 17:05:27" itemprop="dateModified" datetime="2018-12-17T17:05:27+08:00">2018-12-17</time>
+                <time title="修改时间：2018-12-24 10:56:12" itemprop="dateModified" datetime="2018-12-24T10:56:12+08:00">2018-12-24</time>
               
             
           </span>
@@ -503,7 +503,8 @@
 <li>资源生产与消费问题（生产者-消费者模式）&lt;= 常用来解决数据的强耦合问题</li>
 </ol>
 <p>下文会展开描述这两类问题。</p>
-<h3 id="多线程数据读写访问问题（同步问题）"><a href="#多线程数据读写访问问题（同步问题）" class="headerlink" title="多线程数据读写访问问题（同步问题）"></a>多线程数据读写访问问题（同步问题）</h3><h4 id="synchronized-关键字"><a href="#synchronized-关键字" class="headerlink" title="synchronized 关键字"></a>synchronized 关键字</h4><p>synchronized可以在两个地方使用，一种是在方法体内部，可以进行instance level或者class level(通过synchronized(AccountSync.Class))进行锁定。</p>
+<h3 id="多线程数据读写访问问题（同步问题）"><a href="#多线程数据读写访问问题（同步问题）" class="headerlink" title="多线程数据读写访问问题（同步问题）"></a>多线程数据读写访问问题（同步问题）</h3><p>由于多线程情况下JVM的内存模型，实际上是存在主内存和工作内存之间的同步问题。读写操作实际上是read-load, store-write操作，在多线程并发时，操作的并发会导致主内存和工作内存某变量值的不同步问题。</p>
+<h4 id="synchronized-关键字"><a href="#synchronized-关键字" class="headerlink" title="synchronized 关键字"></a>synchronized 关键字</h4><p>synchronized可以在两个地方使用，一种是在方法体内部，可以进行instance level或者class level(通过synchronized(AccountSync.Class))进行锁定。</p>
 <p>当synchronized锁定在（静态）方法级别，所有（静态）method只能有一个method被线程调用，其他线程需要等待。</p>
 <p>当synchronized锁定在instance级别时，取决于instance的状态，所有需要拿该instance的线程需要等待。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountSync</span> </span>&#123;</span><br><span class="line">    Object o = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [])</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(o)&#123;</span><br><span class="line">            <span class="comment">//synchronized block </span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">myMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// lock class level access</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -593,12 +594,17 @@
 <li>volatile 关键字</li>
 </ol>
 <p>概括的说，保证内存可见性，防止指令重排序。</p>
-<p>深里说，通过插入内存屏障，来强制CPU的缓存失效来保证内存可见性。通过插入内存屏障阻止编译器，操作系统，内存做指令重排。</p>
+<p>volatile的内存语义及实现：</p>
+<ul>
+<li>通过插入内存屏障，来组织编译器/操作系统进行指令重排序。</li>
+<li>通过关联读/写操作和使用操作（用之前必须从主内存读，assign后必须写入主内存，以及写happens-before读规则）强制CPU的缓存失效来保证内存可见性。</li>
+</ul>
 <ol start="2">
 <li>final 关键字</li>
 </ol>
 <p>凡是对成员变量或者本地变量(在方法中的或者代码块中的变量称为本地变量)声明为final的都叫作final变量。final变量经常和static关键字一起使用，作为常量。final变量能保证其初始化的同步操作。</p>
-<h2 id="多线程的资源生产与消费问题"><a href="#多线程的资源生产与消费问题" class="headerlink" title="多线程的资源生产与消费问题"></a>多线程的资源生产与消费问题</h2><h3 id="Exchanger类"><a href="#Exchanger类" class="headerlink" title="Exchanger类"></a>Exchanger类</h3><h3 id="读写队列"><a href="#读写队列" class="headerlink" title="读写队列"></a>读写队列</h3><h2 id="Java-asynchronized-programming"><a href="#Java-asynchronized-programming" class="headerlink" title="Java asynchronized programming"></a>Java asynchronized programming</h2><p>异步方法是提升程序性能的一个有效手段，采用已经封装好的方法，让JVM去控制线程的创建和回收管理，减少了线程的阻塞，让程序员更加关注方法的设计。</p>
+<h2 id="多线程的资源生产与消费问题"><a href="#多线程的资源生产与消费问题" class="headerlink" title="多线程的资源生产与消费问题"></a>多线程的资源生产与消费问题</h2><p>Java的Vector容器实际上是线程安全的数据结构，也就是说Vector的各个操作都能保证其原子性，但是也会存在多线程问题。这是因为在Vector的删除和添加操作中，如果存在多线程并发，删除操作的对象是可能是一个空Vector容器，造成问题。Developer需要有很好的上下文控制来避免这种生产消费问题。</p>
+<h3 id="Exchanger类"><a href="#Exchanger类" class="headerlink" title="Exchanger类"></a>Exchanger类</h3><h3 id="读写队列"><a href="#读写队列" class="headerlink" title="读写队列"></a>读写队列</h3><h2 id="Java-asynchronized-programming"><a href="#Java-asynchronized-programming" class="headerlink" title="Java asynchronized programming"></a>Java asynchronized programming</h2><p>异步方法是提升程序性能的一个有效手段，采用已经封装好的方法，让JVM去控制线程的创建和回收管理，减少了线程的阻塞，让程序员更加关注方法的设计。</p>
 <h3 id="Callable-Future-和FutureTask"><a href="#Callable-Future-和FutureTask" class="headerlink" title="Callable,Future, 和FutureTask"></a>Callable,Future, 和FutureTask</h3><h3 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h3><p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，必须等待它返回的结果。java.util.concurrent.Future对象解决了这个问题。</p>
 <p>在线程池提交Callable任务后返回了一个Future对象，使用它可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法，等待Callable结束并获取它的执行结果。</p>
 <p>Callable与Runnable接口很相似，不同之处在于一个需要返回值，一个不需要。而且Callable可以抛出异常。</p>
@@ -773,6 +779,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/12/24/Java-Memory-Model/" rel="prev" title="Java Memory Model">
+                Java Memory Model <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -841,7 +851,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
