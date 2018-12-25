@@ -117,7 +117,8 @@
 <meta property="og:description" content="Java ConcurrencyMulti-threading线程线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New)         : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/ThreadStatus.jpg">
-<meta property="og:updated_time" content="2018-12-24T06:34:32.698Z">
+<meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/concurrentHashmap.png">
+<meta property="og:updated_time" content="2018-12-25T02:24:33.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Concurrency">
 <meta name="twitter:description" content="Java ConcurrencyMulti-threading线程线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New)         : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”">
@@ -396,7 +397,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-24 14:34:32" itemprop="dateModified" datetime="2018-12-24T14:34:32+08:00">2018-12-24</time>
+                <time title="修改时间：2018-12-25 10:24:33" itemprop="dateModified" datetime="2018-12-25T10:24:33+08:00">2018-12-25</time>
               
             
           </span>
@@ -505,7 +506,7 @@
 <p>下文会展开描述这两类问题。</p>
 <h3 id="多线程数据读写访问问题（同步问题）"><a href="#多线程数据读写访问问题（同步问题）" class="headerlink" title="多线程数据读写访问问题（同步问题）"></a>多线程数据读写访问问题（同步问题）</h3><p>由于多线程情况下JVM的内存模型，实际上是存在主内存和工作内存之间的同步问题。读写操作实际上是read-load, store-write操作，在多线程并发时，操作的并发会导致主内存和工作内存某变量值的不同步问题。</p>
 <h4 id="synchronized-关键字"><a href="#synchronized-关键字" class="headerlink" title="synchronized 关键字"></a>synchronized 关键字</h4><p>synchronized可以在两个地方使用，一种是在方法体内部，可以进行instance level或者class level(通过synchronized(AccountSync.Class))进行锁定。</p>
-<p>当synchronized锁定在（静态）方法级别，所有（静态）method只能有一个method被线程调用，其他线程需要等待。</p>
+<p>当synchronized锁定在（静态）方法级别，所有（静态）method只能有一个method被线程调用，其他线程需要等待。同一个线程可重入synchronized区块/方法。</p>
 <p>当synchronized锁定在instance级别时，取决于instance的状态，所有需要拿该instance的线程需要等待。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountSync</span> </span>&#123;</span><br><span class="line">    Object o = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [])</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(o)&#123;</span><br><span class="line">            <span class="comment">//synchronized block </span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">myMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// lock class level access</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h4><p><a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/locks/Lock.html" target="_blank" rel="noopener">Lock</a>是java的一个interface，所有实现了该接口的类型都具有锁的特质。</p>
@@ -575,6 +576,21 @@
 <blockquote>
 <p><a href="https://www.cnblogs.com/ITtangtang/p/3948786.html" target="_blank" rel="noopener">https://www.cnblogs.com/ITtangtang/p/3948786.html</a></p>
 </blockquote>
+<p>HashMap并发问题：</p>
+<blockquote>
+<p> HashTable容器使用synchronized来保证线程安全，但在线程竞争激烈的情况下HashTable的效率非常低下。因为当一个线程访问HashTable的同步方法时，其他线程访问HashTable的同步方法时，可能会进入阻塞或轮询状态。如线程1使用put进行添加元素，线程2不但不能使用put方法添加元素，并且也不能使用get方法来获取元素，所以竞争越激烈效率越低。</p>
+</blockquote>
+<p>ConcurrentHashMap解决并发问题:</p>
+<blockquote>
+<p>ConcurrentHashMap所使用的锁分段技术，首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。有些方法需要跨段，比如size()和containsValue()，它们可能需要锁定整个表而而不仅仅是某个段，这需要按顺序锁定所有段，操作完毕后，又按顺序释放所有段的锁。这里“按顺序”是很重要的，否则极有可能出现死锁，在ConcurrentHashMap内部，段数组是final的，并且其成员变量实际上也是final的，但是，仅仅是将数组声明为final的并不保证数组成员也是final的，这需要实现上的保证。这可以确保不会出现死锁，因为获得锁的顺序是固定的。</p>
+</blockquote>
+<p><img src="/2018/12/12/Java-Concurrency/concurrentHashmap.png" alt="ConcurrentHashMap"></p>
+<p>ConcurrentHashMap实现细节：</p>
+<blockquote>
+<p>ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segment是一种可重入锁ReentrantLock，在ConcurrentHashMap里扮演锁的角色，HashEntry则用于存储键值对数据。一个ConcurrentHashMap里包含一个Segment数组，Segment的结构和HashMap类似，是一种数组和链表结构， 一个Segment里包含一个HashEntry数组，每个HashEntry是一个链表结构的元素， 每个Segment守护者一个HashEntry数组里的元素,当对HashEntry数组的数据进行修改时，必须首先获得它对应的Segment锁。</p>
+</blockquote>
+<p>读取HashEntry信息是不需要拿锁，从而保证了并发读的高效性。HashMap中读取Map.Entry&lt;K,V&gt;是需要拿锁的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">HashEntry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;  </span><br><span class="line">    <span class="keyword">final</span> K key; <span class="comment">// immutable field保证链表稳定性，新节点头插入,或者替换已有的值（不能重复value）。  </span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> hash;  </span><br><span class="line">    <span class="keyword">volatile</span> V value;  <span class="comment">//volatile保证可见性，删除需要O(n)倒序复制被删节点前的list。</span></span><br><span class="line">    <span class="keyword">final</span> HashEntry&lt;K,V&gt; next;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>锁的底层实现———同步器AQS框架</strong></p>
 <blockquote>
 <p><a href="http://www.cnblogs.com/waterystone/p/4920797.html" target="_blank" rel="noopener">http://www.cnblogs.com/waterystone/p/4920797.html</a></p>

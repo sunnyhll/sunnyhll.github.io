@@ -122,7 +122,7 @@
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/24/Java-Memory-Model/FinalWrite.png">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/24/Java-Memory-Model/FinalElementWrite.png">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/24/Java-Memory-Model/FinalRead.png">
-<meta property="og:updated_time" content="2018-12-24T06:20:44.795Z">
+<meta property="og:updated_time" content="2018-12-25T02:03:30.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Memory Model">
 <meta name="twitter:description" content="JMM存在的目的Java虚拟机规范中试图定义一种Java内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各个平台下都能达到一致的内存访问效果。  JVM内存模型操作主内存操作  lock：将一个变量表示为一条线程独占的状态。 unlock: 将一个处于锁定状态的变量释放，释放后的变量才可以被其他线程锁定。 read: 将一个变量的值从主内存传输到线程的工作内存中，以便随后的">
@@ -384,12 +384,24 @@
                 
               
 
-              <time title="创建时间：2018-12-24 14:19:13 / 修改时间：14:20:44" itemprop="dateCreated datePublished" datetime="2018-12-24T14:19:13+08:00">2018-12-24</time>
+              <time title="创建时间：2018-12-24 14:19:13" itemprop="dateCreated datePublished" datetime="2018-12-24T14:19:13+08:00">2018-12-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-25 10:03:30" itemprop="dateModified" datetime="2018-12-25T10:03:30+08:00">2018-12-25</time>
               
             
           </span>
@@ -492,13 +504,20 @@
 <h2 id="Happen-Before先行发生法则"><a href="#Happen-Before先行发生法则" class="headerlink" title="Happen-Before先行发生法则"></a>Happen-Before先行发生法则</h2><p>先行发生是JMM中定义的两项操作之前的偏序关系，如果说操作A先行发生于操作B，其实就是说发生操作B之前，操作A产生的影响能够被B观察到，“影响”包括修改了内存中共享变量的值、发送了消息、调用了方法等。</p>
 <p>具体体现：</p>
 <ul>
-<li><strong>程序次序规则（Program Order Rule）</strong>：在一个线程内，按照程序代码顺序，书写在前面的操作先行发生于书写在后面的操作。准确地说，应该是控制流顺序而不是程序代码顺序，因为要考虑分支、循环等结构。<br>￼</li>
-<li><strong>管程锁定规则（Monitor Lock Rule）</strong>：一个unlock操作先行发生于后面对同一个锁的lock操作。这里必须强调的是同一个锁，而“后面”是指时间上的先后顺序。<br>￼</li>
-<li><strong>volatile变量规则（Volatile Variable Rule）</strong>：对一个volatile变量的写操作先行发生于后面对这个变量的读操作，这里的“后面”同样是指时间上的先后顺序。</li>
-<li><strong>线程终止规则（Thread Termination Rule）</strong>：线程中的所有操作都先行发生于对此线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值等手段检测到线程已经终止执行。</li>
-<li><strong>线程中断规则（Thread Interruption Rule）</strong>：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过Thread.interrupted()方法检测到是否有中断发生。</li>
-<li><strong>对象终结规则（Finalizer Rule）</strong>：一个对象的初始化完成（构造函数执行结束）先行发生于它的finalize()方法的开始。</li>
-<li><strong>传递性（Transitivity）</strong>：如果操作A先行发生于操作B，操作B先行发生于操作C，那就可以得出操作A先行发生于操作C的结论。</li>
+<li><p><strong>程序次序规则（Program Order Rule）</strong>：在一个线程内，按照程序代码顺序，书写在前面的操作先行发生于书写在后面的操作。准确地说，应该是控制流顺序而不是程序代码顺序，因为要考虑分支、循环等结构。</p>
+</li>
+<li><p><strong>管程锁定规则（Monitor Lock Rule）</strong>：一个unlock操作先行发生于后面对同一个锁的lock操作。这里必须强调的是同一个锁，而“后面”是指时间上的先后顺序。</p>
+</li>
+<li><p><strong>volatile变量规则（Volatile Variable Rule）</strong>：对一个volatile变量的写操作先行发生于后面对这个变量的读操作，这里的“后面”同样是指时间上的先后顺序。</p>
+</li>
+<li><p><strong>线程终止规则（Thread Termination Rule）</strong>：线程中的所有操作都先行发生于对此线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值等手段检测到线程已经终止执行。</p>
+</li>
+<li><p><strong>线程中断规则（Thread Interruption Rule）</strong>：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过Thread.interrupted()方法检测到是否有中断发生。</p>
+</li>
+<li><p><strong>对象终结规则（Finalizer Rule）</strong>：一个对象的初始化完成（构造函数执行结束）先行发生于它的finalize()方法的开始。</p>
+</li>
+<li><p><strong>传递性（Transitivity）</strong>：如果操作A先行发生于操作B，操作B先行发生于操作C，那就可以得出操作A先行发生于操作C的结论。</p>
+</li>
 </ul>
 <h1 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h1><h1 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h1><p>硬件层的内存屏障分为两种：Load Barrier 和 Store Barrier即读屏障和写屏障。<br>内存屏障有两个作用：</p>
 <ol>
