@@ -331,6 +331,237 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/05/13/Leetcode-523-Continuous-Subarray-Sum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/05/13/Leetcode-523-Continuous-Subarray-Sum/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/2/index.html">Leetcode 523 Continuous Subarray Sum</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-13 22:00:25" itemprop="dateCreated datePublished" datetime="2018-05-13T22:00:25+08:00">2018-05-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-26 10:16:20" itemprop="dateModified" datetime="2018-05-26T10:16:20+08:00">2018-05-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithms/" itemprop="url" rel="index"><span itemprop="name">Algorithms</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Given a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums up to n*k where n is also an integer.</p>
+<p>Example 1:</p>
+<p>Input: [23, 2, 4, 6, 7],  k=6</p>
+<p>Output: True</p>
+<p>Explanation: Because [2, 4] is a continuous subarray of size 2 and sums up to 6.</p>
+<p>Example 2:</p>
+<p>Input: [23, 2, 6, 4, 7],  k=6</p>
+<p>Output: True</p>
+<p>Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of size 5 and sums up to 42. 42 is a mutiple of 6 and 7 and n=7.</p>
+<p>Note:</p>
+<ol>
+<li>The length of the array won’t exceed 10,000.</li>
+<li>You may assume the sum of all the numbers is in the range of a signed 32-bit integer.</li>
+</ol>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>本题是一个经典的动态规划问题，此类问题的特征是，需要在穷举的可能性中找到一个最优化的解，从而求出所需问题的答案。本题的目标是找到所有和为K的连续子数组的个数。虽然本题没有直接提问一个最优解的概念，但是其实和为K的连续子数组的个数就是在穷举所有可能性后得出的并且是唯一的结果。</p>
+<p>本题的解题思路是采用是动态规划思想，一般来讲，动态规划题目的解题思路如下：</p>
+<ol>
+<li>找出最优解性质，并刻画其结构特征;</li>
+<li>递归的定义最优值;</li>
+<li>自底向上的方式算出最优值；</li>
+<li>根据计算最优值时得到的信息构造最优解。</li>
+</ol>
+<blockquote>
+<p>动态规划解题的前提假设是：问题的最优解包含着其自问题的最优解。此种性质称为最优子结构性质。最优子结构性质不难通过反证法证明。</p>
+</blockquote>
+<blockquote>
+<p>递归关系的建立，是基于已有的前提最优解，所以不难在此基础上推导出递增关系。</p>
+</blockquote>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>本题中，连续子数组的和是可以通过数组前缀和算出来的。两个长度不同的数组S[i], S[j]的前缀和相减就能计算出子数组S[(i+1)~j]的和。</p>
+<blockquote>
+<p>数组前缀和定义：一个数组从0号元素相加到k号元素则是该数组的第k个前缀和。下文用Sum(k)表示。</p>
+</blockquote>
+<p>假设已知长度为k的所有长度大于2的子数组后缀和中，是K的整数倍的有a(k)个，则当在k+1的情况下，a(k+1)则是a(k)+所有k的子数组后缀和中值为K的整数倍-a[k+1]的个数。</p>
+<blockquote>
+<p>数组后缀和定义：一个数组从最后一个元素加到倒数第k的元素，是该数组的第k个后缀和。</p>
+</blockquote>
+<p>长度为k的数组的所有子数组的后缀和计算，可以利用数组的前缀和计算出。a(k)情况下，其后缀和的集合为第k个前缀和减去第i个前缀和(0&lt;=i&lt;k)的数集。</p>
+<p>为求得所有k的子数组后缀和中值为K的整数倍-a[k+1]的个数，需要求出所有k的整倍数-a[k+1]的个数。循环终止于当k的倍数大于整个序列和。</p>
+<h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><p>本程序需要维护一个HashMap，每个key都是一个前缀和，value则是前缀和的子数组个数。从而在每步的计算中能够利用这个数据结构最优查找速度。</p>
+<p>每步的运算设计思想是找到重复的子问题，从而能在一步一步地推中找到第n步的答案。每步的计算中需要找到第k后缀和中符合条件的解，也就是HashMap中key值为sum-K_multiple的value。计算公式推导如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第k后缀和中符合条件的解</span><br><span class="line">    =[所有K的整倍数a[k+1]-为a[k]后缀和的]value</span><br><span class="line">    =[所有K的整倍数-a[k+1]为(Sum(k)-Sum(i))]的value, i=0,1,...,k-2中某值</span><br><span class="line">    =[所有K的整倍数为(Sum(k+1)-Sum(i))]的value</span><br><span class="line">    =[Sum(i)中值为(Sum(k+1)-所有K的整数倍)]的value</span><br></pre></td></tr></table></figure>
+<p>本算法需要计算从0到n的所有子数组前缀和并进行O(1)的HashMap查找，所以最终的复杂度为O(n)。</p>
+<h3 id="实现技巧"><a href="#实现技巧" class="headerlink" title="实现技巧"></a>实现技巧</h3><p>边界条件考虑：</p>
+<ol>
+<li><p>长度至少为2的子数组；</p>
+<p> 对于存在单个数为K的整数倍的数组，单数的情况是不能统计进最终结果的，所以需要在查找匹配的情况下去检查Sum(i)是否为previous_sum。如果是且value=1就需要剔除该种情况。</p>
+</li>
+<li><p>非负序列</p>
+<p> 注意，value是可以不为1的，因为非负序列是可以存在连续的0元素。</p>
+</li>
+<li><p>K的整数倍</p>
+<p> K的整数倍包括负数倍，也包括0倍，所以需要考虑K&lt;0是将K转化为正数，因为同解。</p>
+</li>
+<li><p>K为零的情况</p>
+<p> K为零的情况需要特殊考虑，主要是因为算法可以大大简化为查找连续两个0的算法。也因为K为零会使求余数运算符无法使用。</p>
+</li>
+<li><p>循环次数过多超时问题</p>
+<p> 此属于算法优化问题，当Sum(k+1)本身就是K的整数倍的时候，可以直接跳过K的整数倍递增的查找运算，从而避免K过小，序列元素值过大而造成的超时问题。</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">checkSubarraySum</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//special consideration for k=0 case</span></span><br><span class="line">        <span class="keyword">if</span>(k == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; nums.length; ++i)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i&gt; <span class="number">0</span> &amp;&amp; nums[i] == <span class="number">0</span> &amp;&amp; nums[i-<span class="number">1</span>]==<span class="number">0</span>)</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// revert to positive value to get same solution</span></span><br><span class="line">        <span class="keyword">if</span>(k &lt; <span class="number">0</span>)</span><br><span class="line">            k = -k;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> previous_sum = <span class="number">0</span>;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Integer, Integer&gt; ();</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; nums.length; ++i)&#123;</span><br><span class="line">            sum += nums[i];            </span><br><span class="line">            <span class="comment">//check sum(k+1) first</span></span><br><span class="line">            <span class="keyword">if</span>(sum%k == <span class="number">0</span> &amp;&amp; i &gt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="comment">//iterate to search</span></span><br><span class="line">            <span class="keyword">int</span> k_multiple = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(k_multiple&lt;sum )&#123;</span><br><span class="line">                <span class="keyword">if</span>(map.containsKey(sum-k_multiple))&#123;</span><br><span class="line">                    <span class="keyword">if</span>(sum-k_multiple == previous_sum &amp;&amp; map.get(previous_sum) == <span class="number">1</span>)&#123;</span><br><span class="line">                        k_multiple += k;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;                        </span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;                    </span><br><span class="line">                k_multiple += k;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            <span class="comment">//memroize sum(k)</span></span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(sum))</span><br><span class="line">                map.put(sum, map.get(sum)+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                map.put(sum, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// store previoius sum(k) to avoid length=1 subarraies</span></span><br><span class="line">            previous_sum = sum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/30/My-Book-List/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -393,7 +624,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-02-10 11:12:09" itemprop="dateModified" datetime="2019-02-10T11:12:09+08:00">2019-02-10</time>
+                <time title="修改时间：2019-02-12 10:58:54" itemprop="dateModified" datetime="2019-02-12T10:58:54+08:00">2019-02-12</time>
               
             
           </span>
@@ -489,12 +720,12 @@
 <tr>
 <td style="text-align:left">&lt;&lt; CLR via C#&gt;&gt;</td>
 <td style="text-align:center">693/798</td>
-<td style="text-align:right">2019-Jan</td>
+<td style="text-align:right">2019-Feb</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;深入理解Java虚拟机JVM高级特性与最佳实践&gt;&gt;</td>
 <td style="text-align:center">419/582</td>
-<td style="text-align:right">2018-Dec</td>
+<td style="text-align:right">2019-Feb</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;卑鄙的圣人:曹操 8&gt;&gt;</td>
@@ -1798,7 +2029,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
