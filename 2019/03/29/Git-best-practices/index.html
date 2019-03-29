@@ -108,14 +108,18 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="Git 基本操作创建Git仓库1git init 查看代码情况12git statusgit diff &amp;#123;filepath&amp;#125; 提交代码1234git clone &amp;#123;clone.git&amp;#125;git add -Agit commit -m &quot;message&quot;git push orgin master 保存/恢复临时修改文件12git stashgit checkou">
+<meta name="keywords" content="肉肉">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Git best practices">
 <meta property="og:url" content="https://sunnyhll.github.io/2019/03/29/Git-best-practices/index.html">
 <meta property="og:site_name" content="微观天下">
+<meta property="og:description" content="Git 基本操作创建Git仓库1git init 查看代码情况12git statusgit diff &amp;#123;filepath&amp;#125; 提交代码1234git clone &amp;#123;clone.git&amp;#125;git add -Agit commit -m &quot;message&quot;git push orgin master 保存/恢复临时修改文件12git stashgit checkou">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-29T14:37:59.012Z">
+<meta property="og:updated_time" content="2019-03-29T14:57:59.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git best practices">
+<meta name="twitter:description" content="Git 基本操作创建Git仓库1git init 查看代码情况12git statusgit diff &amp;#123;filepath&amp;#125; 提交代码1234git clone &amp;#123;clone.git&amp;#125;git add -Agit commit -m &quot;message&quot;git push orgin master 保存/恢复临时修改文件12git stashgit checkou">
 
 
 
@@ -373,7 +377,7 @@
                 
               
 
-              <time title="创建时间：2019-03-29 22:37:46 / 修改时间：22:37:59" itemprop="dateCreated datePublished" datetime="2019-03-29T22:37:46+08:00">2019-03-29</time>
+              <time title="创建时间：2019-03-29 22:37:46 / 修改时间：22:57:59" itemprop="dateCreated datePublished" datetime="2019-03-29T22:37:46+08:00">2019-03-29</time>
             
 
             
@@ -383,6 +387,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -419,7 +441,30 @@
       
 
       
-        
+        <h1 id="Git-基本操作"><a href="#Git-基本操作" class="headerlink" title="Git 基本操作"></a>Git 基本操作</h1><h2 id="创建Git仓库"><a href="#创建Git仓库" class="headerlink" title="创建Git仓库"></a>创建Git仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<h2 id="查看代码情况"><a href="#查看代码情况" class="headerlink" title="查看代码情况"></a>查看代码情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git diff &#123;filepath&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &#123;clone.git&#125;</span><br><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">"message"</span></span><br><span class="line">git push orgin master</span><br></pre></td></tr></table></figure>
+<h2 id="保存-恢复临时修改文件"><a href="#保存-恢复临时修改文件" class="headerlink" title="保存/恢复临时修改文件"></a>保存/恢复临时修改文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br><span class="line">git checkout stash@&#123;0&#125; -- &#123;filepath&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读取文件历史版本"><a href="#读取文件历史版本" class="headerlink" title="读取文件历史版本"></a>读取文件历史版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &#123;commithash&#125; -- &#123;filepath&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.0  <span class="comment"># tag most recent commit</span></span><br><span class="line">git tag -a v0.9 85fc7e7 <span class="comment"># tag on a specific commit</span></span><br><span class="line">git tag <span class="comment"># view tags</span></span><br></pre></td></tr></table></figure>
+<h1 id="Pull-Fork工作流"><a href="#Pull-Fork工作流" class="headerlink" title="Pull/Fork工作流"></a>Pull/Fork工作流</h1><ol>
+<li>fork from the github</li>
+<li><p>clone to local and commit changes</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &#123;clone.git&#125;</span><br><span class="line">git checkout -b feature</span><br><span class="line"><span class="comment"># make changes to this branch</span></span><br><span class="line">git add -p</span><br><span class="line">git commit -m <span class="string">"feature message"</span></span><br><span class="line">git push origin feature</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rebase commits after remote master</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git remote add upstream &#123;remote.git&#125;</span><br><span class="line">git pull upstream master</span><br><span class="line"><span class="comment"># no changes on master, then automatically git history is updated</span></span><br><span class="line">git checkout feature</span><br><span class="line">git pull --rebase origin master</span><br><span class="line"><span class="comment"># apply changes from origin master to feature newly commits</span></span><br><span class="line">git push origin feature --force</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>raise pull request for code review</p>
+</li>
+</ol>
+<h1 id="提交历史管理"><a href="#提交历史管理" class="headerlink" title="提交历史管理"></a>提交历史管理</h1><h2 id="缩减冗余commit-log"><a href="#缩减冗余commit-log" class="headerlink" title="缩减冗余commit log"></a>缩减冗余commit log</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rewrite last 10 commit logs</span></span><br><span class="line">git rebase -i HEAD~10 feature</span><br><span class="line">git push orign feature --force</span><br></pre></td></tr></table></figure>
+<h1 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h1><h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature</span><br><span class="line"><span class="comment"># create a branch based on current branch</span></span><br></pre></td></tr></table></figure>
+<h2 id="切换分支-从Detached-HEAD切换"><a href="#切换分支-从Detached-HEAD切换" class="headerlink" title="切换分支/从Detached HEAD切换"></a>切换分支/从Detached HEAD切换</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature</span><br></pre></td></tr></table></figure>
+<h2 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -d feature</span><br><span class="line">git branch -D feature <span class="comment"># force delete</span></span><br></pre></td></tr></table></figure>
+<h2 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push orgin --delete feature</span><br></pre></td></tr></table></figure>
+<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git merge feature</span><br><span class="line"><span class="comment"># merge changes from feature branch to current master branch</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -439,6 +484,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/肉肉/" rel="tag"># 肉肉</a>
+          
+        </div>
       
 
       
@@ -502,8 +553,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -541,7 +601,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -605,6 +667,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-基本操作"><span class="nav-number">1.</span> <span class="nav-text">Git 基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Git仓库"><span class="nav-number">1.1.</span> <span class="nav-text">创建Git仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看代码情况"><span class="nav-number">1.2.</span> <span class="nav-text">查看代码情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交代码"><span class="nav-number">1.3.</span> <span class="nav-text">提交代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存-恢复临时修改文件"><span class="nav-number">1.4.</span> <span class="nav-text">保存/恢复临时修改文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取文件历史版本"><span class="nav-number">1.5.</span> <span class="nav-text">读取文件历史版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建标签"><span class="nav-number">1.6.</span> <span class="nav-text">创建标签</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pull-Fork工作流"><span class="nav-number">2.</span> <span class="nav-text">Pull/Fork工作流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交历史管理"><span class="nav-number">3.</span> <span class="nav-text">提交历史管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缩减冗余commit-log"><span class="nav-number">3.1.</span> <span class="nav-text">缩减冗余commit log</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分支管理"><span class="nav-number">4.</span> <span class="nav-text">分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新分支"><span class="nav-number">4.1.</span> <span class="nav-text">创建新分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换分支-从Detached-HEAD切换"><span class="nav-number">4.2.</span> <span class="nav-text">切换分支/从Detached HEAD切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除本地分支"><span class="nav-number">4.3.</span> <span class="nav-text">删除本地分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除远程分支"><span class="nav-number">4.4.</span> <span class="nav-text">删除远程分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并分支"><span class="nav-number">4.5.</span> <span class="nav-text">合并分支</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

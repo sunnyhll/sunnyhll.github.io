@@ -376,7 +376,7 @@
                 
               
 
-              <time title="创建时间：2019-03-29 22:37:46 / 修改时间：22:37:59" itemprop="dateCreated datePublished" datetime="2019-03-29T22:37:46+08:00">2019-03-29</time>
+              <time title="创建时间：2019-03-29 22:37:46 / 修改时间：22:57:59" itemprop="dateCreated datePublished" datetime="2019-03-29T22:37:46+08:00">2019-03-29</time>
             
 
             
@@ -386,6 +386,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -416,7 +434,30 @@
       
         
           
-            
+            <h1 id="Git-基本操作"><a href="#Git-基本操作" class="headerlink" title="Git 基本操作"></a>Git 基本操作</h1><h2 id="创建Git仓库"><a href="#创建Git仓库" class="headerlink" title="创建Git仓库"></a>创建Git仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<h2 id="查看代码情况"><a href="#查看代码情况" class="headerlink" title="查看代码情况"></a>查看代码情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git diff &#123;filepath&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="提交代码"><a href="#提交代码" class="headerlink" title="提交代码"></a>提交代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &#123;clone.git&#125;</span><br><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">"message"</span></span><br><span class="line">git push orgin master</span><br></pre></td></tr></table></figure>
+<h2 id="保存-恢复临时修改文件"><a href="#保存-恢复临时修改文件" class="headerlink" title="保存/恢复临时修改文件"></a>保存/恢复临时修改文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br><span class="line">git checkout stash@&#123;0&#125; -- &#123;filepath&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读取文件历史版本"><a href="#读取文件历史版本" class="headerlink" title="读取文件历史版本"></a>读取文件历史版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &#123;commithash&#125; -- &#123;filepath&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.0  <span class="comment"># tag most recent commit</span></span><br><span class="line">git tag -a v0.9 85fc7e7 <span class="comment"># tag on a specific commit</span></span><br><span class="line">git tag <span class="comment"># view tags</span></span><br></pre></td></tr></table></figure>
+<h1 id="Pull-Fork工作流"><a href="#Pull-Fork工作流" class="headerlink" title="Pull/Fork工作流"></a>Pull/Fork工作流</h1><ol>
+<li>fork from the github</li>
+<li><p>clone to local and commit changes</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &#123;clone.git&#125;</span><br><span class="line">git checkout -b feature</span><br><span class="line"><span class="comment"># make changes to this branch</span></span><br><span class="line">git add -p</span><br><span class="line">git commit -m <span class="string">"feature message"</span></span><br><span class="line">git push origin feature</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rebase commits after remote master</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git remote add upstream &#123;remote.git&#125;</span><br><span class="line">git pull upstream master</span><br><span class="line"><span class="comment"># no changes on master, then automatically git history is updated</span></span><br><span class="line">git checkout feature</span><br><span class="line">git pull --rebase origin master</span><br><span class="line"><span class="comment"># apply changes from origin master to feature newly commits</span></span><br><span class="line">git push origin feature --force</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>raise pull request for code review</p>
+</li>
+</ol>
+<h1 id="提交历史管理"><a href="#提交历史管理" class="headerlink" title="提交历史管理"></a>提交历史管理</h1><h2 id="缩减冗余commit-log"><a href="#缩减冗余commit-log" class="headerlink" title="缩减冗余commit log"></a>缩减冗余commit log</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rewrite last 10 commit logs</span></span><br><span class="line">git rebase -i HEAD~10 feature</span><br><span class="line">git push orign feature --force</span><br></pre></td></tr></table></figure>
+<h1 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h1><h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature</span><br><span class="line"><span class="comment"># create a branch based on current branch</span></span><br></pre></td></tr></table></figure>
+<h2 id="切换分支-从Detached-HEAD切换"><a href="#切换分支-从Detached-HEAD切换" class="headerlink" title="切换分支/从Detached HEAD切换"></a>切换分支/从Detached HEAD切换</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature</span><br></pre></td></tr></table></figure>
+<h2 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -d feature</span><br><span class="line">git branch -D feature <span class="comment"># force delete</span></span><br></pre></td></tr></table></figure>
+<h2 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push orgin --delete feature</span><br></pre></td></tr></table></figure>
+<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git merge feature</span><br><span class="line"><span class="comment"># merge changes from feature branch to current master branch</span></span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -3285,7 +3326,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
