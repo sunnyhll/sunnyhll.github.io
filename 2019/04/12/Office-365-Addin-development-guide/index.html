@@ -108,24 +108,29 @@
 
 
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="This is a guide for how to develop Office 365 cross platform addin. Front end UI frameworkMicrosoft has provided offical Office UI framework: Office Fabric UI. The office site is at https://developer.">
+<meta name="keywords" content="肉肉,Office Addin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://sunnyhll.github.io/2018/04/15/hello-world/index.html">
+<meta property="og:title" content="Office 365 Addin development guide">
+<meta property="og:url" content="https://sunnyhll.github.io/2019/04/12/Office-365-Addin-development-guide/index.html">
 <meta property="og:site_name" content="微观天下">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="This is a guide for how to develop Office 365 cross platform addin. Front end UI frameworkMicrosoft has provided offical Office UI framework: Office Fabric UI. The office site is at https://developer.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-15T01:41:45.137Z">
+<meta property="og:image" content="https://sunnyhll.github.io/2019/04/12/Office-365-Addin-development-guide/AddinJSModel.PNG">
+<meta property="og:image" content="https://sunnyhll.github.io/2019/04/12/Office-365-Addin-development-guide/ClientSupport.PNG">
+<meta property="og:image" content="https://sunnyhll.github.io/2019/04/12/Office-365-Addin-development-guide/OutlookConcepts.PNG">
+<meta property="og:updated_time" content="2019-04-12T14:16:54.388Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Office 365 Addin development guide">
+<meta name="twitter:description" content="This is a guide for how to develop Office 365 cross platform addin. Front end UI frameworkMicrosoft has provided offical Office UI framework: Office Fabric UI. The office site is at https://developer.">
+<meta name="twitter:image" content="https://sunnyhll.github.io/2019/04/12/Office-365-Addin-development-guide/AddinJSModel.PNG">
 
 
 
 
 
 
-  <link rel="canonical" href="https://sunnyhll.github.io/2018/04/15/hello-world/"/>
+  <link rel="canonical" href="https://sunnyhll.github.io/2019/04/12/Office-365-Addin-development-guide/"/>
 
 
 
@@ -135,7 +140,7 @@
   };
 </script>
 
-  <title>Hello World | 微观天下</title>
+  <title>Office 365 Addin development guide | 微观天下</title>
   
 
 
@@ -334,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/15/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2019/04/12/Office-365-Addin-development-guide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="果核&肉肉">
@@ -351,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">Office 365 Addin development guide
               
             
           </h1>
@@ -376,9 +381,13 @@
                 
               
 
-              <time title="创建时间：2018-04-15 09:41:45" itemprop="dateCreated datePublished" datetime="2018-04-15T09:41:45+08:00">2018-04-15</time>
+              <time title="创建时间：2019-04-12 22:16:53 / 修改时间：22:16:54" itemprop="dateCreated datePublished" datetime="2019-04-12T22:16:53+08:00">2019-04-12</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -418,16 +427,44 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<h3 id="Nodejs-and-NPM-requirement"><a href="#Nodejs-and-NPM-requirement" class="headerlink" title="Nodejs and NPM requirement"></a>Nodejs and NPM requirement</h3><p>Nodejs higher than 6.0.0 and NPM higher than 5. Otherwise, Hexo might not work with some strange error!!</p>
+        <p>This is a guide for how to develop Office 365 cross platform addin.</p>
+<h1 id="Front-end-UI-framework"><a href="#Front-end-UI-framework" class="headerlink" title="Front end UI framework"></a>Front end UI framework</h1><p>Microsoft has provided offical Office UI framework: Office Fabric UI. The office site is at <a href="https://developer.microsoft.com/en-us/fabric" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/fabric</a>. The are three directions of the UI project future roadmap. All the three projects are implementation of UI components, demos are available at <a href="https://developer.microsoft.com/en-us/fabric#/components" target="_blank" rel="noopener">https://developer.microsoft.com/en-us/fabric#/components</a>.</p>
+<ol>
+<li>Fabric React (Official support)</li>
+<li>AngularJS (Community version, no updates)</li>
+<li>Fabric iOS</li>
+<li>Fabric JS (Stop support from MSFT)</li>
+</ol>
+<p>New UI design sytem is called fluent, the website is at <a href="https://www.microsoft.com/design/fluent/" target="_blank" rel="noopener">https://www.microsoft.com/design/fluent/</a>. It can help let developer know how to design an Windows style application UI and the guide of UWP web app design. </p>
+<p>Fabric.js is an open source js framework using canvas as the basic style of UI components, the official site is at <a href="http://fabricjs.com/" target="_blank" rel="noopener">http://fabricjs.com/</a>.</p>
+<h2 id="Useful-links"><a href="#Useful-links" class="headerlink" title="Useful links:"></a>Useful links:</h2><p>Directly reuse existing Microsoft designed and implemented components is very convinient as long as your application can work well with these codes.</p>
+<ul>
+<li>Office UI Fabric Core (Style and fonts): <a href="https://github.com/OfficeDev/office-ui-fabric-core" target="_blank" rel="noopener">https://github.com/OfficeDev/office-ui-fabric-core</a></li>
+<li>Office UI Fabric React (Full components): <a href="https://github.com/OfficeDev/office-ui-fabric-react" target="_blank" rel="noopener">https://github.com/OfficeDev/office-ui-fabric-react</a></li>
+<li>Office UI Fabric JS (Full components in JS): <a href="https://github.com/OfficeDev/office-ui-fabric-js/" target="_blank" rel="noopener">https://github.com/OfficeDev/office-ui-fabric-js/</a></li>
+</ul>
+<p>Except Windows style UI frameworks, there are other frameworks using morden components:</p>
+<ul>
+<li>Material-UI: <a href="https://www.jianshu.com/p/b3cfaca94596" target="_blank" rel="noopener">https://www.jianshu.com/p/b3cfaca94596</a> , <a href="https://material-ui.com/getting-started/example-projects/" target="_blank" rel="noopener">https://material-ui.com/getting-started/example-projects/</a></li>
+<li>PrimeNG: <a href="https://www.primefaces.org/primeng" target="_blank" rel="noopener">https://www.primefaces.org/primeng</a> </li>
+</ul>
+<h1 id="Front-end-Office-js-framework"><a href="#Front-end-Office-js-framework" class="headerlink" title="Front end Office.js framework"></a>Front end Office.js framework</h1><p>Office.js is the JavaScript based Office model provided by Microsoft, there are also Excel-15.js or Outlook-15.js for application respectively.</p>
+<h2 id="Office-JavaScript-API-object-model"><a href="#Office-JavaScript-API-object-model" class="headerlink" title="Office JavaScript API object model"></a>Office JavaScript API object model</h2><p>This doc <a href="https://docs.microsoft.com/en-us/office/dev/add-ins/develop/office-javascript-api-object-model" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/office/dev/add-ins/develop/office-javascript-api-object-model</a> explains the API model for new O365 addin JS model.</p>
+<p>The object is still under active development, there are more and more new features added, reading the documents can get the updated information. As for now, there are below bullet points:</p>
+<p><img src="/2019/04/12/Office-365-Addin-development-guide/AddinJSModel.PNG" alt="JSAddinFeatures"></p>
+<p>This is also guide for how to develop Addin with Angular front end. <a href="https://docs.microsoft.com/en-us/office/dev/add-ins/develop/add-ins-with-angular2" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/office/dev/add-ins/develop/add-ins-with-angular2</a></p>
+<p>Office appication has its own object model, so developers can read the related documents for detailed guide.</p>
+<h2 id="Outlook-Backend-service"><a href="#Outlook-Backend-service" class="headerlink" title="Outlook Backend service"></a>Outlook Backend service</h2><p>Except the general Office JS API model, Outlook has its own API. The development guide is at <a href="https://docs.microsoft.com/en-us/outlook/add-ins/" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/outlook/add-ins/</a>. </p>
+<h3 id="Manifest-version-and-corresponding-clients-support"><a href="#Manifest-version-and-corresponding-clients-support" class="headerlink" title="Manifest version and corresponding clients support"></a>Manifest version and corresponding clients support</h3><p><img src="/2019/04/12/Office-365-Addin-development-guide/ClientSupport.PNG" alt="ClientSupport"></p>
+<h3 id="Outlook-Web-Addin-Catalogs"><a href="#Outlook-Web-Addin-Catalogs" class="headerlink" title="Outlook Web Addin Catalogs"></a>Outlook Web Addin Catalogs</h3><p>Outlook Addin has its own concepts and there are many aspects:</p>
+<p><img src="/2019/04/12/Office-365-Addin-development-guide/OutlookConcepts.PNG" alt="OutlookCatalog"></p>
+<h3 id="Sample-Addins-for-Outlook"><a href="#Sample-Addins-for-Outlook" class="headerlink" title="Sample Addins for Outlook"></a>Sample Addins for Outlook</h3><p><a href="https://developer.microsoft.com/zh-cn/outlook/gallery/?filterBy=Outlook,Samples,Add-ins" target="_blank" rel="noopener">https://developer.microsoft.com/zh-cn/outlook/gallery/?filterBy=Outlook,Samples,Add-ins</a> </p>
+<h1 id="Other-Office-Web-Addin-Demos"><a href="#Other-Office-Web-Addin-Demos" class="headerlink" title="Other Office Web Addin Demos"></a>Other Office Web Addin Demos</h1><ul>
+<li>Word Style Checker: <a href="https://github.com/OfficeDev/Word-Add-in-Angular2-StyleChecker" target="_blank" rel="noopener">https://github.com/OfficeDev/Word-Add-in-Angular2-StyleChecker</a></li>
+<li>Word task pane add-in: <a href="https://github.com/OfficeDev/Office-Add-in-Fabric-UI-Sample" target="_blank" rel="noopener">https://github.com/OfficeDev/Office-Add-in-Fabric-UI-Sample</a></li>
+<li>Outlook Addin: <a href="https://github.com/OfficeDev/outlook-add-in-attachments-demo" target="_blank" rel="noopener">https://github.com/OfficeDev/outlook-add-in-attachments-demo</a></li>
+<li>Word dialog Addin: <a href="https://github.com/OfficeDev/Office-Add-in-Dialog-API-Simple-Example" target="_blank" rel="noopener">https://github.com/OfficeDev/Office-Add-in-Dialog-API-Simple-Example</a></li>
+</ul>
 
       
     </div>
@@ -449,6 +486,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/肉肉/" rel="tag"># 肉肉</a>
+          
+            <a href="/tags/Office-Addin/" rel="tag"># Office Addin</a>
+          
+        </div>
+      
 
       
       
@@ -458,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/14/Leetcode-560-Subarray-Sum-Equals-K/" rel="next" title="Leetcode 560: Subarray Sum Equals K">
-                <i class="fa fa-chevron-left"></i> Leetcode 560: Subarray Sum Equals K
+              <a href="/2019/03/29/Git-best-practices/" rel="next" title="Git best practices">
+                <i class="fa fa-chevron-left"></i> Git best practices
               </a>
             
           </div>
@@ -467,10 +512,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/19/Angular-5-with-Angular-CLI/" rel="prev" title="Angular 5 with Angular CLI">
-                Angular 5 with Angular CLI <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -641,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nodejs-and-NPM-requirement"><span class="nav-number">1.5.</span> <span class="nav-text">Nodejs and NPM requirement</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Front-end-UI-framework"><span class="nav-number">1.</span> <span class="nav-text">Front end UI framework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Useful-links"><span class="nav-number">1.1.</span> <span class="nav-text">Useful links:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Front-end-Office-js-framework"><span class="nav-number">2.</span> <span class="nav-text">Front end Office.js framework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Office-JavaScript-API-object-model"><span class="nav-number">2.1.</span> <span class="nav-text">Office JavaScript API object model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Outlook-Backend-service"><span class="nav-number">2.2.</span> <span class="nav-text">Outlook Backend service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Manifest-version-and-corresponding-clients-support"><span class="nav-number">2.2.1.</span> <span class="nav-text">Manifest version and corresponding clients support</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outlook-Web-Addin-Catalogs"><span class="nav-number">2.2.2.</span> <span class="nav-text">Outlook Web Addin Catalogs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Addins-for-Outlook"><span class="nav-number">2.2.3.</span> <span class="nav-text">Sample Addins for Outlook</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Other-Office-Web-Addin-Demos"><span class="nav-number">3.</span> <span class="nav-text">Other Office Web Addin Demos</span></a></li></ol></div>
             
 
           </div>
