@@ -118,7 +118,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/ThreadStatus.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/concurrentHashmap.png">
-<meta property="og:updated_time" content="2019-04-21T14:12:04.704Z">
+<meta property="og:updated_time" content="2019-04-24T14:43:16.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Concurrency">
 <meta name="twitter:description" content="Multi-threading线程线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New) : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的sta">
@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-21 22:12:04" itemprop="dateModified" datetime="2019-04-21T22:12:04+08:00">2019-04-21</time>
+                <time title="修改时间：2019-04-24 22:43:16" itemprop="dateModified" datetime="2019-04-24T22:43:16+08:00">2019-04-24</time>
               
             
           </span>
@@ -505,7 +505,7 @@
 </ol>
 <ul>
 <li>wait的语义是释放当前拿到的锁，让本线程进入睡眠状态。</li>
-<li>notify的语义是通知其他线程唤醒。</li>
+<li>notify的语义是通知其他线程唤醒，让原本是waiting状态的线程变成了blocked（同步块中释放锁，重新等待拿锁恢复同步块内代码wait()后继续执行）。</li>
 </ul>
 <p>一般的应用场景是，wait释放锁，notify别的线程来拿锁，并唤醒继续执行。这些方法必须在已经获得锁的同步块中书写，否则会抛出illeagalmonitorStateException。这属于线程的基本工具，一般推荐使用已有的并发框架，而非此类方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// the standard idiom for using the wait method</span></span><br><span class="line">synchonized(o)&#123;</span><br><span class="line">    <span class="comment">// 防止线程被无意唤醒，需要while loop保证代码安全</span></span><br><span class="line">    <span class="keyword">while</span>(!condition)&#123;</span><br><span class="line">        o.wait();</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">        <span class="comment">// notifyAll能保证需要被唤醒的线程的活性。如果都在等待同一个条件，可以用notify()</span></span><br><span class="line">        o.notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// do something when condition is fulfilled.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -516,7 +516,18 @@
 <li>static Thread.yeild()：可以让步出当前线程的优先级，让其他同优先级的线程先跑。</li>
 <li>Thread.join(): 当前线程等待一个线程t（join的实例）完成后再继续执行。</li>
 <li>static Thread.sleep(): 保持拿锁，线程睡眠一定时间。与wait()不同之处在于前者锁并没有释放。</li>
-<li>Thread.interrupt(): 调用中断的线程去中断别的线程，被中断的线程如果处于等待/睡眠状态，会抛出InterrupException，如果处于阻塞于IO状态，会抛出ClosedByInterruptException，并且连接中断，如果阻塞与selector，则会出发selector’s wakeup方法，并且状态Thread.interrupted()变成true。其他情况，直接Thread.isInterrupted()/static Thread.interrupted()变成true。</li>
+<li>Thread.interrupt(): 调用中断的线程去中断别的线程，被中断的线程如果处于等待/睡眠状态，会抛出InterrupException，如果处于阻塞于IO状态，会抛出ClosedByInterruptException，并且连接中断，如果阻塞与selector，则会出发selector’s wakeup方法，并且状态Thread.interrupted()变成true。其他情况，直接Thread.isInterrupted()/static Thread.interrupted()变成true。在异常处理完毕后，线程的中断标志位会复位，从而允许再一次中断。</li>
+<li>Deprecated方法有suspend(),resume()，stop()能让线程暂停,恢复运行和完全停止。需要留意的是线程被suspend和stop并不会释放线程已经拿到的锁，所以不是一个很好的终止线程的方法，而中断则可以在异常捕捉处理好锁释放，资源释放的逻辑。</li>
+</ul>
+<ol start="4">
+<li>线程通信问题</li>
+</ol>
+<ul>
+<li>volatile, synchronized</li>
+<li>wait/notify</li>
+<li>pipewriter/pipereader</li>
+<li>join</li>
+<li>ThreadLocal</li>
 </ul>
 <h1 id="多线程问题"><a href="#多线程问题" class="headerlink" title="多线程问题"></a><strong>多线程问题</strong></h1><ol>
 <li>数据访问问题（读写）</li>
@@ -892,7 +903,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
