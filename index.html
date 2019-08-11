@@ -331,6 +331,273 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2019/08/11/HTTP-protocol-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/11/HTTP-protocol-introduction/" class="post-title-link" itemprop="https://sunnyhll.github.io/index.html">HTTP protocol introduction</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-11 21:57:54 / 修改时间：21:58:11" itemprop="dateCreated datePublished" datetime="2019-08-11T21:57:54+08:00">2019-08-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><p>HTTP协议属于应用层协议，其设计目的是为了方便文本内容的分享与发布。HTTP协议是Web资源共享的基础，与URL(文档地址定位符)，HTML共同构建了Web世界。</p>
+<p>HTTP协议属于点到点通信协议，请求访问资源的一端称为客户端，提供资源相应的一端称为服务器。</p>
+<h2 id="HTTP协议方法"><a href="#HTTP协议方法" class="headerlink" title="HTTP协议方法"></a>HTTP协议方法</h2><ul>
+<li>GET：请求访问资源。</li>
+<li>POST：传输主体内容。</li>
+<li>PUT：传输内容，幂等传输。</li>
+<li>HEAD: 获得报文首部，用于确认资源有效性和更新日期。</li>
+<li>DELETE: 删除内容。</li>
+<li>OPTIONS: 询问资源支持方法。</li>
+<li>TRACE：追踪路径，用于计算客户端到服务器端的跳数。</li>
+<li>CONNECT: 要求用socket协议连接代理。</li>
+</ul>
+<p>HTTP方法本身是无状态协议，为了支持复杂有状态场景，引入了Cookie技术，确保认证客户端通信的上下文是连续的。</p>
+<h2 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h2><table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">类别</th>
+<th style="text-align:left">原因短语</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1XX</td>
+<td style="text-align:left">Informational(信息性状态码)</td>
+<td style="text-align:left">接收的请求正在处理</td>
+</tr>
+<tr>
+<td style="text-align:left">2XX</td>
+<td style="text-align:left">Success（成功状态码）</td>
+<td style="text-align:left">请求正常处理完毕</td>
+</tr>
+<tr>
+<td style="text-align:left">3XX</td>
+<td style="text-align:left">Redirection（重定向状态码）</td>
+<td style="text-align:left">需要进行附加操作以完成请求</td>
+</tr>
+<tr>
+<td style="text-align:left">4XX</td>
+<td style="text-align:left">Client Error（客户端错误状态码）</td>
+<td style="text-align:left">服务器无法处理请求</td>
+</tr>
+<tr>
+<td style="text-align:left">5XX</td>
+<td style="text-align:left">Server Error(服务器错误状态码)</td>
+<td style="text-align:left">服务器处理请求出错</td>
+</tr>
+</tbody>
+</table>
+<h2 id="HTTP协议架构中的转发功能节点"><a href="#HTTP协议架构中的转发功能节点" class="headerlink" title="HTTP协议架构中的转发功能节点"></a>HTTP协议架构中的转发功能节点</h2><ul>
+<li>代理：代理服务器的基本行为是接收客户端发送的请求转发给其他服务器，不改变请求URI。分为两类：<ol>
+<li>缓存代理：缓存内容。</li>
+<li>透明代理：纯粹内容转发，不做缓存。</li>
+</ol>
+</li>
+<li>网关：网关为通信链路上的服务器提供非HTTP协议连接，例如与信用卡结算系统联动，数据库联动等。</li>
+<li>隧道：隧道的建立能够确保客户端与服务器之间安全的通信。也能扩展HTTP通信协议，例如支持推送功能等等。</li>
+</ul>
+<h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><h2 id="HTTP协议的缺点："><a href="#HTTP协议的缺点：" class="headerlink" title="HTTP协议的缺点："></a>HTTP协议的缺点：</h2><ol>
+<li>明文信息会被窃听；</li>
+<li>无法验证通信方身份，会被伪装；</li>
+<li>无法验证报文的完整性，会被篡改。</li>
+</ol>
+<h2 id="HTTP-over-SSL-TSL"><a href="#HTTP-over-SSL-TSL" class="headerlink" title="HTTP over SSL/TSL"></a>HTTP over SSL/TSL</h2><p>SSL/TSL协议独立与HTTP协议，存在于HTTP和TCP协议之间，在建立HTTP连接之前，先建立SSL通信机制，交换加密密钥，从而在HTTP通信报文可以进行加密传输。</p>
+<p>HTTPS 协议通信握手/分手协议步骤：</p>
+<p><img src="/2019/08/11/HTTP-protocol-introduction/HTTPS.jpg" alt="HTTPS"></p>
+<p>握手主要分为4个阶段:</p>
+<ol>
+<li>SSL证书请求，及公钥获取。&lt;= 由于非对称加密机制的效率较低，安全性高，只用作密钥交互。</li>
+<li>客户端密钥加密发送。</li>
+<li>服务器端密钥确认。</li>
+<li>数据传输… &lt;= 数据传输阶段的加密是基于协商确定的对称密钥发送，效率较高。</li>
+</ol>
+<h1 id="WebSocket协议"><a href="#WebSocket协议" class="headerlink" title="WebSocket协议"></a>WebSocket协议</h1><p>Web浏览器支持的全双工通信协议，在HTTP部首加入upgrade：websocket字段，服务器通过返回状态码101 swtiching protocols响应连接，一旦服务器与客户端建立WebSocket协议的通信连接，之后所有的通信都用这个专用协议进行。</p>
+<ul>
+<li>推送功能： 服务器可以直接发送数据到客户端。</li>
+<li>减少通信量：保持连接的状态减少HTTP协议的连接开销。</li>
+</ul>
+<h1 id="用户认证问题"><a href="#用户认证问题" class="headerlink" title="用户认证问题"></a>用户认证问题</h1><p>HTTP/1.1常见的认证方式如下：</p>
+<ul>
+<li>BASIC认证：直接提交用户名密码完成认证。<br><img src="/2019/08/11/HTTP-protocol-introduction/BASIC.jpg" alt="BASIC"></li>
+<li>DIGEST认证：客户端根据服务器端的质询码生成响应码完成认证。<br><img src="/2019/08/11/HTTP-protocol-introduction/DIGEST.jpg" alt="DIGEST"></li>
+<li>SSL客户端认证：凭借HTTPS的客户端认证证书完成认证。</li>
+<li>FormBase认证：在用户登录信息以表单形式提交后，服务器端发放Session ID用于用户认证状态的绑定和保持。<br><img src="/2019/08/11/HTTP-protocol-introduction/FORMBASED.jpg" alt="FORM"></li>
+<li>Kerberos认证：</li>
+<li>NTLM认证：</li>
+<li>SSO认证：</li>
+</ul>
+<h1 id="Web安全问题"><a href="#Web安全问题" class="headerlink" title="Web安全问题"></a>Web安全问题</h1><ul>
+<li>跨站脚本工具XSS：通过执行非法HTML标签/JS脚本进行攻击。<ol>
+<li>表单中插入非法标签执行JS脚本。</li>
+<li>基于用户Cookie的窃取攻击</li>
+</ol>
+</li>
+<li>SQL注入攻击：通过加入SQL结束符，强制加入SQL语句执行。</li>
+<li>OS命令攻击:通过Shell脚本注入执行系统命令。</li>
+<li>HTTP部首注入攻击：通过访问URL加入换行符，注入HTTP首部字段进行攻击。<ol>
+<li>Cookie设置字段生效。</li>
+<li>HTTP响应截断攻击，强制显示伪造内容。</li>
+</ol>
+</li>
+<li>邮件首部注入攻击: <ol>
+<li>BCC邮件泄露。</li>
+</ol>
+</li>
+<li>目录遍历攻击: 访问无疑公开的文件目录。</li>
+<li>远程文件包含漏洞：引入其他包，例如System包进行代码污染。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2019/04/24/Java-Xml-Libraries/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -579,7 +846,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
+                <time title="修改时间：2019-07-15 16:20:03" itemprop="dateModified" datetime="2019-07-15T16:20:03+08:00">2019-07-15</time>
               
             
           </span>
@@ -643,6 +910,7 @@
 <p>Office appication has its own object model, so developers can read the related documents for detailed guide.</p>
 <h2 id="Outlook-Backend-service"><a href="#Outlook-Backend-service" class="headerlink" title="Outlook Backend service"></a>Outlook Backend service</h2><p>Except the general Office JS API model, Outlook has its own API. The development guide is at <a href="https://docs.microsoft.com/en-us/outlook/add-ins/" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/outlook/add-ins/</a>. </p>
 <h3 id="Manifest-version-and-corresponding-clients-support"><a href="#Manifest-version-and-corresponding-clients-support" class="headerlink" title="Manifest version and corresponding clients support"></a>Manifest version and corresponding clients support</h3><p><img src="/2019/04/12/Office-365-Addin-development-guide/ClientSupport.PNG" alt="ClientSupport"></p>
+<p>Troubleshooting manifest file <a href="https://docs.microsoft.com/en-us/office/dev/add-ins/testing/troubleshoot-manifest#to-use-the-office-add-in-validator-to-validate-your-manifest" target="_blank" rel="noopener">here</a></p>
 <h3 id="Outlook-Web-Addin-Catalogs"><a href="#Outlook-Web-Addin-Catalogs" class="headerlink" title="Outlook Web Addin Catalogs"></a>Outlook Web Addin Catalogs</h3><p>Outlook Addin has its own concepts and there are many aspects:</p>
 <p><img src="/2019/04/12/Office-365-Addin-development-guide/OutlookConcepts.PNG" alt="OutlookCatalog"></p>
 <h3 id="Sample-Addins-for-Outlook"><a href="#Sample-Addins-for-Outlook" class="headerlink" title="Sample Addins for Outlook"></a>Sample Addins for Outlook</h3><p><a href="https://developer.microsoft.com/zh-cn/outlook/gallery/?filterBy=Outlook,Samples,Add-ins" target="_blank" rel="noopener">https://developer.microsoft.com/zh-cn/outlook/gallery/?filterBy=Outlook,Samples,Add-ins</a> </p>
@@ -2793,7 +3061,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
+                <time title="修改时间：2019-05-23 07:45:51" itemprop="dateModified" datetime="2019-05-23T07:45:51+08:00">2019-05-23</time>
               
             
           </span>
@@ -3052,262 +3320,7 @@
 </tr>
 </tbody>
 </table>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/11/17/Phoenix-Project-Reading-Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/17/Phoenix-Project-Reading-Notes/" class="post-title-link" itemprop="https://sunnyhll.github.io/index.html">Phoenix Project Reading Notes</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-17 13:40:59" itemprop="dateCreated datePublished" datetime="2018-11-17T13:40:59+08:00">2018-11-17</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/读书笔记/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="读书笔记-——-《凤凰项目：一个IT运维的传奇故事》"><a href="#读书笔记-——-《凤凰项目：一个IT运维的传奇故事》" class="headerlink" title="读书笔记 —— 《凤凰项目：一个IT运维的传奇故事》"></a>读书笔记 —— 《凤凰项目：一个IT运维的传奇故事》</h1><p>本书从IT运维管理者的第一视角，讲述了IT部门每天都会发生的事情，并通过从工厂管理经验中借鉴到的方法，改善了IT部分的产能的故事。</p>
-<h2 id="IT工作者的每日工作项目"><a href="#IT工作者的每日工作项目" class="headerlink" title="IT工作者的每日工作项目"></a>IT工作者的每日工作项目</h2><p>IT人员的工作往往分为如下几个项目。所以每一个程序员需要重视这四类工作。</p>
-<h3 id="业务项目"><a href="#业务项目" class="headerlink" title="业务项目"></a>业务项目</h3><p>这是多数开发项目所包含的业务举措，通常隶属于项目管理办公室。虽然是IT项目，但大多数是跟业务的利润有直接相关联。</p>
-<h3 id="IT内部项目"><a href="#IT内部项目" class="headerlink" title="IT内部项目"></a>IT内部项目</h3><p>IT内部项目包括可能由业务项目衍生出的基础架构或IT运维项目，亿级内部生成的改进项目（例如创建新环境和部署自动化等）。这类项目业务部门并不是直接集中跟踪管理的，而属于预算所有者（例如数据库经理、存储管理经理和分布式系统经理）。</p>
-<h3 id="变更"><a href="#变更" class="headerlink" title="变更"></a>变更</h3><p>经常由前两种类型的工作引起，往往在保修系统中被跟踪（例如IT运维补救、JIRA或者用于开发的敏捷计划工具）。事实上，在价值流的两个不同部分中存在两个工作跟踪系统，这会引起问题，尤其在交接工作的时候。</p>
-<p>某些情况下，在一些兼具功能开发和服务交付指责的专门团队中，所有工作都会处在同一个系统中。这样做的好处是，操作层面的故障会和功能缺陷以及新的特性功能一起，在存量工作和现行工作中显现。</p>
-<p>在生产环境的变更是需要严格关注的，有的公司会专门对生产环境的变更进行记录。尤其会对变更本身的原因，步骤，以及风险评估和处理细节都进行记录。变更记录会交由管理者进行审批从而在计划时间窗口生效。</p>
-<h3 id="计划外项目-救火"><a href="#计划外项目-救火" class="headerlink" title="计划外项目/救火"></a>计划外项目/救火</h3><p>包括操作事故和操作问题，通常由上述三类型的工作导致，而且往往以牺牲其他计划内工作为代价。</p>
-<h2 id="布伦特——约束点问题"><a href="#布伦特——约束点问题" class="headerlink" title="布伦特——约束点问题"></a>布伦特——约束点问题</h2><p>文中的工程师布伦特是IT运维部的约束点，原因是：</p>
-<ul>
-<li>IT运维工作中最优秀的救火队员</li>
-<li>IT运维视角唯一的项目系统架构师</li>
-<li>IT变更项目中时常存在的执行者</li>
-<li>项目半成品堆积：由于救火项目或者忙等待问题造成。</li>
-</ul>
-<p>每个工作中心中都存在他的身影，个人能力的有限决定了IT部门的产出有限。</p>
-<p><strong>约束点问题解决了，工作产能问题便能解决。所有在非约束点做的改进都是假象。</strong></p>
-<p>对应的改善约束点问题的方案：</p>
-<ul>
-<li>建立L3支持工程师代替执行并学习布伦特的救火技术，建立其他人可以借鉴的trouble shooting检查清单。</li>
-<li>专一做到资深架构应该做的工作：关键项目的系统架构</li>
-<li>将需要布伦特参与的项目进行工作和流程标准化管理</li>
-<li>IT工作可视化并控制半成品</li>
-</ul>
-<blockquote>
-<p>等待时间是工作中心中某个资源忙碌成都的函数。下图横轴坐标上是工作重心中给定资源的忙碌百分比，纵坐标轴上是大致的等待时间（更确切的说是队列长度）。等待时间=忙碌时间百分比/空闲时间百分比。曲线的形状表明，当资源使用率超过80%时，等待时间就会直线上升。这会对项目交付产生灾难性后果。</p>
-</blockquote>
-<p><img src="/2018/11/17/Phoenix-Project-Reading-Notes/WaitingTime.jpg" alt="waitingtime"></p>
-<p>看板对于IT中的半成品问题是最有效、最简单的一种对策。两本书推荐阅读：</p>
-<ol>
-<li>《个人看板:了解工作/驾驭生活》by吉姆·本森和托尼安妮·德马里亚·巴里</li>
-<li>《看板方法：科技企业渐进变革成功之道》by戴维·J·安德森</li>
-</ol>
-<h2 id="工作流程改进————形"><a href="#工作流程改进————形" class="headerlink" title="工作流程改进————形"></a>工作流程改进————形</h2><p>为了将IT的工作项目完善的进行预先评估和量化分析，每一项工作类型都可以进行执行周期的管理与规划，尽量减少工作半成品的积压，并且最大化工作成品的“吞吐量”。本文提出需要进行“改进形”计划：</p>
-<blockquote>
-<p>以两周为周期，进行两个“计划-执行-审核-落实”改进周期，确立项目需要的四大要素：机器、方法、人员与测评。每两周必须做出一些改进，无论任何形式的改进。</p>
-</blockquote>
-<blockquote>
-<p>积压的项目分为三类：需要布伦特参与的项目，可以提高布伦特生产力的项目，其他项目。优先开展后两类项目；对于需要布伦特参与的项目遵循约束点问题解决方案进行优化。</p>
-</blockquote>
-<p>“改进形”带来的好处：</p>
-<ul>
-<li>提供一种适用于各种问题或挑战的系统化科学规程；</li>
-<li>组织成员普遍养成解决问题的习惯；</li>
-<li>通过让经理开展周期性指导，让其向教练和导师的角色转变；</li>
-<li>通过让人们每天慢慢进步的方法，形成PDCA（Plan-Do-Check-Action）。</li>
-</ul>
-<blockquote>
-<p>微软IT案例研究《在9个月内实现逆袭：在微软IT部门应用鼓点-缓冲-绳子解决法（译注：即限制驱导式排程法）》，作者是戴维·J．安德森和德拉戈什·杜密特里乌。</p>
-<p>当时安德森和杜密特里乌两人都在微软，他们描述了以前那种糟透了的状态。大多数IT从业人员&gt;对那种状态都再熟悉不过了。</p>
-<p>❑ 完成业务部门要求的工作耗时过长：平均交付周期是155天。</p>
-<p>❑ 对于延误和长交付周期的不满迫使IT管理作出“更多的工作预估”，这让经理们不得不把全部时<br>间都用来做PPT，而不是干实事（因为业务部门的结论是他们没有作出正确的工作预估）。</p>
-<p>❑ 不管业务部门提出什么要求，回答永远是“做这件事需要5个月”。</p>
-<p>❑ 每项任务都预计在20天内完成，但是没人知道多出的那135天都去哪儿了。</p>
-<p>杜密特里乌在报修系统中创建了一个名叫“等待德拉戈什”的新字段（实际上，这个报修系统是微&gt;软缺陷跟踪系统），以及时发现工作阻碍。他很快得出结论，项目团队70%的时间都卡在了别人&gt;那里——也就是说，在70%的时间里，工作都在排队。<br>杜密特里乌认为，他的团队一个月只能完成3项工作，按照这个速度，需要三年才能完成所有的&gt;工作。以下是他提出的对策及其惊人结果。</p>
-<p>❑ 他们不再预估工作，而采用根据历史数据得出的实际时间——他们有80个人——报修系统里有多&gt;年的工作记录供他们使用。这样做的结果是开发和测试效率立刻提高了30%。</p>
-<p>❑ 他们不再采用成本核算，而采用简单的“基于预算贡献的ROI（Return on Investment，投资&gt;回报率）”。所节省的时间让PM能力立刻提高了20%。</p>
-<p>❑ 发现约束点是开发部之后，PM接管了许多开发任务，把开发能力提高了20%。这样做也让开发&gt;人员更加高兴，因为他们可以专心写代码，不用再作任务预估了。</p>
-<p>❑ 他们引进了一名可用性专家来调整变更申请表。（他打趣说：“我们得填完4页表格，才能得到&gt;一杯水；我们把4页表格换成2页的，上面还有很多自由格式字段，目的是保证从事这项工作的人&gt;了解其所需的全部信息。”）</p>
-<p>❑ 接着他们减少了系统中允许的半成品数量：一开始平均有40到60个未结项目，他们把未结项目&gt;数减少到了5个。</p>
-<p>❑ 然后他们创建了工作缓冲区，任何遇到阻碍的开发或测试人员都能在缓冲区里做一些工作。</p>
-<p>❑ 交付周期从155天下降到22天。这么短的交付周期让他们创造了一个新的SLA认证（SLA &gt;guarantee）,25天（哇哦！）。</p>
-<p>❑ 他们的下一轮生产能力大幅提高来自于增加开发人员数量，因为每两天的开发工作就需要一天&gt;的测试工作。他们提拔了愿意参与开发工作的测试人员，把开发人员和测试人员的比例从1∶1提&gt;高到2∶1。</p>
-<p>❑ 上述种种的结果是什么？他们在9个月里完成了整整3年积压下来的工作；对他们服务的需求量&gt;也增加了，然后他们继续在其后的每个月都顺利完成并交付了所有业务部门要求的工作；不仅没&gt;人被解雇，而且很多人还升了职。<br>杜密特里乌说：“我们始终致力于降低交付周期，而不是开发和测试自身的优化，因此我们成功&gt;了。”</p>
-<p>这只是详细描述的众多惊人转变之一。难以置信的是，转变主要不是基于自动化，相反，这种不&gt;可思议的改进来自于调整关于工作系统的策略和控制半成品的策略，确保有一个高效的跨职能团&gt;队，让所有事情都为约束点服务，以及管理好工作交接。</p>
-</blockquote>
-<h1 id="IT工作管理核心思想"><a href="#IT工作管理核心思想" class="headerlink" title="IT工作管理核心思想"></a>IT工作管理核心思想</h1><h2 id="三步工作法"><a href="#三步工作法" class="headerlink" title="三步工作法"></a>三步工作法</h2><p><strong>第一工作法</strong>是关于从开发到IT运维再到客户的整个自左向右的工作流。为了使流量最大化，我们需要小的批量规模和工作间隔，决不让缺陷刘翔下游工作中心，并且不断为了整体目标(相对于开发功能完成率、测试发现/修复比率或运维有效性指标等局部目标）进行优化。</p>
-<p>必要的做法包括持续构建、集成以及部署，按需创建环境，严控半成品，以及构建起能够顺利变更的安全系统和组织。</p>
-<p><strong>第二工作法</strong>是关于价值流各阶段自右向左的快速持续反馈流，放大其效益以确保防止问题再次发生，或者更快地发现和修复问题。这样，我们就能在所需之处获取或嵌入知识，从源头上保证质量。</p>
-<p>必要的做法包括：在部署管道中的构建和测试失败时“停止生产线”；日复一日地持续改进日常工作；创建快速的自动化测试套装软件，以确保代码总是处于可部署的状态；在开发和IT运维之间建立共同的目标和共同解决问题的机制；建立普遍的产品遥测技术，让每个人都能知道，代码和环境是否在按照设定的运行，以及是否达到了客户的目标。</p>
-<p><strong>第三工作法</strong>是关于创造公司文化，该文化可带动两种风气的形成：不断尝试，这需要承担风险并从成功和失败中吸取经验教训；理解重复和练习是熟练掌握的前提。</p>
-<p>尝试和承担风险让我们能够不懈地改进工作系统，这经常要求我们去做一些与几十年来的做法大不相同的事。一旦出了问题，不断重复的日常操练赋予我们的技能和经验，令我们可以撤回至安全区域并恢复正常运作。</p>
-<p>必要的做法包括营造一种勇于创新、敢于冒险（相对于畏惧或盲目服从命令）以及高信任度（相对于低信任度和命令控制）的文化，把至少20%的开发和IT运维周期划拨给非功能性需求，并且不断鼓励进行改进。</p>
-<h2 id="团队领导力的寓言"><a href="#团队领导力的寓言" class="headerlink" title="团队领导力的寓言"></a>团队领导力的寓言</h2><p>这是帕特里克·兰西奥尼在《团队领导的五大障碍：关于领导力的寓言》（The Five Dysfunctions of a Team: A Leadership Fable）一书中描述的方法。<br>他认为，团队无法达成目标的一个核心诱因是信任缺失。在他的模型中，五大障碍被描述为：</p>
-<ul>
-<li>信任缺失——不愿在团队中显示弱点；</li>
-<li>惧怕冲突——在充满激情的建设性辩论中寻求和谐的假象；</li>
-<li>缺乏诚意——假意与团队的决策达成一致，形成模棱两可的公司氛围；</li>
-<li>回避问责——面对员工的失职行为，逃避追责，降低了工作标准；</li>
-<li>忽视结果——对个人成就、地位和自我价值的关注超过了对团队成功的关注。</li>
-</ul>
-<p>考虑到开发部和IT运维部之间，以及IT和“业务部门”之间存在着长期、剧烈的部门斗争，我想我们非常需要兰西奥尼先生的教诲以实现开发运维的理想。<br>通常来说，运用兰西奥尼先生方法论的第一步，是领导人要展示自己的弱点（或者起码要从塑造示弱的行为着手）。在《凤凰计划》中，史蒂夫多年来已将这一实践内化于心，并主导了一场关于个人经历的分享活动。</p>
-<h2 id="信息安全问题解决思想"><a href="#信息安全问题解决思想" class="headerlink" title="信息安全问题解决思想"></a>信息安全问题解决思想</h2><p>以不对IT系统做过多无用功就保护公司不受审计困扰，才是最终的胜利。而不是一昧的强制加入新的安全补丁，限制IT系统的功能与产出更多的维护问题。正如QA不需要测试不再需要的功能和不可能发生的性能压力，不要犯“眼界的错误”。</p>
-<h2 id="优先项目永远优先"><a href="#优先项目永远优先" class="headerlink" title="优先项目永远优先"></a>优先项目永远优先</h2><p>关乎公司存亡的项目永远放在第一位。必要时可以冻结其他项目进度以提供充足的资源，人力和时间。</p>
-
+<h2 id="Collections-类"><a href="#Collections-类" class="headerlink" title="Collections 类"></a><a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html" target="_blank" rel="noopener">Collections 类</a></h2>
           
         
       
@@ -3395,7 +3408,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -3420,7 +3433,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -3432,6 +3449,10 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
+                    
+                      
                     
                       
                     
