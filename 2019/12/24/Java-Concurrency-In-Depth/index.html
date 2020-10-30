@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://sunnyhll.github.io/2019/12/24/Java-Concurrency-In-Depth/CachedThreadPool.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2019/12/24/Java-Concurrency-In-Depth/ScheduledTaskSubmission.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2019/12/24/Java-Concurrency-In-Depth/FutureTask.jpg">
-<meta property="og:updated_time" content="2020-04-04T15:40:27.190Z">
+<meta property="og:updated_time" content="2020-10-18T15:07:39.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Concurrency In Depth">
 <meta name="twitter:description" content="本文将从计算机底层实现的角度描述Java目前的并发工具的实现细节。 Synchronized实现细节JVM基于进入和退出Monitor对象来实现方法同步和代码块同步。即使用monitorenter和monitorexit指令实现的。  monitorenter指令是在编译后插入到同步代码块的开始位置，而monitorexit是插入到方法结束处和异常处。 线程执行到monitorenter指令时会尝">
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-04-04 23:40:27" itemprop="dateModified" datetime="2020-04-04T23:40:27+08:00">2020-04-04</time>
+                <time title="修改时间：2020-10-18 23:07:39" itemprop="dateModified" datetime="2020-10-18T23:07:39+08:00">2020-10-18</time>
               
             
           </span>
@@ -477,7 +477,7 @@
 <li>monitorenter指令是在编译后插入到同步代码块的开始位置，而monitorexit是插入到方法结束处和异常处。</li>
 <li>线程执行到monitorenter指令时会尝试获取对象所对应的monitor的所有权/对象锁。</li>
 </ul>
-<p>Synchronized用的锁是存在与Java对象头里。Java对象头的结构于<a href="JVM-memory-management-and-GC/#对象头">这里</a>。</p>
+<p>Synchronized用的锁是存在与Java对象头里。Java对象头的结构于<a href="../../../../2018/11/07/JVM-memory-management-and-GC/#对象头">这里</a>。</p>
 <p>锁一共有4种状态，级别从低到高分别是：无锁状态、偏向锁状态、轻量级锁状态和重量级锁状态。</p>
 <p>偏向锁：</p>
 <pre><code>1. 设置:当一个线程获取锁，对象锁从无锁状态变成偏向锁，允许该线程反复拿锁。（已经有identity hashcode的对象不会使用偏向锁）
@@ -488,7 +488,7 @@
 <pre><code>1. 设置：JVM在当前线程栈帧中创建用于存储锁纪录的空间，并将对象头的MarkWord复制到锁纪录中。然后尝试用CAS操作将指向锁纪录指针放入MarkWord空间。如果成功，则获得锁，如果失败，则自旋来获取锁。
 
 2. 解锁: CAS操作将Displaced MarkWord
-放回到对象头，如果成功，表示没有竞争。如果失败说明存在竞争，膨胀成重量级锁。阻塞所有没拿到锁的线程。
+放回到对象头，如果成功，表示没有竞争。如果失败说明存在竞争,即两个线程中解锁线程无法将MarkWord取回，因为另一个自旋线程已经尝试将MarkWord放到自己线程的锁记录中，CAS会发现MW的owner不是自己，膨胀成重量级锁。阻塞所有没拿到锁的线程。
 </code></pre><p>重量级锁：</p>
 <pre><code>1. 设置：重量级锁会阻塞拿不到锁的所有线程，减少了自旋带来的CPU开销。一旦升级成重量级锁，将不会降级锁。
 </code></pre><h1 id="原子操作的实现原理"><a href="#原子操作的实现原理" class="headerlink" title="原子操作的实现原理"></a>原子操作的实现原理</h1><p>原子操作主要依赖的是计算机的如下几个CPU基本操作：</p>
@@ -725,7 +725,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
