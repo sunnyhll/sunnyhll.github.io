@@ -376,7 +376,7 @@
                 
               
 
-              <time title="创建时间：2020-11-16 22:34:27" itemprop="dateCreated datePublished" datetime="2020-11-16T22:34:27+08:00">2020-11-16</time>
+              <time title="创建时间：2020-11-16 22:49:49" itemprop="dateCreated datePublished" datetime="2020-11-16T22:49:49+08:00">2020-11-16</time>
             
 
             
@@ -482,13 +482,19 @@
 <ul>
 <li>EU用户：End User：一个人类用户。</li>
 <li>RP客户端：Relying Party ,用来代指OAuth2中的受信任的客户端，身份认证和授权信息的消费方；</li>
-<li>OP认证服务器：OpenID Provider，有能力提供EU认证的服务（比如OAuth2中的授权服务），用来为RP提供EU的身份认证信息；</li>
+<li>OP认证服务器：OpenID Provider，有能力提供EU认证的服务（比如OAuth2中的授权服务），用来为RP提供EU的ID Token身份认证信息和Access Token访问令牌；</li>
 <li>UE用户资源服务器：UserInfo Endpoint用户信息接口（受OAuth2保护），当RP使用Access Token访问时，返回授权用户的信息，此接口必须使用HTTPS。</li>
-<li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。</li>
+<li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。通过OP提供。</li>
 </ul>
 <p>认证流程如下：</p>
 <p><img src="/2020/11/16/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
 <p>其中，UserIndo EndPoint是一个受OAuth2保护的资源。在RP得到Access Token后可以请求此资源，然后获得一组EU相关的Claims，这些信息可以说是ID Token的扩展，比如如果你觉得ID Token中只需包含EU的唯一标识sub即可（避免ID Token过于庞大），然后通过此接口获取完整的EU的信息。此资源必须部署在TLS之上。</p>
+<p>OIDC的支持的授权流程如下：</p>
+<ol>
+<li>Authorization Code(授权码模式)：使用OAuth2的授权码来换取Id Token和Access Token。</li>
+<li>Implicit (简化模式)：使用OAuth2的Implicit流程获取Id Token和Access Token。</li>
+<li>Hybrid(混合模式)：混合Authorization Code +Implicit。</li>
+</ol>
 <h2 id="OAuth2授权模型"><a href="#OAuth2授权模型" class="headerlink" title="OAuth2授权模型"></a>OAuth2授权模型</h2><p>OAuth2的授权模型时为了已登录用户通过第三方应用访问资源服务器进行授权的流程，授权模型和OIDC相似，包含如下四个角色:</p>
 <ul>
 <li>资源拥有者（User） - 指应用的用户，比如github的一个账户拥有者</li>
