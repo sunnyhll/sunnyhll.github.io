@@ -108,19 +108,19 @@
 
 
 
-  <meta name="description" content="project bootstrap Demo项目是通过VS2019自带的Addin模板生成。默认debug模式部署在一个o365 dev tenant上。 Demo 项目原型简述引入demo项目是一个查看邮件各种属性的ESCPOC项目，在读取一封邮件时，可以点击ESCPOC按钮查看邮件的属性。在启动debug并上传manifest后，点击Ribbon上的MyAddinGroup按钮，显示如下图所示">
+  <meta name="description" content="project bootstrap Demo项目是通过VS2019自带的Addin模板生成。默认debug模式部署在一个o365 dev tenant上。目前已有Github demo项目也可以直接下载，相关链接。 Demo 项目原型简述引入demo项目是一个查看邮件各种属性的ESCPOC项目，在读取一封邮件时，可以点击ESCPOC按钮查看邮件的属性。在启动debug并上传manifest后，点击">
 <meta name="keywords" content="肉肉,Office Addin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Office 365 Addin ESC POC">
 <meta property="og:url" content="https://sunnyhll.github.io/2020/11/07/Office-365-Addin-ESC-POC/index.html">
 <meta property="og:site_name" content="微观天下">
-<meta property="og:description" content="project bootstrap Demo项目是通过VS2019自带的Addin模板生成。默认debug模式部署在一个o365 dev tenant上。 Demo 项目原型简述引入demo项目是一个查看邮件各种属性的ESCPOC项目，在读取一封邮件时，可以点击ESCPOC按钮查看邮件的属性。在启动debug并上传manifest后，点击Ribbon上的MyAddinGroup按钮，显示如下图所示">
+<meta property="og:description" content="project bootstrap Demo项目是通过VS2019自带的Addin模板生成。默认debug模式部署在一个o365 dev tenant上。目前已有Github demo项目也可以直接下载，相关链接。 Demo 项目原型简述引入demo项目是一个查看邮件各种属性的ESCPOC项目，在读取一封邮件时，可以点击ESCPOC按钮查看邮件的属性。在启动debug并上传manifest后，点击">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/11/07/Office-365-Addin-ESC-POC/ESCPOC.PNG">
-<meta property="og:updated_time" content="2020-11-07T01:45:41.645Z">
+<meta property="og:updated_time" content="2020-11-07T02:12:49.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Office 365 Addin ESC POC">
-<meta name="twitter:description" content="project bootstrap Demo项目是通过VS2019自带的Addin模板生成。默认debug模式部署在一个o365 dev tenant上。 Demo 项目原型简述引入demo项目是一个查看邮件各种属性的ESCPOC项目，在读取一封邮件时，可以点击ESCPOC按钮查看邮件的属性。在启动debug并上传manifest后，点击Ribbon上的MyAddinGroup按钮，显示如下图所示">
+<meta name="twitter:description" content="project bootstrap Demo项目是通过VS2019自带的Addin模板生成。默认debug模式部署在一个o365 dev tenant上。目前已有Github demo项目也可以直接下载，相关链接。 Demo 项目原型简述引入demo项目是一个查看邮件各种属性的ESCPOC项目，在读取一封邮件时，可以点击ESCPOC按钮查看邮件的属性。在启动debug并上传manifest后，点击">
 <meta name="twitter:image" content="https://sunnyhll.github.io/2020/11/07/Office-365-Addin-ESC-POC/ESCPOC.PNG">
 
 
@@ -379,9 +379,13 @@
                 
               
 
-              <time title="创建时间：2020-11-07 09:45:41" itemprop="dateCreated datePublished" datetime="2020-11-07T09:45:41+08:00">2020-11-07</time>
+              <time title="创建时间：2020-11-07 09:45:41 / 修改时间：10:12:49" itemprop="dateCreated datePublished" datetime="2020-11-07T09:45:41+08:00">2020-11-07</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -420,7 +424,7 @@
       
 
       
-        <h1 id="project-bootstrap"><a href="#project-bootstrap" class="headerlink" title="project bootstrap"></a>project bootstrap</h1><p> Demo项目是通过VS2019自带的Addin模板生成。默认debug模式部署在一个o365 dev tenant上。</p>
+        <h1 id="project-bootstrap"><a href="#project-bootstrap" class="headerlink" title="project bootstrap"></a>project bootstrap</h1><p> Demo项目是通过VS2019自带的Addin模板生成。默认debug模式部署在一个o365 dev tenant上。目前已有Github demo项目也可以直接下载，相关<a href="https://docs.microsoft.com/en-us/office/dev/add-ins/outlook/outlook-on-send-addins?tabs=windows#install-outlook-add-ins-that-use-on-send" target="_blank" rel="noopener">链接</a>。</p>
 <h2 id="Demo-项目原型简述"><a href="#Demo-项目原型简述" class="headerlink" title="Demo 项目原型简述"></a>Demo 项目原型简述</h2><p>引入demo项目是一个查看邮件各种属性的ESCPOC项目，在读取一封邮件时，可以点击ESCPOC按钮查看邮件的属性。在启动debug并上传manifest后，点击Ribbon上的MyAddinGroup按钮，显示如下图所示：</p>
 <p> <img src="/2020/11/07/Office-365-Addin-ESC-POC/ESCPOC.PNG" alt="ESCPOCDemo"></p>
 <p>我们的目标POC项目是一个非常简单的发送弹框程序，需要订阅每一封邮件的发送事件itemsend并且根据Web API调用结果显示一个web UI.</p>
@@ -436,6 +440,7 @@
 <p>注意配置上下文需要在VersionOverrides 1.1框架下。</p>
 <h2 id="O365-环境准备"><a href="#O365-环境准备" class="headerlink" title="O365 环境准备"></a>O365 环境准备</h2><p>对于跨平台的O365 Addin，一个合法的O365账号是需要的，而且需要拥有上传插件的权限。在用用MSDN订阅的情况下，可以创建合适的E3等级Office Tenant。例如本文则使用<a href="mailto:huangsun@sunnyhll.onmicrosoft.com" target="_blank" rel="noopener">huangsun@sunnyhll.onmicrosoft.com</a>作为测试账号，密码为系统密码。</p>
 <p>Web Addin查看可以点击Outlook桌面客户端的Manage Addin按钮，也可以在<a href="https://outlook.office365.com/owa/?path=/options/manageapps" target="_blank" rel="noopener">https://outlook.office365.com/owa/?path=/options/manageapps</a> 链接中看到。可以看到即使安装了很多插件，这些插件却不是实时安装在本地Outlook桌面客户端上的， 而是在需要访问的时候才进行加载执行的。</p>
+<h3 id="开启ItemSend事件监听"><a href="#开启ItemSend事件监听" class="headerlink" title="开启ItemSend事件监听"></a>开启ItemSend事件监听</h3><p>相关<a href="https://docs.microsoft.com/en-us/powershell/exchange/exchange-online/connect-to-exchange-online-powershell/connect-to-exchange-online-powershell?view=exchange-ps" target="_blank" rel="noopener">链接</a>.</p>
 <h3 id="“My-Custom-Roles”权限"><a href="#“My-Custom-Roles”权限" class="headerlink" title="“My Custom Roles”权限"></a>“My Custom Roles”权限</h3><p>对于个人O365账号，这里不需要进行权限获取，Microsoft Tenant默认每个客户的SideLoad权限开启。</p>
 <h3 id="Web-Addin部署"><a href="#Web-Addin部署" class="headerlink" title="Web Addin部署"></a>Web Addin部署</h3><p>对于Outlook Web Addin, 主要分成两部分部署：</p>
 <ul>
@@ -489,6 +494,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/16/Authentication/" rel="prev" title="Authentication">
+                Authentication <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -558,7 +567,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -570,6 +579,10 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
+                    
+                      
+                    
+                      
                     
                       
                     
@@ -632,7 +645,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -667,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#project-bootstrap"><span class="nav-number">1.</span> <span class="nav-text">project bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-项目原型简述"><span class="nav-number">1.1.</span> <span class="nav-text">Demo 项目原型简述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ESCPOC-xml-修改剖析"><span class="nav-number">1.1.1.</span> <span class="nav-text">ESCPOC.xml 修改剖析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O365-环境准备"><span class="nav-number">1.2.</span> <span class="nav-text">O365 环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#“My-Custom-Roles”权限"><span class="nav-number">1.2.1.</span> <span class="nav-text">“My Custom Roles”权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Addin部署"><span class="nav-number">1.2.2.</span> <span class="nav-text">Web Addin部署</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#project-bootstrap"><span class="nav-number">1.</span> <span class="nav-text">project bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-项目原型简述"><span class="nav-number">1.1.</span> <span class="nav-text">Demo 项目原型简述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ESCPOC-xml-修改剖析"><span class="nav-number">1.1.1.</span> <span class="nav-text">ESCPOC.xml 修改剖析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O365-环境准备"><span class="nav-number">1.2.</span> <span class="nav-text">O365 环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启ItemSend事件监听"><span class="nav-number">1.2.1.</span> <span class="nav-text">开启ItemSend事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“My-Custom-Roles”权限"><span class="nav-number">1.2.2.</span> <span class="nav-text">“My Custom Roles”权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Addin部署"><span class="nav-number">1.2.3.</span> <span class="nav-text">Web Addin部署</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
