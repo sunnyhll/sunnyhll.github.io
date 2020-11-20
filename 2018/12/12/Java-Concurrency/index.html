@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/Threadpool.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/BlockingQueue.png">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/RWLock.png">
-<meta property="og:updated_time" content="2019-12-18T13:24:18.874Z">
+<meta property="og:updated_time" content="2020-11-19T08:23:23.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Concurrency">
 <meta name="twitter:description" content="线程概念线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New) : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的start()方法，从而来启动该">
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-12-18 21:24:18" itemprop="dateModified" datetime="2019-12-18T21:24:18+08:00">2019-12-18</time>
+                <time title="修改时间：2020-11-19 16:23:23" itemprop="dateModified" datetime="2020-11-19T16:23:23+08:00">2020-11-19</time>
               
             
           </span>
@@ -477,7 +477,8 @@
 <ol>
 <li>可以使每个线程做自己的任务，代码上语义更明确</li>
 <li>利用多核CPU的优势</li>
-<li>可以把占据时间长如IO阻塞的任务放到后台处理</li>
+<li>可以把占据时间长如阻塞UI的任务放到后台处理从而保证界面/线程响应</li>
+<li>可以提升CPU利用率，通过回调方式而不是阻塞方式处理IO操作</li>
 </ol>
 <p>缺点：</p>
 <ol>
@@ -796,7 +797,7 @@
 </tbody>
 </table>
 <p><strong>示例代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CompletableFuture 在调用runAsync后会立刻执行，定义的Runnable输入参入与.NET中定义的Task.Run(Action a)很相似。</span></span><br><span class="line">CompletableFuture cf = CompletableFuture.runAsync(()=&gt; System.out.println(<span class="string">"Hello"</span>));</span><br><span class="line">CompletableFuture&lt;String&gt; cf2 = CompletableFuture.supplierAsync(()=&gt;<span class="string">"Hello"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// get()方法会阻塞当前线程等待结果，类似于.NET的Task.Result属性。此接口继承于Future的get()方法，运行方式和CompletableFuture的join()一致，与之不相同的是get()会抛出InterruptedException 和ExecutionException异常需要开发者手动处理，而join()抛出的异常则交由exceptionally()中的callback进行处理。</span></span><br><span class="line">        cf.get();</span><br><span class="line">        <span class="comment">// join()方法会阻塞当前线程，同步执行等待结果，和.NET的Task.wait()方法相似，如果有异常/在等待时被取消，会抛出相应的exception。</span></span><br><span class="line">        System.out.println(cf2.get());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CompletableFuture 在调用runAsync后会立刻执行，定义的Runnable输入参入与.NET中定义的Task.Run(Action a)很相似。</span></span><br><span class="line">CompletableFuture cf = CompletableFuture.runAsync(()=&gt; System.out.println(<span class="string">"Hello"</span>));</span><br><span class="line">CompletableFuture&lt;String&gt; cf2 = CompletableFuture.supplierAsync(()=&gt;<span class="string">"Hello"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// get()方法会阻塞当前线程等待结果，类似于.NET的Task.Result属性。此接口继承于Future的get()方法，运行方式和CompletableFuture的join()一致，与之不相同的是get()会抛出InterruptedException 和ExecutionException异常需要开发者手动处理，而join()抛出的异常则交由exceptionally()中的callback进行处理。</span></span><br><span class="line">        cf.get();</span><br><span class="line">        <span class="comment">// join()方法也会阻塞当前线程，同步执行等待结果，和.NET的Task.wait()方法相似，如果有异常/在等待时被取消，会抛出相应未经过检查的exception，比如CompletionException异常 /CancellationException异常。</span></span><br><span class="line">        System.out.println(cf2.get());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -1023,6 +1024,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
