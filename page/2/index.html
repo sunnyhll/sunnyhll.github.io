@@ -1375,7 +1375,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-11-19 16:23:23" itemprop="dateModified" datetime="2020-11-19T16:23:23+08:00">2020-11-19</time>
+                <time title="修改时间：2020-11-20 14:43:52" itemprop="dateModified" datetime="2020-11-20T14:43:52+08:00">2020-11-20</time>
               
             
           </span>
@@ -1548,7 +1548,7 @@
 <p>提供两个可以阻塞当前线程的方法扩展Queue的操作，常用于生产者和消费者场景。</p>
 <ul>
 <li>take() 移除元素，当队列为空时，获取元素的线程会等待队列变为非空。</li>
-<li>put() 增加元素，当队列满的时候，队列会阻塞插入元素的线程，知道队列不满。</li>
+<li>put() 增加元素，当队列满的时候，队列会阻塞插入元素的线程，直到队列不满。</li>
 </ul>
 <p><img src="/2018/12/12/Java-Concurrency/BlockingQueue.png" alt="BlockingQueues"></p>
 <p>阻塞队列支持四种处理方式，如上图所示，包含7个阻塞队列：</p>
