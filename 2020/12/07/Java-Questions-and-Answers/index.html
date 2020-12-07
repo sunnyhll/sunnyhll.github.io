@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文将着重于以问答形式记录Java相关知识点。 JVM JVM垃圾收集器比较，怎么选？   JVM总共有7种垃圾收集器   参考GCs  Serial,ParNew,Parallel Scavenge 负责堆年轻代中的内存回收  Serial Old,CMS,Parallel Old 负责堆老年代中的内存回收  G1分代回收，能独立管理整个GC堆  两个收集器中间存在连线的，说明能够配合工作">
+<meta name="keywords" content="肉肉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Questions and Answers">
+<meta property="og:url" content="https://sunnyhll.github.io/2020/12/07/Java-Questions-and-Answers/index.html">
+<meta property="og:site_name" content="微观天下">
+<meta property="og:description" content="本文将着重于以问答形式记录Java相关知识点。 JVM JVM垃圾收集器比较，怎么选？   JVM总共有7种垃圾收集器   参考GCs  Serial,ParNew,Parallel Scavenge 负责堆年轻代中的内存回收  Serial Old,CMS,Parallel Old 负责堆老年代中的内存回收  G1分代回收，能独立管理整个GC堆  两个收集器中间存在连线的，说明能够配合工作">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Java-Questions-and-Answers/DeadLockCase.png">
+<meta property="og:updated_time" content="2020-12-07T03:02:21.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Questions and Answers">
+<meta name="twitter:description" content="本文将着重于以问答形式记录Java相关知识点。 JVM JVM垃圾收集器比较，怎么选？   JVM总共有7种垃圾收集器   参考GCs  Serial,ParNew,Parallel Scavenge 负责堆年轻代中的内存回收  Serial Old,CMS,Parallel Old 负责堆老年代中的内存回收  G1分代回收，能独立管理整个GC堆  两个收集器中间存在连线的，说明能够配合工作">
+<meta name="twitter:image" content="https://sunnyhll.github.io/2020/12/07/Java-Questions-and-Answers/DeadLockCase.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://sunnyhll.github.io/2020/12/07/Java-Questions-and-Answers/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java Questions and Answers | 微观天下</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">微观天下</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2020/12/07/Java-Questions-and-Answers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java Questions and Answers
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-07 11:02:21" itemprop="dateCreated datePublished" datetime="2020-12-07T11:02:21+08:00">2020-12-07</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/生活/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文将着重于以问答形式记录Java相关知识点。</p>
+<h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><ol>
+<li>JVM垃圾收集器比较，怎么选？</li>
+</ol>
+<ul>
+<li><p>JVM总共有7种垃圾收集器</p>
+<p>  参考<a href="/2018/11/07/JVM-memory-management-and-GC/GCs.jpg">GCs</a></p>
+</li>
+<li><p>Serial,ParNew,Parallel Scavenge 负责堆年轻代中的内存回收</p>
+</li>
+<li><p>Serial Old,CMS,Parallel Old 负责堆老年代中的内存回收</p>
+</li>
+<li><p>G1分代回收，能独立管理整个GC堆</p>
+</li>
+<li><p>两个收集器中间存在连线的，说明能够配合工作</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">收集算法</th>
+<th style="text-align:left">工作区域</th>
+<th style="text-align:left">可配合对象</th>
+<th style="text-align:left">线程/并发</th>
+<th style="text-align:left">适用场合</th>
+<th style="text-align:left">优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Serial</td>
+<td style="text-align:left">复制算法</td>
+<td style="text-align:left">新生代</td>
+<td style="text-align:left">CMS;<br>Serial Old</td>
+<td style="text-align:left">单</td>
+<td style="text-align:left">单CPU;<br>Client模式下</td>
+<td style="text-align:left">缺：stop the world;<br>优：简单高效,没有线程交互开销,专注于GC;</td>
+</tr>
+<tr>
+<td style="text-align:left">ParNew</td>
+<td style="text-align:left">复制算法</td>
+<td style="text-align:left">新生代</td>
+<td style="text-align:left">CMS;<br>Serial Old</td>
+<td style="text-align:left">多</td>
+<td style="text-align:left">多CPU;<br>Server模式下</td>
+<td style="text-align:left">缺：stop the world <br>优：并行并发GC</td>
+</tr>
+<tr>
+<td style="text-align:left">Parallel Scavenge</td>
+<td style="text-align:left">复制算法</td>
+<td style="text-align:left">新生代</td>
+<td style="text-align:left">Serial Old;<br>Parallel Scavenge</td>
+<td style="text-align:left">多</td>
+<td style="text-align:left">吞吐量控制,<br>Client,server均可以</td>
+<td style="text-align:left">主要关注吞吐量,通过吞吐量的设置控制停顿时间,适应不同的场景</td>
+</tr>
+<tr>
+<td style="text-align:left">Serial Old</td>
+<td style="text-align:left">标记整理算法</td>
+<td style="text-align:left">老年代</td>
+<td style="text-align:left">Serial,<br>ParNew,<br>Parallel Scavenge</td>
+<td style="text-align:left">单</td>
+<td style="text-align:left">主要Client模式下</td>
+<td style="text-align:left">缺：stop the world</td>
+</tr>
+<tr>
+<td style="text-align:left">Parallel Old</td>
+<td style="text-align:left">复制算法（Parallel Scavenge老年代版本）</td>
+<td style="text-align:left">老年代</td>
+<td style="text-align:left">Parallel Scavenge</td>
+<td style="text-align:left">多</td>
+<td style="text-align:left">吞吐量控制,<br>Client,server均可以</td>
+<td style="text-align:left">主要关注吞吐量,通过吞吐量的设置控制停顿时间,适应不同的场景</td>
+</tr>
+<tr>
+<td style="text-align:left">CMS(Concurretn Mark Sweep)</td>
+<td style="text-align:left">标记清除算法</td>
+<td style="text-align:left">老年代</td>
+<td style="text-align:left">Serial,<br>ParNew,<br>Serial Old是其备选方案</td>
+<td style="text-align:left">多</td>
+<td style="text-align:left">互联网站;<br>B/S系统服务端</td>
+<td style="text-align:left">缺：CPU资源敏感,无法处理浮动垃圾,产生大量内存碎片<br>优：并发收集,低停顿</td>
+</tr>
+<tr>
+<td style="text-align:left">G1</td>
+<td style="text-align:left">整体基于标记整理算法</td>
+<td style="text-align:left">新生代&amp;老年代</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">多</td>
+<td style="text-align:left">面向服务端应用</td>
+<td style="text-align:left">优：并行与并发, 分代收集,空间整合(标记整理算法),可预测停顿<br>需要Remembered Set来避免全堆扫描</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Threading"><a href="#Threading" class="headerlink" title="Threading"></a>Threading</h1><ol>
+<li><p>为什么要使用多线程?</p>
+<p> 参考<a href="/2018/12/12/Java-Concurrency/#多线程概念">多线程概念</a>。</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>CompletableFuture的get()方法和join()方法有什么区别？</p>
+<p> 参考<a href="/2018/12/12/Java-Concurrency/#CompletableFuture">代码示例</a></p>
+</li>
+<li><p>多线程处理结果怎么拿到?</p>
+<p> 当通过异步方式CompletableFuture调用时，可以通过get()/join()来阻塞当前线程等待结果，或者通过回调函数thenApply()传入后续处理。</p>
+<p> 当通过Thread形式调用时，可以通过线程调度器方法join()方式阻塞当前线程等待结果。</p>
+</li>
+<li><p>线程池有哪些参数，分别怎么使用？怎么释放？</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                        <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                        TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                        BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                        ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                        RejectedExecutionHandler handler)</span></span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>corePoolSize 线程池核心线程大小</p>
+<p> 线程池中会维护一个最小的线程数量，即使这些线程处理空闲状态，他们也不会被销毁，除非设置了allowCoreThreadTimeOut。这里的最小线程数量即是corePoolSize。</p>
+</li>
+<li><p>maximumPoolSize 线程池最大线程数量</p>
+<p> 一个任务被提交到线程池以后，首先会找有没有空闲存活线程，如果有则直接执行，如果没有则会缓存到工作队列（后面会介绍）中，如果工作队列满了，才会创建一个新线程，然后从工作队列的头部取出一个任务交由新线程来处理，而将刚提交的任务放入工作队列尾部。线程池不会无限制的去创建新线程，它会有一个最大线程数量的限制，这个数量即由maximunPoolSize指定。</p>
+</li>
+<li><p>keepAliveTime 空闲线程存活时间</p>
+<p> 一个线程如果处于空闲状态，并且当前的线程数量大于corePoolSize，那么在指定时间后，这个空闲线程会被销毁，这里的指定时间由keepAliveTime来设定</p>
+</li>
+<li><p>unit 空闲线程存活时间单位</p>
+<p> keepAliveTime的计量单位</p>
+</li>
+<li><p>workQueue 工作队列</p>
+<p> 新任务被提交后，会先进入到此工作队列中，任务调度时再从队列中取出任务。jdk中提供了四种工作队列：</p>
+<ol>
+<li><p>ArrayBlockingQueue</p>
+<p> 基于数组的有界阻塞队列，按FIFO排序。新任务进来后，会放到该队列的队尾，有界的数组可以防止资源耗尽问题。当线程池中线程数量达到corePoolSize后，再有新任务进来，则会将任务放入该队列的队尾，等待被调度。如果队列已经是满的，则创建一个新线程，如果线程数量已经达到maxPoolSize，则会执行拒绝策略。</p>
+</li>
+<li><p>LinkedBlockingQuene</p>
+<p> 基于链表的无界阻塞队列（其实最大容量为Interger.MAX），按照FIFO排序。由于该队列的近似无界性，当线程池中线程数量达到corePoolSize后，再有新任务进来，会一直存入该队列，而不会去创建新线程直到maxPoolSize，因此使用该工作队列时，参数maxPoolSize其实是不起作用的。</p>
+</li>
+<li><p>SynchronousQuene</p>
+<p> 一个不缓存任务的阻塞队列，生产者放入一个任务必须等到消费者取出这个任务。也就是说新任务进来时，不会缓存，而是直接被调度执行该任务，如果没有可用线程，则创建新线程，如果线程数量达到maxPoolSize，则执行拒绝策略。</p>
+</li>
+<li><p>PriorityBlockingQueue</p>
+<p> 具有优先级的无界阻塞队列，优先级通过参数Comparator实现。</p>
+</li>
+</ol>
+</li>
+<li><p>threadFactory 线程工厂</p>
+<p> 创建一个新线程时使用的工厂，可以用来设定线程名、是否为daemon线程等等</p>
+</li>
+<li><p>handler 拒绝策略</p>
+<p> 当工作队列中的任务已到达最大限制，并且线程池中的线程数量也达到最大限制，这时如果有新任务提交进来，该如何处理呢。这里的拒绝策略，就是解决这个问题的，jdk中提供了4中拒绝策略：</p>
+<ol>
+<li><p>CallerRunsPolicy</p>
+<p>该策略下，在调用者线程中直接执行被拒绝任务的run方法，除非线程池已经shutdown，则直接抛弃任务。</p>
+</li>
+<li><p>AbortPolicy</p>
+<p>该策略下，直接丢弃任务，并抛出RejectedExecutionException异常。</p>
+</li>
+<li><p>DiscardPolicy</p>
+<p>该策略下，直接丢弃任务，什么都不做。</p>
+</li>
+<li><p>DiscardOldestPolicy</p>
+<p>该策略下，抛弃进入队列最早的那个任务，然后尝试把这次拒绝的任务放入队列</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>新建一个线程底层发生了什么？</p>
+<ul>
+<li><p>Java: 当我们创建一个线程并执行start()方法后这个线程才会被创建和执行。Java.lang.Thread.start()方法会调用本地方法start0();</p>
+</li>
+<li><p>JVM: start0()方法会调用JVM_StartThread()方法:</p>
+<ul>
+<li>这是JVM_StartThread的具体实现，可以看到，它会创建一个JavaThread实例。</li>
+<li>os::create_thread的具体实现。在这个方法中会创建一个平台相关的OSThread 实例。在os::create_thread()方法中会利用glibc库中的pthread.h中的pthread_create方法创建一个轻量级的Linux进程，这个方法执行后，线程创建控制流从JVM转到OS.</li>
+</ul>
+</li>
+<li>OS: <ul>
+<li>pthread.h 中定义pthread_create()方法。</li>
+<li>pthread_create 方法进入clone方法的桥梁create_thread()方法。</li>
+<li>系统调用：<ul>
+<li>系统调用的处理程序：sys_clone</li>
+<li>do_fork()函数生成轻量级进程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线程安全需要考虑几个方面问题:</p>
+</li>
+</ol>
+<ul>
+<li>原子性</li>
+<li>可见性</li>
+<li>有序性</li>
+</ul>
+<h1 id="Java-Language"><a href="#Java-Language" class="headerlink" title="Java Language"></a>Java Language</h1><ol>
+<li>Synchronized和ReentrantLock比较有什么不同？</li>
+</ol>
+<ul>
+<li>语法不同：一个是修饰符，一个是对象，利用方法/传参控制</li>
+<li>实现机制不同：前者使用JVM管理实例对象头，互斥变量，后者使用AQS(volatile状态变量+同步队列)实现</li>
+<li>性能不同：前者通过锁膨胀机制提升性能，后者需要程序员通过代码灵活控制锁的获取/释放/公平性问题。</li>
+</ul>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><ol>
+<li>Spring源码分析</li>
+</ol>
+<p><a href="http://ddrv.cn/docs/springtutorial/" target="_blank" rel="noopener">http://ddrv.cn/docs/springtutorial/</a></p>
+<ol start="2">
+<li>Spring AOP实现基于代码分析</li>
+</ol>
+<ul>
+<li>JDK基于继承(Proxy实例，实现被代理类接口)和反射(调用真正实例方法)的动态代理实现方法</li>
+<li>CGLIB基于反射生成代理子类继承（被代理类）实现动态代理，代理方法需要实现MethodInterceptor接口</li>
+<li>代理实例方法直接调用的调用实现</li>
+<li>代理实例方法间接调用的调用实现</li>
+</ul>
+<ol start="3">
+<li>Spring getBean的实现</li>
+</ol>
+<ul>
+<li>getBeanDefinition</li>
+<li>IOC Container中Bean实例化-&gt;初始化-&gt;完整对象</li>
+</ul>
+<h1 id="Spring-boot"><a href="#Spring-boot" class="headerlink" title="Spring boot"></a>Spring boot</h1><ol>
+<li>Spring boot源码分析</li>
+</ol>
+<p><a href="https://www.jianshu.com/p/9fa2d0bcd8e4" target="_blank" rel="noopener">https://www.jianshu.com/p/9fa2d0bcd8e4</a></p>
+<ul>
+<li>Starter组件，开箱即用的各类服务启动器</li>
+<li>自动装配，分析代码上下文，动态扫描Bean，并完成装配</li>
+<li>Actuator，Spring Boot应用的监控</li>
+<li>Spring Boot Cli，基于命令行工具快速构建Spring Boot应用</li>
+</ul>
+<h1 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h1><ol>
+<li>B+树的数据结构特点</li>
+</ol>
+<h1 id="编译器知识"><a href="#编译器知识" class="headerlink" title="编译器知识"></a>编译器知识</h1><ol>
+<li><p>AST概念，Lombok框架基本概念</p>
+</li>
+<li><p>语法树概览</p>
+</li>
+</ol>
+<h1 id="Spring-cloud"><a href="#Spring-cloud" class="headerlink" title="Spring cloud"></a>Spring cloud</h1><ol>
+<li>对Spring Cloud微服务架构理解？</li>
+</ol>
+<p>微服务架构是一种松耦合架构，Java Spring Cloud对微服务支持体现在功能性支持上，目前有五个流行关键组件:</p>
+<ul>
+<li>API网关</li>
+<li>负载均衡</li>
+<li>服务注册</li>
+<li>容错机制：弹性断路器模式，后备处理模式</li>
+<li>配置管理</li>
+</ul>
+<p>这些组件保证了微服务内容服务器的服务A高可用性，P分区容忍性，但并没有保证C一致性。</p>
+<ol start="2">
+<li><p>对于Spring Cloud微服务架构组件源码分析</p>
+<p> <a href="https://www.jianshu.com/p/53a280c0f17d" target="_blank" rel="noopener">https://www.jianshu.com/p/53a280c0f17d</a></p>
+<ul>
+<li>Spring Cloud Gateway 源码分析</li>
+<li>Spring Cloud Alibaba源码分析</li>
+</ul>
+</li>
+<li><p>Spring Cloud Netflix</p>
+<ul>
+<li>Ribbon 负载均衡</li>
+<li>Zuul API网关</li>
+<li>Eureka 服务注册</li>
+<li>Hystrix弹性断路器模式，后备处理模式</li>
+<li>Feign 支持RPC风格调用</li>
+</ul>
+</li>
+<li><p>Spring Cloud Alibaba</p>
+<ul>
+<li>Nacos 配置中心，负载均衡，服务注册</li>
+<li>Sentinel 弹性限流/熔断模式</li>
+<li>Seata 分布式事务</li>
+<li>RocketMQ 分布式消息通信</li>
+</ul>
+</li>
+<li><p>Spring Cloud和Dubbo有什么不同？</p>
+<ul>
+<li>协议层不同：HTTP层和二进制协议（</li>
+<li>耦合性不同: 解耦合RESTful设计和基于接口调用</li>
+<li>注册中心: Eureka/Nacos和zk/redis等</li>
+<li>功能中间件支持: 全方位多场景和SOA场景支持</li>
+</ul>
+</li>
+</ol>
+<h1 id="Distributed-system"><a href="#Distributed-system" class="headerlink" title="Distributed system"></a>Distributed system</h1><ol>
+<li>分布式事务是怎么实现的？</li>
+</ol>
+<ul>
+<li>Seata组件可以实现AT, TCC, Sega 和XA事务模式</li>
+<li>RocketMQ可以实现TCC事务模式</li>
+</ul>
+<ol start="2">
+<li>分布式缓存？</li>
+</ol>
+<ul>
+<li>Memcached单机缓存</li>
+<li>Redis分布式缓存Master-Slave</li>
+<li>分布式写加锁，超时解锁，定时延长锁寿命</li>
+</ul>
+<h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><ol>
+<li>Leetcode No.53 最大字序和</li>
+</ol>
+<p>暴力算法，贪心法，动态规划法，分治法。</p>
+<h1 id="System-Architecture-and-Design"><a href="#System-Architecture-and-Design" class="headerlink" title="System Architecture and Design"></a>System Architecture and Design</h1><ol>
+<li><p>Domain Driven Design</p>
+</li>
+<li><p>常见架构理论：六边形架构/洋葱架构</p>
+</li>
+</ol>
+<h1 id="Developer-Career-Value"><a href="#Developer-Career-Value" class="headerlink" title="Developer Career/Value"></a>Developer Career/Value</h1><ol>
+<li>你有什么可以为新公司提供的价值？</li>
+</ol>
+<ul>
+<li>喜欢实践动手，愿意自学新的技术，能快速落地应用原型，根据需求深入研究</li>
+<li>对于目前微服务架构，容器构建编排技术，云服务部署有一定地经验可以快速上手</li>
+<li>熟悉Java基础知识，Spring框架，对于基于事件驱动，多线程，异步等性能优化方案有一定地经验</li>
+<li>全栈开发经验，能够很好地协调前后端工程师共同参与的的项目开发</li>
+<li>多平台前端开发经验，有助于公司开发一些必要的前端桌面应用，插件前端等</li>
+<li>熟悉需求落地，能够把握业务重点，更好的控制项目进度</li>
+<li>产品支持经验，能够更好的和运营维护工程师沟通，从开发角度提升运行效率</li>
+<li>工作过程中可以帮助较为资浅同事</li>
+</ul>
+<ol start="2">
+<li>你为旧公司做出了哪些项目贡献？</li>
+</ol>
+<ul>
+<li><p>跨平台微服务迁移项目</p>
+<ul>
+<li><p>桌面用户界面迁移</p>
+<ul>
+<li>性能优化：同步UI转换成异步UI</li>
+<li>跨平台支持: WinForm/WPF内嵌网页交互界面</li>
+</ul>
+</li>
+<li><p>桌面处理逻辑微服务迁移</p>
+<ul>
+<li>跨平台支持/稳定性提升：复杂逻辑服务化</li>
+<li>解耦合处理模型/优化内存管理：功能性逻辑与业务逻辑解耦合</li>
+<li>运用容器技术自动化灵活部署于云服务</li>
+<li>中心化插件模型快速迭代部署</li>
+</ul>
+</li>
+<li><p>业务处理模型转型</p>
+<ul>
+<li>提前处理耗时数据准备工作</li>
+<li>并发计算处理，支持远程处理模型</li>
+<li>处理结果整合和后处理流程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>云服务项目转型</p>
+<ul>
+<li>混合语言环境 Java/.NET/.NET core，灵活开发，各取其优</li>
+<li>Docker技术引入，支持快速迭代批量部署</li>
+<li>运用微服务架构支持云平台部署</li>
+</ul>
+</li>
+<li><p>技术经验分享</p>
+<ul>
+<li>Java Spring</li>
+<li>.NET COM/ASP.NET</li>
+<li>.NET core</li>
+<li>Cloud platform</li>
+<li>Container技术</li>
+</ul>
+</li>
+<li><p>业务金融安全领域知识</p>
+<ul>
+<li>访问授权模型</li>
+<li>DLP数据管理机制<ul>
+<li>Symantec</li>
+<li>O365 DLP</li>
+<li>O365 AIP</li>
+<li>ESC</li>
+</ul>
+</li>
+<li>终端日志跟踪机制</li>
+</ul>
+</li>
+<li><p>管理经验</p>
+</li>
+</ul>
+<ol start="3">
+<li>为什么离开现在的公司？</li>
+</ol>
+<ul>
+<li>技术栈落后<ul>
+<li>传统科技公司的技术栈是2000年科技状态，并且运营以稳定高效为目的，因此技术革新迭代慢。</li>
+<li>云服务，微服务，大数据技术已经是现代程序员必备知识，在传统金融公司无法得到实践</li>
+</ul>
+</li>
+<li>资源有限<ul>
+<li>公司从顶层架构设计上趋向于利用有限的资源进行维护，缺乏对新技术革新和投资</li>
+<li>团队太小，开发人员需要兼职项目需求关系，维护，产品长远更新没有效率和不受重视</li>
+</ul>
+</li>
+<li>个人职业发展<ul>
+<li>寻求技术栈转型，更快地学习和实践现代化程序员职业道路</li>
+<li>实现个人价值，希望能为公司业务带来改善</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>数据库上遇到的挑战，怎么解决的？</li>
+</ol>
+<p>拍卖网站数据库死锁问题，并发场景下，Sybase是基于页锁的粒度进行并发控制，当发生如下情况时：</p>
+<p><img src="/2020/12/07/Java-Questions-and-Answers/DeadLockCase.png" alt="Deadlock"></p>
+<ul>
+<li>一个线程id=775正在等待表格页1741的互斥锁，执行INSERT操作, 目前另一个线程id=559已经拿到了Auction_Bids表格页1741的共享锁（读锁）</li>
+<li>另一个线程id=559正在等待表格页1776的共享锁，执行SELECT操作，目前线程id=775已经拿到了Auction_Bids表格也1776的互斥锁。</li>
+<li>Sybase数据库在解决死锁过程中选择了取消线程id=775的互斥锁，这样会致使一个写操作失效。</li>
+</ul>
+<p>锁产生的原因：</p>
+<ul>
+<li>Hibernate在生成Select SQL时，由于是表格Auction_Bids left outer join Auction_Users,需要对整个表格的页逐个进行扫描，所以会对Auction_Bids表格进行逐个共享锁获取。</li>
+<li>对于insert操作时，锁是页锁，但是数据页会一页一页的锁，但是由于插入数据需要先自增操作select @@identity获取了令一个表页的互斥锁。因此第一个拿1776互斥锁行为阻止了select语句对页共享锁的获取。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Locking Scheme/Locking granulairty</th>
+<th style="text-align:center">Table lock</th>
+<th style="text-align:left">Page lock</th>
+<th style="text-align:left">Row lock</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">数据页+索引页</td>
+<td style="text-align:center">表锁+页锁</td>
+<td style="text-align:left">页锁</td>
+<td style="text-align:left">行锁</td>
+</tr>
+<tr>
+<td style="text-align:left">仅数据页</td>
+<td style="text-align:center">表锁+页锁</td>
+<td style="text-align:left">页锁</td>
+<td style="text-align:left">行锁</td>
+</tr>
+<tr>
+<td style="text-align:left">仅数行</td>
+<td style="text-align:center">表锁+行锁</td>
+<td style="text-align:left">页锁</td>
+<td style="text-align:left">行锁</td>
+</tr>
+</tbody>
+</table>
+<p>解决方案:</p>
+<ul>
+<li>由于大量的读操作被写操作阻塞住，读写分离是最好的解决方法。但是这个解决方案需要投入一个新的读数据库并且同步数据。</li>
+<li>从数据库层面上可以通过创建索引，并且允许脏读写索引数据(插入的时候不锁索引表格)避免全表扫描，并且减小锁的粒度为行粒度来减少并发带来的死锁。代码层面上对于自增ID和插入数据操作(insert select)如果能够分别处理也能避免死锁的发生。</li>
+</ul>
+<ol start="5">
+<li>邮件过滤规则引擎算法设计思想</li>
+</ol>
+<ul>
+<li>采用类似于依赖注入方式，根据XML的配置的关联情况生成对应的实例。支持递归与或复合表达式配置。</li>
+<li>表达式可视化支持能够大大减少客户咨询负担，可以交由业务端自行处理</li>
+<li>单一规则灵活横向扩展，利用OOP的抽象对象将检查规则分类扩展，同时支持一套可共享判定操作行为。</li>
+<li>单线程执行引擎具有不稳定性和执行效率低下问题，并发执行引擎并且加以高可用扩展能够更好的高效处理。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/肉肉/" rel="tag"># 肉肉</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/07/Microservices-via-Spring-Cloud/" rel="next" title="Microservices via Spring Cloud">
+                <i class="fa fa-chevron-left"></i> Microservices via Spring Cloud
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">果核&肉肉</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Threading"><span class="nav-number">2.</span> <span class="nav-text">Threading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Language"><span class="nav-number">3.</span> <span class="nav-text">Java Language</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">4.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-boot"><span class="nav-number">5.</span> <span class="nav-text">Spring boot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Database"><span class="nav-number">6.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译器知识"><span class="nav-number">7.</span> <span class="nav-text">编译器知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-cloud"><span class="nav-number">8.</span> <span class="nav-text">Spring cloud</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Distributed-system"><span class="nav-number">9.</span> <span class="nav-text">Distributed system</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">10.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Architecture-and-Design"><span class="nav-number">11.</span> <span class="nav-text">System Architecture and Design</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Developer-Career-Value"><span class="nav-number">12.</span> <span class="nav-text">Developer Career/Value</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">果核&肉肉</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
