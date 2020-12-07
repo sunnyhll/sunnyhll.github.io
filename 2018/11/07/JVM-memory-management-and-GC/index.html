@@ -130,7 +130,7 @@
 <meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/CMS.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/G1.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/GCArgs.jpg">
-<meta property="og:updated_time" content="2019-05-06T14:15:35.044Z">
+<meta property="og:updated_time" content="2020-12-04T04:02:28.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM memory management and GC">
 <meta name="twitter:description" content="Java memory allocationJava虚拟机管理内存会包括以下几个运行时数据区域，如下图所示。  JVM运行时数据区域简介程序计数器(Program Counter Register)程序计数器时当前线程执行字节码的行号指示器。每条线程有独立的程序计数器。  如果线程执行Java方法，这个技术及记录的时真该执行的虚拟机字节码指令的地址。 如果线程执行的时Native方法，这个计数器值">
@@ -409,7 +409,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
+                <time title="修改时间：2020-12-04 12:02:28" itemprop="dateModified" datetime="2020-12-04T12:02:28+08:00">2020-12-04</time>
               
             
           </span>
@@ -583,8 +583,40 @@
 <p>问题：</p>
 <ol>
 <li>并发清理时预留空间不够造成并发清理(Concurrent Mode Failure)失败=&gt;浮动垃圾(Floating Gabage)过多。</li>
-<li>内存碎片化问题。</li>
+<li>内存碎片化问题。一旦发生大对象触发的FullGC，Serial Old回收则会出现长时间STW。</li>
 </ol>
+<ul>
+<li><p>CMS并发三色标记法</p>
+<ol>
+<li>黑色：已经标记完引用对象的颜色</li>
+<li>灰色：没有标记完引用对象的颜色</li>
+<li>白色：默认垃圾（没有被标记颜色）</li>
+</ol>
+<ul>
+<li><p>标记问题：</p>
+<ol>
+<li>本来A-&gt;B, B-&gt;D;</li>
+<li>在A标记完，B部分标记后，B-&gt;D引用消失，D没有被标记，A-&gt;D引用建立</li>
+<li>由于D从始至终都没有被标记</li>
+</ol>
+</li>
+<li><p>标记问题一Incremental Update更正：</p>
+<ol>
+<li>对于A-&gt;D（白)的引用建立，把A修正成灰色。</li>
+</ol>
+</li>
+<li><p>Incremental Update更正存在的ABA问题：</p>
+<ol>
+<li>回收线程一：标记A属性1，正在标记属性2</li>
+<li>业务逻辑线程二：把属性1指向白色D， A保持灰色</li>
+<li>回收线程三: 更新属性2的标记，将A标记为黑色</li>
+</ol>
+</li>
+<li><p>CMS最终解决方案：必须STW从头扫描一次</p>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="G1-Garbage-First-收集器"><a href="#G1-Garbage-First-收集器" class="headerlink" title="G1(Garbage First)收集器"></a>G1(Garbage First)收集器</h3><p>Young GC:</p>
 <ul>
 <li>标记-清除-复制算法整理 STW<br>只对新生代区块进行清理，但是也会需要扫描所有region的Rset，否则不知道有哪些Old-&gt;Young的引用。</li>
@@ -720,7 +752,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -732,8 +764,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -765,8 +795,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
