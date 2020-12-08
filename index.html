@@ -998,6 +998,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-08 16:16:37" itemprop="dateModified" datetime="2020-12-08T16:16:37+08:00">2020-12-08</time>
+              
+            
           </span>
 
           
@@ -1344,6 +1360,20 @@
 <h4 id="RocketMQ-消息并发消费实现"><a href="#RocketMQ-消息并发消费实现" class="headerlink" title="RocketMQ 消息并发消费实现"></a>RocketMQ 消息并发消费实现</h4><p>并发消费场景下，消息队列允许Consumer的线程消费池可以向同一个队列消费信息，并且每个消费线程消费信息会有自己的进度信息。</p>
 <h4 id="RocketMQ-分布式事务消息实现"><a href="#RocketMQ-分布式事务消息实现" class="headerlink" title="RocketMQ 分布式事务消息实现"></a>RocketMQ 分布式事务消息实现</h4><p>为分布式事务处理提供了通信基础。</p>
 <p><img src="/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png" alt="RMQ"></p>
+<p>Rocket发送事务消息：</p>
+<p>Rocket发送事务消息是二次提交的，第一次发送prepare提交到服务器时消息主题会替换为RMQ_SYS_TRANS_HALF_TOPIC。等到本地事务执行完毕以后才进行二次提交，这时会发送给原本消息的topic。</p>
+<ol>
+<li><p>由producer发送prepare（半消息）给MQ的broker。MQ会把消息记录到本地，然后回复prepare消息状态给producer。</p>
+</li>
+<li><p>prepare消息发送以后获取发送状态，如果是成功则执行本地业务（本地事务），根据本地事务执行结果手动返回相应状态（RocketMQLocalTransactionState.COMMIT、RocketMQLocalTransactionState.ROLLBACK等）给MQ。</p>
+</li>
+<li><p>如果是COMMIT则说明本地事务执行成功，prepare为可提交状态，MQ收到COMMIT消息就会发送给consumer，然后consumer执行本地业务。如果是ROLLBACK则会删除prepare消息。</p>
+</li>
+<li><p>如果MQ一直没收到返回状态则会启动定时任务检查本地事务状态</p>
+</li>
+<li><p>消费者、生产者的事务各由开发者自己保证。MQ的事务是由MQ保证，这里会根据使用者配置的参数来决定如何执行。</p>
+</li>
+</ol>
 <h4 id="RocketMQ消费模式"><a href="#RocketMQ消费模式" class="headerlink" title="RocketMQ消费模式"></a>RocketMQ消费模式</h4><ul>
 <li>at-most-once最多一次</li>
 <li>at-least-once最少一次，RocketMQ通过消费者ACK机制支持至少一次</li>
@@ -1405,7 +1435,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2020/11/19/Authentication/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2020/11/16/Authentication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="果核&肉肉">
@@ -1425,7 +1455,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/11/19/Authentication/" class="post-title-link" itemprop="https://sunnyhll.github.io/index.html">Authentication</a>
+                <a href="/2020/11/16/Authentication/" class="post-title-link" itemprop="https://sunnyhll.github.io/index.html">Authentication</a>
               
             
           </h1>
@@ -1450,7 +1480,7 @@
                 
               
 
-              <time title="创建时间：2020-11-19 16:37:42" itemprop="dateCreated datePublished" datetime="2020-11-19T16:37:42+08:00">2020-11-19</time>
+              <time title="创建时间：2020-11-16 22:49:49" itemprop="dateCreated datePublished" datetime="2020-11-16T22:49:49+08:00">2020-11-16</time>
             
 
             
@@ -1537,11 +1567,11 @@
 <h1 id="session-cookie鉴权"><a href="#session-cookie鉴权" class="headerlink" title="session-cookie鉴权"></a>session-cookie鉴权</h1><p>Session是HTTP协议中为了支持有状态的通信而发明的会话机制，本质上是通过服务器为用户建立sessionid从而保证用户的状态信息能够在服务器端保存。用户不需要反复进行登录认证就能保持会话。</p>
 <p>而Cookie则是一种特殊的HTTP头部，能够在HTTP通信中保存一定的用户信息，如sessionid从而达到认证用户的目的。由于Cookie本身是针对某一域名而产生的，所以在发送Cookie过程中必须提供正确域名的sessionid才行。</p>
 <p>具体流程如下：</p>
-<p><img src="/2020/11/19/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
+<p><img src="/2020/11/16/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
 <p>Cookie鉴权常用Single Sign On场景，例如，于对于企业中的不同子域名的验证，可以通过结合SAML, CAS等协议完成。对于不同网络更加广泛的第三方验证则有OIDC协议支持。</p>
 <h1 id="Token-验证-JWT"><a href="#Token-验证-JWT" class="headerlink" title="Token 验证(JWT)"></a>Token 验证(JWT)</h1><p>Token验证方式和Seesion验证方式很类似，不同的是Token本身包含一些有意义的信息：用户名、密码、过期时间等。Token本身由服务器签发，客户端请求的发送中需要包含 Authorization : JWT “{jwt token}”，服务器提取token信息通过相同的算法验证即可。相较于Session验证方式节约了分布式系统中服务器存储sessionid和用户信息的开销，只需要服务器拥有相同的密钥即可。</p>
 <p>具体流程如下:</p>
-<p><img src="/2020/11/19/Authentication/TokenAuth.png" alt="tokenAuth"></p>
+<p><img src="/2020/11/16/Authentication/TokenAuth.png" alt="tokenAuth"></p>
 <p>JWT(json-web-token)算法细节：</p>
 <p>JWT由三部分”{header}.{payload}.{signature}’,两种算法生成，公式如下：<br>    signature = sha256(base64(header)+’.’+base64(payload),{服务器密钥})</p>
 <ol>
@@ -1561,7 +1591,7 @@
 <li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。通过OP提供。</li>
 </ul>
 <p>认证流程如下：</p>
-<p><img src="/2020/11/19/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
+<p><img src="/2020/11/16/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
 <p>其中，UserIndo EndPoint是一个受OAuth2保护的资源。在RP得到Access Token后可以请求此资源，然后获得一组EU相关的Claims，这些信息可以说是ID Token的扩展，比如如果你觉得ID Token中只需包含EU的唯一标识sub即可（避免ID Token过于庞大），然后通过此接口获取完整的EU的信息。此资源必须部署在TLS之上。</p>
 <p>OIDC的支持的授权流程如下：</p>
 <ol>
@@ -1591,14 +1621,14 @@
 <li>客户端应用拿着授权码code，和clientId，clientSecret，去换取access_token</li>
 <li>返回access_token给客户端应用 </li>
 </ol>
-<p><img src="/2020/11/19/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
+<p><img src="/2020/11/16/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
 <p>这种场景下，用户名、密码、客户端应用信息，都没有直接暴露在浏览器，是web下是最安全的。</p>
 <h3 id="简化模式"><a href="#简化模式" class="headerlink" title="简化模式"></a>简化模式</h3><p>授权码模式的简化，用户认证成功后，直接将token返回给浏览器。因为某些应用没有前端服务器，只有一堆静态的html（很少见），这种模式，一般不用。</p>
-<p><img src="/2020/11/19/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
+<p><img src="/2020/11/16/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
 <h3 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h3><p>适用场景：手机app ，这个客户端应用是你完全可以信任的，你的app就是自己公司开发的。但是这个模式并不适合在web场景下用，在web下，用户名密码并不是直接填给自己写的应用的，而是填在浏览器呈现的一个页面上的，这个浏览器是客户端应用的一个代理，浏览器是没法保证安全性的。</p>
-<p><img src="/2020/11/19/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
+<p><img src="/2020/11/16/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
 <h3 id="客户端证书模式"><a href="#客户端证书模式" class="headerlink" title="客户端证书模式"></a>客户端证书模式</h3><p>客户端应用直接发 clientId、clientSecret给认证服务器，发的令牌是针对客户端应用的，不是针对用户的。跟没授权一样，令牌不能识别用户身份。</p>
-<p><img src="/2020/11/19/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
+<p><img src="/2020/11/16/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
 
           
         
@@ -3543,6 +3573,8 @@
                     
                       
                     
+                      
+                    
                     <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
@@ -3555,6 +3587,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     

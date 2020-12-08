@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStream.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStreamConsume.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png">
-<meta property="og:updated_time" content="2020-12-07T02:53:17.404Z">
+<meta property="og:updated_time" content="2020-12-08T08:16:37.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Microservices via Spring Cloud">
 <meta name="twitter:description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
@@ -386,6 +386,22 @@
               <time title="创建时间：2020-12-07 10:53:17" itemprop="dateCreated datePublished" datetime="2020-12-07T10:53:17+08:00">2020-12-07</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-08 16:16:37" itemprop="dateModified" datetime="2020-12-08T16:16:37+08:00">2020-12-08</time>
+              
             
           </span>
 
@@ -738,6 +754,20 @@
 <h4 id="RocketMQ-消息并发消费实现"><a href="#RocketMQ-消息并发消费实现" class="headerlink" title="RocketMQ 消息并发消费实现"></a>RocketMQ 消息并发消费实现</h4><p>并发消费场景下，消息队列允许Consumer的线程消费池可以向同一个队列消费信息，并且每个消费线程消费信息会有自己的进度信息。</p>
 <h4 id="RocketMQ-分布式事务消息实现"><a href="#RocketMQ-分布式事务消息实现" class="headerlink" title="RocketMQ 分布式事务消息实现"></a>RocketMQ 分布式事务消息实现</h4><p>为分布式事务处理提供了通信基础。</p>
 <p><img src="/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png" alt="RMQ"></p>
+<p>Rocket发送事务消息：</p>
+<p>Rocket发送事务消息是二次提交的，第一次发送prepare提交到服务器时消息主题会替换为RMQ_SYS_TRANS_HALF_TOPIC。等到本地事务执行完毕以后才进行二次提交，这时会发送给原本消息的topic。</p>
+<ol>
+<li><p>由producer发送prepare（半消息）给MQ的broker。MQ会把消息记录到本地，然后回复prepare消息状态给producer。</p>
+</li>
+<li><p>prepare消息发送以后获取发送状态，如果是成功则执行本地业务（本地事务），根据本地事务执行结果手动返回相应状态（RocketMQLocalTransactionState.COMMIT、RocketMQLocalTransactionState.ROLLBACK等）给MQ。</p>
+</li>
+<li><p>如果是COMMIT则说明本地事务执行成功，prepare为可提交状态，MQ收到COMMIT消息就会发送给consumer，然后consumer执行本地业务。如果是ROLLBACK则会删除prepare消息。</p>
+</li>
+<li><p>如果MQ一直没收到返回状态则会启动定时任务检查本地事务状态</p>
+</li>
+<li><p>消费者、生产者的事务各由开发者自己保证。MQ的事务是由MQ保证，这里会根据使用者配置的参数来决定如何执行。</p>
+</li>
+</ol>
 <h4 id="RocketMQ消费模式"><a href="#RocketMQ消费模式" class="headerlink" title="RocketMQ消费模式"></a>RocketMQ消费模式</h4><ul>
 <li>at-most-once最多一次</li>
 <li>at-least-once最少一次，RocketMQ通过消费者ACK机制支持至少一次</li>
@@ -781,7 +811,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/19/Authentication/" rel="next" title="Authentication">
+              <a href="/2020/11/16/Authentication/" rel="next" title="Authentication">
                 <i class="fa fa-chevron-left"></i> Authentication
               </a>
             
@@ -894,6 +924,8 @@
                     
                       
                     
+                      
+                    
                     <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
@@ -906,6 +938,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
