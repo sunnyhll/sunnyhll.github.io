@@ -116,16 +116,15 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/NettyNIO.png">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStream.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStreamConsume.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png">
-<meta property="og:updated_time" content="2020-12-08T08:16:37.366Z">
+<meta property="og:updated_time" content="2020-12-18T02:32:31.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Microservices via Spring Cloud">
 <meta name="twitter:description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
-<meta name="twitter:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/NettyNIO.png">
+<meta name="twitter:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png">
 
 
 
@@ -400,7 +399,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-12-08 16:16:37" itemprop="dateModified" datetime="2020-12-08T16:16:37+08:00">2020-12-08</time>
+                <time title="修改时间：2020-12-18 10:32:31" itemprop="dateModified" datetime="2020-12-18T10:32:31+08:00">2020-12-18</time>
               
             
           </span>
@@ -476,7 +475,7 @@
 <h1 id="Spring-Cloud常用组件"><a href="#Spring-Cloud常用组件" class="headerlink" title="Spring Cloud常用组件"></a>Spring Cloud常用组件</h1><h2 id="API网关"><a href="#API网关" class="headerlink" title="API网关"></a>API网关</h2><p>Spring Cloud Gateway和Netflix Zuul为所有微服务提供了一个单一入口点。API网关是一个单独的中间件。</p>
 <h2 id="Spring-Cloud-Gateway源码分析"><a href="#Spring-Cloud-Gateway源码分析" class="headerlink" title="Spring Cloud Gateway源码分析"></a>Spring Cloud Gateway源码分析</h2><p>处理流程：</p>
 <ul>
-<li>Netty web容器：NIO机制，事件循环监听端口请求</li>
+<li>基于webflux容器/Netty通信框架：NIO机制，事件循环监听端口请求</li>
 <li>请求的Route Predicate函数式过滤匹配规则<ul>
 <li>HTTP请求信息检查例如：Host，Query, Path, Header, Cookie</li>
 </ul>
@@ -486,86 +485,6 @@
 <li>Post型过滤器可以对返回数据进行增强处理</li>
 <li>下游服务可以为注册中心的地址/预先配置好的节点IP信息</li>
 </ul>
-</li>
-</ul>
-<h3 id="Netty-NIO的源码分析"><a href="#Netty-NIO的源码分析" class="headerlink" title="Netty NIO的源码分析"></a>Netty NIO的源码分析</h3><p><img src="/2020/12/07/Microservices-via-Spring-Cloud/NettyNIO.png" alt="NettyNIO"></p>
-<ul>
-<li><p>Reactor线程处理流程:</p>
-<ol>
-<li><p>初始化Initiation Dispatcher，然后将若干个Concrete Event Handler注册到Initiation Dispatcher中。当应用向Initiation Dispatcher注册Concrete Event Handler时，会在注册的同时指定感兴趣的事件，即，应用会标识出该事件处理器希望Initiation Dispatcher在某些事件发生时向其发出通知，事件通过Handle来标识，而Concrete Event Handler又持有该Handle。这样，事件 ————&gt; Handle ————&gt; Concrete Event Handler 就关联起来了。</p>
-</li>
-<li><p>Initiation Dispatcher 会要求每个事件处理器向其传递内部的Handle。该Handle向操作系统标识了事件处理器。</p>
-</li>
-<li><p>当所有的Concrete Event Handler都注册完毕后，应用会调用handle_events方法来启动Initiation Dispatcher的事件循环。这是，Initiation Dispatcher会将每个注册的Concrete Event Handler的Handle合并起来，并使用Synchronous Event Demultiplexer(同步事件分离器)同步阻塞的等待事件的发生。比如说，TCP协议层会使用select同步事件分离器操作来等待客户端发送的数据到达连接的socket handler上。<br>比如，在Java中通过Selector的select()方法来实现这个同步阻塞等待事件发生的操作。在Linux操作系统下，select()的实现中:</p>
-<ul>
-<li><p>会将已经注册到Initiation Dispatcher的事件调用epollCtl(epfd, opcode, fd, events)注册到linux系统中，这里fd表示Handle，events表示我们所感兴趣的Handle的事件；</p>
-</li>
-<li><p>通过调用epollWait方法同步阻塞的等待已经注册的事件的发生。不同事件源上的事件可能同时发生，一旦有事件被触发了，epollWait方法就会返回；</p>
-</li>
-<li><p>最后通过发生的事件找到相关联的SelectorKeyImpl对象，并设置其发生的事件为就绪状态，然后将SelectorKeyImpl放入selectedSet中。这样一来我们就可以通过Selector.selectedKeys()方法得到事件就绪的SelectorKeyImpl集合了。</p>
-</li>
-</ul>
-</li>
-<li><p>当与某个事件源对应的Handle变为ready状态时(比如说，TCP socket变为等待读状态时)，Synchronous Event Demultiplexer就会通知Initiation Dispatcher。</p>
-</li>
-<li><p>Initiation Dispatcher会触发事件处理器的回调方法，从而响应这个处于ready状态的Handle。当事件发生时，Initiation Dispatcher会将被事件源激活的Handle作为『key』来寻找并分发恰当的事件处理器回调方法。</p>
-</li>
-<li><p>Initiation Dispatcher会回调事件处理器的handle_event(type)回调方法来执行特定于应用的功能(开发者自己所编写的功能)，从而相应这个事件。所发生的事件类型可以作为该方法参数并被该方法内部使用来执行额外的特定于服务的分离与分发。</p>
-</li>
-</ol>
-</li>
-<li><p>服务器单线程Reactor处理流程</p>
-<ol>
-<li>服务器端的Reactor是一个线程对象，该线程会启动事件循环，并使用Selector来实现IO的多路复用。注册一个Acceptor事件处理器到Reactor中，Acceptor事件处理器所关注的事件是ACCEPT事件，这样Reactor会监听客户端向服务器端发起的连接请求事件(ACCEPT事件)。</li>
-<li>客户端向服务器端发起一个连接请求，Reactor监听到了该ACCEPT事件的发生并将该ACCEPT事件派发给相应的Acceptor处理器来进行处理。Acceptor处理器通过accept()方法得到与这个客户端对应的连接(SocketChannel)，然后将该连接所关注的READ事件以及对应的READ事件处理器注册到Reactor中，这样一来Reactor就会监听该连接的READ事件了。或者当你需要向客户端发送数据时，就向Reactor注册该连接的WRITE事件和其处理器。</li>
-<li>当Reactor监听到有读或者写事件发生时，将相关的事件派发给对应的处理器进行处理。比如，读处理器会通过SocketChannel的read()方法读取数据，此时read()操作可以直接读取到数据，而不会堵塞与等待可读的数据到来。</li>
-<li><p>每当处理完所有就绪的感兴趣的I/O事件后，Reactor线程会再次执行select()阻塞等待新的事件就绪并将其分派给对应处理器进行处理。</p>
-<p>注意，Reactor的单线程模式的单线程主要是针对于I/O操作而言，也就是所以的I/O的accept()、read()、write()以及connect()操作都在一个线程上完成的。</p>
-<p>但在目前的单线程Reactor模式中，不仅I/O操作在该Reactor线程上，连非I/O的业务操作也在该线程上进行处理了，这可能会大大延迟I/O请求的响应。所以我们应该将非I/O的业务逻辑操作从Reactor线程上卸载，以此来加速Reactor线程对I/O请求的响应。</p>
-</li>
-</ol>
-</li>
-<li><p>服务器多线程Reactor处理流程：</p>
-<p>  Reactor线程池中的每一Reactor线程都会有自己的Selector、线程和分发的事件循环逻辑。<br>  mainReactor可以只有一个，但subReactor一般会有多个。mainReactor线程主要负责接收客户端的连接请求，然后将接收到的SocketChannel传递给subReactor，由subReactor来完成和客户端的通信。</p>
-<ol>
-<li><p>注册一个Acceptor事件处理器到mainReactor中，Acceptor事件处理器所关注的事件是ACCEPT事件，这样mainReactor会监听客户端向服务器端发起的连接请求事件(ACCEPT事件)。启动mainReactor的事件循环。</p>
-</li>
-<li><p>客户端向服务器端发起一个连接请求，mainReactor监听到了该ACCEPT事件并将该ACCEPT事件派发给Acceptor处理器来进行处理。Acceptor处理器通过accept()方法得到与这个客户端对应的连接(SocketChannel)，然后将这个SocketChannel传递给subReactor线程池。</p>
-</li>
-<li><p>subReactor线程池分配一个subReactor线程给这个SocketChannel，即，将SocketChannel关注的READ事件以及对应的READ事件处理器注册到subReactor线程中。当然你也注册WRITE事件以及WRITE事件处理器到subReactor线程中以完成I/O写操作。Reactor线程池中的每一Reactor线程都会有自己的Selector、线程和分发的循环逻辑。</p>
-</li>
-<li><p>当有I/O事件就绪时，相关的subReactor就将事件派发给响应的处理器处理。注意，这里subReactor线程只负责完成I/O的read()操作，在读取到数据后将业务逻辑的处理放入到线程池中完成，若完成业务逻辑后需要返回数据给客户端，则相关的I/O的write操作还是会被提交回subReactor线程来完成。</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="扩展知识：Tomcat-同步-异步BIO的源码分析"><a href="#扩展知识：Tomcat-同步-异步BIO的源码分析" class="headerlink" title="扩展知识：Tomcat 同步/异步BIO的源码分析"></a>扩展知识：Tomcat 同步/异步BIO的源码分析</h3><ul>
-<li>服务器流程：<ol>
-<li>服务器端的Server是一个线程，线程中执行一个死循环来阻塞的监听客户端的连接请求和通信。</li>
-<li>当客户端向服务器端发送一个连接请求后，服务器端的Server会接受客户端的请求，ServerSocket.accept()从阻塞中返回，得到一个与客户端连接相对于的Socket。</li>
-<li>构建一个handler，将Socket传入该handler。创建一个线程并启动该线程，在线程中执行handler，这样与客户端的所有的通信以及数据处理都在该线程中执行。当该客户端和服务器端完成通信关闭连接后，线程就会被销毁。</li>
-<li>然后Server继续执行accept()操作等待新的连接请求。</li>
-</ol>
-</li>
-</ul>
-<ul>
-<li><p>优点：</p>
-<ul>
-<li>使用简单，容易编程</li>
-<li>在多核系统下，能够充分利用了多核CPU的资源。即，当I/O阻塞系统，但CPU空闲的时候，可以利用多线程使用CPU资源。</li>
-</ul>
-</li>
-<li><p>缺点：该模式的本质问题在于严重依赖线程，但线程Java虚拟机非常宝贵的资源。随着客户端并发访问量的急剧增加，线程数量的不断膨胀将服务器端的性能将急剧下降。</p>
-<ul>
-<li>线程生命周期的开销非常高。线程的创建与销毁并不是没有代价的。在Linux这样的操作系统中，线程本质上就是一个进程，创建和销毁都是重量级的系统函数。</li>
-<li>资源消耗。内存：大量空闲的线程会占用许多内存，给垃圾回收器带来压力。；CPU：如果你已经拥有足够多的线程使所有CPU保持忙碌状态，那么再创建更过的线程反而会降低性能。</li>
-<li>稳定性。在可创建线程的数量上存在一个限制。这个限制值将随着平台的不同而不同，并且受多个因素制约：a)JVM的启动参数、b)Threa的构造函数中请求的栈大小、c)底层操作系统对线程的限制 等。如果破坏了这些限制，那么很可能抛出OutOfMemoryError异常。</li>
-<li>线程的切换成本是很高的。操作系统发生线程切换的时候，需要保留线程的上下文，然后执行系统调用。如果线程数过高，不仅会带来许多无用的上下文切换，还可能导致执行线程切换的时间甚至会大于线程执行的时间，这时候带来的表现往往是系统负载偏高、CPU sy(系统CPU)使用率特别高，导致系统几乎陷入不可用的状态。</li>
-<li>容易造成锯齿状的系统负载。一旦线程数量高但外部网络环境不是很稳定，就很容易造成大量请求的结果同时返回，激活大量阻塞线程从而使系统负载压力过大。</li>
-<li>若是长连接的情况下并且客户端与服务器端交互并不频繁的，那么客户端和服务器端的连接会一直保留着，对应的线程也就一直存在在，但因为不频繁的通信，导致大量线程在大量时间内都处于空置状态。</li>
-</ul>
-</li>
-<li><p>适用场景：如果你有少量的连接使用非常高的带宽，一次发送大量的数据，也许典型的IO服务器实现可能非常契合。</p>
 </li>
 </ul>
 <h3 id="安全——服务验证和授权"><a href="#安全——服务验证和授权" class="headerlink" title="安全——服务验证和授权"></a>安全——服务验证和授权</h3><p>Spring Cloud Securty为微服务提供了一种灵活的用户验证机制，和授权模型。其中验证机制可以基于OAuth2.0标准下的OpenID协议完成，而用户服务授权模型则通过OAuth 2.0的token提供。云服务中的所有服务都应该引入服务验证和授权机制来保护内容服务的安全性。</p>
@@ -811,7 +730,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/16/Authentication/" rel="next" title="Authentication">
+              <a href="/2020/11/19/Authentication/" rel="next" title="Authentication">
                 <i class="fa fa-chevron-left"></i> Authentication
               </a>
             
@@ -893,7 +812,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -905,8 +824,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -938,8 +855,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1010,7 +925,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud微服务框架"><span class="nav-number">1.</span> <span class="nav-text">Spring Cloud微服务框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud常用组件"><span class="nav-number">2.</span> <span class="nav-text">Spring Cloud常用组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API网关"><span class="nav-number">2.1.</span> <span class="nav-text">API网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud-Gateway源码分析"><span class="nav-number">2.2.</span> <span class="nav-text">Spring Cloud Gateway源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Netty-NIO的源码分析"><span class="nav-number">2.2.1.</span> <span class="nav-text">Netty NIO的源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展知识：Tomcat-同步-异步BIO的源码分析"><span class="nav-number">2.2.2.</span> <span class="nav-text">扩展知识：Tomcat 同步/异步BIO的源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全——服务验证和授权"><span class="nav-number">2.2.3.</span> <span class="nav-text">安全——服务验证和授权</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Netflix"><span class="nav-number">3.</span> <span class="nav-text">Spring Cloud Netflix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Eureka服务注册"><span class="nav-number">3.1.</span> <span class="nav-text">Netflix Eureka服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Ribbon负载均衡"><span class="nav-number">3.2.</span> <span class="nav-text">Netflix Ribbon负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ribbon负载均衡策略比较"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ribbon负载均衡策略比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Feign动态代理RPC调用"><span class="nav-number">3.3.</span> <span class="nav-text">Netflix Feign动态代理RPC调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Hystrix服务弹性保证"><span class="nav-number">3.4.</span> <span class="nav-text">Netflix Hystrix服务弹性保证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hystrix熔断机制源码分析"><span class="nav-number">3.4.1.</span> <span class="nav-text">Hystrix熔断机制源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hystrix手写代码示例"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">Hystrix手写代码示例</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Alibaba"><span class="nav-number">4.</span> <span class="nav-text">Spring Cloud Alibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos-配置中心，负载均衡，服务注册"><span class="nav-number">4.1.</span> <span class="nav-text">Nacos 配置中心，负载均衡，服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos服务注册源码分析"><span class="nav-number">4.1.1.</span> <span class="nav-text">Nacos服务注册源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel-弹性限流-熔断模式"><span class="nav-number">4.2.</span> <span class="nav-text">Sentinel 弹性限流/熔断模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentinel和Hystrix对比"><span class="nav-number">4.2.1.</span> <span class="nav-text">Sentinel和Hystrix对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seata-分布式事务"><span class="nav-number">4.3.</span> <span class="nav-text">Seata 分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务解决理论"><span class="nav-number">4.3.1.</span> <span class="nav-text">分布式事务解决理论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#X-Open分布式事务模型"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">X/Open分布式事务模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两段提交协议"><span class="nav-number">4.3.1.2.</span> <span class="nav-text">两段提交协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三段提交协议"><span class="nav-number">4.3.1.3.</span> <span class="nav-text">三段提交协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务解决方案"><span class="nav-number">4.3.2.</span> <span class="nav-text">分布式事务解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seata源码分析"><span class="nav-number">4.3.3.</span> <span class="nav-text">Seata源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud-Stream-发布-订阅流处理"><span class="nav-number">4.4.</span> <span class="nav-text">Spring Cloud Stream 发布/订阅流处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-分布式消息通信源码分析"><span class="nav-number">4.4.1.</span> <span class="nav-text">RocketMQ 分布式消息通信源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-消息使用场景与实现"><span class="nav-number">4.4.2.</span> <span class="nav-text">RocketMQ 消息使用场景与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-顺序消息实现"><span class="nav-number">4.4.2.1.</span> <span class="nav-text">RocketMQ 顺序消息实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-普通消息发送实现"><span class="nav-number">4.4.2.2.</span> <span class="nav-text">RocketMQ 普通消息发送实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-消息并发消费实现"><span class="nav-number">4.4.2.3.</span> <span class="nav-text">RocketMQ 消息并发消费实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-分布式事务消息实现"><span class="nav-number">4.4.2.4.</span> <span class="nav-text">RocketMQ 分布式事务消息实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ消费模式"><span class="nav-number">4.4.2.5.</span> <span class="nav-text">RocketMQ消费模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ实现原理"><span class="nav-number">4.4.3.</span> <span class="nav-text">RocketMQ实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高性能设计"><span class="nav-number">4.4.3.1.</span> <span class="nav-text">高性能设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高可用设计"><span class="nav-number">4.4.3.2.</span> <span class="nav-text">高可用设计</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud微服务框架"><span class="nav-number">1.</span> <span class="nav-text">Spring Cloud微服务框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud常用组件"><span class="nav-number">2.</span> <span class="nav-text">Spring Cloud常用组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API网关"><span class="nav-number">2.1.</span> <span class="nav-text">API网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud-Gateway源码分析"><span class="nav-number">2.2.</span> <span class="nav-text">Spring Cloud Gateway源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全——服务验证和授权"><span class="nav-number">2.2.1.</span> <span class="nav-text">安全——服务验证和授权</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Netflix"><span class="nav-number">3.</span> <span class="nav-text">Spring Cloud Netflix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Eureka服务注册"><span class="nav-number">3.1.</span> <span class="nav-text">Netflix Eureka服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Ribbon负载均衡"><span class="nav-number">3.2.</span> <span class="nav-text">Netflix Ribbon负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ribbon负载均衡策略比较"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ribbon负载均衡策略比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Feign动态代理RPC调用"><span class="nav-number">3.3.</span> <span class="nav-text">Netflix Feign动态代理RPC调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Hystrix服务弹性保证"><span class="nav-number">3.4.</span> <span class="nav-text">Netflix Hystrix服务弹性保证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hystrix熔断机制源码分析"><span class="nav-number">3.4.1.</span> <span class="nav-text">Hystrix熔断机制源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hystrix手写代码示例"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">Hystrix手写代码示例</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Alibaba"><span class="nav-number">4.</span> <span class="nav-text">Spring Cloud Alibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos-配置中心，负载均衡，服务注册"><span class="nav-number">4.1.</span> <span class="nav-text">Nacos 配置中心，负载均衡，服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos服务注册源码分析"><span class="nav-number">4.1.1.</span> <span class="nav-text">Nacos服务注册源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel-弹性限流-熔断模式"><span class="nav-number">4.2.</span> <span class="nav-text">Sentinel 弹性限流/熔断模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentinel和Hystrix对比"><span class="nav-number">4.2.1.</span> <span class="nav-text">Sentinel和Hystrix对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seata-分布式事务"><span class="nav-number">4.3.</span> <span class="nav-text">Seata 分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务解决理论"><span class="nav-number">4.3.1.</span> <span class="nav-text">分布式事务解决理论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#X-Open分布式事务模型"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">X/Open分布式事务模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两段提交协议"><span class="nav-number">4.3.1.2.</span> <span class="nav-text">两段提交协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三段提交协议"><span class="nav-number">4.3.1.3.</span> <span class="nav-text">三段提交协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务解决方案"><span class="nav-number">4.3.2.</span> <span class="nav-text">分布式事务解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seata源码分析"><span class="nav-number">4.3.3.</span> <span class="nav-text">Seata源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud-Stream-发布-订阅流处理"><span class="nav-number">4.4.</span> <span class="nav-text">Spring Cloud Stream 发布/订阅流处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-分布式消息通信源码分析"><span class="nav-number">4.4.1.</span> <span class="nav-text">RocketMQ 分布式消息通信源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-消息使用场景与实现"><span class="nav-number">4.4.2.</span> <span class="nav-text">RocketMQ 消息使用场景与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-顺序消息实现"><span class="nav-number">4.4.2.1.</span> <span class="nav-text">RocketMQ 顺序消息实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-普通消息发送实现"><span class="nav-number">4.4.2.2.</span> <span class="nav-text">RocketMQ 普通消息发送实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-消息并发消费实现"><span class="nav-number">4.4.2.3.</span> <span class="nav-text">RocketMQ 消息并发消费实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-分布式事务消息实现"><span class="nav-number">4.4.2.4.</span> <span class="nav-text">RocketMQ 分布式事务消息实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ消费模式"><span class="nav-number">4.4.2.5.</span> <span class="nav-text">RocketMQ消费模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ实现原理"><span class="nav-number">4.4.3.</span> <span class="nav-text">RocketMQ实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高性能设计"><span class="nav-number">4.4.3.1.</span> <span class="nav-text">高性能设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高可用设计"><span class="nav-number">4.4.3.2.</span> <span class="nav-text">高可用设计</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

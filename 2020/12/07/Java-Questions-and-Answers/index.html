@@ -108,19 +108,19 @@
 
 
 
-  <meta name="description" content="本文将着重于以问答形式记录Java相关知识点。 JVM JVM垃圾收集器比较，怎么选？   JVM总共有7种垃圾收集器   参考GCs  Serial,ParNew,Parallel Scavenge 负责堆年轻代中的内存回收  Serial Old,CMS,Parallel Old 负责堆老年代中的内存回收  G1分代回收，能独立管理整个GC堆  两个收集器中间存在连线的，说明能够配合工作">
+  <meta name="description" content="本文将着重于以问答形式记录Java相关知识点。 Java集合与数据结构 Java 数组Array和动态数组ArrayList有什么区别?   数组和ArrayList的本质区别在于前者是类型安全的,而后者是类型不安全的.ArrayList为了兼容所有类型对象,使用了Object数组，在使用元素的时候会有装箱和拆箱的操作,降低了程序的性能. ArrayList会动态扩充容量,容量为原来的2倍. Ar">
 <meta name="keywords" content="肉肉">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java Questions and Answers">
 <meta property="og:url" content="https://sunnyhll.github.io/2020/12/07/Java-Questions-and-Answers/index.html">
 <meta property="og:site_name" content="微观天下">
-<meta property="og:description" content="本文将着重于以问答形式记录Java相关知识点。 JVM JVM垃圾收集器比较，怎么选？   JVM总共有7种垃圾收集器   参考GCs  Serial,ParNew,Parallel Scavenge 负责堆年轻代中的内存回收  Serial Old,CMS,Parallel Old 负责堆老年代中的内存回收  G1分代回收，能独立管理整个GC堆  两个收集器中间存在连线的，说明能够配合工作">
+<meta property="og:description" content="本文将着重于以问答形式记录Java相关知识点。 Java集合与数据结构 Java 数组Array和动态数组ArrayList有什么区别?   数组和ArrayList的本质区别在于前者是类型安全的,而后者是类型不安全的.ArrayList为了兼容所有类型对象,使用了Object数组，在使用元素的时候会有装箱和拆箱的操作,降低了程序的性能. ArrayList会动态扩充容量,容量为原来的2倍. Ar">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Java-Questions-and-Answers/DeadLockCase.png">
-<meta property="og:updated_time" content="2020-12-09T05:29:26.037Z">
+<meta property="og:updated_time" content="2020-12-18T06:49:10.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Questions and Answers">
-<meta name="twitter:description" content="本文将着重于以问答形式记录Java相关知识点。 JVM JVM垃圾收集器比较，怎么选？   JVM总共有7种垃圾收集器   参考GCs  Serial,ParNew,Parallel Scavenge 负责堆年轻代中的内存回收  Serial Old,CMS,Parallel Old 负责堆老年代中的内存回收  G1分代回收，能独立管理整个GC堆  两个收集器中间存在连线的，说明能够配合工作">
+<meta name="twitter:description" content="本文将着重于以问答形式记录Java相关知识点。 Java集合与数据结构 Java 数组Array和动态数组ArrayList有什么区别?   数组和ArrayList的本质区别在于前者是类型安全的,而后者是类型不安全的.ArrayList为了兼容所有类型对象,使用了Object数组，在使用元素的时候会有装箱和拆箱的操作,降低了程序的性能. ArrayList会动态扩充容量,容量为原来的2倍. Ar">
 <meta name="twitter:image" content="https://sunnyhll.github.io/2020/12/07/Java-Questions-and-Answers/DeadLockCase.png">
 
 
@@ -396,7 +396,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-12-09 13:29:26" itemprop="dateModified" datetime="2020-12-09T13:29:26+08:00">2020-12-09</time>
+                <time title="修改时间：2020-12-18 14:49:10" itemprop="dateModified" datetime="2020-12-18T14:49:10+08:00">2020-12-18</time>
               
             
           </span>
@@ -455,6 +455,14 @@
 
       
         <p>本文将着重于以问答形式记录Java相关知识点。</p>
+<h1 id="Java集合与数据结构"><a href="#Java集合与数据结构" class="headerlink" title="Java集合与数据结构"></a>Java集合与数据结构</h1><ol>
+<li>Java 数组Array和动态数组ArrayList有什么区别?</li>
+</ol>
+<ul>
+<li>数组和ArrayList的本质区别在于前者是类型安全的,而后者是类型不安全的.<br>ArrayList为了兼容所有类型对象,使用了Object数组，在使用元素的时候会有装箱和拆箱的操作,降低了程序的性能.</li>
+<li>ArrayList会动态扩充容量,容量为原来的2倍.</li>
+<li>ArrayList只有把元素添加进去之后才可以通过下标访问相应的元素. s数组在创建的时候就已经确定了数据类型,并且它的长度是固定的，只能通过下标改变各个元素的值和访问.</li>
+</ul>
 <h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><ol>
 <li>JVM垃圾收集器比较，怎么选？</li>
 </ol>
@@ -988,6 +996,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/12/18/Java-NIO/" rel="prev" title="Java NIO">
+                Java NIO <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -1056,7 +1068,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1068,8 +1080,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1101,8 +1111,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1173,7 +1181,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">1.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Threading"><span class="nav-number">2.</span> <span class="nav-text">Threading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Language"><span class="nav-number">3.</span> <span class="nav-text">Java Language</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">4.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-boot"><span class="nav-number">5.</span> <span class="nav-text">Spring boot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Database"><span class="nav-number">6.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译器知识"><span class="nav-number">7.</span> <span class="nav-text">编译器知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-cloud"><span class="nav-number">8.</span> <span class="nav-text">Spring cloud</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Distributed-system"><span class="nav-number">9.</span> <span class="nav-text">Distributed system</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">10.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Architecture-and-Design"><span class="nav-number">11.</span> <span class="nav-text">System Architecture and Design</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Developer-Career-Value"><span class="nav-number">12.</span> <span class="nav-text">Developer Career/Value</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java集合与数据结构"><span class="nav-number">1.</span> <span class="nav-text">Java集合与数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM"><span class="nav-number">2.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Threading"><span class="nav-number">3.</span> <span class="nav-text">Threading</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Language"><span class="nav-number">4.</span> <span class="nav-text">Java Language</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">5.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-boot"><span class="nav-number">6.</span> <span class="nav-text">Spring boot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Database"><span class="nav-number">7.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译器知识"><span class="nav-number">8.</span> <span class="nav-text">编译器知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-cloud"><span class="nav-number">9.</span> <span class="nav-text">Spring cloud</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Distributed-system"><span class="nav-number">10.</span> <span class="nav-text">Distributed system</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">11.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Architecture-and-Design"><span class="nav-number">12.</span> <span class="nav-text">System Architecture and Design</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Developer-Career-Value"><span class="nav-number">13.</span> <span class="nav-text">Developer Career/Value</span></a></li></ol></div>
             
 
           </div>

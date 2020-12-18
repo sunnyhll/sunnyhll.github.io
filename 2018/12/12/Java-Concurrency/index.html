@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/Threadpool.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/BlockingQueue.png">
 <meta property="og:image" content="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/RWLock.png">
-<meta property="og:updated_time" content="2020-11-20T06:43:52.512Z">
+<meta property="og:updated_time" content="2020-12-18T02:23:24.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Concurrency">
 <meta name="twitter:description" content="线程概念线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：   新建状态(New) : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。 就绪状态(Runnable): 也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的start()方法，从而来启动该">
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-11-20 14:43:52" itemprop="dateModified" datetime="2020-11-20T14:43:52+08:00">2020-11-20</time>
+                <time title="修改时间：2020-12-18 10:23:24" itemprop="dateModified" datetime="2020-12-18T10:23:24+08:00">2020-12-18</time>
               
             
           </span>
@@ -746,120 +746,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AtomicIntegerFieldUpdaterTest</span> </span>&#123; </span><br><span class="line">    <span class="comment">// 创建原子更新器,并设置需要更新的对象类和对象的属性</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> AtomicIntegerFieldUpdater&lt;User&gt; a = </span><br><span class="line">            AtomicIntegerFieldUpdater.newUpdater(User.class, <span class="string">"old"</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;  </span><br><span class="line">        <span class="comment">// 设置柯南的年龄是10岁</span></span><br><span class="line">        User conan = <span class="keyword">new</span> User(<span class="string">"conan"</span>, <span class="number">10</span>);</span><br><span class="line">        <span class="comment">// 柯南长了一岁，但是仍然会输出旧的年龄</span></span><br><span class="line">        System.out.println(a.getAndIncrement(conan));</span><br><span class="line">        <span class="comment">// 输出柯南现在的年龄</span></span><br><span class="line">        System.out.println(a.get(conan));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">int</span> old;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String name, <span class="keyword">int</span> old)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">            <span class="keyword">this</span>.old = old;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> name;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getOld</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> old;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="多线程的资源生产与消费问题"><a href="#多线程的资源生产与消费问题" class="headerlink" title="多线程的资源生产与消费问题"></a>多线程的资源生产与消费问题</h2><p>Java的Vector容器实际上是线程安全的数据结构，也就是说Vector的各个操作都能保证其原子性，但是也会存在多线程问题。这是因为在Vector的删除和添加操作中，如果存在多线程并发，删除操作的对象是可能是一个空Vector容器，造成问题。Developer需要有很好的上下文控制来避免这种生产消费问题。</p>
-<h3 id="多线程管理工具"><a href="#多线程管理工具" class="headerlink" title="多线程管理工具"></a>多线程管理工具</h3><h4 id="Object方法"><a href="#Object方法" class="headerlink" title="Object方法"></a><a href="#通过Object方法控制线程并发">Object方法</a></h4><h4 id="线程调度器"><a href="#线程调度器" class="headerlink" title="线程调度器"></a><a href="#线程调度器Scheduler">线程调度器</a></h4><h4 id="线程同步器"><a href="#线程同步器" class="headerlink" title="线程同步器"></a><a href="#线程同步器Synchronizer">线程同步器</a></h4><h4 id="线程上下文管理工具-1"><a href="#线程上下文管理工具-1" class="headerlink" title="线程上下文管理工具"></a><a href="#线程上下文管理工具">线程上下文管理工具</a></h4><h3 id="异步方法"><a href="#异步方法" class="headerlink" title="异步方法"></a>异步方法</h3><p>异步方法(Java asynchronized programming)是提升程序性能的一个有效手段，采用已经封装好的方法，让JVM去控制线程的创建和回收管理，减少了线程的阻塞，让程序员更加关注方法的设计。</p>
-<h4 id="Callable-Future-和FutureTask"><a href="#Callable-Future-和FutureTask" class="headerlink" title="Callable,Future, 和FutureTask"></a>Callable,Future, 和FutureTask</h4><ul>
-<li>Callable</li>
-</ul>
-<p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，必须等待它返回的结果。java.util.concurrent.Future对象解决了这个问题。</p>
-<p>在线程池提交Callable任务后返回了一个Future对象，使用它可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法，等待Callable结束并获取它的执行结果。</p>
-<p>Callable与Runnable接口很相似，不同之处在于一个需要返回值，一个不需要。而且Callable可以抛出异常。</p>
-<ul>
-<li>Future和FutureTask</li>
-</ul>
-<p>FutureTask是Future接口的一个唯一实现类。</p>
-<p>FutureTask类实现了RunnableFuture接口，RunnableFuture继承了Runnable接口和Future接口，所以它既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值。</p>
-<p><strong>Future接口的不足：</strong></p>
-<p>Future接口可以构建异步应用，但依然有其局限性。它很难直接表述多个Future 结果之间的依赖性。实际开发中，我们经常需要达成以下目的：</p>
-<pre><code>* 将两个异步计算合并为一个——这两个异步计算之间相互独立，同时第二个又依赖于第一个的结果。
-* 等待 Future 集合中的所有任务都完成。
-* 仅等待 Future 集合中最快结束的任务完成（有可能因为它们试图通过不同的方式计算同一个值），并返回它的结果。
-* 通过编程方式完成一个 Future 任务的执行（即以手工设定异步操作结果的方式）。
-* 应对 Future 的完成事件（即当 Future 的完成事件发生时会收到通知，并能使用 Future计算的结果进行下一步的操作，不只是简单地阻塞等待操作的结果）
-</code></pre><p>在CompletableFuture中，满足了上述的目的。</p>
-<blockquote>
-<p><a href="https://www.cnblogs.com/dolphin0520/p/3949310.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/p/3949310.html</a></p>
-</blockquote>
-<h4 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="noopener">CompletableFuture</a></h4><p>通过静态方法产生CompletableFuture实例。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">静态方法</th>
-<th style="text-align:center">内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">runAsync(Runnable runnable)</td>
-<td style="text-align:center">使用ForkJoinPool.commonPool()作为它的线程池执行异步代码。</td>
-</tr>
-<tr>
-<td style="text-align:left">runAsync(Runnable runnable, Executor executor)</td>
-<td style="text-align:center">使用指定的thread pool执行异步代码。</td>
-</tr>
-<tr>
-<td style="text-align:left">supplyAsync(Supplier&lt;U&gt; supplier)</td>
-<td style="text-align:center">使用ForkJoinPool.commonPool()作为它的线程池执行异步代码，异步操作有返回值</td>
-</tr>
-<tr>
-<td style="text-align:left">supplyAsync(Supplier&lt;U&gt; supplier, Executor executor)</td>
-<td style="text-align:center">使用指定的thread pool执行异步代码，异步操作有返回值</td>
-</tr>
-</tbody>
-</table>
-<p><strong>示例代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CompletableFuture 在调用runAsync后会立刻执行，定义的Runnable输入参入与.NET中定义的Task.Run(Action a)很相似。</span></span><br><span class="line">CompletableFuture cf = CompletableFuture.runAsync(()=&gt; System.out.println(<span class="string">"Hello"</span>));</span><br><span class="line">CompletableFuture&lt;String&gt; cf2 = CompletableFuture.supplierAsync(()=&gt;<span class="string">"Hello"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// get()方法会阻塞当前线程等待结果，类似于.NET的Task.Result属性。此接口继承于Future的get()方法，运行方式和CompletableFuture的join()一致，与之不相同的是get()会抛出InterruptedException 和ExecutionException异常需要开发者手动处理，而join()抛出的异常则交由exceptionally()中的callback进行处理。</span></span><br><span class="line">        cf.get();</span><br><span class="line">        <span class="comment">// join()方法也会阻塞当前线程，同步执行等待结果，和.NET的Task.wait()方法相似，如果有异常/在等待时被取消，会抛出相应未经过检查的exception，比如CompletionException异常 /CancellationException异常。</span></span><br><span class="line">        System.out.println(cf2.get());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">实例方法</th>
-<th style="text-align:center">内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">thenRun(Runnable runnable)</td>
-<td style="text-align:center">可以传入一个Lamda表达式作为后续处理方法</td>
-</tr>
-<tr>
-<td style="text-align:left">thenAccept(Comsummer&lt;? super T&gt; consummer)</td>
-<td style="text-align:center">在异步task执行完成后传入一个Action方法来处理输出参数,如果void输出是不需要thenAccept(**),也有async版本</td>
-</tr>
-<tr>
-<td style="text-align:left">thenApply(Function&lt;? super T, ? super E&gt; function)</td>
-<td style="text-align:center">在异步task执行完成后传入一个Func来处理输出参数，并且得出返回值，也有async版本</td>
-</tr>
-<tr>
-<td style="text-align:left">thenCombine(CompletionStage&lt;? extends U&gt; taskToBeCombined, Function&lt;? super T, ? super U&gt; function)</td>
-<td style="text-align:center">Task并联，两个都执行完成了再继续fucntion)</td>
-</tr>
-<tr>
-<td style="text-align:left">thenCompose(Function&lt;? extends U&gt; function, CompletionStage\<u> cf)</u></td>
-<td style="text-align:center">Task串联，本task执行完成后再执行下一步</td>
-</tr>
-<tr>
-<td style="text-align:left">complete(T t)</td>
-<td style="text-align:center">立刻返回Task的结果，并且返回值是t。当然如果Task已经异步执行完毕，则设置失效</td>
-</tr>
-<tr>
-<td style="text-align:left">completeExceptionally(Throwable x)</td>
-<td style="text-align:center">立刻返回Task并且抛出对应的Exception。如果Task已经结束，则不变。</td>
-</tr>
-<tr>
-<td style="text-align:left">get()</td>
-<td style="text-align:center">尝试获取结果，如果没有结束/抛出exception/cancel掉，都会抛出对应的exception.</td>
-</tr>
-<tr>
-<td style="text-align:left">join()</td>
-<td style="text-align:center">join()方法会阻塞当前线程，同步执行等待结果，和.NET的Task.wait()方法相似，如果有异常/被取消，会抛出相应的exception。</td>
-</tr>
-<tr>
-<td style="text-align:left">handle(BiFunction&lt;? super T, Throwable, ? extends U&gt; fn)</td>
-<td style="text-align:center">将event handler传入，待到task执行完毕后进行处理/exception handling。也有async版本</td>
-</tr>
-<tr>
-<td style="text-align:left">exceptionally​(Function&lt;Throwable,? extends T&gt; fn)</td>
-<td style="text-align:center">为异步方法注册exception的callback，当然也可以给该task注册下一步的方法在thenApply(..)中。</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>Lambda表达式</li>
-</ul>
-<p>在Java里，lamda表达式的实质是函数。Runnable是一种特殊的lamda表达式，也就是.NET 中的Action类型委托实例，()-&gt; { ….; return void;}</p>
-<blockquote>
-<p><a href="https://www.jianshu.com/p/dff9063e1ab6" target="_blank" rel="noopener">https://www.jianshu.com/p/dff9063e1ab6</a></p>
-</blockquote>
-<h1 id="题外话：C-多线程工具"><a href="#题外话：C-多线程工具" class="headerlink" title="题外话：C#多线程工具"></a>题外话：C#多线程工具</h1><h1 id="题外话-C-异步编程"><a href="#题外话-C-异步编程" class="headerlink" title="题外话: C#异步编程"></a>题外话: C#异步编程</h1>
+<h3 id="多线程管理工具"><a href="#多线程管理工具" class="headerlink" title="多线程管理工具"></a>多线程管理工具</h3><h4 id="Object方法"><a href="#Object方法" class="headerlink" title="Object方法"></a><a href="#通过Object方法控制线程并发">Object方法</a></h4><h4 id="线程调度器"><a href="#线程调度器" class="headerlink" title="线程调度器"></a><a href="#线程调度器Scheduler">线程调度器</a></h4><h4 id="线程同步器"><a href="#线程同步器" class="headerlink" title="线程同步器"></a><a href="#线程同步器Synchronizer">线程同步器</a></h4><h4 id="线程上下文管理工具-1"><a href="#线程上下文管理工具-1" class="headerlink" title="线程上下文管理工具"></a><a href="#线程上下文管理工具">线程上下文管理工具</a></h4><h1 id="题外话：C-多线程工具"><a href="#题外话：C-多线程工具" class="headerlink" title="题外话：C#多线程工具"></a>题外话：C#多线程工具</h1>
       
     </div>
 
@@ -979,7 +866,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -991,8 +878,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1024,8 +909,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1096,7 +979,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程概念"><span class="nav-number">1.</span> <span class="nav-text">线程概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程概念"><span class="nav-number">2.</span> <span class="nav-text">多线程概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程管理的基本工具（及Executor框架）"><span class="nav-number">3.</span> <span class="nav-text">线程管理的基本工具（及Executor框架）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个新线程"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个新线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过Object方法控制线程并发"><span class="nav-number">3.2.</span> <span class="nav-text">通过Object方法控制线程并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程调度器Scheduler"><span class="nav-number">3.3.</span> <span class="nav-text">线程调度器Scheduler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通信"><span class="nav-number">3.4.</span> <span class="nav-text">线程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程上下文管理工具"><span class="nav-number">3.5.</span> <span class="nav-text">线程上下文管理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步器Synchronizer"><span class="nav-number">3.6.</span> <span class="nav-text">线程同步器Synchronizer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程问题"><span class="nav-number">4.</span> <span class="nav-text">多线程问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程数据读写访问问题（同步-并发问题）"><span class="nav-number">4.1.</span> <span class="nav-text">多线程数据读写访问问题（同步/并发问题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized-关键字"><span class="nav-number">4.1.1.</span> <span class="nav-text">synchronized 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁"><span class="nav-number">4.1.2.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发集合Concurrent-collection"><span class="nav-number">4.1.3.</span> <span class="nav-text">并发集合Concurrent collection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无锁并发工具"><span class="nav-number">4.1.4.</span> <span class="nav-text">无锁并发工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程的资源生产与消费问题"><span class="nav-number">4.2.</span> <span class="nav-text">多线程的资源生产与消费问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程管理工具"><span class="nav-number">4.2.1.</span> <span class="nav-text">多线程管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object方法"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">Object方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程调度器"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">线程调度器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程同步器"><span class="nav-number">4.2.1.3.</span> <span class="nav-text">线程同步器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程上下文管理工具-1"><span class="nav-number">4.2.1.4.</span> <span class="nav-text">线程上下文管理工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步方法"><span class="nav-number">4.2.2.</span> <span class="nav-text">异步方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Callable-Future-和FutureTask"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">Callable,Future, 和FutureTask</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CompletableFuture"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">CompletableFuture</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题外话：C-多线程工具"><span class="nav-number">5.</span> <span class="nav-text">题外话：C#多线程工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题外话-C-异步编程"><span class="nav-number">6.</span> <span class="nav-text">题外话: C#异步编程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程概念"><span class="nav-number">1.</span> <span class="nav-text">线程概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程概念"><span class="nav-number">2.</span> <span class="nav-text">多线程概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程管理的基本工具（及Executor框架）"><span class="nav-number">3.</span> <span class="nav-text">线程管理的基本工具（及Executor框架）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个新线程"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个新线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过Object方法控制线程并发"><span class="nav-number">3.2.</span> <span class="nav-text">通过Object方法控制线程并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程调度器Scheduler"><span class="nav-number">3.3.</span> <span class="nav-text">线程调度器Scheduler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程通信"><span class="nav-number">3.4.</span> <span class="nav-text">线程通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程上下文管理工具"><span class="nav-number">3.5.</span> <span class="nav-text">线程上下文管理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步器Synchronizer"><span class="nav-number">3.6.</span> <span class="nav-text">线程同步器Synchronizer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程问题"><span class="nav-number">4.</span> <span class="nav-text">多线程问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程数据读写访问问题（同步-并发问题）"><span class="nav-number">4.1.</span> <span class="nav-text">多线程数据读写访问问题（同步/并发问题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized-关键字"><span class="nav-number">4.1.1.</span> <span class="nav-text">synchronized 关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁"><span class="nav-number">4.1.2.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发集合Concurrent-collection"><span class="nav-number">4.1.3.</span> <span class="nav-text">并发集合Concurrent collection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无锁并发工具"><span class="nav-number">4.1.4.</span> <span class="nav-text">无锁并发工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程的资源生产与消费问题"><span class="nav-number">4.2.</span> <span class="nav-text">多线程的资源生产与消费问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程管理工具"><span class="nav-number">4.2.1.</span> <span class="nav-text">多线程管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Object方法"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">Object方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程调度器"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">线程调度器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程同步器"><span class="nav-number">4.2.1.3.</span> <span class="nav-text">线程同步器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程上下文管理工具-1"><span class="nav-number">4.2.1.4.</span> <span class="nav-text">线程上下文管理工具</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题外话：C-多线程工具"><span class="nav-number">5.</span> <span class="nav-text">题外话：C#多线程工具</span></a></li></ol></div>
             
 
           </div>
