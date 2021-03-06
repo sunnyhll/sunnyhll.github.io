@@ -459,7 +459,7 @@
 <h3 id="Create-username-github-io-repo-for-statics-hexo-pages"><a href="#Create-username-github-io-repo-for-statics-hexo-pages" class="headerlink" title="Create {username}.github.io repo for statics hexo pages"></a>Create {username}.github.io repo for statics hexo pages</h3><h3 id="Configure-config-yml-file-for-hexo-blogs-and-deployments"><a href="#Configure-config-yml-file-for-hexo-blogs-and-deployments" class="headerlink" title="Configure _config.yml file for hexo blogs and deployments"></a>Configure _config.yml file for hexo blogs and deployments</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span><br><span class="line">url: https://&#123;username&#125;.github.io/</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:&#123;username&#125;/&#123;username&#125;.githubm.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message: "Site updated: &#123;&#123; now('YYYY-MM-DD HH:mm:ss') &#125;&#125;"</span><br></pre></td></tr></table></figure>
 <h3 id="Deploy-hexo-static-files-to-target-repo"><a href="#Deploy-hexo-static-files-to-target-repo" class="headerlink" title="Deploy hexo static files to target repo"></a>Deploy hexo static files to target repo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>Useful links:<br><a href="https://blog.csdn.net/android_msk/article/details/75040841" target="_blank" rel="noopener">Hexo with pictures</a>,<br><a href="https://bingyue.github.io/2017/03/08/%E4%BD%BF%E7%94%A8Github-Pages%E5%92%8CHexo%E6%9E%84%E5%BB%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">Hexo Deployment</a>,<br><a href="https://yq.aliyun.com/articles/72002" target="_blank" rel="noopener">Jekyll vs Hexo</a>,<br><a href="https://coding.net/help/doc/project/markdown.html" target="_blank" rel="noopener">Markdown</a>,<br><a href="https://www.jianshu.com/p/1e402922ee32/" target="_blank" rel="noopener">Markdown brief</a>,<br><a href="https://blog.csdn.net/u013553529/article/details/50629055" target="_blank" rel="noopener">Markdown highlights</a></p>
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
       
     </div>
 
@@ -659,7 +659,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -714,7 +718,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -738,6 +742,15 @@
 
 
 
+
+
+
+  <script src="https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 <div class="busuanzi-count">

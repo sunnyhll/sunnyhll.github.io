@@ -117,7 +117,7 @@
 <meta property="og:description" content="Java异步计算方法与异步网络通信框架Java异步方法异步方法(Java asynchronized programming)是提升程序性能的一个有效手段，采用已经封装好的方法，让JVM去控制线程的创建和回收管理，减少了线程的阻塞，让程序员更加关注方法的设计。 Callable,Future, 和FutureTask Callable  Callable接口使用泛型去定义它的返回类型。Execut">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/18/Java-NIO/Reactor.png">
-<meta property="og:updated_time" content="2020-12-18T06:40:42.278Z">
+<meta property="og:updated_time" content="2020-12-24T09:41:21.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java NIO">
 <meta name="twitter:description" content="Java异步计算方法与异步网络通信框架Java异步方法异步方法(Java asynchronized programming)是提升程序性能的一个有效手段，采用已经封装好的方法，让JVM去控制线程的创建和回收管理，减少了线程的阻塞，让程序员更加关注方法的设计。 Callable,Future, 和FutureTask Callable  Callable接口使用泛型去定义它的返回类型。Execut">
@@ -383,6 +383,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-24 17:41:21" itemprop="dateModified" datetime="2020-12-24T17:41:21+08:00">2020-12-24</time>
+              
+            
           </span>
 
           
@@ -461,7 +477,7 @@
 <blockquote>
 <p><a href="https://www.cnblogs.com/dolphin0520/p/3949310.html" target="_blank" rel="noopener">https://www.cnblogs.com/dolphin0520/p/3949310.html</a></p>
 </blockquote>
-<h3 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="noopener">CompletableFuture</a></h3><p>通过静态方法产生CompletableFuture实例。</p>
+<h3 id="CompletableFuture"><a href="#CompletableFuture" class="headerlink" title="CompletableFuture"></a><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html" target="_blank" rel="noopener">CompletableFuture</a></h3><p>通过静态方法产生CompletableFuture实例。CompletableFuture的底层实现原理：</p>
 <table>
 <thead>
 <tr>
@@ -490,6 +506,8 @@
 </table>
 <p><strong>示例代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CompletableFuture 在调用runAsync后会立刻执行，定义的Runnable输入参入与.NET中定义的Task.Run(Action a)很相似。</span></span><br><span class="line">CompletableFuture cf = CompletableFuture.runAsync(()=&gt; System.out.println(<span class="string">"Hello"</span>));</span><br><span class="line">CompletableFuture&lt;String&gt; cf2 = CompletableFuture.supplierAsync(()=&gt;<span class="string">"Hello"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// get()方法会阻塞当前线程等待结果，类似于.NET的Task.Result属性。此接口继承于Future的get()方法，运行方式和CompletableFuture的join()一致，与之不相同的是get()会抛出InterruptedException 和ExecutionException异常需要开发者手动处理，而join()抛出的异常则交由exceptionally()中的callback进行处理。</span></span><br><span class="line">        cf.get();</span><br><span class="line">        <span class="comment">// join()方法也会阻塞当前线程，同步执行等待结果，和.NET的Task.wait()方法相似，如果有异常/在等待时被取消，会抛出相应未经过检查的exception，比如CompletionException异常 /CancellationException异常。</span></span><br><span class="line">        System.out.println(cf2.get());</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>底层是通过一个线程池接收提交的任务，源码是用一个Executor实例执行lamda表达式，一般默认是运用ForJoinPool线程池中的线程执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Executor ASYNC_POOL = USE_COMMON_POOL ?</span><br><span class="line">        ForkJoinPool.commonPool() : <span class="keyword">new</span> ThreadPerTaskExecutor();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/** Fallback if ForkJoinPool.commonPool() cannot support parallelism */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPerTaskExecutor</span> <span class="keyword">implements</span> <span class="title">Executor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable r)</span> </span>&#123; <span class="keyword">new</span> Thread(r).start(); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -551,7 +569,8 @@
 <blockquote>
 <p><a href="https://www.jianshu.com/p/dff9063e1ab6" target="_blank" rel="noopener">https://www.jianshu.com/p/dff9063e1ab6</a></p>
 </blockquote>
-<h1 id="题外话-C-异步编程方法"><a href="#题外话-C-异步编程方法" class="headerlink" title="题外话: C#异步编程方法"></a>题外话: C#异步编程方法</h1><h1 id="Java-NIO网络编程框架"><a href="#Java-NIO网络编程框架" class="headerlink" title="Java NIO网络编程框架"></a>Java NIO网络编程框架</h1><p>在网络编程领域，节点间式依赖TCP/UDP协议进行通信，Java提供的Socket实现在JDK 1.4以前是阻塞I/O, 也就是说每一个Socket连接，JVM中会分配一个线程阻塞等待连接建立，数据通信，在高并发场景下会发生线程池线程用尽的情况，为了优化网络通信效率，出现了非阻塞/异步I/O的设计方案。</p>
+<h1 id="题外话-C-异步编程方法"><a href="#题外话-C-异步编程方法" class="headerlink" title="题外话: C#异步编程方法"></a>题外话: C#异步编程方法</h1><p>C#异步编程框架依赖于CLR的实现，更加高效和简单明了，而Java的异步方法依赖线程池实现。</p>
+<h1 id="Java-NIO网络编程框架"><a href="#Java-NIO网络编程框架" class="headerlink" title="Java NIO网络编程框架"></a>Java NIO网络编程框架</h1><p>在网络编程领域，节点间式依赖TCP/UDP协议进行通信，Java提供的Socket实现在JDK 1.4以前是阻塞I/O, 也就是说每一个Socket连接，JVM中会分配一个线程阻塞等待连接建立，数据通信，在高并发场景下会发生线程池线程用尽的情况，为了优化网络通信效率，出现了非阻塞/异步I/O的设计方案。</p>
 <h2 id="Reactor模式设计思想"><a href="#Reactor模式设计思想" class="headerlink" title="Reactor模式设计思想"></a>Reactor模式设计思想</h2><p>Netty通信框架的设计思想是基于Reactor模式思想，这是一种基于事件驱动的设计思想。能够高效的解决很多程序设计中的线程不必要阻塞问题。Java NIO也是基于Reactor设计思想实现的，在JVM本地方法层面做到了多路复用I/O。</p>
 <p><img src="/2020/12/18/Java-NIO/Reactor.png" alt="NettyNIO"></p>
 <p>Reactor模式中的五个角色:</p>
@@ -640,7 +659,7 @@
 <li><p>适用场景：如果你有少量的连接使用非常高的带宽，一次发送大量的数据，也许典型的IO服务器实现可能非常契合。</p>
 </li>
 </ul>
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
       
     </div>
 
@@ -834,7 +853,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -889,7 +912,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -913,6 +936,15 @@
 
 
 
+
+
+
+  <script src="https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 <div class="busuanzi-count">

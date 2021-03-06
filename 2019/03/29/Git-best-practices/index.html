@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="Git 基本操作创建Git仓库1git init 查看代码情况12git statusgit diff &amp;#123;filepath&amp;#125; 提交代码1234git clone &amp;#123;clone.git&amp;#125;git add -Agit commit -m &quot;message&quot;git push orgin master 保存/恢复临时修改文件12git stashgit checkou">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-06T14:15:34.870Z">
+<meta property="og:updated_time" content="2021-02-03T06:40:35.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git best practices">
 <meta name="twitter:description" content="Git 基本操作创建Git仓库1git init 查看代码情况12git statusgit diff &amp;#123;filepath&amp;#125; 提交代码1234git clone &amp;#123;clone.git&amp;#125;git add -Agit commit -m &quot;message&quot;git push orgin master 保存/恢复临时修改文件12git stashgit checkou">
@@ -394,7 +394,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-06 22:15:34" itemprop="dateModified" datetime="2019-05-06T22:15:34+08:00">2019-05-06</time>
+                <time title="修改时间：2021-02-03 14:40:35" itemprop="dateModified" datetime="2021-02-03T14:40:35+08:00">2021-02-03</time>
               
             
           </span>
@@ -469,13 +469,20 @@
 <li><p>raise pull request for code review</p>
 </li>
 </ol>
-<h1 id="提交历史管理"><a href="#提交历史管理" class="headerlink" title="提交历史管理"></a>提交历史管理</h1><h2 id="缩减冗余commit-log"><a href="#缩减冗余commit-log" class="headerlink" title="缩减冗余commit log"></a>缩减冗余commit log</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rewrite last 10 commit logs</span></span><br><span class="line">git rebase -i HEAD~10 feature</span><br><span class="line">git push orign feature --force</span><br></pre></td></tr></table></figure>
+<h1 id="提交历史管理"><a href="#提交历史管理" class="headerlink" title="提交历史管理"></a>提交历史管理</h1><h2 id="缩减冗余commit-log"><a href="#缩减冗余commit-log" class="headerlink" title="缩减冗余commit log"></a>缩减冗余commit log</h2><ul>
+<li>通过rebase修改commit history</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rewrite last 10 commit logs</span></span><br><span class="line">git rebase -i HEAD~10 feature</span><br><span class="line">git push orign feature --force</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过squash命令压缩commit history</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD~12 <span class="comment"># 将git指针定位到历史版本</span></span><br><span class="line"></span><br><span class="line">git merge --squash HEAD@&#123;1&#125; <span class="comment"># 从该点开始merge到最新的版本</span></span><br><span class="line"></span><br><span class="line">git commmit -m <span class="string">"xxx"</span> <span class="comment"># 提交commit重写</span></span><br><span class="line"></span><br><span class="line">git push origin master --force <span class="comment"># 强制改写历史</span></span><br></pre></td></tr></table></figure>
 <h1 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h1><h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b feature</span><br><span class="line"><span class="comment"># create a branch based on current branch</span></span><br></pre></td></tr></table></figure>
 <h2 id="切换分支-从Detached-HEAD切换"><a href="#切换分支-从Detached-HEAD切换" class="headerlink" title="切换分支/从Detached HEAD切换"></a>切换分支/从Detached HEAD切换</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature</span><br></pre></td></tr></table></figure>
 <h2 id="删除本地分支"><a href="#删除本地分支" class="headerlink" title="删除本地分支"></a>删除本地分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -d feature</span><br><span class="line">git branch -D feature <span class="comment"># force delete</span></span><br></pre></td></tr></table></figure>
 <h2 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push orgin --delete feature</span><br></pre></td></tr></table></figure>
 <h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git merge feature</span><br><span class="line"><span class="comment"># merge changes from feature branch to current master branch</span></span><br></pre></td></tr></table></figure>
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
       
     </div>
 
@@ -671,7 +678,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -726,7 +737,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -750,6 +761,15 @@
 
 
 
+
+
+
+  <script src="https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 <div class="busuanzi-count">

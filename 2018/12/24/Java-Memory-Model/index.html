@@ -606,7 +606,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> FieldType field;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> FieldType <span class="title">getField</span><span class="params">()</span></span>&#123;</span><br><span class="line">  FieldType result = field;</span><br><span class="line">  <span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123;</span><br><span class="line">    field = result = computeFieldValue();</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="双重检查模式"><a href="#双重检查模式" class="headerlink" title="双重检查模式"></a>双重检查模式</h3><p>双重检查模式通过synchronized和volatile的内存语义，3, 4对其他线程可见，且其他线程在1处的读不会重排序到2语块的内部，能够确保在线程更新field值时，与其他线程查看field值之间的读写能够顺序执行。</p>
 <p>局部变量result的使用能够保证尽量少次数的访问field和取锁，提升运行效率。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> FieldType field;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> FieldType <span class="title">getField</span><span class="params">()</span></span>&#123;</span><br><span class="line">  FieldType result = field;</span><br><span class="line">  <span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123;</span><br><span class="line">    result = field;</span><br><span class="line">    <span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123; <span class="comment">// 1</span></span><br><span class="line">      synchornized(<span class="keyword">this</span>)&#123; <span class="comment">// 2</span></span><br><span class="line">        field = result = computeFieldValue(); <span class="comment">//3, 4</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> FieldType field;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> FieldType <span class="title">getField</span><span class="params">()</span></span>&#123;</span><br><span class="line">  FieldType result = field;</span><br><span class="line">  <span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123;</span><br><span class="line">    result = field;</span><br><span class="line">    <span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123; <span class="comment">// 1</span></span><br><span class="line">      synchornized(<span class="keyword">this</span>)&#123; <span class="comment">// 2</span></span><br><span class="line">        field = result = computeFieldValue(); <span class="comment">//3, 4</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
       
     </div>
 
@@ -804,7 +804,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -859,7 +863,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -883,6 +887,15 @@
 
 
 
+
+
+
+  <script src="https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 <div class="busuanzi-count">

@@ -462,7 +462,7 @@
 <p>最后，在app module模块中引入对in-memory-web-api的引用，和in-memory-data service模块的使用，并配置好in-memeory-server对应的data/service来源。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NgModule &#125;       <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserModule &#125;  <span class="keyword">from</span> <span class="string">'@angular/platform-browser'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; FormsModule &#125;    <span class="keyword">from</span> <span class="string">'@angular/forms'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HttpClientModule &#125;    <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import in-memroy-data servier related module </span></span><br><span class="line"><span class="keyword">import</span> &#123; HttpClientInMemoryWebApiModule &#125; <span class="keyword">from</span> <span class="string">'angular-in-memory-web-api'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; InMemoryDataService &#125;  <span class="keyword">from</span> <span class="string">'./in-memory-data.service'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; AppRoutingModule &#125;     <span class="keyword">from</span> <span class="string">'./app-routing.module'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; AppComponent &#125;         <span class="keyword">from</span> <span class="string">'./app.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; DashboardComponent &#125;   <span class="keyword">from</span> <span class="string">'./dashboard/dashboard.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroDetailComponent &#125;  <span class="keyword">from</span> <span class="string">'./hero-detail/hero-detail.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroesComponent &#125;      <span class="keyword">from</span> <span class="string">'./heroes/heroes.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroSearchComponent &#125;  <span class="keyword">from</span> <span class="string">'./hero-search/hero-search.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroService &#125;          <span class="keyword">from</span> <span class="string">'./hero.service'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MessageService &#125;       <span class="keyword">from</span> <span class="string">'./message.service'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MessagesComponent &#125;    <span class="keyword">from</span> <span class="string">'./messages/messages.component'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    BrowserModule,</span><br><span class="line">    FormsModule,</span><br><span class="line">    AppRoutingModule,</span><br><span class="line">    HttpClientModule,</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// The HttpClientInMemoryWebApiModule module intercepts HTTP requests</span></span><br><span class="line">    <span class="comment">// and returns simulated server responses.</span></span><br><span class="line">    <span class="comment">// Remove it when a real server is ready to receive requests.</span></span><br><span class="line">    HttpClientInMemoryWebApiModule.forRoot(</span><br><span class="line">      InMemoryDataService, &#123; dataEncapsulation: <span class="literal">false</span> &#125;</span><br><span class="line">    )</span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    AppComponent,</span><br><span class="line">    DashboardComponent,</span><br><span class="line">    HeroesComponent,</span><br><span class="line">    HeroDetailComponent,</span><br><span class="line">    MessagesComponent,</span><br><span class="line">    HeroSearchComponent</span><br><span class="line">  ],</span><br><span class="line">  providers: [ HeroService, MessageService ],</span><br><span class="line">  bootstrap: [ AppComponent ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Angular-Data-Model-–-Class"><a href="#Angular-Data-Model-–-Class" class="headerlink" title="Angular Data Model – Class"></a>Angular Data Model – Class</h3><p>In Angular 5, data model is encapsulated through classes, mainly for rendering templates in components. Creating a new class by Angular Cli:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ng generate class &#123;classname&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ng generate class &#123;classname&#125;</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
       
     </div>
 
@@ -660,7 +660,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -715,7 +719,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -739,6 +743,15 @@
 
 
 
+
+
+
+  <script src="https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 <div class="busuanzi-count">
