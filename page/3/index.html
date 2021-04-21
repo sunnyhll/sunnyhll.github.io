@@ -331,6 +331,271 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/11/Java-Streams/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/11/Java-Streams/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/3/index.html">Java Stream API</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-11 18:09:56" itemprop="dateCreated datePublished" datetime="2018-12-11T18:09:56+08:00">2018-12-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java-Streams"><a href="#Java-Streams" class="headerlink" title="Java Streams"></a>Java Streams</h1><p>Java在JDK1.8中引入了Stream API,支持对流的处理。流处理类似于对于数据库数据流进行只读操作后求得某种结果，有如下特点:</p>
+<p><img src="/2018/12/11/Java-Streams/JavaStream.png" alt="Java-Streams"></p>
+<ol>
+<li>stream不存储数据</li>
+<li>stream不改变源数据</li>
+<li>stream的延迟执行特性</li>
+</ol>
+<h2 id="Stream-API-简述"><a href="#Stream-API-简述" class="headerlink" title="Stream API 简述"></a>Stream API 简述</h2><h3 id="创建Stream"><a href="#创建Stream" class="headerlink" title="创建Stream"></a>创建Stream</h3><p>Stream.of(Collection<t> collections)时Stream类的静态方法，可以将集合数据转化为Stream。</t></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Stream.of()</span></span><br><span class="line">Stream&lt;Student&gt; stream = Stream.of(stuArr);</span><br><span class="line"><span class="comment">//Arrays.stream</span></span><br><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">34</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    IntStream intStream = Arrays.stream(arr);</span><br></pre></td></tr></table></figure>
+<h3 id="Stream操作"><a href="#Stream操作" class="headerlink" title="Stream操作"></a>Stream操作</h3><blockquote>
+<p>Reference Link: <a href="https://www.cnblogs.com/CarpenterLee/p/6545321.html" target="_blank" rel="noopener">https://www.cnblogs.com/CarpenterLee/p/6545321.html</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作类型</th>
+<th style="text-align:center">接口方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">中间操作</td>
+<td style="text-align:center">concat() distinct() filter() flatMap() limit() map() peek() skip() sorted() parallel() sequential() unordered()</td>
+</tr>
+<tr>
+<td style="text-align:left">结束操作</td>
+<td style="text-align:center">allMatch() anyMatch() collect() count() findAny() findFirst() forEach() forEachOrdered() max() min() noneMatch() reduce() toArray()</td>
+</tr>
+</tbody>
+</table>
+<p>对于接口方法的传入参数，是各种函数接口，可以用lamda表达式方便的书写。下面介绍几个经典的API使用：</p>
+<ol>
+<li>forEach()</li>
+</ol>
+<p>forEach(Consumer&lt;? super E&gt; action)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用Stream.forEach()迭代</span></span><br><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">"I"</span>, <span class="string">"love"</span>, <span class="string">"you"</span>, <span class="string">"too"</span>);</span><br><span class="line">stream.forEach(str -&gt; System.out.println(str));</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>filter()</li>
+</ol>
+<p>filter(Predicate&lt;? super E&gt; predicate)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保留长度等于3的字符串</span></span><br><span class="line">Stream&lt;String&gt; stream= Stream.of(<span class="string">"I"</span>, <span class="string">"love"</span>, <span class="string">"you"</span>, <span class="string">"too"</span>);</span><br><span class="line">stream.filter(str -&gt; str.length()==<span class="number">3</span>)</span><br><span class="line">    .forEach(str -&gt; System.out.println(str));</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>map()</li>
+</ol>
+<p><r> Stream<r> map(Function&lt;? super T,? extends R&gt; mapper)</r></r></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream　= Stream.of(<span class="string">"I"</span>, <span class="string">"love"</span>, <span class="string">"you"</span>, <span class="string">"too"</span>);</span><br><span class="line">stream.map(str -&gt; str.toUpperCase())</span><br><span class="line">    .forEach(str -&gt; System.out.println(str));</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>reduce()</li>
+</ol>
+<blockquote>
+<p>reference Link: <a href="http://www.cnblogs.com/CarpenterLee/p/6550212.html" target="_blank" rel="noopener">http://www.cnblogs.com/CarpenterLee/p/6550212.html</a></p>
+</blockquote>
+<ul>
+<li>Optional<t> reduce(BinaryOperator<t> accumulator)</t></t></li>
+<li>T reduce(T identity, BinaryOperator<t> accumulator)</t></li>
+<li>\<u> U reduce(U identity, BiFunction&lt;U,? super T,U&gt; accumulator, BinaryOperator\<u> combiner)</u></u></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找出最长的单词</span></span><br><span class="line"></span><br><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">"I"</span>, <span class="string">"love"</span>, <span class="string">"you"</span>, <span class="string">"too"</span>);</span><br><span class="line">Optional&lt;String&gt; longest = stream.reduce((s1, s2) -&gt; s1.length()&gt;=s2.length() ? s1 : s2);</span><br><span class="line"><span class="comment">//Optional&lt;String&gt; longest = stream.max((s1, s2) -&gt; s1.length()-s2.length());</span></span><br><span class="line">System.out.println(longest.get());</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>collect()</li>
+</ol>
+<ul>
+<li><r> R collect(Supplier<r> supplier, BiConsumer&lt;R,? super T&gt; accumulator, BiConsumer&lt;R,R&gt; combiner)</r></r></li>
+<li>&lt;R,A&gt; R collect(Collector&lt;? super T,A,R&gt; collector)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//　将Stream规约成List</span></span><br><span class="line">Stream&lt;String&gt; stream = Stream.of(<span class="string">"I"</span>, <span class="string">"love"</span>, <span class="string">"you"</span>, <span class="string">"too"</span>);</span><br><span class="line">List&lt;String&gt; list = stream.collect(ArrayList::<span class="keyword">new</span>, ArrayList::add, ArrayList::addAll);<span class="comment">// 方式１</span></span><br><span class="line"><span class="comment">//List&lt;String&gt; list = stream.collect(Collectors.toList());// 方式2</span></span><br><span class="line">System.out.println(list);</span><br></pre></td></tr></table></figure>
+<h2 id="LINQ-in-C"><a href="#LINQ-in-C" class="headerlink" title="LINQ in C#"></a>LINQ in C#</h2><p>与Java语言相比，C#引入了LINQ，lamda表达式和扩展方法来更好的支持chaining operation。LinQ支持所有实现了Enumberable接口的类型。</p>
+<ol>
+<li><p>ForEach()</p>
+<p> .ForEach(Action<t> action)</t></p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;string&gt; stringList = new List&lt;string&gt;（）;</span><br><span class="line">   stringList.Add(&quot;I&quot;);</span><br><span class="line">   stringList.Add(&quot;love&quot;);</span><br><span class="line">   stringList.Add(&quot;you&quot;);</span><br><span class="line">   stringList.Add(&quot;too&quot;);</span><br><span class="line">   stringList.ForEach(a =&gt; Console.WriteLine(a));</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>Where()</p>
+<p> .Where(Func&lt;T, bool&gt; function)</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stringList.Where( x=&gt; x.Length == 3)</span><br><span class="line">            .ForEach( x=&gt; Console.WriteLine(x));</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>Select()</p>
+<p> .Select(Func&lt;T, int, R&gt; function)</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stringList.Selct((x, i) =&gt; x.ToUpper())</span><br><span class="line">            .ForEach( x=&gt; Console.WriteLine(x));</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><p>Aggregate()</p>
+<p> .Aggregate(A, Func&lt;A, T, A&gt; function, Func&lt;A, R&gt; function2)</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringList.Aggregate(&quot;&quot;, (cur, next) =&gt; cur.Length &gt; next.Length ? cur : next, x =&gt; Console.WriteLine(x));</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>扩展方法，Java collect()方法是.NET扩展方法功能的一种实现，C#通过定义扩展方法更好的支持LINQ的Chaining功能，使得Java Collectors的接口都可以直接通过相似的方法实现。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringList.Select(x=&gt;x).toList();</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/08/Java-Collections/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2753,224 +3018,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/14/ubuntu-subsystem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/04/14/ubuntu-subsystem/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/3/index.html">Ubuntu-subsystem</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-14 23:01:49" itemprop="dateCreated datePublished" datetime="2018-04-14T23:01:49+08:00">2018-04-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Runbooks/" itemprop="url" rel="index"><span itemprop="name">Runbooks</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Ubuntu-on-Windows-10"><a href="#Ubuntu-on-Windows-10" class="headerlink" title="Ubuntu on Windows 10"></a>Ubuntu on Windows 10</h2><ol>
-<li>Enable Developer mode for Win 10<br><img src="/2018/04/14/ubuntu-subsystem/Developer-mode.PNG" alt="Developer-mode"></li>
-<li>Add Windows Linux subsystem<br><img src="/2018/04/14/ubuntu-subsystem/Linux-subsystem.PNG" alt="Linux-subsystem"></li>
-<li>Install Ubuntu/SUSE/*** from App Store<br><img src="/2018/04/14/ubuntu-subsystem/Install-ubuntu.PNG" alt="Install-ubuntu"></li>
-</ol>
-<h2 id="Update-package-sources"><a href="#Update-package-sources" class="headerlink" title="Update package sources"></a>Update package sources</h2><ol>
-<li>Edit /etc/apt/source.list<blockquote>
-<p>#中国数学物理大学源</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid main multiverse restricted universe</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-backports main multiverse restricted universe</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-proposed main multiverse restricted universe</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-security main multiverse restricted universe</p>
-<p>deb <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-updates main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-backports main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-proposed main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-security main multiverse restricted universe</p>
-<p>deb-src <a href="http://debian.ustc.edu.cn/ubuntu/" target="_blank" rel="noopener">http://debian.ustc.edu.cn/ubuntu/</a> vivid-updates main multiverse restricted universe</p>
-<p>#阿里云的源：</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid main restricted universe multiverse</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-security main restricted universe multiverse</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-updates main restricted universe multiverse</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-proposed main restricted universe multiverse</p>
-<p>deb <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-backports main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-security main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-updates main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-proposed main restricted universe multiverse</p>
-<p>deb-src <a href="http://mirrors.aliyun.com/ubuntu/" target="_blank" rel="noopener">http://mirrors.aliyun.com/ubuntu/</a> vivid-backports main restricted universe multiverse</p>
-</blockquote>
-</li>
-</ol>
-<p>作者：sarleon<br>链接：<a href="https://www.zhihu.com/question/41311332/answer/90517838" target="_blank" rel="noopener">https://www.zhihu.com/question/41311332/answer/90517838</a></p>
-<ol start="2">
-<li>Run apt to udpate<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Intall-Nodejs-and-npm"><a href="#Intall-Nodejs-and-npm" class="headerlink" title="Intall Nodejs and npm"></a>Intall Nodejs and npm</h2><ul>
-<li><p>Install from Ubuntu apt tool</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install nodejs nodejs-legacy npm</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>npm self update for npm</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g npm@latest</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>npm update nodejs using package n</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable <span class="comment">#get latest stable</span></span><br><span class="line">$ sudo n latest <span class="comment">#get latest version</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3018,7 +3065,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
