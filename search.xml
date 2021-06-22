@@ -1047,50 +1047,60 @@
 <thead>
 <tr>
 <th style="text-align:left">书名</th>
-<th style="text-align:right">完成时间</th>
+<th style="text-align:left">完成时间</th>
 <th style="text-align:center">评分/10</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">&lt;&lt;明朝那些事儿&gt;&gt;</td>
-<td style="text-align:right">2013</td>
+<td style="text-align:left">2013</td>
 <td style="text-align:center">8</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;卑鄙的圣人:曹操 1-6&gt;&gt;</td>
-<td style="text-align:right">2018-Jun</td>
+<td style="text-align:left">2018-Jun</td>
 <td style="text-align:center">7</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;力哥说理财：小白理财入门必修课&gt;&gt;</td>
-<td style="text-align:right">2018-Aug</td>
+<td style="text-align:left">2018-Aug</td>
 <td style="text-align:center">6</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;卑鄙的圣人:曹操 7&gt;&gt;</td>
-<td style="text-align:right">2018-Oct</td>
+<td style="text-align:left">2018-Oct</td>
 <td style="text-align:center">7</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;凤凰项目：一个IT运维的传奇故事&gt;&gt;</td>
-<td style="text-align:right">2018-Nov</td>
+<td style="text-align:left">2018-Nov</td>
 <td style="text-align:center">9</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;深入理解Java虚拟机JVM高级特性与最佳实践&gt;&gt;</td>
-<td style="text-align:right">2019-Mar</td>
+<td style="text-align:left">2019-Mar</td>
 <td style="text-align:center">10</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt; Java并发编程的艺术&gt;&gt;</td>
-<td style="text-align:right">2019-Dec</td>
+<td style="text-align:left">2019-Dec</td>
 <td style="text-align:center">10</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;微服务设计&gt;&gt;</td>
-<td style="text-align:right">2020-Feb</td>
+<td style="text-align:left">2020-Feb</td>
 <td style="text-align:center">8</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt;番茄工作法&gt;&gt;</td>
+<td style="text-align:left">2021-May</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt;高敏感是种天赋&gt;&gt;</td>
+<td style="text-align:left">2021-Jun</td>
+<td style="text-align:center">9</td>
 </tr>
 </tbody>
 </table>
@@ -1105,34 +1115,19 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">&lt;&lt;高敏感是种天赋&gt;&gt;</td>
-<td style="text-align:center">63/196</td>
-<td style="text-align:right">2021-May</td>
-</tr>
-<tr>
-<td style="text-align:left">&lt;&lt;番茄工作法&gt;&gt;</td>
-<td style="text-align:center">88/126</td>
-<td style="text-align:right">2021-May</td>
-</tr>
-<tr>
 <td style="text-align:left">&lt;&lt;快学scala&gt;&gt;</td>
-<td style="text-align:center"></td>
+<td style="text-align:center">50%</td>
 <td style="text-align:right">2021-May</td>
 </tr>
 <tr>
-<td style="text-align:left">&lt;&lt; React实战&gt;&gt;</td>
-<td style="text-align:center"></td>
-<td style="text-align:right">2021-Apr</td>
+<td style="text-align:left">&lt;&lt;价值投资——原理与实战&gt;&gt;</td>
+<td style="text-align:center">22/151</td>
+<td style="text-align:right">2021-Jun</td>
 </tr>
 <tr>
-<td style="text-align:left">&lt;&lt; Electron实战&gt;&gt;</td>
-<td style="text-align:center"></td>
-<td style="text-align:right">2021-Apr</td>
-</tr>
-<tr>
-<td style="text-align:left">&lt;&lt; PWA实战&gt;&gt;</td>
-<td style="text-align:center"></td>
-<td style="text-align:right">2021-Apr</td>
+<td style="text-align:left">&lt;&lt;大型网站——技术架构演进与性能优化&gt;&gt;</td>
+<td style="text-align:center">5%</td>
+<td style="text-align:right">2021-Jun</td>
 </tr>
 <tr>
 <td style="text-align:left">面向模式的软件架构——模式系统</td>
@@ -1199,26 +1194,51 @@
 <th style="text-align:left">书名</th>
 <th style="text-align:center">进度</th>
 <th style="text-align:right">上次阅读时间</th>
-<th style="text-align:left">原因</th>
+<th style="text-align:left">参考原因</th>
+<th style="text-align:left">类型</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">&lt;&lt; Spring实战&gt;&gt;</td>
 <td style="text-align:center">10%</td>
-<td style="text-align:right">2019-Oct</td>
+<td style="text-align:right">后端主流框架</td>
+<td style="text-align:left">2019-Oct</td>
 <td style="text-align:left">工具书</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt; Spring boot实战&gt;&gt;</td>
 <td style="text-align:center">5%</td>
-<td style="text-align:right">2019-Oct</td>
+<td style="text-align:right">后端小白主流框架</td>
+<td style="text-align:left">2019-Oct</td>
 <td style="text-align:left">工具书</td>
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt; Spring Cloud 实战&gt;&gt;</td>
-<td style="text-align:center">DevOps主流框架</td>
-<td style="text-align:right">2020-Dec</td>
+<td style="text-align:center">5%</td>
+<td style="text-align:right">DevOps主流框架</td>
+<td style="text-align:left">2020-Dec</td>
+<td style="text-align:left">工具书</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt; React实战&gt;&gt;</td>
+<td style="text-align:center">20%</td>
+<td style="text-align:right">前端主流框架</td>
+<td style="text-align:left">2021-Apr</td>
+<td style="text-align:left">工具书</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt; Electron实战&gt;&gt;</td>
+<td style="text-align:center">50%</td>
+<td style="text-align:right">跨平台客户端框架</td>
+<td style="text-align:left">2021-Apr</td>
+<td style="text-align:left">工具书</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&lt; PWA实战&gt;&gt;</td>
+<td style="text-align:center">30%</td>
+<td style="text-align:right">前端演进框架</td>
+<td style="text-align:left">2021-Apr</td>
 <td style="text-align:left">工具书</td>
 </tr>
 </tbody>
@@ -1241,7 +1261,7 @@
 </tr>
 <tr>
 <td style="text-align:left">&lt;&lt;深入理解C#&gt;&gt;</td>
-<td style="text-align:center"></td>
+<td style="text-align:center">30%</td>
 <td style="text-align:right">2017-Nov</td>
 <td style="text-align:left">目前专注Java</td>
 </tr>
@@ -1483,6 +1503,7 @@
 </ul>
 </blockquote>
 <h3 id="Hexo-search功能"><a href="#Hexo-search功能" class="headerlink" title="Hexo search功能"></a>Hexo search功能</h3><p>随着文章数量增加，每一页寻找文档变得耗时间，所以增加了search功能来支持快速文章定位功能。</p>
+<p>More info: <a href="https://huangweicai.github.io/2019/01/12/Hexo%E5%A2%9E%E5%8A%A0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/" target="_blank" rel="noopener">here</a></p>
 <ol>
 <li>下载插件</li>
 </ol>
@@ -1499,7 +1520,7 @@
   <entry>
     <title>React Fundamentals</title>
     <url>/2021/05/01/React-Fundamentals/</url>
-    <content><![CDATA[<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
+    <content><![CDATA[<h1 id="Architecture-Overview"><a href="#Architecture-Overview" class="headerlink" title="Architecture Overview"></a>Architecture Overview</h1><h1 id="Design-In-Depth"><a href="#Design-In-Depth" class="headerlink" title="Design In Depth"></a>Design In Depth</h1><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">]]></content>
   </entry>
   <entry>
     <title>Ubuntu-subsystem</title>
