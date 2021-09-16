@@ -360,6 +360,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/19/Angular-5-with-Angular-CLI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/04/19/Angular-5-with-Angular-CLI/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/4/index.html">Angular 5 with Angular CLI</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-19 22:12:45" itemprop="dateCreated datePublished" datetime="2018-04-19T22:12:45+08:00">2018-04-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-06-22 10:51:51" itemprop="dateModified" datetime="2021-06-22T10:51:51+08:00">2021-06-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Angular-5-Overview"><a href="#Angular-5-Overview" class="headerlink" title="Angular 5 Overview"></a>Angular 5 Overview</h2><p>Angular 5的快速开发，测试和部署可以使用Angular CLI工具完成。Angular 5是基于Typescript语言开发的Web前端框架。</p>
+<h3 id="Angular-5-quick-start"><a href="#Angular-5-quick-start" class="headerlink" title="Angular 5 quick start"></a>Angular 5 quick start</h3><ul>
+<li>Environment Setup</li>
+<li>ng command</li>
+<li>Project structure definition<blockquote>
+<p>More at: <a href="https://angular.io/guide/quickstart" target="_blank" rel="noopener">https://angular.io/guide/quickstart</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Angular-5-basic-prject-development-tutorial"><a href="#Angular-5-basic-prject-development-tutorial" class="headerlink" title="Angular 5 basic prject development tutorial"></a>Angular 5 basic prject development tutorial</h3><h4 id="Application-shell"><a href="#Application-shell" class="headerlink" title="Application shell"></a>Application shell</h4><p>Angular 5应用的基本框架，可以用ng new {projectname}命令生成，一个简单的Angular项目需要包含一个app module和app component。在app component中，会定义一个<app-root></app-root>控件，作为整个Angular app的入口，一般写在index.html中。</p>
+<h4 id="Angular-Component"><a href="#Angular-Component" class="headerlink" title="Angular Component"></a>Angular Component</h4><p>在已经有的app component基础上，可以用ng generate component {dir/componetname}命令生成更多的组件，新的组件组成元素和app component一样，也是html模板，ts组件功能定义，和css组件风格。一般意义上，在ts中定义控件directive的名称，在html模板中，可以直接调用该directive。</p>
+<p>每个已经创建好的component会被自动import进入app.module.ts文件，从而在Angular应用启动时，能自动寻找到对应的component并加载。如果developer需要在自己定义的component中引用其他component/service组件，也需要定义相似的import语句，否则Angualr引擎并不能成功识别调用组件。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Angular components</span></span><br><span class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; <span class="keyword">from</span> <span class="string">'@angular/platform-browser'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; NgModule &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; FormsModule &#125; <span class="keyword">from</span> <span class="string">'@angular/forms'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Angular application shell</span></span><br><span class="line"><span class="keyword">import</span> &#123; AppComponent &#125; <span class="keyword">from</span> <span class="string">'./app.component'</span>;</span><br><span class="line"><span class="comment">//Additional costomized components</span></span><br><span class="line"><span class="keyword">import</span> &#123; HeroesComponent &#125; <span class="keyword">from</span> <span class="string">'./heroes/heroes.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroDetailComponent &#125; <span class="keyword">from</span> <span class="string">'./hero-detail/hero-detail.component'</span>;</span><br><span class="line"><span class="comment">//Additional service modules</span></span><br><span class="line"><span class="keyword">import</span> &#123; HeroService &#125; <span class="keyword">from</span> <span class="string">'./hero.service'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  declarations: [</span><br><span class="line">    AppComponent,</span><br><span class="line">    HeroesComponent,</span><br><span class="line">    HeroDetailComponent,</span><br><span class="line">  ],</span><br><span class="line">  imports: [</span><br><span class="line">    BrowserModule,</span><br><span class="line">    FormsModule</span><br><span class="line">  ],</span><br><span class="line">  providers: [</span><br><span class="line">    HeroService</span><br><span class="line">  ],</span><br><span class="line">  bootstrap: [ AppComponent ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="Angular-Service"><a href="#Angular-Service" class="headerlink" title="Angular Service"></a>Angular Service</h4><p>Angular提供了service module来支持现在Web前端数据获取和更新功能。可以用ng generate service {dir/servicename} –module=app命令来生成。</p>
+<h4 id="Angular-Routing"><a href="#Angular-Routing" class="headerlink" title="Angular Routing"></a>Angular Routing</h4><p>Angular提供了routing来允许Web前端以single page application(SPA)方式渲染多个url的页面。可以用ng generate module app-routing –flat –module=app生成app.routing.ts模块。app routing模块隐式定义了<router-outlet></router-outlet>控件，这是一个可以根据输入url进行跳转的控件。一般放在app componet html模板中，作为Angular应用的跳转渲染单元。这个控件本身，并不能提供跳转入口，一般需要写锚，在html模板显式来定义url。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">"/heroes"</span>&gt;</span>Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">"/heroes"</span>&gt;</span>Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此外，app routing模块本身，定义了url跳转的逻辑。由于Angualar的html模块本身具有嵌套性，因而在routing逻辑中，只要引入自定义的directive控件，就能自动渲染出控件中所嵌套的所有元素。可以说，Angular的程序设计思想，就是基于模板设计的，每个模板都是一个自定义的DOM元素，允许在Angular的控制域中任意的复用。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NgModule &#125;             <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="comment">// Angular routing module</span></span><br><span class="line"><span class="keyword">import</span> &#123; RouterModule, Routes &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; DashboardComponent &#125;   <span class="keyword">from</span> <span class="string">'./dashboard/dashboard.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroesComponent &#125;      <span class="keyword">from</span> <span class="string">'./heroes/heroes.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroDetailComponent &#125;  <span class="keyword">from</span> <span class="string">'./hero-detail/hero-detail.component'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> routes: Routes = [</span><br><span class="line">  &#123; path: <span class="string">''</span>, redirectTo: <span class="string">'/dashboard'</span>, pathMatch: <span class="string">'full'</span> &#125;,</span><br><span class="line">  &#123; path: <span class="string">'dashboard'</span>, component: DashboardComponent &#125;,</span><br><span class="line">  &#123; path: <span class="string">'detail/:id'</span>, component: HeroDetailComponent &#125;,</span><br><span class="line">  &#123; path: <span class="string">'heroes'</span>, component: HeroesComponent &#125;</span><br><span class="line">];</span><br><span class="line"> </span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [ RouterModule.forRoot(routes) ],</span><br><span class="line">  exports: [ RouterModule ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppRoutingModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Angular-HTTP"><a href="#Angular-HTTP" class="headerlink" title="Angular HTTP"></a>Angular HTTP</h4><p>Angular提供了HttpClient库作为Restful API的utility来完成Web前端的服务器数据交互。在程序中，HttpClient库一般本身不会单独存在于componnet中，而是作为Angular Service模块的底层调用库。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Service module</span></span><br><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="comment">// import httpclient Angular module</span></span><br><span class="line"><span class="keyword">import</span> &#123; HttpClient, HttpHeaders &#125; <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; Observable &#125; <span class="keyword">from</span> <span class="string">'rxjs/Observable'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; of &#125; <span class="keyword">from</span> <span class="string">'rxjs/observable/of'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; catchError, map, tap &#125; <span class="keyword">from</span> <span class="string">'rxjs/operators'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; Hero &#125; <span class="keyword">from</span> <span class="string">'./hero'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MessageService &#125; <span class="keyword">from</span> <span class="string">'./message.service'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> httpOptions = &#123;</span><br><span class="line">  headers: <span class="keyword">new</span> HttpHeaders(&#123; <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span> &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroService &#123;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">private</span> heroesUrl = <span class="string">'api/heroes'</span>;  <span class="comment">// URL to web api</span></span><br><span class="line"> </span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> http: HttpClient,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> messageService: MessageService</span>) &#123; &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** GET heroes from the server */</span></span><br><span class="line">  getHeroes (): Observable&lt;Hero[]&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.get&lt;Hero[]&gt;(<span class="keyword">this</span>.heroesUrl)</span><br><span class="line">      .pipe(</span><br><span class="line">        tap(<span class="function"><span class="params">heroes</span> =&gt;</span> <span class="keyword">this</span>.log(<span class="string">`fetched heroes`</span>)),</span><br><span class="line">        catchError(<span class="keyword">this</span>.handleError(<span class="string">'getHeroes'</span>, []))</span><br><span class="line">      );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** GET hero by id. Return `undefined` when id not found */</span></span><br><span class="line">  getHeroNo404&lt;Data&gt;(id: <span class="built_in">number</span>): Observable&lt;Hero&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;this.heroesUrl&#125;</span>/?id=<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.get&lt;Hero[]&gt;(url)</span><br><span class="line">      .pipe(</span><br><span class="line">        map(<span class="function"><span class="params">heroes</span> =&gt;</span> heroes[<span class="number">0</span>]), <span class="comment">// returns a &#123;0|1&#125; element array</span></span><br><span class="line">        tap(<span class="function"><span class="params">h</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> outcome = h ? <span class="string">`fetched`</span> : <span class="string">`did not find`</span>;</span><br><span class="line">          <span class="keyword">this</span>.log(<span class="string">`<span class="subst">$&#123;outcome&#125;</span> hero id=<span class="subst">$&#123;id&#125;</span>`</span>);</span><br><span class="line">        &#125;),</span><br><span class="line">        catchError(<span class="keyword">this</span>.handleError&lt;Hero&gt;(<span class="string">`getHero id=<span class="subst">$&#123;id&#125;</span>`</span>))</span><br><span class="line">      );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** GET hero by id. Will 404 if id not found */</span></span><br><span class="line">  getHero(id: <span class="built_in">number</span>): Observable&lt;Hero&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;this.heroesUrl&#125;</span>/<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.get&lt;Hero&gt;(url).pipe(</span><br><span class="line">      tap(_ =&gt; <span class="keyword">this</span>.log(<span class="string">`fetched hero id=<span class="subst">$&#123;id&#125;</span>`</span>)),</span><br><span class="line">      catchError(<span class="keyword">this</span>.handleError&lt;Hero&gt;(<span class="string">`getHero id=<span class="subst">$&#123;id&#125;</span>`</span>))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* GET heroes whose name contains search term */</span></span><br><span class="line">  searchHeroes(term: <span class="built_in">string</span>): Observable&lt;Hero[]&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!term.trim()) &#123;</span><br><span class="line">      <span class="comment">// if not search term, return empty hero array.</span></span><br><span class="line">      <span class="keyword">return</span> of([]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.get&lt;Hero[]&gt;(<span class="string">`api/heroes/?name=<span class="subst">$&#123;term&#125;</span>`</span>).pipe(</span><br><span class="line">      tap(_ =&gt; <span class="keyword">this</span>.log(<span class="string">`found heroes matching "<span class="subst">$&#123;term&#125;</span>"`</span>)),</span><br><span class="line">      catchError(<span class="keyword">this</span>.handleError&lt;Hero[]&gt;(<span class="string">'searchHeroes'</span>, []))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//////// Save methods //////////</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** POST: add a new hero to the server */</span></span><br><span class="line">  addHero (hero: Hero): Observable&lt;Hero&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.post&lt;Hero&gt;(<span class="keyword">this</span>.heroesUrl, hero, httpOptions).pipe(</span><br><span class="line">      tap(<span class="function">(<span class="params">hero: Hero</span>) =&gt;</span> <span class="keyword">this</span>.log(<span class="string">`added hero w/ id=<span class="subst">$&#123;hero.id&#125;</span>`</span>)),</span><br><span class="line">      catchError(<span class="keyword">this</span>.handleError&lt;Hero&gt;(<span class="string">'addHero'</span>))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** DELETE: delete the hero from the server */</span></span><br><span class="line">  deleteHero (hero: Hero | <span class="built_in">number</span>): Observable&lt;Hero&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> id = <span class="keyword">typeof</span> hero === <span class="string">'number'</span> ? hero : hero.id;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;this.heroesUrl&#125;</span>/<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.delete&lt;Hero&gt;(url, httpOptions).pipe(</span><br><span class="line">      tap(_ =&gt; <span class="keyword">this</span>.log(<span class="string">`deleted hero id=<span class="subst">$&#123;id&#125;</span>`</span>)),</span><br><span class="line">      catchError(<span class="keyword">this</span>.handleError&lt;Hero&gt;(<span class="string">'deleteHero'</span>))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** PUT: update the hero on the server */</span></span><br><span class="line">  updateHero (hero: Hero): Observable&lt;<span class="built_in">any</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.put(<span class="keyword">this</span>.heroesUrl, hero, httpOptions).pipe(</span><br><span class="line">      tap(_ =&gt; <span class="keyword">this</span>.log(<span class="string">`updated hero id=<span class="subst">$&#123;hero.id&#125;</span>`</span>)),</span><br><span class="line">      catchError(<span class="keyword">this</span>.handleError&lt;<span class="built_in">any</span>&gt;(<span class="string">'updateHero'</span>))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Handle Http operation that failed.</span></span><br><span class="line"><span class="comment">   * Let the app continue.</span></span><br><span class="line"><span class="comment">   * @param operation - name of the operation that failed</span></span><br><span class="line"><span class="comment">   * @param result - optional value to return as the observable result</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> handleError&lt;T&gt; (operation = <span class="string">'operation'</span>, result?: T) &#123;</span><br><span class="line">    <span class="keyword">return</span> (error: <span class="built_in">any</span>): Observable&lt;T&gt; =&gt; &#123;</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> send the error to remote logging infrastructure</span></span><br><span class="line">      <span class="built_in">console</span>.error(error); <span class="comment">// log to console instead</span></span><br><span class="line"> </span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> better job of transforming error for user consumption</span></span><br><span class="line">      <span class="keyword">this</span>.log(<span class="string">`<span class="subst">$&#123;operation&#125;</span> failed: <span class="subst">$&#123;error.message&#125;</span>`</span>);</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// Let the app keep running by returning an empty result.</span></span><br><span class="line">      <span class="keyword">return</span> of(result <span class="keyword">as</span> T);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** Log a HeroService message with the MessageService */</span></span><br><span class="line">  <span class="keyword">private</span> log(message: <span class="built_in">string</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.messageService.add(<span class="string">'HeroService: '</span> + message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HttpClient除了和真正的服务器交互外，还可以和in-memory的数据服务器进行虚拟交互，也就是说，在不修改(略微)原有程序代码的情况下，可以自己运用一个npm package设立一个in-memory的数据服务器，HttpClient并不知道request已经被这个in-memory服务器拦截并返回内存中的数据。</p>
+<p>在前后端分离的开发过程中，如果要引用此功能，需要预先安装angular-in-memory-web-api的npm包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install angular-in-memory-web-api@0.5 --save</span><br></pre></td></tr></table></figure>
+<p>然后，创建in-memory-data.service模块，存储内存中的数据，作为HttpClient访问交互的相关数据。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; InMemoryDbService &#125; <span class="keyword">from</span> <span class="string">'angular-in-memory-web-api'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> InMemoryDataService <span class="keyword">implements</span> InMemoryDbService &#123;</span><br><span class="line">  createDb() &#123;</span><br><span class="line">    <span class="keyword">const</span> heroes = [</span><br><span class="line">      &#123; id: <span class="number">11</span>, name: <span class="string">'Mr. Nice'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">12</span>, name: <span class="string">'Narco'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">13</span>, name: <span class="string">'Bombasto'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">14</span>, name: <span class="string">'Celeritas'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">15</span>, name: <span class="string">'Magneta'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">16</span>, name: <span class="string">'RubberMan'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">17</span>, name: <span class="string">'Dynama'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">18</span>, name: <span class="string">'Dr IQ'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">19</span>, name: <span class="string">'Magma'</span> &#125;,</span><br><span class="line">      &#123; id: <span class="number">20</span>, name: <span class="string">'Tornado'</span> &#125;</span><br><span class="line">    ];</span><br><span class="line">    <span class="keyword">return</span> &#123;heroes&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，在app module模块中引入对in-memory-web-api的引用，和in-memory-data service模块的使用，并配置好in-memeory-server对应的data/service来源。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NgModule &#125;       <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserModule &#125;  <span class="keyword">from</span> <span class="string">'@angular/platform-browser'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; FormsModule &#125;    <span class="keyword">from</span> <span class="string">'@angular/forms'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HttpClientModule &#125;    <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import in-memroy-data servier related module </span></span><br><span class="line"><span class="keyword">import</span> &#123; HttpClientInMemoryWebApiModule &#125; <span class="keyword">from</span> <span class="string">'angular-in-memory-web-api'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; InMemoryDataService &#125;  <span class="keyword">from</span> <span class="string">'./in-memory-data.service'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; AppRoutingModule &#125;     <span class="keyword">from</span> <span class="string">'./app-routing.module'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; AppComponent &#125;         <span class="keyword">from</span> <span class="string">'./app.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; DashboardComponent &#125;   <span class="keyword">from</span> <span class="string">'./dashboard/dashboard.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroDetailComponent &#125;  <span class="keyword">from</span> <span class="string">'./hero-detail/hero-detail.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroesComponent &#125;      <span class="keyword">from</span> <span class="string">'./heroes/heroes.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroSearchComponent &#125;  <span class="keyword">from</span> <span class="string">'./hero-search/hero-search.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HeroService &#125;          <span class="keyword">from</span> <span class="string">'./hero.service'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MessageService &#125;       <span class="keyword">from</span> <span class="string">'./message.service'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; MessagesComponent &#125;    <span class="keyword">from</span> <span class="string">'./messages/messages.component'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    BrowserModule,</span><br><span class="line">    FormsModule,</span><br><span class="line">    AppRoutingModule,</span><br><span class="line">    HttpClientModule,</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// The HttpClientInMemoryWebApiModule module intercepts HTTP requests</span></span><br><span class="line">    <span class="comment">// and returns simulated server responses.</span></span><br><span class="line">    <span class="comment">// Remove it when a real server is ready to receive requests.</span></span><br><span class="line">    HttpClientInMemoryWebApiModule.forRoot(</span><br><span class="line">      InMemoryDataService, &#123; dataEncapsulation: <span class="literal">false</span> &#125;</span><br><span class="line">    )</span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    AppComponent,</span><br><span class="line">    DashboardComponent,</span><br><span class="line">    HeroesComponent,</span><br><span class="line">    HeroDetailComponent,</span><br><span class="line">    MessagesComponent,</span><br><span class="line">    HeroSearchComponent</span><br><span class="line">  ],</span><br><span class="line">  providers: [ HeroService, MessageService ],</span><br><span class="line">  bootstrap: [ AppComponent ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Angular-Data-Model-–-Class"><a href="#Angular-Data-Model-–-Class" class="headerlink" title="Angular Data Model – Class"></a>Angular Data Model – Class</h3><p>In Angular 5, data model is encapsulated through classes, mainly for rendering templates in components. Creating a new class by Angular Cli:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ng generate class &#123;classname&#125;</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/14/Leetcode-560-Subarray-Sum-Equals-K/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1223,11 +1422,29 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-06-22 11:48:42" itemprop="dateModified" datetime="2021-06-22T11:48:42+08:00">2021-06-22</time>
+                <time title="修改时间：2021-07-23 11:37:53" itemprop="dateModified" datetime="2021-07-23T11:37:53+08:00">2021-07-23</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Runbooks/" itemprop="url" rel="index"><span itemprop="name">Runbooks</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1430,7 +1647,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1442,8 +1659,6 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1477,8 +1692,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
