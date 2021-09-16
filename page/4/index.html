@@ -360,6 +360,1186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/08/Java-Collections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/08/Java-Collections/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/4/index.html">Java集合框架</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-08 20:18:42" itemprop="dateCreated datePublished" datetime="2018-12-08T20:18:42+08:00">2018-12-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-21 13:36:15" itemprop="dateModified" datetime="2020-12-21T13:36:15+08:00">2020-12-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java集合框架"><a href="#Java集合框架" class="headerlink" title="Java集合框架"></a>Java集合框架</h1><blockquote>
+<p>Reference Link: <a href="http://www.runoob.com/java/java-collections.html" target="_blank" rel="noopener">http://www.runoob.com/java/java-collections.html</a></p>
+</blockquote>
+<p>集合框架被设计成要满足以下几个目标。</p>
+<ul>
+<li>该框架必须是高性能的。基本集合（动态数组，链表，树，哈希表）的实现也必须是高效的。</li>
+<li>该框架允许不同类型的集合，以类似的方式工作，具有高度的互操作性。</li>
+<li>对一个集合的扩展和适应必须是简单的。<br>为此，整个集合框架就围绕一组标准接口而设计。你可以直接使用这些接口的标准实现，如下图所示，诸如： LinkedList, HashSet, 和 TreeSet 等,除此之外你也可以通过这些接口实现自己的集合。</li>
+</ul>
+<p><img src="/2018/12/08/Java-Collections/JavaCollectionsUML.gif" alt="JavaCollectionsUML"></p>
+<p>从上面的集合框架图可以看到，Java 集合框架主要包括两种类型的容器，一种是集合（Collection），存储一个元素集合，另一种是图（Map），存储键/值对映射。Collection 接口又有 3 种子类型，List、Set 和 Queue，再下面是一些抽象类，最后是具体实现类，常用的有 ArrayList、LinkedList、HashSet、LinkedHashSet、HashMap、LinkedHashMap 等等。</p>
+<p>集合框架是一个用来代表和操纵集合的统一架构。所有的集合框架都包含如下内容：</p>
+<ul>
+<li>接口：是代表集合的抽象数据类型。例如 Collection、List、Set、Map 等。之所以定义多个接口，是为了以不同的方式操作集合对象</li>
+<li>实现（类）：是集合接口的具体实现。从本质上讲，它们是可重复使用的数据结构，例如：ArrayList、LinkedList、HashSet、HashMap。</li>
+<li>算法：是实现集合接口的对象里的方法执行的一些有用的计算，例如：搜索和排序。这些算法被称为多态，那是因为相同的方法可以在相似的接口上有着不同的实现。<br>除了集合，该框架也定义了几个 Map 接口和类。Map 里存储的是键/值对。尽管 Map 不是集合，但是它们完全整合在集合中。</li>
+</ul>
+<p>集合框架体系如图所示:</p>
+<p><img src="/2018/12/08/Java-Collections/java-coll-architecture.png" alt="JavaCollArch"></p>
+<h2 id="集合接口"><a href="#集合接口" class="headerlink" title="集合接口"></a>集合接口</h2><ol>
+<li><a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/collection.html" target="_blank" rel="noopener">Collection 接口</a></li>
+</ol>
+<p>Collection 是最基本的集合接口，一个 Collection 代表一组 Object，即 Collection 的元素, Java不提供直接继承自Collection的类，只提供继承于的子接口(如List和set)。<br>Collection 接口存储一组不唯一，无序的对象。</p>
+<ol start="2">
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/List.html" target="_blank" rel="noopener">List 接口</a></li>
+</ol>
+<p>List接口是一个有序的 Collection，使用此接口能够精确的控制每个元素插入的位置，能够通过索引(元素在List中位置，类似于数组的下标)来访问List中的元素，第一个元素的索引为 0，而且允许有相同的元素。<br>List 接口存储一组不唯一，有序（插入顺序）的对象。</p>
+<ol start="3">
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html" target="_blank" rel="noopener">Set 接口</a></li>
+</ol>
+<p>Set 具有与 Collection 完全一样的接口，只是行为上不同，Set 不保存重复的元素。<br>Set 接口存储一组唯一，无序的对象。</p>
+<ol start="4">
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html" target="_blank" rel="noopener">SortedSet 接口</a></li>
+</ol>
+<p>继承于Set保存有序的集合。</p>
+<ol start="5">
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/Map.html" target="_blank" rel="noopener">Map 接口</a></li>
+</ol>
+<p>Map 接口存储一组键值对象，提供key（键）到value（值）的映射。</p>
+<ol start="6">
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/Map.Entry.html" target="_blank" rel="noopener">Map.Entry 接口</a></li>
+</ol>
+<p>描述在一个Map中的一个元素（键/值对）。是一个Map的内部类。</p>
+<ol start="7">
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/SortedMap.html" target="_blank" rel="noopener">SortedMap 接口</a></li>
+</ol>
+<p>继承于 Map，使 Key 保持在升序排列。</p>
+<ol start="8">
+<li><a href="https://www.tutorialspoint.com/java/java_enumeration_interface.htm" target="_blank" rel="noopener">Enumeration 接口</a></li>
+</ol>
+<p>这是一个传统的接口和定义的方法，通过它可以枚举（一次获得一个）对象集合中的元素。这个传统接口已被迭代器取代。</p>
+<ol start="9">
+<li><a href="https://docs.oracle.com/javase/tutorial/collections/interfaces/queue.html" target="_blank" rel="noopener">Queue 接口</a></li>
+</ol>
+<p>Queue是队列实现，实现了先进先出功能。</p>
+<h2 id="集合实现类（集合类）"><a href="#集合实现类（集合类）" class="headerlink" title="集合实现类（集合类）"></a>集合实现类（集合类）</h2><h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">类名</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AbstractCollection</td>
+<td style="text-align:center">实现了大部分的集合接口。</td>
+</tr>
+<tr>
+<td style="text-align:left">AbstractList</td>
+<td style="text-align:center">继承于AbstractCollection 并且实现了大部分List接口。</td>
+</tr>
+<tr>
+<td style="text-align:left">AbstractSequentialList</td>
+<td style="text-align:center">继承于 AbstractList ，提供了对数据元素的链式访问而不是随机访问。</td>
+</tr>
+<tr>
+<td style="text-align:left">AbstractSet</td>
+<td style="text-align:center">继承于AbstractCollection 并且实现了大部分Set接口。</td>
+</tr>
+<tr>
+<td style="text-align:left">AbstractMap</td>
+<td style="text-align:center">实现了大部分的Map接口。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="集合类"><a href="#集合类" class="headerlink" title="集合类"></a>集合类</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">类名</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">LinkedList</td>
+<td style="text-align:center">该类实现了List接口，允许有null（空）元素。主要用于创建链表数据结构，该类没有同步方法，如果多个线程同时访问一个List，则必须自己实现访问同步，解决方法就是在创建List时候构造一个同步的List。例如: <code>Listlist=Collections.synchronizedList(newLinkedList(...));</code>LinkedList 查找效率低。</td>
+</tr>
+<tr>
+<td style="text-align:left">ArrayList</td>
+<td style="text-align:center">该类也是实现了List的接口，实现了可变大小的数组，随机访问和遍历元素时，提供更好的性能。该类也是非同步的,在多线程的情况下不要使用。ArrayList 增长当前长度的50%，插入删除效率低。</td>
+</tr>
+<tr>
+<td style="text-align:left">HashSet</td>
+<td style="text-align:center">该类实现了Set接口，不允许出现重复元素，不保证集合中元素的顺序，允许包含值为null的元素，但最多只能一个。</td>
+</tr>
+<tr>
+<td style="text-align:left">LinkedHashSet</td>
+<td style="text-align:center">具有可预知迭代顺序的 Set 接口的哈希表和链接列表实现。</td>
+</tr>
+<tr>
+<td style="text-align:left">TreeSet</td>
+<td style="text-align:center">该类实现了Set接口，可以实现排序等功能。</td>
+</tr>
+<tr>
+<td style="text-align:left">HashMap</td>
+<td style="text-align:center">HashMap 是一个散列表，它存储的内容是键值对(key-value)映射。该类实现了Map接口，根据键的HashCode值存储数据，具有很快的访问速度，最多允许一条记录的键为null，不支持线程同步。</td>
+</tr>
+<tr>
+<td style="text-align:left">TreeMap</td>
+<td style="text-align:center">继承了AbstractMap，并且使用一颗树。</td>
+</tr>
+<tr>
+<td style="text-align:left">WeakHashMap</td>
+<td style="text-align:center">继承AbstractMap类，使用弱密钥的哈希表。</td>
+</tr>
+<tr>
+<td style="text-align:left">LinkedHashMap</td>
+<td style="text-align:center">继承于HashMap，使用元素的自然顺序对元素进行排序.</td>
+</tr>
+<tr>
+<td style="text-align:left">IdentityHashMap</td>
+<td style="text-align:center">继承AbstractMap类，比较文档时使用引用相等。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="其他：数据结构类"><a href="#其他：数据结构类" class="headerlink" title="其他：数据结构类"></a>其他：数据结构类</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">类名</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Vector</td>
+<td style="text-align:center">该类和ArrayList非常相似，但是该类是同步的，可以用在多线程的情况，该类允许设置默认的增长长度，默认扩容方式为原来的2倍。</td>
+</tr>
+<tr>
+<td style="text-align:left">Stack</td>
+<td style="text-align:center">栈是Vector的一个子类，它实现了一个标准的后进先出的栈。</td>
+</tr>
+<tr>
+<td style="text-align:left">Dictionary</td>
+<td style="text-align:center">Dictionary 类是一个抽象类，用来存储键/值对，作用和Map类相似。</td>
+</tr>
+<tr>
+<td style="text-align:left">Hashtable</td>
+<td style="text-align:center">Hashtable 是 Dictionary(字典) 类的子类，位于 java.util 包中。</td>
+</tr>
+<tr>
+<td style="text-align:left">Properties</td>
+<td style="text-align:center">Properties 继承于 Hashtable，表示一个持久的属性集，属性列表中每个键及其对应值都是一个字符串。</td>
+</tr>
+<tr>
+<td style="text-align:left">BitSet</td>
+<td style="text-align:center">一个Bitset类创建一种特殊类型的数组来保存位值。BitSet中数组大小会随需要增加。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="遍历示例代码"><a href="#遍历示例代码" class="headerlink" title="遍历示例代码"></a>遍历示例代码</h2><h3 id="遍历ArrayList"><a href="#遍历ArrayList" class="headerlink" title="遍历ArrayList"></a>遍历ArrayList</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     List&lt;String&gt; list=<span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">     list.add(<span class="string">"Hello"</span>);</span><br><span class="line">     list.add(<span class="string">"World"</span>);</span><br><span class="line">     list.add(<span class="string">"HAHAHAHA"</span>);</span><br><span class="line">     <span class="comment">//第一种遍历方法使用foreach遍历List</span></span><br><span class="line">     <span class="keyword">for</span> (String str : list) &#123;            <span class="comment">//也可以改写for(int i=0;i&lt;list.size();i++)这种形式</span></span><br><span class="line">        System.out.println(str);</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     <span class="comment">//第二种遍历，把链表变为数组相关的内容进行遍历</span></span><br><span class="line">     String[] strArray=<span class="keyword">new</span> String[list.size()];</span><br><span class="line">     list.toArray(strArray);</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;strArray.length;i++) <span class="comment">//这里也可以改写为  foreach(String str:strArray)这种形式</span></span><br><span class="line">     &#123;</span><br><span class="line">        System.out.println(strArray[i]);</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">//第三种遍历 使用迭代器进行相关遍历</span></span><br><span class="line">     </span><br><span class="line">     Iterator&lt;String&gt; ite=list.iterator();</span><br><span class="line">     <span class="keyword">while</span>(ite.hasNext())<span class="comment">//判断下一个元素之后有值</span></span><br><span class="line">     &#123;</span><br><span class="line">         System.out.println(ite.next());</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="遍历Map"><a href="#遍历Map" class="headerlink" title="遍历Map"></a>遍历Map</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">      map.put(<span class="string">"1"</span>, <span class="string">"value1"</span>);</span><br><span class="line">      map.put(<span class="string">"2"</span>, <span class="string">"value2"</span>);</span><br><span class="line">      map.put(<span class="string">"3"</span>, <span class="string">"value3"</span>);</span><br><span class="line">      </span><br><span class="line">      <span class="comment">//第一种：普遍使用，二次取值</span></span><br><span class="line">      System.out.println(<span class="string">"通过Map.keySet遍历key和value："</span>);</span><br><span class="line">      <span class="keyword">for</span> (String key : map.keySet()) &#123;</span><br><span class="line">       System.out.println(<span class="string">"key= "</span>+ key + <span class="string">" and value= "</span> + map.get(key));</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">//第二种</span></span><br><span class="line">      System.out.println(<span class="string">"通过Map.entrySet使用iterator遍历key和value："</span>);</span><br><span class="line">      Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = map.entrySet().iterator();</span><br><span class="line">      <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">       Map.Entry&lt;String, String&gt; entry = it.next();</span><br><span class="line">       System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="comment">//第三种：推荐，尤其是容量大时</span></span><br><span class="line">      System.out.println(<span class="string">"通过Map.entrySet遍历key和value"</span>);</span><br><span class="line">      <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">       System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">      <span class="comment">//第四种</span></span><br><span class="line">      System.out.println(<span class="string">"通过Map.values()遍历所有的value，但不能遍历key"</span>);</span><br><span class="line">      <span class="keyword">for</span> (String v : map.values()) &#123;</span><br><span class="line">       System.out.println(<span class="string">"value= "</span> + v);</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题外话：-Java-数组"><a href="#题外话：-Java-数组" class="headerlink" title="题外话： Java 数组"></a>题外话： Java 数组</h1><p>Java 数组是很容易和Java动态数组(ArrayList)进行混淆的数据结构。其实Java数组本身并不具有方法，唯一的属性是length。对于数组的大小也不能改变，很多功能需要借助Utility类Arrays提供的静态方法。</p>
+<p>Java中的所有数组都是通过Array类实例化。Array类没有public的构造方法，数组是通过Array的newInstance()方法进行实例化。Java数组是支持所有类型的，也就是说对于自定义引用类型，也能创建数组类型，但是与动态数组的方式不同，内存分配机制上也有所不同。</p>
+<h2 id="Array类源码"><a href="#Array类源码" class="headerlink" title="Array类源码"></a>Array类源码</h2><p>数组类的实现主要基于本地方法创建，申请分配一段连续内存，每一个数组元素支持强类型检查。长度不支持扩展。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.lang;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">System</span> </span>&#123;</span><br><span class="line">    <span class="comment">//System 类不能被实例化。 </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">System</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="comment">//在 System 类提供的设施中，有标准输入、标准输出和错误输出流；对外部定义的属性</span></span><br><span class="line">    <span class="comment">//和环境变量的访问；加载文件和库的方法；还有快速复制数组的一部分的实用方法。</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * src and dest都必须是同类型或者可以进行转换类型的数组．</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>      src      the source array.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>      srcPos   starting position in the source array.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>      dest     the destination array.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>      destPos  starting position in the destination data.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>      length   the number of array elements to be copied.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">arraycopy</span><span class="params">(Object src, <span class="keyword">int</span> srcPos, Object dest,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">int</span> destPos, <span class="keyword">int</span> length)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">package</span> com.lang.reflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Array</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Array</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建一个具有指定的组件类型和维度的新数组。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">newInstance</span><span class="params">(Class&lt;?&gt; componentType, <span class="keyword">int</span> length)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> NegativeArraySizeException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> newArray(componentType, length);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> Object <span class="title">newArray</span><span class="params">(Class componentType, <span class="keyword">int</span> length)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> NegativeArraySizeException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数组声明与初始化"><a href="#数组声明与初始化" class="headerlink" title="数组声明与初始化"></a>数组声明与初始化</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//直接声明空数组</span></span><br><span class="line">dataType[] arrayRefVar = <span class="keyword">new</span> dataType[arraySize];</span><br><span class="line"><span class="comment">//直接引入数组元素，用花括弧创建</span></span><br><span class="line"><span class="keyword">int</span> [] arrayRefVar2 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="comment">//访问时通过下标访问</span></span><br><span class="line">System.out.println(arrayRefVar2[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<h2 id="多维数组声明与初始化"><a href="#多维数组声明与初始化" class="headerlink" title="多维数组声明与初始化"></a>多维数组声明与初始化</h2><p>多维数组其实就是一维数组的嵌套扩展，维度取决于数组各个元素的类型，如果是一个数组则能增加一个维度。因此多维数组的创建与访问也是基于一维数组的方法。Array类属性只有length一个，访问是基于下标的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//直接声明矩阵二维数组</span></span><br><span class="line">dataType[][] arrayRefVar = <span class="keyword">new</span> dataType[colsize][rowsize];</span><br><span class="line"><span class="comment">//分段申明非矩阵二维数组</span></span><br><span class="line">dataType[][] arrayRefVar2 = <span class="keyword">new</span> dataType[colsize][];</span><br><span class="line">arrayRefVar2[<span class="number">0</span>] = <span class="keyword">new</span> dataType[row1size];</span><br><span class="line">arrayRefVar2[<span class="number">1</span>] = <span class="keyword">new</span> dataType[row2size];</span><br><span class="line"><span class="comment">//直接引入数组元素，用嵌套花括弧创建，按照维度分配，第一个是第一列</span></span><br><span class="line"><span class="keyword">int</span>[][] arrayint = &#123;</span><br><span class="line">  &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;,</span><br><span class="line">  &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//直接引入数组元素，用下标顺序填入</span></span><br><span class="line"><span class="keyword">int</span>[][] array2 = &#123;<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>], <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>]&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组的访问是基于下标 array2[col][row]</span></span><br></pre></td></tr></table></figure>
+<h1 id="题外话-Arrays-类"><a href="#题外话-Arrays-类" class="headerlink" title="题外话: Arrays 类"></a>题外话: <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html" target="_blank" rel="noopener">Arrays 类</a></h1><p>java.util.Arrays 类能方便地操作数组，它提供的所有方法都是静态的。<br>具有以下功能：</p>
+<ul>
+<li>给数组赋值：通过 fill 方法。</li>
+<li>对数组排序：通过 sort 方法,按升序。</li>
+<li>比较数组：通过 equals 方法比较数组中元素值是否相等。</li>
+<li>查找数组元素：通过 binarySearch 方法能对排序好的数组进行二分查找法操作。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法名</th>
+<th style="text-align:center">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>public static int binarySearch(Object[] a, Object key)</code></td>
+<td style="text-align:center">用二分查找算法在给定数组中搜索给定值的对象(Byte,Int,double等)。数组在调用前必须排序好的。如果查找值包含在数组中，则返回搜索键的索引；否则返回 (-(插入点) - 1)。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>public static boolean equals(long[] a, long[] a2)</code></td>
+<td style="text-align:center">如果两个指定的 long 型数组彼此相等，则返回 true。如果两个数组包含相同数量的元素，并且两个数组中的所有相应元素对都是相等的，则认为这两个数组是相等的。换句话说，如果两个数组以相同顺序包含相同的元素，则两个数组是相等的。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>public static void fill(int[] a, int val)</code></td>
+<td style="text-align:center">将指定的 int 值分配给指定 int 型数组指定范围中的每个元素。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>public static void sort(Object[] a)</code></td>
+<td style="text-align:center">对指定对象数组根据其元素的自然顺序进行升序排列。同样的方法适用于所有的其他基本数据类型（Byte，short，Int等）。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="题外话：-Collections-类"><a href="#题外话：-Collections-类" class="headerlink" title="题外话： Collections 类"></a>题外话： <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html" target="_blank" rel="noopener">Collections 类</a></h1><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/11/17/Phoenix-Project-Reading-Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/17/Phoenix-Project-Reading-Notes/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/4/index.html">Phoenix Project Reading Notes</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-17 13:40:59" itemprop="dateCreated datePublished" datetime="2018-11-17T13:40:59+08:00">2018-11-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/读书笔记/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="读书笔记-——-《凤凰项目：一个IT运维的传奇故事》"><a href="#读书笔记-——-《凤凰项目：一个IT运维的传奇故事》" class="headerlink" title="读书笔记 —— 《凤凰项目：一个IT运维的传奇故事》"></a>读书笔记 —— 《凤凰项目：一个IT运维的传奇故事》</h1><p>本书从IT运维管理者的第一视角，讲述了IT部门每天都会发生的事情，并通过从工厂管理经验中借鉴到的方法，改善了IT部分的产能的故事。</p>
+<h2 id="IT工作者的每日工作项目"><a href="#IT工作者的每日工作项目" class="headerlink" title="IT工作者的每日工作项目"></a>IT工作者的每日工作项目</h2><p>IT人员的工作往往分为如下几个项目。所以每一个程序员需要重视这四类工作。</p>
+<h3 id="业务项目"><a href="#业务项目" class="headerlink" title="业务项目"></a>业务项目</h3><p>这是多数开发项目所包含的业务举措，通常隶属于项目管理办公室。虽然是IT项目，但大多数是跟业务的利润有直接相关联。</p>
+<h3 id="IT内部项目"><a href="#IT内部项目" class="headerlink" title="IT内部项目"></a>IT内部项目</h3><p>IT内部项目包括可能由业务项目衍生出的基础架构或IT运维项目，亿级内部生成的改进项目（例如创建新环境和部署自动化等）。这类项目业务部门并不是直接集中跟踪管理的，而属于预算所有者（例如数据库经理、存储管理经理和分布式系统经理）。</p>
+<h3 id="变更"><a href="#变更" class="headerlink" title="变更"></a>变更</h3><p>经常由前两种类型的工作引起，往往在保修系统中被跟踪（例如IT运维补救、JIRA或者用于开发的敏捷计划工具）。事实上，在价值流的两个不同部分中存在两个工作跟踪系统，这会引起问题，尤其在交接工作的时候。</p>
+<p>某些情况下，在一些兼具功能开发和服务交付指责的专门团队中，所有工作都会处在同一个系统中。这样做的好处是，操作层面的故障会和功能缺陷以及新的特性功能一起，在存量工作和现行工作中显现。</p>
+<p>在生产环境的变更是需要严格关注的，有的公司会专门对生产环境的变更进行记录。尤其会对变更本身的原因，步骤，以及风险评估和处理细节都进行记录。变更记录会交由管理者进行审批从而在计划时间窗口生效。</p>
+<h3 id="计划外项目-救火"><a href="#计划外项目-救火" class="headerlink" title="计划外项目/救火"></a>计划外项目/救火</h3><p>包括操作事故和操作问题，通常由上述三类型的工作导致，而且往往以牺牲其他计划内工作为代价。</p>
+<h2 id="布伦特——约束点问题"><a href="#布伦特——约束点问题" class="headerlink" title="布伦特——约束点问题"></a>布伦特——约束点问题</h2><p>文中的工程师布伦特是IT运维部的约束点，原因是：</p>
+<ul>
+<li>IT运维工作中最优秀的救火队员</li>
+<li>IT运维视角唯一的项目系统架构师</li>
+<li>IT变更项目中时常存在的执行者</li>
+<li>项目半成品堆积：由于救火项目或者忙等待问题造成。</li>
+</ul>
+<p>每个工作中心中都存在他的身影，个人能力的有限决定了IT部门的产出有限。</p>
+<p><strong>约束点问题解决了，工作产能问题便能解决。所有在非约束点做的改进都是假象。</strong></p>
+<p>对应的改善约束点问题的方案：</p>
+<ul>
+<li>建立L3支持工程师代替执行并学习布伦特的救火技术，建立其他人可以借鉴的trouble shooting检查清单。</li>
+<li>专一做到资深架构应该做的工作：关键项目的系统架构</li>
+<li>将需要布伦特参与的项目进行工作和流程标准化管理</li>
+<li>IT工作可视化并控制半成品</li>
+</ul>
+<blockquote>
+<p>等待时间是工作中心中某个资源忙碌成都的函数。下图横轴坐标上是工作重心中给定资源的忙碌百分比，纵坐标轴上是大致的等待时间（更确切的说是队列长度）。等待时间=忙碌时间百分比/空闲时间百分比。曲线的形状表明，当资源使用率超过80%时，等待时间就会直线上升。这会对项目交付产生灾难性后果。</p>
+</blockquote>
+<p><img src="/2018/11/17/Phoenix-Project-Reading-Notes/WaitingTime.jpg" alt="waitingtime"></p>
+<p>看板对于IT中的半成品问题是最有效、最简单的一种对策。两本书推荐阅读：</p>
+<ol>
+<li>《个人看板:了解工作/驾驭生活》by吉姆·本森和托尼安妮·德马里亚·巴里</li>
+<li>《看板方法：科技企业渐进变革成功之道》by戴维·J·安德森</li>
+</ol>
+<h2 id="工作流程改进————形"><a href="#工作流程改进————形" class="headerlink" title="工作流程改进————形"></a>工作流程改进————形</h2><p>为了将IT的工作项目完善的进行预先评估和量化分析，每一项工作类型都可以进行执行周期的管理与规划，尽量减少工作半成品的积压，并且最大化工作成品的“吞吐量”。本文提出需要进行“改进形”计划：</p>
+<blockquote>
+<p>以两周为周期，进行两个“计划-执行-审核-落实”改进周期，确立项目需要的四大要素：机器、方法、人员与测评。每两周必须做出一些改进，无论任何形式的改进。</p>
+</blockquote>
+<blockquote>
+<p>积压的项目分为三类：需要布伦特参与的项目，可以提高布伦特生产力的项目，其他项目。优先开展后两类项目；对于需要布伦特参与的项目遵循约束点问题解决方案进行优化。</p>
+</blockquote>
+<p>“改进形”带来的好处：</p>
+<ul>
+<li>提供一种适用于各种问题或挑战的系统化科学规程；</li>
+<li>组织成员普遍养成解决问题的习惯；</li>
+<li>通过让经理开展周期性指导，让其向教练和导师的角色转变；</li>
+<li>通过让人们每天慢慢进步的方法，形成PDCA（Plan-Do-Check-Action）。</li>
+</ul>
+<blockquote>
+<p>微软IT案例研究《在9个月内实现逆袭：在微软IT部门应用鼓点-缓冲-绳子解决法（译注：即限制驱导式排程法）》，作者是戴维·J．安德森和德拉戈什·杜密特里乌。</p>
+<p>当时安德森和杜密特里乌两人都在微软，他们描述了以前那种糟透了的状态。大多数IT从业人员&gt;对那种状态都再熟悉不过了。</p>
+<p>❑ 完成业务部门要求的工作耗时过长：平均交付周期是155天。</p>
+<p>❑ 对于延误和长交付周期的不满迫使IT管理作出“更多的工作预估”，这让经理们不得不把全部时<br>间都用来做PPT，而不是干实事（因为业务部门的结论是他们没有作出正确的工作预估）。</p>
+<p>❑ 不管业务部门提出什么要求，回答永远是“做这件事需要5个月”。</p>
+<p>❑ 每项任务都预计在20天内完成，但是没人知道多出的那135天都去哪儿了。</p>
+<p>杜密特里乌在报修系统中创建了一个名叫“等待德拉戈什”的新字段（实际上，这个报修系统是微&gt;软缺陷跟踪系统），以及时发现工作阻碍。他很快得出结论，项目团队70%的时间都卡在了别人&gt;那里——也就是说，在70%的时间里，工作都在排队。<br>杜密特里乌认为，他的团队一个月只能完成3项工作，按照这个速度，需要三年才能完成所有的&gt;工作。以下是他提出的对策及其惊人结果。</p>
+<p>❑ 他们不再预估工作，而采用根据历史数据得出的实际时间——他们有80个人——报修系统里有多&gt;年的工作记录供他们使用。这样做的结果是开发和测试效率立刻提高了30%。</p>
+<p>❑ 他们不再采用成本核算，而采用简单的“基于预算贡献的ROI（Return on Investment，投资&gt;回报率）”。所节省的时间让PM能力立刻提高了20%。</p>
+<p>❑ 发现约束点是开发部之后，PM接管了许多开发任务，把开发能力提高了20%。这样做也让开发&gt;人员更加高兴，因为他们可以专心写代码，不用再作任务预估了。</p>
+<p>❑ 他们引进了一名可用性专家来调整变更申请表。（他打趣说：“我们得填完4页表格，才能得到&gt;一杯水；我们把4页表格换成2页的，上面还有很多自由格式字段，目的是保证从事这项工作的人&gt;了解其所需的全部信息。”）</p>
+<p>❑ 接着他们减少了系统中允许的半成品数量：一开始平均有40到60个未结项目，他们把未结项目&gt;数减少到了5个。</p>
+<p>❑ 然后他们创建了工作缓冲区，任何遇到阻碍的开发或测试人员都能在缓冲区里做一些工作。</p>
+<p>❑ 交付周期从155天下降到22天。这么短的交付周期让他们创造了一个新的SLA认证（SLA &gt;guarantee）,25天（哇哦！）。</p>
+<p>❑ 他们的下一轮生产能力大幅提高来自于增加开发人员数量，因为每两天的开发工作就需要一天&gt;的测试工作。他们提拔了愿意参与开发工作的测试人员，把开发人员和测试人员的比例从1∶1提&gt;高到2∶1。</p>
+<p>❑ 上述种种的结果是什么？他们在9个月里完成了整整3年积压下来的工作；对他们服务的需求量&gt;也增加了，然后他们继续在其后的每个月都顺利完成并交付了所有业务部门要求的工作；不仅没&gt;人被解雇，而且很多人还升了职。<br>杜密特里乌说：“我们始终致力于降低交付周期，而不是开发和测试自身的优化，因此我们成功&gt;了。”</p>
+<p>这只是详细描述的众多惊人转变之一。难以置信的是，转变主要不是基于自动化，相反，这种不&gt;可思议的改进来自于调整关于工作系统的策略和控制半成品的策略，确保有一个高效的跨职能团&gt;队，让所有事情都为约束点服务，以及管理好工作交接。</p>
+</blockquote>
+<h1 id="IT工作管理核心思想"><a href="#IT工作管理核心思想" class="headerlink" title="IT工作管理核心思想"></a>IT工作管理核心思想</h1><h2 id="三步工作法"><a href="#三步工作法" class="headerlink" title="三步工作法"></a>三步工作法</h2><p><strong>第一工作法</strong>是关于从开发到IT运维再到客户的整个自左向右的工作流。为了使流量最大化，我们需要小的批量规模和工作间隔，决不让缺陷刘翔下游工作中心，并且不断为了整体目标(相对于开发功能完成率、测试发现/修复比率或运维有效性指标等局部目标）进行优化。</p>
+<p>必要的做法包括持续构建、集成以及部署，按需创建环境，严控半成品，以及构建起能够顺利变更的安全系统和组织。</p>
+<p><strong>第二工作法</strong>是关于价值流各阶段自右向左的快速持续反馈流，放大其效益以确保防止问题再次发生，或者更快地发现和修复问题。这样，我们就能在所需之处获取或嵌入知识，从源头上保证质量。</p>
+<p>必要的做法包括：在部署管道中的构建和测试失败时“停止生产线”；日复一日地持续改进日常工作；创建快速的自动化测试套装软件，以确保代码总是处于可部署的状态；在开发和IT运维之间建立共同的目标和共同解决问题的机制；建立普遍的产品遥测技术，让每个人都能知道，代码和环境是否在按照设定的运行，以及是否达到了客户的目标。</p>
+<p><strong>第三工作法</strong>是关于创造公司文化，该文化可带动两种风气的形成：不断尝试，这需要承担风险并从成功和失败中吸取经验教训；理解重复和练习是熟练掌握的前提。</p>
+<p>尝试和承担风险让我们能够不懈地改进工作系统，这经常要求我们去做一些与几十年来的做法大不相同的事。一旦出了问题，不断重复的日常操练赋予我们的技能和经验，令我们可以撤回至安全区域并恢复正常运作。</p>
+<p>必要的做法包括营造一种勇于创新、敢于冒险（相对于畏惧或盲目服从命令）以及高信任度（相对于低信任度和命令控制）的文化，把至少20%的开发和IT运维周期划拨给非功能性需求，并且不断鼓励进行改进。</p>
+<h2 id="团队领导力的寓言"><a href="#团队领导力的寓言" class="headerlink" title="团队领导力的寓言"></a>团队领导力的寓言</h2><p>这是帕特里克·兰西奥尼在《团队领导的五大障碍：关于领导力的寓言》（The Five Dysfunctions of a Team: A Leadership Fable）一书中描述的方法。<br>他认为，团队无法达成目标的一个核心诱因是信任缺失。在他的模型中，五大障碍被描述为：</p>
+<ul>
+<li>信任缺失——不愿在团队中显示弱点；</li>
+<li>惧怕冲突——在充满激情的建设性辩论中寻求和谐的假象；</li>
+<li>缺乏诚意——假意与团队的决策达成一致，形成模棱两可的公司氛围；</li>
+<li>回避问责——面对员工的失职行为，逃避追责，降低了工作标准；</li>
+<li>忽视结果——对个人成就、地位和自我价值的关注超过了对团队成功的关注。</li>
+</ul>
+<p>考虑到开发部和IT运维部之间，以及IT和“业务部门”之间存在着长期、剧烈的部门斗争，我想我们非常需要兰西奥尼先生的教诲以实现开发运维的理想。<br>通常来说，运用兰西奥尼先生方法论的第一步，是领导人要展示自己的弱点（或者起码要从塑造示弱的行为着手）。在《凤凰计划》中，史蒂夫多年来已将这一实践内化于心，并主导了一场关于个人经历的分享活动。</p>
+<h2 id="信息安全问题解决思想"><a href="#信息安全问题解决思想" class="headerlink" title="信息安全问题解决思想"></a>信息安全问题解决思想</h2><p>以不对IT系统做过多无用功就保护公司不受审计困扰，才是最终的胜利。而不是一昧的强制加入新的安全补丁，限制IT系统的功能与产出更多的维护问题。正如QA不需要测试不再需要的功能和不可能发生的性能压力，不要犯“眼界的错误”。</p>
+<h2 id="优先项目永远优先"><a href="#优先项目永远优先" class="headerlink" title="优先项目永远优先"></a>优先项目永远优先</h2><p>关乎公司存亡的项目永远放在第一位。必要时可以冻结其他项目进度以提供充足的资源，人力和时间。</p>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/11/07/JVM-memory-management-and-GC/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/4/index.html">JVM memory management and GC</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-07 16:58:46" itemprop="dateCreated datePublished" datetime="2018-11-07T16:58:46+08:00">2018-11-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-12 10:02:19" itemprop="dateModified" datetime="2021-01-12T10:02:19+08:00">2021-01-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java-memory-allocation"><a href="#Java-memory-allocation" class="headerlink" title="Java memory allocation"></a>Java memory allocation</h1><p>Java虚拟机管理内存会包括以下几个运行时数据区域，如下图所示。</p>
+<p><img src="/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG" alt="jvm"></p>
+<h2 id="JVM运行时数据区域简介"><a href="#JVM运行时数据区域简介" class="headerlink" title="JVM运行时数据区域简介"></a>JVM运行时数据区域简介</h2><h3 id="程序计数器-Program-Counter-Register"><a href="#程序计数器-Program-Counter-Register" class="headerlink" title="程序计数器(Program Counter Register)"></a>程序计数器(Program Counter Register)</h3><p>程序计数器时当前线程执行字节码的行号指示器。每条线程有独立的程序计数器。</p>
+<ul>
+<li>如果线程执行Java方法，这个技术及记录的时真该执行的虚拟机字节码指令的地址。</li>
+<li>如果线程执行的时Native方法，这个计数器值则为Undefined。</li>
+</ul>
+<h3 id="Java虚拟机栈-JVM-stacks"><a href="#Java虚拟机栈-JVM-stacks" class="headerlink" title="Java虚拟机栈(JVM stacks)"></a>Java虚拟机栈(JVM stacks)</h3><p>JVM栈也是线程私有的。虚拟机栈描述的时Java方法执行的内存模型：</p>
+<ol>
+<li>每个方法会先创建一个栈帧Stack Frame，用于存储局部变量表，操作数栈，动态链接，方法出口等信息。</li>
+<li>在方法执行完后，该栈帧会出栈。</li>
+</ol>
+<p>栈内存说的就是虚拟机中局部变量表部分。</p>
+<h3 id="Native方法栈"><a href="#Native方法栈" class="headerlink" title="Native方法栈"></a>Native方法栈</h3><p>本地方法栈为虚拟机使用到的Native方法服务。</p>
+<h3 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h3><p>Java堆是虚拟机所管理的内存，被所有线程共享的，目的是存放对象实例。Java堆是垃圾收集器(GC)主要管理的区域。</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>方法区是用于存储虚拟机的类信息，常量，静态变量，即时编译器编译后的代码等数据，被所有线程共享。在HotSpot虚拟机中，方法区又叫做“永久代”，是因为GC分代收集扩展至方法区，使得方法区由GC中的永久代区域实现。</p>
+<h4 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h4><p>运行时常量池是方法区的一部分。本来在方法区中的类信息就包含了除类的版本、字段、方法、接口等描述信息之外，还有一项信息便是常量池，用于存放编译生成的各种字面量和符号引用。常量池信息将在类加载后进入方法区的运行时常量池中存放。同时，一些方法如String类的intern()方法也能将字符串加入运行时常量池。所以在类信息加载完成后，常量池也不是大小就不变的。</p>
+<h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p>直接内存并不是与JVM运行时数据区的一部分。JDK1.4后引入的NIO(New I/O)类，引入了一种基于通道(Channel)与缓冲区(Buffer)的I/O方式。它可以使用Native函数库直接分配对外内存，然后通过Java堆中的DirectByteBuffer对象作为这块内存的引用进行操作。直接内存不属于JVM GC的管理范畴，可以用-Xmx进行设定。</p>
+<h2 id="JVM对象的创建"><a href="#JVM对象的创建" class="headerlink" title="JVM对象的创建"></a>JVM对象的创建</h2><p>当JVM遇到一条new指令时，会做出什么样的处理呢?</p>
+<ol>
+<li>检查指令参数是否能在常量池中定位到一个类的符号引用，并确保其被正确的加载、解析和初始化；</li>
+<li><p>在Java堆上分配内存，有两种空闲内存分配方式：</p>
+<ul>
+<li>空闲列表： 基于Mark-Sweep算法的收集器的GC，如CMS；</li>
+<li>指针碰撞： 具有compact过程的收集器的GC，如Serial, ParNew等。</li>
+</ul>
+</li>
+<li><p>为了避免竞争效应即操作的原子性，系统采用如下两种其一的方法：</p>
+<ul>
+<li>分配内存动作进行同步处理，CAS(Compare and swap)+失败重试机制，</li>
+<li>分配内存按照线程划分不同的空间之中进行，即本地线程缓冲机制(TLAB, Thread local allocation buffer)。</li>
+</ul>
+</li>
+<li><p>为新创建对象设置好初始值；</p>
+</li>
+<li>对对象的对象头信息(Object header)进行相关必要设置，如：<ul>
+<li>类型指向</li>
+<li>类的元数据</li>
+<li>对象哈希值</li>
+<li>对象的GC年代信息</li>
+</ul>
+</li>
+<li>类文件bytecode中的&lt; init&gt;方法执行；</li>
+</ol>
+<blockquote>
+<p>init方法是Java的class文件中的各种构造方法经过JIT解释后生成的bytecode代码，一般由invokespecial操作码所调用。</p>
+</blockquote>
+<p>自此，一个完整的对象就被创建好了。</p>
+<h2 id="JVM对象的内存布局"><a href="#JVM对象的内存布局" class="headerlink" title="JVM对象的内存布局"></a>JVM对象的内存布局</h2><p>当JVM对象被创建好了，会被分配在Java堆上，存储布局可以分为三个区域：对象头(header)、实例数据(instance data)和对齐填充(padding)。</p>
+<h3 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h3><p>对象头包括两部分，一部分是”Mark Word”,另一部分是类型指针。</p>
+<ul>
+<li>Mark word: 长度为32bit或64bit。HotSpot 32位虚拟机中具体的对象头存储内容取决于对象的锁状态值，如下：<br><img src="/2018/11/07/JVM-memory-management-and-GC/MarkWord.PNG" alt="Markword"></li>
+<li>类型指针: 长度为32bit或64bit，用于存储指向类元数据的指针，并不是所有的虚拟机实现都必须在对象数据上保留类型指针。</li>
+<li>数组长度：长度为32bit，当对象为数组时，用于存储数组的长度。注：此数组并非ArrayList泛型，后者属于引用类型。</li>
+</ul>
+<h3 id="实例数据"><a href="#实例数据" class="headerlink" title="实例数据"></a>实例数据</h3><p>实例数据部分存储了类对象的所有类型的字段内容。每种虚拟机有自己定义好的参数和字段的分配策略。</p>
+<h3 id="对齐填充"><a href="#对齐填充" class="headerlink" title="对齐填充"></a>对齐填充</h3><p>对齐填充的存在是为了满足HotSpot VM自动内存管理系统要求，保证所有对象的地址都是8字节的整数倍。</p>
+<h2 id="Java基础类型内存布局"><a href="#Java基础类型内存布局" class="headerlink" title="Java基础类型内存布局"></a>Java基础类型内存布局</h2><p>java的基本数据类型共有8种，即int,short,long,byte,float,double,boolean,char(注意，并没有String的基本类型)。Java基础类型变量是在(Java虚拟机)栈上分配的，当变量的作用域运行结束后，通过出栈的方式回收分配在栈上的变量内存。</p>
+<p>当声明分配一个int类型变量a = 3时，JVM会先为该变量创建一个变量为a的引用，再在栈上搜索是否存在字面值为3的引用。</p>
+<ul>
+<li>如果找到，就直接将a指向3的地址。</li>
+<li>如果没有找到，就分配一个内存存放字面值3，并将a指向这个地址。<br>因此说，基础类型字面值在同一个栈上是共享的。</li>
+</ul>
+<p><strong>问题：已知int类型变量需要32bit内存，具体stack frame上内存分配是什么样子的呢? 变量a是怎么存放的? int类型信息又是放在那里的呢?</strong></p>
+<h2 id="JVM对象的访问定位"><a href="#JVM对象的访问定位" class="headerlink" title="JVM对象的访问定位"></a>JVM对象的访问定位</h2><p>对象的访问定位如下图，HOTSOPT用的是第2种算法：</p>
+<ol>
+<li>使用句柄（先指向堆里的句柄池，再从句柄池找到指针，优点是只需要修改句柄, 缺点就是句柄池也是开销）；</li>
+<li>直接指针（减少性能开销）: 需要存2个数据， 到对象实例数据的指针，到对象类数据的指针。<br><img src="/2018/11/07/JVM-memory-management-and-GC/reference.PNG" alt="reference"></li>
+</ol>
+<h1 id="Garbage-Collection-of-JVM"><a href="#Garbage-Collection-of-JVM" class="headerlink" title="Garbage Collection of JVM"></a>Garbage Collection of JVM</h1><h2 id="GC定义"><a href="#GC定义" class="headerlink" title="GC定义"></a>GC定义</h2><p>Garbage Collection（垃圾回收/GC）是JVM对于Java堆上内存在运行时进行的动态管理，主要是对Java堆上不再被引用的对象进行回收。Minor GC是主要快速回收Eden区和Survivor区对象内存，Full GC则会对老年代也进行回收，后者可能会影响性能。</p>
+<h2 id="如何确定对象是否需要回收？"><a href="#如何确定对象是否需要回收？" class="headerlink" title="如何确定对象是否需要回收？"></a>如何确定对象是否需要回收？</h2><h3 id="引用计数算法（Reference-Counting）"><a href="#引用计数算法（Reference-Counting）" class="headerlink" title="引用计数算法（Reference Counting）"></a>引用计数算法（Reference Counting）</h3><p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被使用的。</p>
+<p>缺点：存在循环引用的问题。</p>
+<h3 id="可达性分析算法（Reachability-Analysis）"><a href="#可达性分析算法（Reachability-Analysis）" class="headerlink" title="可达性分析算法（Reachability Analysis）"></a>可达性分析算法（Reachability Analysis）</h3><p>通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连（用图论的话来说，就是从GC Roots到这个对象不可达）时，则证明此对象是不可用的。</p>
+<p>GC Roots:</p>
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法去中类静态属性引用的对象</li>
+<li>方法去中常量引用的对象</li>
+<li>本地方法栈中JNI（Native方法）引用的对象。</li>
+</ul>
+<h2 id="如何对对象进行回收？"><a href="#如何对对象进行回收？" class="headerlink" title="如何对对象进行回收？"></a>如何对对象进行回收？</h2><h3 id="标记——清除算法"><a href="#标记——清除算法" class="headerlink" title="标记——清除算法"></a>标记——清除算法</h3><p><img src="/2018/11/07/JVM-memory-management-and-GC/MarkSwap.jpg" alt="MarkSwap"></p>
+<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p><img src="/2018/11/07/JVM-memory-management-and-GC/Copying.jpg" alt="Copying"></p>
+<h3 id="标记——整理算法"><a href="#标记——整理算法" class="headerlink" title="标记——整理算法"></a>标记——整理算法</h3><p><img src="/2018/11/07/JVM-memory-management-and-GC/MarkCompact.jpg" alt="MarkCompact"></p>
+<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>对于新生代和老年代的对象进行不同的清理算法，一般来说，复制算法适合新生代，标记-清除算法和标记整理算法更适合老年代内存。</p>
+<h2 id="JVM对象内存管理策略"><a href="#JVM对象内存管理策略" class="headerlink" title="JVM对象内存管理策略"></a>JVM对象内存管理策略</h2><p>GC管理的内存分为三类区域，分别是Eden+Survivor（新生代），Tenured（老年代）和Permanent（永久代）。</p>
+<p><img src="/2018/11/07/JVM-memory-management-and-GC/GCRegions.png" alt="GCregion"></p>
+<ol>
+<li><p>对象优先在Eden分配</p>
+</li>
+<li><p>大对象直接进入老年代</p>
+</li>
+<li><p>长期存活的对象将进入老年代</p>
+</li>
+<li><p>动态对象年龄判定：当Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或者等于该年龄的对象可以直接进入老年代，无须等到MaxTenuringThreshold中要求的年龄。这是为了防止Survivor区溢出。</p>
+</li>
+</ol>
+<h2 id="JVM常用的垃圾收集器"><a href="#JVM常用的垃圾收集器" class="headerlink" title="JVM常用的垃圾收集器"></a>JVM常用的垃圾收集器</h2><p><img src="/2018/11/07/JVM-memory-management-and-GC/GCs.jpg" alt="GCs"></p>
+<h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3><p>单线程处理<strong>新生代</strong>GC。复制算法。STW</p>
+<p><img src="/2018/11/07/JVM-memory-management-and-GC/SerialGC.jpg" alt="Serial/SerialOld"></p>
+<h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>采用多线程处理<strong>新生代</strong>GC。复制算法。STW</p>
+<p><img src="/2018/11/07/JVM-memory-management-and-GC/ParNewGC.jpg" alt="ParNew"></p>
+<h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>处理算法和ParNewGC完全一样。<br>但是，Parallel Scavenge收集器的特点是它的关注点与其他收集器不同，CMS等收集器的关注点是尽可能地缩短垃圾收集时用户线程的停顿时间，而Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量（Throughput）。所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量 = 运行用户代码时间 /（运行用户代码时间 +垃圾收集时间），虚拟机总共运行了100分钟，其中垃圾收集花掉1分钟，那吞吐量就是99%。</p>
+<p><img src="/2018/11/07/JVM-memory-management-and-GC/PSPold.jpg" alt="ParallelScavengeAndParOld"></p>
+<h3 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h3><p>单线程处理<strong>老年代</strong>GC。采用标记-整理算法。STW</p>
+<h3 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h3><p>多线程处理<strong>老年代</strong>GC。采用标记整理算法。STW</p>
+<h3 id="CMS-Concurrent-Mark-Sweep-收集器"><a href="#CMS-Concurrent-Mark-Sweep-收集器" class="headerlink" title="CMS(Concurrent Mark Sweep)收集器"></a>CMS(Concurrent Mark Sweep)收集器</h3><p>四个阶段（基于标记-清理算法）：</p>
+<ul>
+<li>初始标记 STW</li>
+<li>并发标记</li>
+<li>再次标记 STW</li>
+<li>并发清理</li>
+</ul>
+<p><img src="/2018/11/07/JVM-memory-management-and-GC/CMS.jpg" alt="CMS"></p>
+<p>问题：</p>
+<ol>
+<li>并发清理时预留空间不够造成并发清理(Concurrent Mode Failure)失败=&gt;浮动垃圾(Floating Gabage)过多。</li>
+<li>内存碎片化问题。一旦发生大对象触发的FullGC，Serial Old回收则会出现长时间STW。</li>
+</ol>
+<ul>
+<li><p>CMS并发三色标记法</p>
+<ol>
+<li>黑色：已经标记完引用对象的颜色</li>
+<li>灰色：没有标记完引用对象的颜色</li>
+<li>白色：默认垃圾（没有被标记颜色）</li>
+</ol>
+<ul>
+<li><p>标记问题：</p>
+<ol>
+<li>本来A-&gt;B, B-&gt;D;</li>
+<li>在A标记完，B部分标记后，B-&gt;D引用消失，D没有被标记，A-&gt;D引用建立</li>
+<li>由于D从始至终都没有被标记</li>
+</ol>
+</li>
+<li><p>标记问题一Incremental Update更正：</p>
+<ol>
+<li>对于A-&gt;D（白)的引用建立，把A修正成灰色。</li>
+</ol>
+</li>
+<li><p>Incremental Update更正存在的ABA问题：</p>
+<ol>
+<li>回收线程一：标记A属性1，正在标记属性2</li>
+<li>业务逻辑线程二：把属性1指向白色D， A保持灰色</li>
+<li>回收线程三: 更新属性2的标记，将A标记为黑色</li>
+</ol>
+</li>
+<li><p>CMS最终解决方案：必须STW从头扫描一次</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="G1-Garbage-First-收集器"><a href="#G1-Garbage-First-收集器" class="headerlink" title="G1(Garbage First)收集器"></a>G1(Garbage First)收集器</h3><p>启动G1需要参数<code>-XX:+UseG1GC</code>，G1不是与其他GC分代处理垃圾的，而是对新生代和老年代均进行不同的GC。</p>
+<p>Young GC:</p>
+<ul>
+<li>标记-清除-复制算法整理 STW<br>只对新生代区块进行清理，但是也会需要扫描所有region的Rset，否则不知道有哪些Old-&gt;Young的引用。</li>
+</ul>
+<p>Mixed GC:<br>处理Mixed GC时只将将部分old区块进行回收。Rset记录了其他区块对本区块的引用。最终的扫描区域为Young+对Rset进行扫描，缩短了原来需要扫描整个Old时间。而且Young<->Old的引用都能快速找到。</-></p>
+<p>并发标记分为四个阶段(基于标记-整理算法)：</p>
+<ul>
+<li>初始标记 STW</li>
+<li>并发标记</li>
+<li>最终标记 STW </li>
+<li>筛选回收 STW 根据停顿时间要求筛选出Old中的Cset集合，作为回收目标。</li>
+</ul>
+<p>回收evacuation阶段（小区块进行复制整理避免碎片）：<br>需要STW，将选出的Cset中的对象进行复制到新的区块，清除掉原来的区块，达到收集的效果。</p>
+<p><img src="/2018/11/07/JVM-memory-management-and-GC/G1.jpg" alt="G1"></p>
+<h3 id="ZGC-Z-Garbage-Collector-收集器"><a href="#ZGC-Z-Garbage-Collector-收集器" class="headerlink" title="ZGC(Z Garbage Collector)收集器"></a>ZGC(Z Garbage Collector)收集器</h3><p>ZGC（Z Garbage Collector）是一款由Oracle公司研发的，以低延迟为首要目标的一款垃圾收集器。它是基于动态Region内存布局，（暂时）不设年龄分代，使用了读屏障、染色指针和内存多重映射等技术来实现可并发的标记-整理算法的收集器。在JDK 11新加入，还在实验阶段，主要特点是：回收TB级内存（最大4T），停顿时间不超过10ms。m目前ZGC是实验性功能，可以通过<code>-XX:+UnlockExperimentalVMOptions -XX:+UseZGC</code>参数启动ZGC。</p>
+<h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><p><img src="/2018/11/07/JVM-memory-management-and-GC/GCArgs.jpg" alt="GCArgs"></p>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/10/11/Leetcode-901-Online-Stock-Span/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/10/11/Leetcode-901-Online-Stock-Span/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/4/index.html">Leetcode 901 Online Stock Span</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-11 17:13:44" itemprop="dateCreated datePublished" datetime="2018-10-11T17:13:44+08:00">2018-10-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithms/" itemprop="url" rel="index"><span itemprop="name">Algorithms</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p>Write a class StockSpanner which collects daily price quotes for some stock, and returns the span of that stock’s price for the current day.</p>
+<p>The span of the stock’s price today is defined as the maximum number of consecutive days (starting from today and going backwards) for which the price of the stock was less than or equal to today’s price.</p>
+<p>For example, if the price of a stock over the next 7 days were [100, 80, 60, 70, 60, 75, 85], then the stock spans would be [1, 1, 1, 2, 1, 4, 6].</p>
+<p>Example 1:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input: [<span class="string">"StockSpanner"</span>,<span class="string">"next"</span>,<span class="string">"next"</span>,<span class="string">"next"</span>,<span class="string">"next"</span>,<span class="string">"next"</span>,<span class="string">"next"</span>,<span class="string">"next"</span>], [[],[100],[80],[60],[70],[60],[75],[85]]</span><br><span class="line">Output: [null,1,1,1,2,1,4,6]</span><br><span class="line">Explanation: </span><br><span class="line">First, S = StockSpanner() is initialized.  Then:</span><br><span class="line">S.next(100) is called and returns 1,</span><br><span class="line">S.next(80) is called and returns 1,</span><br><span class="line">S.next(60) is called and returns 1,</span><br><span class="line">S.next(70) is called and returns 2,</span><br><span class="line">S.next(60) is called and returns 1,</span><br><span class="line">S.next(75) is called and returns 4,</span><br><span class="line">S.next(85) is called and returns 6.</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Note that (for example) S.next(75) returned 4, because the last 4 prices<br>(including today’s price of 75) were less than or equal to today’s price.</p>
+</blockquote>
+<p>Note:</p>
+<ol>
+<li>Calls to StockSpanner.next(int price) will have 1 &lt;= price &lt;= 10^5.</li>
+<li>There will be at most 10000 calls to StockSpanner.next per test case.</li>
+<li>There will be at most 150000 calls to StockSpanner.next across all test cases.</li>
+<li>The total time limit for this problem has been reduced by 75% for C++, and 50% for all other languages.</li>
+</ol>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>本题考验的是对Java Stack类的熟练使用。</p>
+<h2 id="O-n-复杂度思路"><a href="#O-n-复杂度思路" class="headerlink" title="O(n)复杂度思路"></a>O(n)复杂度思路</h2><p>不难发现，运用两个Stack可以灵活的将数组中的数字进行遍历比较，从而得出结果。但是由于Leetcode对于时间复杂度要求较高，因此同为O(n)算法，需要最大化的优化其系数，从而通过时间限制测试。</p>
+<p><strong>Leetcode solution中提出的一种简化计算的方法</strong></p>
+<p>在仔细分析对比数组的计算结果后，不难得出以下几个结论：</p>
+<ul>
+<li>当数组元素值减少时,权重结果为1；</li>
+<li>当数组元素值增加时，倒推前面小于该值的连续区间可以替换成局部最大值和其局部权重weight。局部最大值即当前元素值；而最末元素的权重，正好是其前面小于该值的连续区间的权重和+1。权重值则为我们需要的返回值。</li>
+</ul>
+<p>以Example中的数组为例，用Stack&lt;int[]&gt;表示分步计算结果为：</p>
+<ol>
+<li>[100, 1]</li>
+<li>[100, 1], [80, 1]</li>
+<li>[100, 1], [80, 1], [60, 1]</li>
+<li>[100, 1], [80, 1], <strong>[70, 2]</strong></li>
+<li>[100, 1], [80, 1], [70, 2], [60, 1]</li>
+<li>[100, 1], [80, 1], <strong>[75, 4]</strong></li>
+<li>[100, 1], <strong>[85, 6]</strong><br>…</li>
+</ol>
+<h2 id="实现技巧"><a href="#实现技巧" class="headerlink" title="实现技巧"></a>实现技巧</h2><p>需要注意的本解法并没有简化时间复杂度，因为在最差情况下（数列递减），计算的复杂度为O(n)。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StockSpanner</span> </span>&#123;</span><br><span class="line">    Stack&lt;Integer&gt; prices, weights;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StockSpanner</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        prices = <span class="keyword">new</span> Stack();</span><br><span class="line">        weights = <span class="keyword">new</span> Stack();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">next</span><span class="params">(<span class="keyword">int</span> price)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> w = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (!prices.isEmpty() &amp;&amp; prices.peek() &lt;= price) &#123;</span><br><span class="line">            prices.pop();</span><br><span class="line">            w += weights.pop();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        prices.push(price);</span><br><span class="line">        weights.push(w);</span><br><span class="line">        <span class="keyword">return</span> w;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/10/02/Angular-5-template-syntax/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1906,656 +3086,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/12/Leetcode-60-Permutation-Sequence/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/04/12/Leetcode-60-Permutation-Sequence/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/4/index.html">Leetcode 60: Permutation Sequence</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-12 13:26:15" itemprop="dateCreated datePublished" datetime="2018-04-12T13:26:15+08:00">2018-04-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithms/" itemprop="url" rel="index"><span itemprop="name">Algorithms</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>The set [1,2,3,…,n] contains a total of n! unique permutations.</p>
-<p>By listing and labeling all of the permutations in order,<br>We get the following sequence (ie, for n = 3):</p>
-<p>“123”</p>
-<p>“132”</p>
-<p>“213”</p>
-<p>“231”</p>
-<p>“312”</p>
-<p>“321”</p>
-<p>Given n and k, return the kth permutation sequence.</p>
-<p>Note: Given n will be between 1 and 9 inclusive.</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>寻找排列顺序规律，可以得出如下排序规律：</p>
-<ol>
-<li><p>整个排序可以划分成n个小排序。以1为首，[2, 3]的子序列排序。以2为首，[1, 3]的子序列排序， 以3为首，[1, 2]的子序列排序。</p>
-</li>
-<li><p>再次划分，则可以将以1为首的排序中，分成以2为第二位， [3]的全排列，和以3为第二位，[2]的全排列。</p>
-</li>
-<li><p>逐次划分，分别能将长度为n的序列分解成n个(n-1)全排列，n*(n-1)个(n-2)的全排列，…n!个(1)的全排列。</p>
-</li>
-</ol>
-<h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><p>在知晓序列排序规律后，可以着手考虑将第k个元素找到。搜索定位的思想类似于一棵树的节点查找，这棵树的结构已经找到：第一层儿子有n个，第二层的孙子节点共有n*(n-1)个，且每个儿子拥有(n-1)个儿子，以此类推。</p>
-<p>而第k个元素对应的元素如何计算出呢？根据这棵树的特点，我们可以做出如下设计，使得从树根到第k个节点的路径就是我们所需要的元素。</p>
-<ol>
-<li><p>假设树根节点是个空节点，其的n个儿子分别为1, 2, 3, 4, 5,…, n。</p>
-</li>
-<li><p>第一层的节点1拥有(n-1)个儿子，分别为2, 3, 4, 5,…n。</p>
-</li>
-<li><p>第二层节点2拥有(n-2)个儿子，分别为3, 4, 5,…n。 而第二层节点3拥有N(n-2)个儿子，分别为2, 4, 5,…n。尤其需要注意，儿子的顺序是除开父亲节点后的顺序结构。</p>
-</li>
-</ol>
-<p>时间复杂度树的高度，为O(n)。</p>
-<h3 id="实现技巧"><a href="#实现技巧" class="headerlink" title="实现技巧"></a>实现技巧</h3><blockquote>
-<p>从1到n的全排列值计算具有较高的代码重复性， 可以用如下算法进行缓存，从而减少反复计算产生的时间消耗。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dynamic length int array declaration!!!</span></span><br><span class="line"><span class="keyword">int</span>[] factorial = <span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line"><span class="comment">// create an array of factorial lookup</span></span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">1</span>;</span><br><span class="line">    factorial[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        sum *= i;</span><br><span class="line">        factorial[i] = sum;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>对于元素生成，可以运用List<integer>类型的灵活性而避免在元素中挪动数字造成的时间开销。即使int array也可以作为一种高效的数据结构。</integer></p>
-</blockquote>
-<blockquote>
-<p>在程序实现中，递归算法会产生较高的空间开销，在for循环可以完成计算的情况下，优先采用后者。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; numbers = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"></span><br><span class="line"><span class="comment">// create a list of numbers to get indices</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">    numbers.add(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// numbers = &#123;1, 2, 3, 4&#125;</span></span><br><span class="line"></span><br><span class="line">k--;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> index = k/factorial[n-i];</span><br><span class="line">        sb.append(String.valueOf(numbers.get(index)));</span><br><span class="line">        numbers.remove(index);</span><br><span class="line">        k-=index*factorial[n-i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> String.valueOf(sb);</span><br></pre></td></tr></table></figure>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/08/My-first-post/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/04/08/My-first-post/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/4/index.html">How to use Hexo on github pages.</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-08 02:49:55" itemprop="dateCreated datePublished" datetime="2018-04-08T02:49:55+08:00">2018-04-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2021-06-22 10:54:28" itemprop="dateModified" datetime="2021-06-22T10:54:28+08:00">2021-06-22</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Runbooks/" itemprop="url" rel="index"><span itemprop="name">Runbooks</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Welcome-to-Sunny’s-hexo-post"><a href="#Welcome-to-Sunny’s-hexo-post" class="headerlink" title="Welcome to Sunny’s hexo post"></a>Welcome to Sunny’s hexo post</h2><p>本文主要介绍一种常见的个人博客管理方式，利用现有的Hexo静态博客模板管理和生成静态博客文档，和github pages对git repo页面的原生发布功能进行博客展示。同时，博客文档也能在本地生成，部署，存档，较于现有的博客工具具有更好的功能扩展。</p>
-<h3 id="Prepare-Node-js"><a href="#Prepare-Node-js" class="headerlink" title="Prepare Node.js"></a>Prepare Node.js</h3><p>Hexo is Node.js based npm plugin, which provides many extensions and powerful blog management functionality.</p>
-<h3 id="Use-Hexo-to-manage-blogs"><a href="#Use-Hexo-to-manage-blogs" class="headerlink" title="Use Hexo to manage blogs"></a>Use Hexo to manage blogs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo --save</span><br><span class="line">$ hexo init</span><br><span class="line">$ hexo new <span class="string">"My New Post"</span> <span class="comment"># hexo new draft "My New Draft"</span></span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<h3 id="Use-SSH-git-management"><a href="#Use-SSH-git-management" class="headerlink" title="Use SSH git management"></a>Use SSH git management</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"&#123;yourgithubaddress&#125;"</span></span><br><span class="line">$ ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<h3 id="Create-username-github-io-repo-for-statics-hexo-pages"><a href="#Create-username-github-io-repo-for-statics-hexo-pages" class="headerlink" title="Create {username}.github.io repo for statics hexo pages"></a>Create {username}.github.io repo for statics hexo pages</h3><h3 id="Configure-config-yml-file-for-hexo-blogs-and-deployments"><a href="#Configure-config-yml-file-for-hexo-blogs-and-deployments" class="headerlink" title="Configure _config.yml file for hexo blogs and deployments"></a>Configure _config.yml file for hexo blogs and deployments</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span><br><span class="line">url: https://&#123;username&#125;.github.io/</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:&#123;username&#125;/&#123;username&#125;.githubm.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message: "Site updated: &#123;&#123; now('YYYY-MM-DD HH:mm:ss') &#125;&#125;"</span><br></pre></td></tr></table></figure>
-<h3 id="Deploy-hexo-static-files-to-target-repo"><a href="#Deploy-hexo-static-files-to-target-repo" class="headerlink" title="Deploy hexo static files to target repo"></a>Deploy hexo static files to target repo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo generate</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>Useful links:<br><a href="https://blog.csdn.net/android_msk/article/details/75040841" target="_blank" rel="noopener">Hexo with pictures</a>,<br><a href="https://bingyue.github.io/2017/03/08/%E4%BD%BF%E7%94%A8Github-Pages%E5%92%8CHexo%E6%9E%84%E5%BB%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">Hexo Deployment</a>,<br><a href="https://yq.aliyun.com/articles/72002" target="_blank" rel="noopener">Jekyll vs Hexo</a>,<br><a href="https://coding.net/help/doc/project/markdown.html" target="_blank" rel="noopener">Markdown</a>,<br><a href="https://www.jianshu.com/p/1e402922ee32/" target="_blank" rel="noopener">Markdown brief</a>,<br><a href="https://blog.csdn.net/u013553529/article/details/50629055" target="_blank" rel="noopener">Markdown highlights</a></p>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/04/01/hello-world/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/4/index.html">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-01 02:49:55" itemprop="dateCreated datePublished" datetime="2018-04-01T02:49:55+08:00">2018-04-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2021-07-23 11:37:53" itemprop="dateModified" datetime="2021-07-23T11:37:53+08:00">2021-07-23</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Runbooks/" itemprop="url" rel="index"><span itemprop="name">Runbooks</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<h3 id="Nodejs-and-NPM-requirement"><a href="#Nodejs-and-NPM-requirement" class="headerlink" title="Nodejs and NPM requirement"></a>Nodejs and NPM requirement</h3><p>Nodejs higher than 6.0.0 and NPM higher than 5. Otherwise, Hexo might not work with some strange error!!</p>
-<h3 id="Hexo-Mermaid-for-graph"><a href="#Hexo-Mermaid-for-graph" class="headerlink" title="Hexo Mermaid for graph"></a>Hexo Mermaid for graph</h3><p>More info: <a href="https://github.com/webappdevelp/hexo-filter-mermaid-diagrams" target="_blank" rel="noopener">Here</a></p>
-<ul>
-<li><p>Flow chart</p>
-<pre class="mermaid">graph TD;
-  A-->B;
-  A-->C;
-  B-->D;
-  C-->D;</pre>
-</li>
-<li><p>Gannt diagram</p>
-</li>
-</ul>
-<pre class="mermaid">gantt
-    dateFormat  YYYY-MM-DD
-    title       Adding GANTT diagram functionality to mermaid
-    excludes    weekends
-    %% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week ("sunday") or "weekends", but not the word "weekdays".)
-
-    section A section
-    Completed task            :done,    des1, 2014-01-06,2014-01-08
-    Active task               :active,  des2, 2014-01-09, 3d
-    Future task               :         des3, after des2, 5d
-    Future task2              :         des4, after des3, 5d
-
-    section Critical tasks
-    Completed task in the critical line :crit, done, 2014-01-06,24h
-    Implement parser and jison          :crit, done, after des1, 2d
-    Create tests for parser             :crit, active, 3d
-    Future task in critical line        :crit, 5d
-    Create tests for renderer           :2d
-    Add to mermaid                      :1d
-
-    section Documentation
-    Describe gantt syntax               :active, a1, after des1, 3d
-    Add gantt diagram to demo page      :after a1  , 20h
-    Add another diagram to demo page    :doc1, after a1  , 48h
-
-    section Last section
-    Describe gantt syntax               :after doc1, 3d
-    Add gantt diagram to demo page      :20h
-    Add another diagram to demo page    :48h</pre>
-
-
-<h3 id="Hexo-simple-mindmap"><a href="#Hexo-simple-mindmap" class="headerlink" title="Hexo simple mindmap"></a>Hexo simple mindmap</h3><p>Hexo simple mindmap插件提供了对脑图的可视化支持，相较于mermaid插件的流程图，能够提供更加原生的脑图体验。</p>
-<p>More info：<a href="https://hunterx.xyz/use-mindmap-in-hexo.html" target="_blank" rel="noopener">here</a></p>
-<ul>
-<li>Example</li>
-</ul>
-<blockquote class="pullquote mindmap mindmap-md"><ul>
-<li>软件架构师思维导图<ul>
-<li>代码规范<ul>
-<li>设计模式</li>
-<li>重构</li>
-<li>源码学习与分析</li>
-<li>复杂系统面向对象模型设计</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="Hexo-search功能"><a href="#Hexo-search功能" class="headerlink" title="Hexo search功能"></a>Hexo search功能</h3><p>随着文章数量增加，每一页寻找文档变得耗时间，所以增加了search功能来支持快速文章定位功能。</p>
-<p>More info: <a href="https://huangweicai.github.io/2019/01/12/Hexo%E5%A2%9E%E5%8A%A0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD/" target="_blank" rel="noopener">here</a></p>
-<ol>
-<li>下载插件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>配置_config.yaml文件</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span></span><br><span class="line"><span class="attr">  format:</span> <span class="string">html</span></span><br><span class="line"><span class="attr">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>配置next主题的_config.yaml文件</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Local search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/flashlab/hexo-generator-search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># if auto, trigger search by changing input</span></span><br><span class="line">  <span class="comment"># if manual, trigger search by pressing enter key or search button</span></span><br><span class="line"><span class="attr">  trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="comment"># show top n results per article, show all results by setting to -1</span></span><br><span class="line"><span class="attr">  top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2598,7 +3133,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2680,7 +3215,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
