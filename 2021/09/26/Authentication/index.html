@@ -112,29 +112,29 @@
 <meta name="keywords" content="肉肉,Microservice,Authentication">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Authentication">
-<meta property="og:url" content="https://sunnyhll.github.io/2021/07/23/Authentication/index.html">
+<meta property="og:url" content="https://sunnyhll.github.io/2021/09/26/Authentication/index.html">
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="Authentication服务鉴权机制用户在访问系统或者服务时，服务器端需要验证用户是否拥有访问的权力，这个过程称为鉴权。在服务器-客户端架构的软件系统中，当一个没有经过鉴权的用户登录时，服务器可能会返回鉴权请求。鉴权是一种客户端和服务器协同认证的方式，有多种方式可以实现：  HTTP Basic Authentication session-cookie Token 验证(JWT) OAuth">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://sunnyhll.github.io/2021/07/23/Authentication/CookieAuth.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2021/07/23/Authentication/TokenAuth.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2021/07/23/Authentication/OIDCAuth.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2021/07/23/Authentication/AuthorizationCodeOAuth.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2021/07/23/Authentication/ImplicitOAuth.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2021/07/23/Authentication/PasswordOAuth.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2021/07/23/Authentication/ClientCertOAuth.png">
-<meta property="og:updated_time" content="2021-07-23T03:37:53.221Z">
+<meta property="og:image" content="https://sunnyhll.github.io/2021/09/26/Authentication/CookieAuth.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/2021/09/26/Authentication/TokenAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/2021/09/26/Authentication/OIDCAuth.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/2021/09/26/Authentication/AuthorizationCodeOAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/2021/09/26/Authentication/ImplicitOAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/2021/09/26/Authentication/PasswordOAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/2021/09/26/Authentication/ClientCertOAuth.png">
+<meta property="og:updated_time" content="2021-09-26T04:04:11.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Authentication">
 <meta name="twitter:description" content="Authentication服务鉴权机制用户在访问系统或者服务时，服务器端需要验证用户是否拥有访问的权力，这个过程称为鉴权。在服务器-客户端架构的软件系统中，当一个没有经过鉴权的用户登录时，服务器可能会返回鉴权请求。鉴权是一种客户端和服务器协同认证的方式，有多种方式可以实现：  HTTP Basic Authentication session-cookie Token 验证(JWT) OAuth">
-<meta name="twitter:image" content="https://sunnyhll.github.io/2021/07/23/Authentication/CookieAuth.jpg">
+<meta name="twitter:image" content="https://sunnyhll.github.io/2021/09/26/Authentication/CookieAuth.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://sunnyhll.github.io/2021/07/23/Authentication/">
+  <link rel="canonical" href="https://sunnyhll.github.io/2021/09/26/Authentication/">
 
 
 
@@ -372,7 +372,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2021/07/23/Authentication/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2021/09/26/Authentication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="果核&肉肉">
@@ -414,7 +414,7 @@
                 
               
 
-              <time title="创建时间：2021-07-23 11:37:53" itemprop="dateCreated datePublished" datetime="2021-07-23T11:37:53+08:00">2021-07-23</time>
+              <time title="创建时间：2021-09-26 12:04:11" itemprop="dateCreated datePublished" datetime="2021-09-26T12:04:11+08:00">2021-09-26</time>
             
 
             
@@ -506,11 +506,11 @@
 <h1 id="session-cookie鉴权"><a href="#session-cookie鉴权" class="headerlink" title="session-cookie鉴权"></a>session-cookie鉴权</h1><p>Session是HTTP协议中为了支持有状态的通信而发明的会话机制，本质上是通过服务器为用户建立sessionid从而保证用户的状态信息能够在服务器端保存。用户不需要反复进行登录认证就能保持会话。</p>
 <p>而Cookie则是一种特殊的HTTP头部，能够在HTTP通信中保存一定的用户信息，如sessionid从而达到认证用户的目的。由于Cookie本身是针对某一域名而产生的，所以在发送Cookie过程中必须提供正确域名的sessionid才行。</p>
 <p>具体流程如下：</p>
-<p><img src="/2021/07/23/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
+<p><img src="/2021/09/26/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
 <p>Cookie鉴权常用Single Sign On场景，例如，于对于企业中的不同子域名的验证，可以通过结合SAML, CAS等协议完成。对于不同网络更加广泛的第三方验证则有OIDC协议支持。</p>
 <h1 id="Token-验证-JWT"><a href="#Token-验证-JWT" class="headerlink" title="Token 验证(JWT)"></a>Token 验证(JWT)</h1><p>Token验证方式和Seesion验证方式很类似，不同的是Token本身包含一些有意义的信息：用户名、密码、过期时间等。Token本身由服务器签发，客户端请求的发送中需要包含 Authorization : JWT “{jwt token}”，服务器提取token信息通过相同的算法验证即可。相较于Session验证方式节约了分布式系统中服务器存储sessionid和用户信息的开销，只需要服务器拥有相同的密钥即可。</p>
 <p>具体流程如下:</p>
-<p><img src="/2021/07/23/Authentication/TokenAuth.png" alt="tokenAuth"></p>
+<p><img src="/2021/09/26/Authentication/TokenAuth.png" alt="tokenAuth"></p>
 <p>JWT(json-web-token)算法细节：</p>
 <p>JWT由三部分”{header}.{payload}.{signature}’,两种算法生成，公式如下：<br>    signature = sha256(base64(header)+’.’+base64(payload),{服务器密钥})</p>
 <ol>
@@ -530,7 +530,7 @@
 <li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。通过OP提供。</li>
 </ul>
 <p>认证流程如下：</p>
-<p><img src="/2021/07/23/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
+<p><img src="/2021/09/26/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
 <p>其中，UserIndo EndPoint是一个受OAuth2保护的资源。在RP得到Access Token后可以请求此资源，然后获得一组EU相关的Claims，这些信息可以说是ID Token的扩展，比如如果你觉得ID Token中只需包含EU的唯一标识sub即可（避免ID Token过于庞大），然后通过此接口获取完整的EU的信息。此资源必须部署在TLS之上。</p>
 <p>OIDC的支持的授权流程如下：</p>
 <ol>
@@ -560,18 +560,18 @@
 <li>客户端应用拿着授权码code，和clientId，clientSecret，去换取access_token</li>
 <li>返回access_token给客户端应用 </li>
 </ol>
-<p><img src="/2021/07/23/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
+<p><img src="/2021/09/26/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
 <p>这种场景下，用户名、密码、客户端应用信息，都没有直接暴露在浏览器，是web下是最安全的。</p>
 <h3 id="简化模式"><a href="#简化模式" class="headerlink" title="简化模式"></a>简化模式</h3><p>授权码模式的简化，用户认证成功后，直接将token返回给浏览器。因为某些应用没有前端服务器，只有一堆静态的html（很少见），这种模式，一般不用。</p>
-<p><img src="/2021/07/23/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
+<p><img src="/2021/09/26/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
 <h3 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h3><p>适用场景：手机app ，这个客户端应用是你完全可以信任的，你的app就是自己公司开发的。但是这个模式并不适合在web场景下用，在web下，用户名密码并不是直接填给自己写的应用的，而是填在浏览器呈现的一个页面上的，这个浏览器是客户端应用的一个代理，浏览器是没法保证安全性的。</p>
-<p><img src="/2021/07/23/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
+<p><img src="/2021/09/26/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
 <h3 id="客户端证书模式"><a href="#客户端证书模式" class="headerlink" title="客户端证书模式"></a>客户端证书模式</h3><p>客户端应用直接发 clientId、clientSecret给认证服务器，发的令牌是针对客户端应用的，不是针对用户的。跟没授权一样，令牌不能识别用户身份。</p>
-<p><img src="/2021/07/23/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
+<p><img src="/2021/09/26/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
 <h1 id="Authentication实战"><a href="#Authentication实战" class="headerlink" title="Authentication实战"></a>Authentication实战</h1><p>本章将着重描述如何在java springboot应用中实现相应的认证流程。springboot提供了一站式应用的开发模式，但是认证流程是需要spring security，同时具体的认证核心模块需要spring securty keberos或者spring security oauth组件支持。下文将主要介绍如何利用这两个模块实现具体的基于siteminder/spnego/oauth协议的认证流程。</p>
 <h2 id="siteminder-sso-preauth"><a href="#siteminder-sso-preauth" class="headerlink" title="siteminder sso + preauth"></a>siteminder sso + preauth</h2><p>Siteminder是企业级认证产品，它提供了一站式认证中间件，从应用开发者的角度来看，就是采用了外部认证系统，应用不需要重新进行认证而是可以直接从siteminder处理过的http request header中提取SM_USER中拿到userprincipal()。因此从spring securty框架的角度之需要直接读取认证后的信息，而不需要再对request进行认证验证。这通常是一种企业内网用户认证采用的sso机制，因为用户之需要进行简单认证后就能得到对多种内部webapp的访问toekn，而且不需要进行细粒度的鉴权的场景适合大部分内部应用，但是，因为外部网站可容易会被假的header所欺骗，安全性较差而不会采用这种方式进行验证。</p>
 <h2 id="spnego-auth"><a href="#spnego-auth" class="headerlink" title="spnego auth"></a>spnego auth</h2><p>SPNEGO是微软设计的一种企业级认证协议，底层支持多种token协议，因此是应用proid常用的一种方式，因为应用的id会常常跑在不同的window/linux环境，而spnego能够支持多种密钥认证从而对跨系统认证能有很好的支持，这种认证方式需要用户自己执行认证检查，所以需要spring-security-keberos模块的相关auth provider进行验证。</p>
-<h2 id="oidc-oauth2-pinfederate-sso"><a href="#oidc-oauth2-pinfederate-sso" class="headerlink" title="oidc oauth2 + pinfederate sso"></a>oidc oauth2 + pinfederate sso</h2><p>oauth标准的实现一般是用oidc协议，spring security oauth2拥有对oauth2标准的鉴权模型的实现，并且可以通过适当的配置完成oidc用户验证。oauth单独并不能完成验证鉴权功能，需要部署一个oauth provider例如云服务商azure AD等，企业级内部可以自己部署pinfederate sso服务器完成auth信息提供功能。</p>
+<h2 id="oidc-oauth2-ping-federate"><a href="#oidc-oauth2-ping-federate" class="headerlink" title="oidc oauth2 + ping federate"></a>oidc oauth2 + ping federate</h2><p>oauth标准的实现一般是用oidc协议，spring security oauth2拥有对oauth2标准的鉴权模型的实现，并且可以通过适当的配置完成oidc用户验证。oauth单独并不能完成验证鉴权功能，需要部署一个oauth provider例如云服务商azure AD等，企业级内部可以自己部署ping federate服务器完成auth信息提供功能，并且向下兼容sso（即open Id）功能。</p>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
       
     </div>
@@ -612,8 +612,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/07/23/code-server-the-VS-code-online/" rel="next" title="code-server the VS code online">
-                <i class="fa fa-chevron-left"></i> code-server the VS code online
+              <a href="/2021/09/16/20210122-工作未来三年规划/" rel="next" title="20210122 工作未来三年规划">
+                <i class="fa fa-chevron-left"></i> 20210122 工作未来三年规划
               </a>
             
           </div>
@@ -621,10 +621,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/09/16/Load-Balancing/" rel="prev" title="Load Balancing">
-                Load Balancing <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -811,7 +807,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication服务鉴权机制"><span class="nav-number">1.</span> <span class="nav-text">Authentication服务鉴权机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-Basic-Authentication"><span class="nav-number">2.</span> <span class="nav-text">HTTP Basic Authentication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session-cookie鉴权"><span class="nav-number">3.</span> <span class="nav-text">session-cookie鉴权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Token-验证-JWT"><span class="nav-number">4.</span> <span class="nav-text">Token 验证(JWT)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth2-OIDC认证"><span class="nav-number">5.</span> <span class="nav-text">OAuth2/OIDC认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OAuth2授权模型"><span class="nav-number">5.1.</span> <span class="nav-text">OAuth2授权模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#授权码模式-最为常见"><span class="nav-number">5.1.1.</span> <span class="nav-text">授权码模式(最为常见)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简化模式"><span class="nav-number">5.1.2.</span> <span class="nav-text">简化模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码模式"><span class="nav-number">5.1.3.</span> <span class="nav-text">密码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端证书模式"><span class="nav-number">5.1.4.</span> <span class="nav-text">客户端证书模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication实战"><span class="nav-number">6.</span> <span class="nav-text">Authentication实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#siteminder-sso-preauth"><span class="nav-number">6.1.</span> <span class="nav-text">siteminder sso + preauth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spnego-auth"><span class="nav-number">6.2.</span> <span class="nav-text">spnego auth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oidc-oauth2-pinfederate-sso"><span class="nav-number">6.3.</span> <span class="nav-text">oidc oauth2 + pinfederate sso</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication服务鉴权机制"><span class="nav-number">1.</span> <span class="nav-text">Authentication服务鉴权机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-Basic-Authentication"><span class="nav-number">2.</span> <span class="nav-text">HTTP Basic Authentication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session-cookie鉴权"><span class="nav-number">3.</span> <span class="nav-text">session-cookie鉴权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Token-验证-JWT"><span class="nav-number">4.</span> <span class="nav-text">Token 验证(JWT)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth2-OIDC认证"><span class="nav-number">5.</span> <span class="nav-text">OAuth2/OIDC认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OAuth2授权模型"><span class="nav-number">5.1.</span> <span class="nav-text">OAuth2授权模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#授权码模式-最为常见"><span class="nav-number">5.1.1.</span> <span class="nav-text">授权码模式(最为常见)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简化模式"><span class="nav-number">5.1.2.</span> <span class="nav-text">简化模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码模式"><span class="nav-number">5.1.3.</span> <span class="nav-text">密码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端证书模式"><span class="nav-number">5.1.4.</span> <span class="nav-text">客户端证书模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication实战"><span class="nav-number">6.</span> <span class="nav-text">Authentication实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#siteminder-sso-preauth"><span class="nav-number">6.1.</span> <span class="nav-text">siteminder sso + preauth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spnego-auth"><span class="nav-number">6.2.</span> <span class="nav-text">spnego auth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oidc-oauth2-ping-federate"><span class="nav-number">6.3.</span> <span class="nav-text">oidc oauth2 + ping federate</span></a></li></ol></li></ol></div>
             
 
           </div>

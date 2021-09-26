@@ -360,6 +360,260 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2021/09/26/Authentication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/09/26/Authentication/" class="post-title-link" itemprop="https://sunnyhll.github.io/index.html">Authentication</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-09-26 12:04:11" itemprop="dateCreated datePublished" datetime="2021-09-26T12:04:11+08:00">2021-09-26</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Authentication服务鉴权机制"><a href="#Authentication服务鉴权机制" class="headerlink" title="Authentication服务鉴权机制"></a>Authentication服务鉴权机制</h1><p>用户在访问系统或者服务时，服务器端需要验证用户是否拥有访问的权力，这个过程称为鉴权。在服务器-客户端架构的软件系统中，当一个没有经过鉴权的用户登录时，服务器可能会返回鉴权请求。鉴权是一种客户端和服务器协同认证的方式，有多种方式可以实现：</p>
+<ul>
+<li>HTTP Basic Authentication</li>
+<li>session-cookie</li>
+<li>Token 验证(JWT)</li>
+<li>OAuth(开放授权)</li>
+</ul>
+<h1 id="HTTP-Basic-Authentication"><a href="#HTTP-Basic-Authentication" class="headerlink" title="HTTP Basic Authentication"></a>HTTP Basic Authentication</h1><p>HTTP认证时一种无状态的认证模式，因此用户在提供相关凭据的请求中能够得到认证用户的访问，而服务器本身在接下来的请求中并不能持续保持登录状态。</p>
+<p>HTTP基本认证的具体流程如下:</p>
+<p>在你访问一个需要HTTP Basic Authentication的URL的时候，如果你没有提供用户名和密码，服务器就会返回401，返回Header中会包含类似”WWW-Authenticate: Basic realm=”test””信息。如果你直接在浏览器中打开，浏览器会弹出对话框提示你输入用户名和密码。</p>
+<p>要在发送请求的时候添加HTTP Basic Authentication认证信息到请求中，有两种方法:</p>
+<ol>
+<li>在请求头中添加Authorization信息：Authorization: “Basic {用户名:密码}的base64加密字符串”。</li>
+<li>在url中添加用户名和密码。</li>
+</ol>
+<p>其中，鉴权机制中的身份验证并非一定要依赖Basic方式的用户名密码作为凭据，可以通过如下方式：</p>
+<ol>
+<li><p>“WWW-Authenticate: Negotiate” SPNEGO协议,支持Kerberos, NTLM点对点认证方式完成。在协商过程中：</p>
+<ul>
+<li>可以请求 Authorization: Negotiate {kerberos票据}进行Kerberos验证</li>
+<li>或者也能读取返回头中的 Authorization: Negotiate NTLMSSP{八字节质询码} ，并在请求头部中加入 Authorization: Negotiate NTLM{加密的质询码和明码用户名}</li>
+</ul>
+</li>
+<li><p>“WWW-Authenticate: Digest realm=”test”,qop=”auth”,nonce=”{md5加密时间},opaque=”{不透明字符串}”摘要认证协议，能避免明文传输数据。</p>
+<ul>
+<li>在请求中需要加入 Authoriztion: Digest username=”guest”,realm=”test”,nonce=”{同上},qop=”auth”,nc=”00000001”,response=”{通过md5加密的user paswd httpmethod uri等信息}”,cnonce=”{客户端提供的非明文字符串}”,uri=”{uri信息}”</li>
+<li>服务器需要检查时间在允许范围内，而且response匹配本地生成值。使用MD5算法的优势在于可以很快正向哈希，而无法短时间内逆向哈希得出用户密码等信息。</li>
+</ul>
+</li>
+</ol>
+<h1 id="session-cookie鉴权"><a href="#session-cookie鉴权" class="headerlink" title="session-cookie鉴权"></a>session-cookie鉴权</h1><p>Session是HTTP协议中为了支持有状态的通信而发明的会话机制，本质上是通过服务器为用户建立sessionid从而保证用户的状态信息能够在服务器端保存。用户不需要反复进行登录认证就能保持会话。</p>
+<p>而Cookie则是一种特殊的HTTP头部，能够在HTTP通信中保存一定的用户信息，如sessionid从而达到认证用户的目的。由于Cookie本身是针对某一域名而产生的，所以在发送Cookie过程中必须提供正确域名的sessionid才行。</p>
+<p>具体流程如下：</p>
+<p><img src="/2021/09/26/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
+<p>Cookie鉴权常用Single Sign On场景，例如，于对于企业中的不同子域名的验证，可以通过结合SAML, CAS等协议完成。对于不同网络更加广泛的第三方验证则有OIDC协议支持。</p>
+<h1 id="Token-验证-JWT"><a href="#Token-验证-JWT" class="headerlink" title="Token 验证(JWT)"></a>Token 验证(JWT)</h1><p>Token验证方式和Seesion验证方式很类似，不同的是Token本身包含一些有意义的信息：用户名、密码、过期时间等。Token本身由服务器签发，客户端请求的发送中需要包含 Authorization : JWT “{jwt token}”，服务器提取token信息通过相同的算法验证即可。相较于Session验证方式节约了分布式系统中服务器存储sessionid和用户信息的开销，只需要服务器拥有相同的密钥即可。</p>
+<p>具体流程如下:</p>
+<p><img src="/2021/09/26/Authentication/TokenAuth.png" alt="tokenAuth"></p>
+<p>JWT(json-web-token)算法细节：</p>
+<p>JWT由三部分”{header}.{payload}.{signature}’,两种算法生成，公式如下：<br>    signature = sha256(base64(header)+’.’+base64(payload),{服务器密钥})</p>
+<ol>
+<li>header包含算法和类别信息, </li>
+<li>payload为加密部分，包含公有声明和私有声明，公有声明为约定的key，私有为公司定制key，</li>
+<li>signature，算法签名。</li>
+<li>sha256为header中写的加密算法，基于服务器密钥生成不同的加密签名,具有不可逆性</li>
+<li>base64为编码算法，可逆运算</li>
+</ol>
+<h1 id="OAuth2-OIDC认证"><a href="#OAuth2-OIDC认证" class="headerlink" title="OAuth2/OIDC认证"></a>OAuth2/OIDC认证</h1><p>OIDC 即Open ID Connect, 是一种基于OAuth2授权流程，并且扩展了身份认证层的一种新的认证机制。</p>
+<p>OIDC认证模型主要包含如下四个角色和一个令牌（完整术语参见<a href="http://openid.net/specs/openid-connect-core-1_0.html#Terminology）：" target="_blank" rel="noopener">http://openid.net/specs/openid-connect-core-1_0.html#Terminology）：</a></p>
+<ul>
+<li>EU用户：End User：一个人类用户。</li>
+<li>RP客户端：Relying Party ,用来代指OAuth2中的受信任的客户端，身份认证和授权信息的消费方；</li>
+<li>OP认证服务器：OpenID Provider，有能力提供EU认证的服务（比如OAuth2中的授权服务），用来为RP提供EU的ID Token身份认证信息和Access Token访问令牌；</li>
+<li>UE用户资源服务器：UserInfo Endpoint用户信息接口（受OAuth2保护），当RP使用Access Token访问时，返回授权用户的信息，此接口必须使用HTTPS。</li>
+<li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。通过OP提供。</li>
+</ul>
+<p>认证流程如下：</p>
+<p><img src="/2021/09/26/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
+<p>其中，UserIndo EndPoint是一个受OAuth2保护的资源。在RP得到Access Token后可以请求此资源，然后获得一组EU相关的Claims，这些信息可以说是ID Token的扩展，比如如果你觉得ID Token中只需包含EU的唯一标识sub即可（避免ID Token过于庞大），然后通过此接口获取完整的EU的信息。此资源必须部署在TLS之上。</p>
+<p>OIDC的支持的授权流程如下：</p>
+<ol>
+<li>Authorization Code(授权码模式)：使用OAuth2的授权码来换取Id Token和Access Token。</li>
+<li>Implicit (简化模式)：使用OAuth2的Implicit流程获取Id Token和Access Token。</li>
+<li>Hybrid(混合模式)：混合Authorization Code +Implicit。</li>
+</ol>
+<h2 id="OAuth2授权模型"><a href="#OAuth2授权模型" class="headerlink" title="OAuth2授权模型"></a>OAuth2授权模型</h2><p>OAuth2的授权模型时为了已登录用户通过第三方应用访问资源服务器进行授权的流程，授权模型和OIDC相似，包含如下四个角色:</p>
+<ul>
+<li>资源拥有者（User） - 指应用的用户，比如github的一个账户拥有者</li>
+<li>认证服务器 （Authorization Server） - 提供登录认证接口的服务器，比如：github等</li>
+<li>资源服务器 （Resources Server） - 提供资源接口及服务的服务器，通常和认证服务器是同    一个应用。</li>
+<li>第三方客户端（Client） - 第三方应用，希望使用资源服务器提供的资源，比如你的一个支持通过github账户登录的应用</li>
+<li>服务提供商(Provider): 认证服务和资源服务归属于一个机构，该机构就是服务提供商，比如github公司</li>
+</ul>
+<p>OAuth2具有四种授权模式，下文将分述这四种模式具体流程：</p>
+<ul>
+<li>授权码模式（authorization code）</li>
+<li>简化模式（implicit）</li>
+<li>密码模式（resource owner password credentials）</li>
+<li>客户端模式（client credentials）</li>
+</ul>
+<h3 id="授权码模式-最为常见"><a href="#授权码模式-最为常见" class="headerlink" title="授权码模式(最为常见)"></a>授权码模式(最为常见)</h3><ol>
+<li>用户访问客户端应用</li>
+<li>引导用户到认证服务器进行登录（此步骤需要携带客户端应用的clientId，可以是html直接转发认证服务器），用户输入用户名、密码</li>
+<li>认证成功后，认证服务器向客户端应用发一个授权码code</li>
+<li>客户端应用拿着授权码code，和clientId，clientSecret，去换取access_token</li>
+<li>返回access_token给客户端应用 </li>
+</ol>
+<p><img src="/2021/09/26/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
+<p>这种场景下，用户名、密码、客户端应用信息，都没有直接暴露在浏览器，是web下是最安全的。</p>
+<h3 id="简化模式"><a href="#简化模式" class="headerlink" title="简化模式"></a>简化模式</h3><p>授权码模式的简化，用户认证成功后，直接将token返回给浏览器。因为某些应用没有前端服务器，只有一堆静态的html（很少见），这种模式，一般不用。</p>
+<p><img src="/2021/09/26/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
+<h3 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h3><p>适用场景：手机app ，这个客户端应用是你完全可以信任的，你的app就是自己公司开发的。但是这个模式并不适合在web场景下用，在web下，用户名密码并不是直接填给自己写的应用的，而是填在浏览器呈现的一个页面上的，这个浏览器是客户端应用的一个代理，浏览器是没法保证安全性的。</p>
+<p><img src="/2021/09/26/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
+<h3 id="客户端证书模式"><a href="#客户端证书模式" class="headerlink" title="客户端证书模式"></a>客户端证书模式</h3><p>客户端应用直接发 clientId、clientSecret给认证服务器，发的令牌是针对客户端应用的，不是针对用户的。跟没授权一样，令牌不能识别用户身份。</p>
+<p><img src="/2021/09/26/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
+<h1 id="Authentication实战"><a href="#Authentication实战" class="headerlink" title="Authentication实战"></a>Authentication实战</h1><p>本章将着重描述如何在java springboot应用中实现相应的认证流程。springboot提供了一站式应用的开发模式，但是认证流程是需要spring security，同时具体的认证核心模块需要spring securty keberos或者spring security oauth组件支持。下文将主要介绍如何利用这两个模块实现具体的基于siteminder/spnego/oauth协议的认证流程。</p>
+<h2 id="siteminder-sso-preauth"><a href="#siteminder-sso-preauth" class="headerlink" title="siteminder sso + preauth"></a>siteminder sso + preauth</h2><p>Siteminder是企业级认证产品，它提供了一站式认证中间件，从应用开发者的角度来看，就是采用了外部认证系统，应用不需要重新进行认证而是可以直接从siteminder处理过的http request header中提取SM_USER中拿到userprincipal()。因此从spring securty框架的角度之需要直接读取认证后的信息，而不需要再对request进行认证验证。这通常是一种企业内网用户认证采用的sso机制，因为用户之需要进行简单认证后就能得到对多种内部webapp的访问toekn，而且不需要进行细粒度的鉴权的场景适合大部分内部应用，但是，因为外部网站可容易会被假的header所欺骗，安全性较差而不会采用这种方式进行验证。</p>
+<h2 id="spnego-auth"><a href="#spnego-auth" class="headerlink" title="spnego auth"></a>spnego auth</h2><p>SPNEGO是微软设计的一种企业级认证协议，底层支持多种token协议，因此是应用proid常用的一种方式，因为应用的id会常常跑在不同的window/linux环境，而spnego能够支持多种密钥认证从而对跨系统认证能有很好的支持，这种认证方式需要用户自己执行认证检查，所以需要spring-security-keberos模块的相关auth provider进行验证。</p>
+<h2 id="oidc-oauth2-ping-federate"><a href="#oidc-oauth2-ping-federate" class="headerlink" title="oidc oauth2 + ping federate"></a>oidc oauth2 + ping federate</h2><p>oauth标准的实现一般是用oidc协议，spring security oauth2拥有对oauth2标准的鉴权模型的实现，并且可以通过适当的配置完成oidc用户验证。oauth单独并不能完成验证鉴权功能，需要部署一个oauth provider例如云服务商azure AD等，企业级内部可以自己部署ping federate服务器完成auth信息提供功能，并且向下兼容sso（即open Id）功能。</p>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2021/09/16/20210122-工作未来三年规划/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -408,6 +662,22 @@
               <time title="创建时间：2021-09-16 16:08:46" itemprop="dateCreated datePublished" datetime="2021-09-16T16:08:46+08:00">2021-09-16</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-09-26 11:59:17" itemprop="dateModified" datetime="2021-09-26T11:59:17+08:00">2021-09-26</time>
+              
             
           </span>
 
@@ -711,9 +981,13 @@
                 
               
 
-              <time title="创建时间：2021-09-16 16:01:36" itemprop="dateCreated datePublished" datetime="2021-09-16T16:01:36+08:00">2021-09-16</time>
+              <time title="创建时间：2021-09-16 16:01:36 / 修改时间：17:21:58" itemprop="dateCreated datePublished" datetime="2021-09-16T16:01:36+08:00">2021-09-16</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -1606,260 +1880,6 @@
 <h2 id="客户端负载均衡"><a href="#客户端负载均衡" class="headerlink" title="客户端负载均衡"></a>客户端负载均衡</h2><h3 id="Ribbon客户端负载均衡"><a href="#Ribbon客户端负载均衡" class="headerlink" title="Ribbon客户端负载均衡"></a>Ribbon客户端负载均衡</h3><p><a href="https://www.cnblogs.com/zhenghongxin/p/10812137.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhenghongxin/p/10812137.html</a></p>
 <h2 id="负载均衡算法"><a href="#负载均衡算法" class="headerlink" title="负载均衡算法"></a>负载均衡算法</h2><p><a href="https://www.jianshu.com/p/253790f4aa20" target="_blank" rel="noopener">https://www.jianshu.com/p/253790f4aa20</a></p>
 <p><a href="https://blog.csdn.net/bjgaocp/article/details/88381859" target="_blank" rel="noopener">https://blog.csdn.net/bjgaocp/article/details/88381859</a></p>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2021/07/23/Authentication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/07/23/Authentication/" class="post-title-link" itemprop="https://sunnyhll.github.io/index.html">Authentication</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2021-07-23 11:37:53" itemprop="dateCreated datePublished" datetime="2021-07-23T11:37:53+08:00">2021-07-23</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Authentication服务鉴权机制"><a href="#Authentication服务鉴权机制" class="headerlink" title="Authentication服务鉴权机制"></a>Authentication服务鉴权机制</h1><p>用户在访问系统或者服务时，服务器端需要验证用户是否拥有访问的权力，这个过程称为鉴权。在服务器-客户端架构的软件系统中，当一个没有经过鉴权的用户登录时，服务器可能会返回鉴权请求。鉴权是一种客户端和服务器协同认证的方式，有多种方式可以实现：</p>
-<ul>
-<li>HTTP Basic Authentication</li>
-<li>session-cookie</li>
-<li>Token 验证(JWT)</li>
-<li>OAuth(开放授权)</li>
-</ul>
-<h1 id="HTTP-Basic-Authentication"><a href="#HTTP-Basic-Authentication" class="headerlink" title="HTTP Basic Authentication"></a>HTTP Basic Authentication</h1><p>HTTP认证时一种无状态的认证模式，因此用户在提供相关凭据的请求中能够得到认证用户的访问，而服务器本身在接下来的请求中并不能持续保持登录状态。</p>
-<p>HTTP基本认证的具体流程如下:</p>
-<p>在你访问一个需要HTTP Basic Authentication的URL的时候，如果你没有提供用户名和密码，服务器就会返回401，返回Header中会包含类似”WWW-Authenticate: Basic realm=”test””信息。如果你直接在浏览器中打开，浏览器会弹出对话框提示你输入用户名和密码。</p>
-<p>要在发送请求的时候添加HTTP Basic Authentication认证信息到请求中，有两种方法:</p>
-<ol>
-<li>在请求头中添加Authorization信息：Authorization: “Basic {用户名:密码}的base64加密字符串”。</li>
-<li>在url中添加用户名和密码。</li>
-</ol>
-<p>其中，鉴权机制中的身份验证并非一定要依赖Basic方式的用户名密码作为凭据，可以通过如下方式：</p>
-<ol>
-<li><p>“WWW-Authenticate: Negotiate” SPNEGO协议,支持Kerberos, NTLM点对点认证方式完成。在协商过程中：</p>
-<ul>
-<li>可以请求 Authorization: Negotiate {kerberos票据}进行Kerberos验证</li>
-<li>或者也能读取返回头中的 Authorization: Negotiate NTLMSSP{八字节质询码} ，并在请求头部中加入 Authorization: Negotiate NTLM{加密的质询码和明码用户名}</li>
-</ul>
-</li>
-<li><p>“WWW-Authenticate: Digest realm=”test”,qop=”auth”,nonce=”{md5加密时间},opaque=”{不透明字符串}”摘要认证协议，能避免明文传输数据。</p>
-<ul>
-<li>在请求中需要加入 Authoriztion: Digest username=”guest”,realm=”test”,nonce=”{同上},qop=”auth”,nc=”00000001”,response=”{通过md5加密的user paswd httpmethod uri等信息}”,cnonce=”{客户端提供的非明文字符串}”,uri=”{uri信息}”</li>
-<li>服务器需要检查时间在允许范围内，而且response匹配本地生成值。使用MD5算法的优势在于可以很快正向哈希，而无法短时间内逆向哈希得出用户密码等信息。</li>
-</ul>
-</li>
-</ol>
-<h1 id="session-cookie鉴权"><a href="#session-cookie鉴权" class="headerlink" title="session-cookie鉴权"></a>session-cookie鉴权</h1><p>Session是HTTP协议中为了支持有状态的通信而发明的会话机制，本质上是通过服务器为用户建立sessionid从而保证用户的状态信息能够在服务器端保存。用户不需要反复进行登录认证就能保持会话。</p>
-<p>而Cookie则是一种特殊的HTTP头部，能够在HTTP通信中保存一定的用户信息，如sessionid从而达到认证用户的目的。由于Cookie本身是针对某一域名而产生的，所以在发送Cookie过程中必须提供正确域名的sessionid才行。</p>
-<p>具体流程如下：</p>
-<p><img src="/2021/07/23/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
-<p>Cookie鉴权常用Single Sign On场景，例如，于对于企业中的不同子域名的验证，可以通过结合SAML, CAS等协议完成。对于不同网络更加广泛的第三方验证则有OIDC协议支持。</p>
-<h1 id="Token-验证-JWT"><a href="#Token-验证-JWT" class="headerlink" title="Token 验证(JWT)"></a>Token 验证(JWT)</h1><p>Token验证方式和Seesion验证方式很类似，不同的是Token本身包含一些有意义的信息：用户名、密码、过期时间等。Token本身由服务器签发，客户端请求的发送中需要包含 Authorization : JWT “{jwt token}”，服务器提取token信息通过相同的算法验证即可。相较于Session验证方式节约了分布式系统中服务器存储sessionid和用户信息的开销，只需要服务器拥有相同的密钥即可。</p>
-<p>具体流程如下:</p>
-<p><img src="/2021/07/23/Authentication/TokenAuth.png" alt="tokenAuth"></p>
-<p>JWT(json-web-token)算法细节：</p>
-<p>JWT由三部分”{header}.{payload}.{signature}’,两种算法生成，公式如下：<br>    signature = sha256(base64(header)+’.’+base64(payload),{服务器密钥})</p>
-<ol>
-<li>header包含算法和类别信息, </li>
-<li>payload为加密部分，包含公有声明和私有声明，公有声明为约定的key，私有为公司定制key，</li>
-<li>signature，算法签名。</li>
-<li>sha256为header中写的加密算法，基于服务器密钥生成不同的加密签名,具有不可逆性</li>
-<li>base64为编码算法，可逆运算</li>
-</ol>
-<h1 id="OAuth2-OIDC认证"><a href="#OAuth2-OIDC认证" class="headerlink" title="OAuth2/OIDC认证"></a>OAuth2/OIDC认证</h1><p>OIDC 即Open ID Connect, 是一种基于OAuth2授权流程，并且扩展了身份认证层的一种新的认证机制。</p>
-<p>OIDC认证模型主要包含如下四个角色和一个令牌（完整术语参见<a href="http://openid.net/specs/openid-connect-core-1_0.html#Terminology）：" target="_blank" rel="noopener">http://openid.net/specs/openid-connect-core-1_0.html#Terminology）：</a></p>
-<ul>
-<li>EU用户：End User：一个人类用户。</li>
-<li>RP客户端：Relying Party ,用来代指OAuth2中的受信任的客户端，身份认证和授权信息的消费方；</li>
-<li>OP认证服务器：OpenID Provider，有能力提供EU认证的服务（比如OAuth2中的授权服务），用来为RP提供EU的ID Token身份认证信息和Access Token访问令牌；</li>
-<li>UE用户资源服务器：UserInfo Endpoint用户信息接口（受OAuth2保护），当RP使用Access Token访问时，返回授权用户的信息，此接口必须使用HTTPS。</li>
-<li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。通过OP提供。</li>
-</ul>
-<p>认证流程如下：</p>
-<p><img src="/2021/07/23/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
-<p>其中，UserIndo EndPoint是一个受OAuth2保护的资源。在RP得到Access Token后可以请求此资源，然后获得一组EU相关的Claims，这些信息可以说是ID Token的扩展，比如如果你觉得ID Token中只需包含EU的唯一标识sub即可（避免ID Token过于庞大），然后通过此接口获取完整的EU的信息。此资源必须部署在TLS之上。</p>
-<p>OIDC的支持的授权流程如下：</p>
-<ol>
-<li>Authorization Code(授权码模式)：使用OAuth2的授权码来换取Id Token和Access Token。</li>
-<li>Implicit (简化模式)：使用OAuth2的Implicit流程获取Id Token和Access Token。</li>
-<li>Hybrid(混合模式)：混合Authorization Code +Implicit。</li>
-</ol>
-<h2 id="OAuth2授权模型"><a href="#OAuth2授权模型" class="headerlink" title="OAuth2授权模型"></a>OAuth2授权模型</h2><p>OAuth2的授权模型时为了已登录用户通过第三方应用访问资源服务器进行授权的流程，授权模型和OIDC相似，包含如下四个角色:</p>
-<ul>
-<li>资源拥有者（User） - 指应用的用户，比如github的一个账户拥有者</li>
-<li>认证服务器 （Authorization Server） - 提供登录认证接口的服务器，比如：github等</li>
-<li>资源服务器 （Resources Server） - 提供资源接口及服务的服务器，通常和认证服务器是同    一个应用。</li>
-<li>第三方客户端（Client） - 第三方应用，希望使用资源服务器提供的资源，比如你的一个支持通过github账户登录的应用</li>
-<li>服务提供商(Provider): 认证服务和资源服务归属于一个机构，该机构就是服务提供商，比如github公司</li>
-</ul>
-<p>OAuth2具有四种授权模式，下文将分述这四种模式具体流程：</p>
-<ul>
-<li>授权码模式（authorization code）</li>
-<li>简化模式（implicit）</li>
-<li>密码模式（resource owner password credentials）</li>
-<li>客户端模式（client credentials）</li>
-</ul>
-<h3 id="授权码模式-最为常见"><a href="#授权码模式-最为常见" class="headerlink" title="授权码模式(最为常见)"></a>授权码模式(最为常见)</h3><ol>
-<li>用户访问客户端应用</li>
-<li>引导用户到认证服务器进行登录（此步骤需要携带客户端应用的clientId，可以是html直接转发认证服务器），用户输入用户名、密码</li>
-<li>认证成功后，认证服务器向客户端应用发一个授权码code</li>
-<li>客户端应用拿着授权码code，和clientId，clientSecret，去换取access_token</li>
-<li>返回access_token给客户端应用 </li>
-</ol>
-<p><img src="/2021/07/23/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
-<p>这种场景下，用户名、密码、客户端应用信息，都没有直接暴露在浏览器，是web下是最安全的。</p>
-<h3 id="简化模式"><a href="#简化模式" class="headerlink" title="简化模式"></a>简化模式</h3><p>授权码模式的简化，用户认证成功后，直接将token返回给浏览器。因为某些应用没有前端服务器，只有一堆静态的html（很少见），这种模式，一般不用。</p>
-<p><img src="/2021/07/23/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
-<h3 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h3><p>适用场景：手机app ，这个客户端应用是你完全可以信任的，你的app就是自己公司开发的。但是这个模式并不适合在web场景下用，在web下，用户名密码并不是直接填给自己写的应用的，而是填在浏览器呈现的一个页面上的，这个浏览器是客户端应用的一个代理，浏览器是没法保证安全性的。</p>
-<p><img src="/2021/07/23/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
-<h3 id="客户端证书模式"><a href="#客户端证书模式" class="headerlink" title="客户端证书模式"></a>客户端证书模式</h3><p>客户端应用直接发 clientId、clientSecret给认证服务器，发的令牌是针对客户端应用的，不是针对用户的。跟没授权一样，令牌不能识别用户身份。</p>
-<p><img src="/2021/07/23/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
-<h1 id="Authentication实战"><a href="#Authentication实战" class="headerlink" title="Authentication实战"></a>Authentication实战</h1><p>本章将着重描述如何在java springboot应用中实现相应的认证流程。springboot提供了一站式应用的开发模式，但是认证流程是需要spring security，同时具体的认证核心模块需要spring securty keberos或者spring security oauth组件支持。下文将主要介绍如何利用这两个模块实现具体的基于siteminder/spnego/oauth协议的认证流程。</p>
-<h2 id="siteminder-sso-preauth"><a href="#siteminder-sso-preauth" class="headerlink" title="siteminder sso + preauth"></a>siteminder sso + preauth</h2><p>Siteminder是企业级认证产品，它提供了一站式认证中间件，从应用开发者的角度来看，就是采用了外部认证系统，应用不需要重新进行认证而是可以直接从siteminder处理过的http request header中提取SM_USER中拿到userprincipal()。因此从spring securty框架的角度之需要直接读取认证后的信息，而不需要再对request进行认证验证。这通常是一种企业内网用户认证采用的sso机制，因为用户之需要进行简单认证后就能得到对多种内部webapp的访问toekn，而且不需要进行细粒度的鉴权的场景适合大部分内部应用，但是，因为外部网站可容易会被假的header所欺骗，安全性较差而不会采用这种方式进行验证。</p>
-<h2 id="spnego-auth"><a href="#spnego-auth" class="headerlink" title="spnego auth"></a>spnego auth</h2><p>SPNEGO是微软设计的一种企业级认证协议，底层支持多种token协议，因此是应用proid常用的一种方式，因为应用的id会常常跑在不同的window/linux环境，而spnego能够支持多种密钥认证从而对跨系统认证能有很好的支持，这种认证方式需要用户自己执行认证检查，所以需要spring-security-keberos模块的相关auth provider进行验证。</p>
-<h2 id="oidc-oauth2-pinfederate-sso"><a href="#oidc-oauth2-pinfederate-sso" class="headerlink" title="oidc oauth2 + pinfederate sso"></a>oidc oauth2 + pinfederate sso</h2><p>oauth标准的实现一般是用oidc协议，spring security oauth2拥有对oauth2标准的鉴权模型的实现，并且可以通过适当的配置完成oidc用户验证。oauth单独并不能完成验证鉴权功能，需要部署一个oauth provider例如云服务商azure AD等，企业级内部可以自己部署pinfederate sso服务器完成auth信息提供功能。</p>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
           
         
