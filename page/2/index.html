@@ -360,6 +360,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2021/07/23/code-server-the-VS-code-online/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/07/23/code-server-the-VS-code-online/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/2/index.html">code-server the VS code online</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-07-23 11:28:41 / 修改时间：11:37:53" itemprop="dateCreated datePublished" datetime="2021-07-23T11:28:41+08:00">2021-07-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Runbooks/" itemprop="url" rel="index"><span itemprop="name">Runbooks</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>code-server: the Visual Studio Code available on browsers</p>
+<p>Light weight personal blog management, available on any big screen devices that has a brower!</p>
+<p>You will have the enrionment served online:</p>
+<ul>
+<li>Git repo management</li>
+<li>Markdown editor and preview</li>
+<li>Cool extensions by vscode</li>
+<li>Oauth security gaurd by Github auth provider</li>
+<li>Availability anywhere, device free</li>
+</ul>
+<h2 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h2><ol>
+<li><p>A Win 10 pro on Azure that allow remote access</p>
+</li>
+<li><p>Install code server on Linux subsystem</p>
+</li>
+</ol>
+<p>Github: <a href="https://github.com/cdr/code-server" target="_blank" rel="noopener">https://github.com/cdr/code-server</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install</span></span><br><span class="line">curl -fsSL https://code-server.dev/install.sh | sh</span><br><span class="line"><span class="comment"># add code-server to daemon won't work for linux subsystem</span></span><br></pre></td></tr></table></figure>
+<h2 id="installation-of-externsions-of-vs-coode-on-code-server"><a href="#installation-of-externsions-of-vs-coode-on-code-server" class="headerlink" title="installation of externsions of vs coode on code server"></a>installation of externsions of vs coode on code server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code-server --install-extension bierner.markdown-mermaid</span><br></pre></td></tr></table></figure>
+<h2 id="demo-using-iPad"><a href="#demo-using-iPad" class="headerlink" title="demo using iPad"></a>demo using iPad</h2><ol>
+<li><p>start code-server with public cloud reverse proxy</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code-server --link</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>allow inbound port of code-server on azure.portal</p>
+</li>
+<li><p>access via https://$hostname-$login/cdr/co</p>
+</li>
+</ol>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2021/05/01/React-Fundamentals/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -575,7 +762,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-10-08 11:25:59" itemprop="dateModified" datetime="2021-10-08T11:25:59+08:00">2021-10-08</time>
+                <time title="修改时间：2021-11-27 07:57:10" itemprop="dateModified" datetime="2021-11-27T07:57:10+08:00">2021-11-27</time>
               
             
           </span>
@@ -900,7 +1087,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-11-26 09:33:24" itemprop="dateModified" datetime="2021-11-26T09:33:24+08:00">2021-11-26</time>
+                <time title="修改时间：2021-12-03 10:17:08" itemprop="dateModified" datetime="2021-12-03T10:17:08+08:00">2021-12-03</time>
               
             
           </span>
@@ -964,25 +1151,25 @@
 <li style="list-style: none"><input type="checkbox" checked> Q1睡眠管理完成良好</li>
 <li style="list-style: none"><input type="checkbox" checked> Q2睡眠管理完成良好</li>
 <li style="list-style: none"><input type="checkbox" checked> Q3睡眠管理完成良好</li>
-<li style="list-style: none"><input type="checkbox"> Q4睡眠保证情况下改善早期状况6：30</li>
+<li style="list-style: none"><input type="checkbox" checked> Q4睡眠保证情况下改善早期状况6：30</li>
 </ul>
 </li>
 <li style="list-style: none"><input type="checkbox"> 饮食管理,减少吃垃圾食品次数,减少鼻炎复发，健康瘦身<ul>
 <li style="list-style: none"><input type="checkbox" checked> Q2吃炸鸡、辣椒较频繁，导致上火严重鼻炎一次</li>
 <li style="list-style: none"><input type="checkbox" checked> Q3每个月炸鸡次数不超过一次，避免鼻炎复发</li>
-<li style="list-style: none"><input type="checkbox"> Q4晚上少量进食，尽量消耗堆积脂肪</li>
+<li style="list-style: none"><input type="checkbox"> Q4晚上少量进食，尽量消耗堆积脂肪 完成度 60%</li>
 </ul>
 </li>
 <li style="list-style: none"><input type="checkbox"> 时间管理，提高每日效率，平衡工作，家庭，和个人的需求<ul>
 <li style="list-style: none"><input type="checkbox" checked> 减少平均每天新浪微博时间至60分钟</li>
 <li style="list-style: none"><input type="checkbox" checked> 减少平均每天Youtube时间至60分钟</li>
 <li style="list-style: none"><input type="checkbox" checked> 减少平均每天手机娱乐时间至90分钟</li>
-<li style="list-style: none"><input type="checkbox"> 保持平均每天看书、运动时间至30分钟</li>
-<li style="list-style: none"><input type="checkbox"> 控制晚上每周平均2/5加班情况，尽量早安排运动回家</li>
+<li style="list-style: none"><input type="checkbox"> 保持平均每天看书、运动时间至30分钟 完成度30%</li>
+<li style="list-style: none"><input type="checkbox"> 控制晚上每周平均2/5加班情况，尽量早安排运动回家 </li>
 <li style="list-style: none"><input type="checkbox" checked> 工作效率提升<ul>
 <li style="list-style: none"><input type="checkbox" checked> 阅读《番茄工作法》</li>
 <li style="list-style: none"><input type="checkbox" checked> 实践执行番茄钟时间管理</li>
-<li style="list-style: none"><input type="checkbox"> 阅读《哈佛时间管理课》</li>
+<li style="list-style: none"><input type="checkbox"> 阅读《哈佛时间管理课》 完成度15%</li>
 </ul>
 </li>
 </ul>
@@ -990,10 +1177,10 @@
 <li style="list-style: none"><input type="checkbox"> 个人充电：阅读书籍10本<ul>
 <li>技术相关书籍：<ul>
 <li style="list-style: none"><input type="checkbox" checked> 阅读《Electron实战》</li>
-<li style="list-style: none"><input type="checkbox"> 阅读《快学Scala》</li>
-<li style="list-style: none"><input type="checkbox"> 阅读《Python量化交易》</li>
-<li style="list-style: none"><input type="checkbox"> 大型网站架构演进</li>
-<li style="list-style: none"><input type="checkbox"> 算法设计与分析基础</li>
+<li style="list-style: none"><input type="checkbox"> 阅读《快学Scala》 完成度 60%</li>
+<li style="list-style: none"><input type="checkbox"> 阅读《Python量化交易》 完成度 5%</li>
+<li style="list-style: none"><input type="checkbox"> 阅读《大型网站架构演进》 完成度 30%</li>
+<li style="list-style: none"><input type="checkbox"> 阅读《算法设计与分析基础》 完成度20%</li>
 </ul>
 </li>
 <li>其他书籍：<ul>
@@ -2735,308 +2922,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2020/02/22/Microservice-Architecture/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/02/22/Microservice-Architecture/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/2/index.html">Microservice Architecture</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-22 12:16:13" itemprop="dateCreated datePublished" datetime="2020-02-22T12:16:13+08:00">2020-02-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-04-04 23:09:36" itemprop="dateModified" datetime="2020-04-04T23:09:36+08:00">2020-04-04</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/架构/" itemprop="url" rel="index"><span itemprop="name">架构</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Why-Microservice"><a href="#Why-Microservice" class="headerlink" title="Why Microservice"></a>Why Microservice</h1><ul>
-<li>Heterogenious technical stack：<br>支持多重技术栈，由于HTTP协议被多种编程语言支持，微服务可以用多种语言实现。</li>
-<li>Robustness：整个App mesh网络不会因为单一的微服务的奔溃而停止工作。</li>
-<li>Extensions：可以针对单一微服务进行扩展。</li>
-<li>Simple deployment：微服务可以进行独立部署，不需要因为单一服务升级而多次部署。</li>
-<li>Efficiency：微服务小团队开发高效敏捷。</li>
-<li>More client support：多种前端客户端支持，可以重复利用同一个微服务后端网络。</li>
-<li>Migration：基于单一微服务迁移的整体升级，阻碍更小。</li>
-</ul>
-<h1 id="What-is-Microservice"><a href="#What-is-Microservice" class="headerlink" title="What is Microservice"></a>What is Microservice</h1><p>微服务就是一些协同工作的小而自治的服务。</p>
-<h1 id="How-to-architect-Microservices"><a href="#How-to-architect-Microservices" class="headerlink" title="How to architect Microservices"></a>How to architect Microservices</h1><h2 id="微服务特点"><a href="#微服务特点" class="headerlink" title="微服务特点"></a>微服务特点</h2><ul>
-<li>Loose coupling松耦合</li>
-</ul>
-<ul>
-<li>High Cohesion高内聚</li>
-</ul>
-<h2 id="上下文边界确定"><a href="#上下文边界确定" class="headerlink" title="上下文边界确定"></a>上下文边界确定</h2><p>业务或者职能的界限，往往也可以作为微服务架构中的服务边界。不同的业务只能之间的内部细节并不需要相互知晓。同一个事件，在不同的业务职能会有不同的体现，但是在内部细节上却没有相互交叉。</p>
-<h2 id="共享和隐藏模型设计"><a href="#共享和隐藏模型设计" class="headerlink" title="共享和隐藏模型设计"></a>共享和隐藏模型设计</h2><p>限界上下文的确立，能够帮助确立共享模块，对于处于两个上下文边界上需要共同的消息，可以确立一个共享模块，专门进行信息共享。同时，对于上下文内部的逻辑，也能进行对应的逻辑模块设计，从而完成对于整个上下文的设计。</p>
-<h2 id="切勿过早划分"><a href="#切勿过早划分" class="headerlink" title="切勿过早划分"></a>切勿过早划分</h2><p>对于一些过早划分的业务产品，警惕由于后期需求用例改变造成多个上下文之间的重叠。比较推荐的是先进行单体设计，不进行划分，在服务稳定之后再进行划分设计迁移，基于以有代码进行划分，比从头开始构建微服务简单得多。</p>
-<h2 id="逐步划分上下文"><a href="#逐步划分上下文" class="headerlink" title="逐步划分上下文"></a>逐步划分上下文</h2><p>不断对上下文的界限进行迭代，从复杂的共享模型中慢慢抽出简单的共享模型，将嵌套的模块逐步上升到顶层模型，对其中某些紧密关联模型进行共享。当然，模型共享的粒度取决于代码是分开维护还是集中维护，如果是集中维护也未尝不可进行嵌套模型共享。</p>
-<h1 id="微服务的集成"><a href="#微服务的集成" class="headerlink" title="微服务的集成"></a>微服务的集成</h1><p>微服务之间的通信机制，可以成为微服务的集成。微服务间的API相互调用设计需要注意一下几个方面：</p>
-<ul>
-<li><p>为用户创建接口</p>
-<p>  用户上下文会触发一定特定的流程。</p>
-</li>
-<li><p>共享数据库</p>
-<p>  数据库是多个微服务共享的，因为每个微服务都可能对同一个数据库进行修改。</p>
-</li>
-<li><p>同步与异步通信模式</p>
-<p>  两种不同的通信模式中，同步模式会阻塞线程，而异步模式是基于事件响应请求的，能提降低耦合性，提高吞吐量。</p>
-</li>
-<li><p>编排与协同</p>
-<p>  编排和协同是两种管理流程的架构风格。（同步）编排是通过一个中心执行者将每一步的步骤执行，知道获取最终的结果。（异步)协同则是以事件为机制进行执行，执行单元会订阅事件，API调用会触发一个事件，事件订阅者则会自动执行响应的流程。后者会需要监控服务，监控结果要映射到流程中，troubleshooting难度增加，这是一个难题。ATOM是一个符合REST规范的协议可以通过它提供资源feed的发布服务，客户端可以消费该信息。</p>
-</li>
-<li><p>RPC与REST</p>
-<p>  远程调用允许进行本地调用，事实上是由某个远程服务器产生。RPC会有一定的技术耦合要求。protocol buffers, Thrift是比较推荐的RPC框架。REST则是RPC的一个替代方案。通过URI对客户端与服务器进行了松耦合。</p>
-</li>
-<li><p>Json与XML</p>
-<p>  JSON与XML都是一种有效的数据序列化格式，前者更加流行XML对超媒体控制更加好。</p>
-</li>
-<li><p>API重定向</p>
-<p>  API的重定向常常发生在多个API版本共存的时候，当老版本的API准备deco时，需要绞杀者模式将旧的API拦截，选择是否替换成新版本的实现。当旧版本的访问完全消失时，再删除旧的API。</p>
-</li>
-</ul>
-<h1 id="拆分成微服务"><a href="#拆分成微服务" class="headerlink" title="拆分成微服务"></a>拆分成微服务</h1><ol>
-<li>寻找独立的上下文边界——接缝</li>
-<li>拆分数据库表格的混合加载功能，放弃直接利用数据库命令访问上下文边界间的外键，改为由代码（微服务服务API）</li>
-<li>共享的静态数据改由配置维护关联。</li>
-<li>针对共享数据，建立合适的领域进行关联，例如代码中建立客户关系，来维护财务——客户——仓库关系。</li>
-<li>共享表格，对于有大量列信息的表格，可以根据上下文边界将表格拆分成两个。</li>
-<li>自数据库开始进行代码重构。</li>
-<li>事务的边界重构，对于多表的修改操作，需要协同处理错误，或者利用分布式事务处理工具代为管理事务。</li>
-<li>拆分后的数据库在制作报表时会出现问题，因为不再能用sql语言进行表格操作。解决方法可以是主动定期导出表格合并，或者基于修改时间订阅导出行为。</li>
-</ol>
-<h1 id="部署微服务"><a href="#部署微服务" class="headerlink" title="部署微服务"></a>部署微服务</h1><ol>
-<li>准备CI系统，流水线，自动化流程</li>
-<li>Paas，Docker打包部署</li>
-</ol>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><ol>
-<li>单元测试</li>
-<li>服务测试(mock/打桩)</li>
-<li>E2E测试 —— 消费者驱动的测试</li>
-<li>上线 —— 金丝雀发布法</li>
-</ol>
-<h1 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h1><p>微服务的监控难度高于单一服务器应用。微服务包含多个服务，而每个服务的实例个数不等。关联标识可以帮忙关联同一个事件服务调用的日志，采用统一标准化的格式能够更快的辅助错误定位。</p>
-<p>监控的内容包括CPU，响应时间，以及合理的语义监控（合成事务监控）。</p>
-<h1 id="微服务安全"><a href="#微服务安全" class="headerlink" title="微服务安全"></a>微服务安全</h1><ol>
-<li>身份验证和授权</li>
-</ol>
-<p>身份雅正确认了登录者的身份。授权机制能够确定登录者可以访问和进行的操作。常见的单点登录（Single Sign-On)，企业级标准为SAML和OpenID Connect，前者基于SOAP标准，后者基于OAuth2.0. 身份提供者可以是外部系统或者内部目录服务，如LDAP/AD等。</p>
-<p>微服务的身份认证和授权部分可以依托于网关，网关可以作为认证代理，通过网管认证的所有查询和操作都可以发送到微服务集群任意一个实例中处理。微服务内部可以决定身份可以授权的操作。</p>
-<ol start="2">
-<li>服务间的身份验证和授权</li>
-</ol>
-<p>服务之间的身份验证是指微服务的各个服务之间的身份验证和授权，一般来说有如下几种方式管理:</p>
-<ul>
-<li>在微服务边界内允许一切</li>
-<li>HTTP(S)基本身份验证（HTTP明文传输认证信息，如果基于SSL认证则需要管理多台服务器之间的自签发证书。）</li>
-<li>使用SAML或OpenID Connect认证授权，可以有效的避免中间人攻击，这样每个服务也需要一个身份。</li>
-<li>客户端证书（采用客户端X.509证书，通过TLS层协议对服务器验证进行保证。)</li>
-<li>HMAC（Hash-based Message Authentication Code,请求主题和私有密钥一起被哈希处理后进行发送，服务器使用请求主题和自己私钥副本重建哈希值。如果匹配则接收，防止的中间人攻击。)</li>
-<li>JWT(JSON Web Token,JWT的原则是在服务器身份验证之后，将生成一个JSON对象并将其发送回用户。当用户与服务器通信时，客户在请求中发回JSON对象。服务器仅依赖于这个JSON对象来标识用户。为了防止用户篡改数据，服务器将在生成对象时添加签名。)</li>
-<li>API密钥(API密钥是给予某种形式的秘密令牌的名称，该秘密令牌与Web服务（或类似）请求一起提交以便识别请求的来源。密钥可以包括在请求内容的一些摘要中，以进一步验证原点并防止篡改值。)</li>
-</ul>
-<ol start="3">
-<li>数据加密（现存多种算法进行数据加密，密钥可以通过加盐哈希保护）</li>
-<li>深度防御</li>
-</ol>
-<ul>
-<li>防火墙</li>
-<li>日志</li>
-<li>入侵监测</li>
-<li>网络隔离</li>
-<li>操作系统安全</li>
-<li>OWASP标准(Open Web Application Security Project开放式Web应用程序安全项目,<a href="https://www.owasp.org" target="_blank" rel="noopener">https://www.owasp.org</a>)</li>
-</ul>
-<h1 id="系统设计与组织架构"><a href="#系统设计与组织架构" class="headerlink" title="系统设计与组织架构"></a>系统设计与组织架构</h1><p>公司团队的组织架构会影响系统设计。</p>
-<ul>
-<li><p>单地域的团队拥有更加好的灵活性和效率，因此对于异地团队最好的办法是想办法合理拆分，让不同的团队负责不同的松耦合模块。</p>
-</li>
-<li><p>每个团队需要负责对服务的需求，更改，构建，部署到运维，自治的团队能够很好的激励团队的效率。</p>
-</li>
-<li><p>小团队规模，少于10个人的团队能够对其所负责的系统整个生命周期负责，技术选择和实现上具有灵活性。当然这个对服务的高效构建部署效率很高，比如利用云服务的Infra来轻松构建CI/CD流程。</p>
-</li>
-</ul>
-<h1 id="规模化微服务"><a href="#规模化微服务" class="headerlink" title="规模化微服务"></a>规模化微服务</h1><ul>
-<li><p>允许故障无处不在，故障永远会在意想不到的时候发生，所以微服务本身需要能够允许故障出现，硬件上也不用为避免故障作特殊设计。</p>
-</li>
-<li><p>服务平行扩容阈值控制，需要参考一些系统参数，响应时间/延迟，可用性，数据持久性（丢包率）。</p>
-</li>
-<li><p>当故障出现时，适当的服务功能降级，允许应用能够在其他方面能够正确运行而不是直接返回错误界面。</p>
-</li>
-<li><p>微服务延迟的影响控制，通常会导致worker线程池的阻塞队列超长，最终线程池没有可用的线程而宕机。合理设置线程池的舱壁bulkhead，在舱位线程用尽后断路该服务，避免因为单个服务的延迟影响导致所有的线程都阻塞于同一个服务。</p>
-</li>
-<li><p>数据库扩展，当数据库需要服务于高吞吐量服务时，可以通过数据库副本，RDBMS系统，扩展写操作，独立CQRS读写分离系统，等多种方式扩展。</p>
-</li>
-<li><p>缓存可以优化重复请求，氛围哭护短、代理和服务器端缓存。</p>
-</li>
-<li><p>自动伸缩，当云管理能够强大到自动调整微服务实例个数，就可以基于当前流量进行自动调整。</p>
-</li>
-<li><p>CAP定理(一致性consistency、可用性availability和分区容忍性partition tolerance)是分布式系统中需要控制好的三个平衡。</p>
-</li>
-<li><p>服务发现，可以通过DNS服务器进行关联，负载均衡服务器将查询分发到不同的IP服务器上。</p>
-</li>
-<li><p>动态服务注册，新加入的微服务实例的IP应用信息需要能共享给其他服务，Zookeeper，consul和Eureka等服务可以管理配置管理和服务发现。</p>
-</li>
-<li><p>文档服务，为API构建合适的文档，Swagger可以很好的自动生成API文档，HAL和HAL浏览器也可以客户端逐步探索API。</p>
-</li>
-<li><p>自描述系统（UDDI Universal Description Discovery and Integration通用描述发现与集成服务），这个标准能帮助了解哪些服务正在运行。</p>
-</li>
-</ul>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3084,7 +2969,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -3096,6 +2981,8 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
+                    
+                      
                     
                       
                     

@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Jetty I/O ModelJetty是一个开源的轻量级webserver框架，实现了大部分javax标准下的接口，并且也提供了很多有用的协议支持，例如http1.1， http2， 和websocket等。Jetty采用了最新的Java Nio接口，从底层解决了阻塞式处理I/O的问题，利用SelectionKey实现了多路复用socketChannel，得到了高效的I/O吞吐性能。本文将着重从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jetty IO model">
+<meta property="og:url" content="https://sunnyhll.github.io/2021/12/30/Jetty-IO-model/index.html">
+<meta property="og:site_name" content="微观天下">
+<meta property="og:description" content="Jetty I/O ModelJetty是一个开源的轻量级webserver框架，实现了大部分javax标准下的接口，并且也提供了很多有用的协议支持，例如http1.1， http2， 和websocket等。Jetty采用了最新的Java Nio接口，从底层解决了阻塞式处理I/O的问题，利用SelectionKey实现了多路复用socketChannel，得到了高效的I/O吞吐性能。本文将着重从">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-12-30T09:28:53.543Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jetty IO model">
+<meta name="twitter:description" content="Jetty I/O ModelJetty是一个开源的轻量级webserver框架，实现了大部分javax标准下的接口，并且也提供了很多有用的协议支持，例如http1.1， http2， 和websocket等。Jetty采用了最新的Java Nio接口，从底层解决了阻塞式处理I/O的问题，利用SelectionKey实现了多路复用socketChannel，得到了高效的I/O吞吐性能。本文将着重从">
+
+
+
+
+
+
+  <link rel="canonical" href="https://sunnyhll.github.io/2021/12/30/Jetty-IO-model/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Jetty IO model | 微观天下</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">微观天下</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2021/12/30/Jetty-IO-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Jetty IO model
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-12-30 17:28:53" itemprop="dateCreated datePublished" datetime="2021-12-30T17:28:53+08:00">2021-12-30</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Jetty-I-O-Model"><a href="#Jetty-I-O-Model" class="headerlink" title="Jetty I/O Model"></a>Jetty I/O Model</h1><p>Jetty是一个开源的轻量级webserver框架，实现了大部分javax标准下的接口，并且也提供了很多有用的协议支持，例如http1.1， http2， 和websocket等。Jetty采用了最新的Java Nio接口，从底层解决了阻塞式处理I/O的问题，利用SelectionKey实现了多路复用socketChannel，得到了高效的I/O吞吐性能。本文将着重从源代码层面去讲解Jetty是如何做到。</p>
+<h1 id="Jetty-Server"><a href="#Jetty-Server" class="headerlink" title="Jetty Server"></a><a href="https://github.com/eclipse/jetty.project/blob/jetty-10.0.x/jetty-server/src/main/java/org/eclipse/jetty/server/Server.java" target="_blank" rel="noopener">Jetty Server</a></h1><p>Jetty Server实例是整个服务的容器，包含了connectors负责管理客户端连接。</p>
+<h2 id="Jetty-ServerConnector"><a href="#Jetty-ServerConnector" class="headerlink" title="Jetty ServerConnector"></a><a href="https://github.com/eclipse/jetty.project/blob/jetty-10.0.x/jetty-server/src/main/java/org/eclipse/jetty/server/ServerConnector.java" target="_blank" rel="noopener">Jetty ServerConnector</a></h2><p>ServerConnector扩展了既有的AbstractConnector，实现了异步处理ServerSocketChannel的selectedKeys事件回调。主要是通过SelectorManager管理一系列ManagedSelector，根据不同的协议生成不同的连接实例。</p>
+<h3 id="Jetty-AbstractConnector"><a href="#Jetty-AbstractConnector" class="headerlink" title="Jetty AbstractConnector"></a><a href="https://github.com/eclipse/jetty.project/blob/jetty-10.0.x/jetty-server/src/main/java/org/eclipse/jetty/server/AbstractConnector.java" target="_blank" rel="noopener">Jetty AbstractConnector</a></h3><p>AbstractConnector是Connector的基本实现，主要包含了一组ConnectionFactory负责构造不同类型的connection，也包含了一组AbstractCoonector.Acceptor实例,负责监听所有的accept事件，accept事件是客户端连接的第一个事件。</p>
+<h3 id="Jetty-SelectorManager与ManagedSelector"><a href="#Jetty-SelectorManager与ManagedSelector" class="headerlink" title="Jetty SelectorManager与ManagedSelector"></a><a href="https://github.com/eclipse/jetty.project/blob/jetty-10.0.x/jetty-io/src/main/java/org/eclipse/jetty/io/SelectorManager.java" target="_blank" rel="noopener">Jetty SelectorManager</a>与<a href="https://github.com/eclipse/jetty.project/blob/jetty-10.0.x/jetty-io/src/main/java/org/eclipse/jetty/io/ManagedSelector.java" target="_blank" rel="noopener">ManagedSelector</a></h3><p>SelectorManager是所有ManagedSelector的管理员，负责异步执行所有ManagedSelector提交的Task，是多路复用一个ServerSocketChannel的核心。底层是依赖Java Nio的ServerSocketChannel多路复用技术实现。</p>
+<h4 id="Java-Nio的多路复用技术"><a href="#Java-Nio的多路复用技术" class="headerlink" title="Java Nio的多路复用技术"></a>Java Nio的多路复用技术</h4><p><a href="https://blog.csdn.net/ycgslh/article/details/79604074" target="_blank" rel="noopener">Reference</a></p>
+<ul>
+<li>ServerSocketChannel<ul>
+<li>创建：通过ServerSocketChannel类的静态方法open()获得。</li>
+<li>绑定端口：每个ServerSocketChannel都有一个对应的ServerSocket,通过其socket()方法获得。获得ServerSocket是为了使用其bind()方法绑定监听端口号。若是使用其accept()方法监听请求就和普通Socket的处理模式无异。</li>
+<li>设置是否使用阻塞模式：true/false。configureBlocking(false)——不适用阻塞模式。阻塞模式不能使用Selector！</li>
+<li>注册选择器以及选择器关心的操作类型：register(Selector,int)     第一个参数可以传入一个选择器对象，第二个可传入SelectionKey代表操作类型的四个静态整型常量中的一个，表示该选择器关心的操作类型。</li>
+</ul>
+</li>
+<li><p>Selector</p>
+<ul>
+<li>创建：通过Selector的静态方法open()获得。</li>
+<li>等待请求：select(long)——long代表最长等待时间，超过该时间程序继续向下执行。若设为0或者不传参数，表示一直阻塞，直到有请求。</li>
+<li><p>获得选择结果集合：selectedKeys()，返回一个SelectionKey集合。SelectionKey对象保存处理当前请求的Channel、Selector、操作类型以及附加对象等等。<br>SelectionKey对象有四个静态常量代表四种操作类型以及对应的判断是否是该种操作的方法：</p>
+<ul>
+<li><p>SelectionKey.OP_ACCEPT——代表接收请求操作                isAcceptable()</p>
+</li>
+<li><p>SelectionKey.OP_CONNECT——代表连接操作                   isConnectable()</p>
+</li>
+<li><p>SelectionKey.OP_READ——代表读操作                              isReadable()</p>
+</li>
+<li><p>SelectionKey.OP_WRITE——代表写操作                            isWritable()</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>NioSocket中服务端的处理过程分为5步：</p>
+<ol>
+<li>创建ServerScoketChannel对象并设置相关参数（绑定监听端口号，是否使用阻塞模式）</li>
+<li>创建Selector并注册到服务端套接字信道（ServerScoketChannel）上</li>
+<li>使用Selector的select方法等待请求</li>
+<li>接收到请求后使用selectedKeys方法获得selectionKey集合</li>
+<li>根据选择键获得Channel、Selector和操作类型进行具体处理。</li>
+</ol>
+</li>
+<li><p>Code Sample</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">模拟服务端 -nio-Socket 实现</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span>  <span class="title">NIOServer</span>  </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">main</span> <span class="params">( String []  args )</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>  &#123;</span><br><span class="line">            <span class="comment">// 创建 ServerSocketChannel 通道，绑定监听端口为 8080</span></span><br><span class="line">            ServerSocketChannel  serverSocketChannel =  ServerSocketChannel . open () ;</span><br><span class="line">            serverSocketChannel. socket ().bind( <span class="keyword">new</span>  InetSocketAddress( <span class="number">8080</span> )) ;</span><br><span class="line">            <span class="comment">// 设置为非阻塞模式</span></span><br><span class="line">            serverSocketChannel.configureBlocking( <span class="keyword">false</span> ) ;</span><br><span class="line">            <span class="comment">// 注册选择器 , 设置选择器选择的操作类型</span></span><br><span class="line">            Selector  selector =  Selector . open () ;</span><br><span class="line">            serverSocketChannel.register(selector ,  SelectionKey . OP_ACCEPT ) ;</span><br><span class="line">            <span class="comment">// 创建处理器</span></span><br><span class="line">            Handler  handler =  <span class="keyword">new</span>  Handler( <span class="number">1204</span> ) ;</span><br><span class="line">            <span class="keyword">while</span>  ( <span class="keyword">true</span> ) &#123;</span><br><span class="line">                <span class="comment">// 等待请求，每次等待阻塞 3s ，超过时间则向下执行，若传入 0 或不传值，则在接收到请求前一直阻塞</span></span><br><span class="line">                <span class="keyword">if</span>  (selector. select ( <span class="number">3000</span> ) ==  <span class="number">0</span> ) &#123;</span><br><span class="line">                    System . out .println( <span class="string">" 等待请求超时 ......"</span> ) ;</span><br><span class="line">                    <span class="keyword">continue</span> ;</span><br><span class="line">                &#125;</span><br><span class="line">                System . out .println( <span class="string">"----- 处理请求 -----"</span> ) ;</span><br><span class="line">                <span class="comment">// 获取待处理的选择键集合</span></span><br><span class="line">                Iterator&lt; SelectionKey &gt; keyIterator = selector. selectedKeys (). iterator () ;</span><br><span class="line">                <span class="keyword">while</span>  (keyIterator. hasNext ()) &#123;</span><br><span class="line">                    SelectionKey  selectionKey = keyIterator. next () ;</span><br><span class="line">                    <span class="keyword">try</span>  &#123;</span><br><span class="line">                        <span class="comment">// 如果是连接请求，调用处理器的连接处理方法</span></span><br><span class="line">                        <span class="keyword">if</span> (selectionKey.isAcceptable())&#123;</span><br><span class="line">                            handler.handleAccept(selectionKey) ;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="comment">// 如果是读请求，调用对应的读方法</span></span><br><span class="line">                        <span class="keyword">if</span>  (selectionKey.isReadable()) &#123;</span><br><span class="line">                            handler.handleRead(selectionKey) ;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;  <span class="keyword">catch</span>  ( IOException  e ) &#123;</span><br><span class="line">                        keyIterator. remove () ;</span><br><span class="line">                        <span class="keyword">continue</span> ;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 处理完毕从待处理集合移除该选择键</span></span><br><span class="line">                keyIterator. remove () ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;  <span class="keyword">catch</span>  ( IOException  e ) &#123;</span><br><span class="line">            e .printStackTrace() ;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        处理器类</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span>  <span class="title">Handler</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span>  bufferSize  =  <span class="number">1024</span> ;  <span class="comment">// 缓冲器容量</span></span><br><span class="line">        <span class="keyword">private</span>  String  localCharset  =  <span class="string">"UTF-8"</span> ;  <span class="comment">// 编码格式</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span>  <span class="title">Handler</span> <span class="params">()</span></span>&#123;&#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span>  <span class="title">Handler</span> <span class="params">( <span class="keyword">int</span>  bufferSize )</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span> ( bufferSize , <span class="keyword">null</span> ) ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span>  <span class="title">Handler</span> <span class="params">( String  localCharset )</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span> (- <span class="number">1</span> , localCharset ) ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span>  <span class="title">Handler</span> <span class="params">( <span class="keyword">int</span>  bufferSize , String  localCharset )</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span> ( bufferSize  &gt;  <span class="number">0</span> )&#123;</span><br><span class="line">                <span class="keyword">this</span> . bufferSize  =  bufferSize ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> ( localCharset  !=  <span class="keyword">null</span> )&#123;</span><br><span class="line">                <span class="keyword">this</span> . localCharset  =  localCharset ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        连接请求处理方法</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">handleAccept</span> <span class="params">( SelectionKey  selectionKey )</span>  <span class="keyword">throws</span>  IOException  </span>&#123;</span><br><span class="line">            <span class="comment">// 通过选择器键获取服务器套接字通道，通过 accept() 方法获取套接字通道连接</span></span><br><span class="line">            SocketChannel  socketChannel = (( ServerSocketChannel ) selectionKey . channel ()). accept () ;</span><br><span class="line">            <span class="comment">// 设置套接字通道为非阻塞模式</span></span><br><span class="line">            socketChannel.configureBlocking( <span class="keyword">false</span> ) ;</span><br><span class="line">            <span class="comment">// 为套接字通道注册选择器，该选择器为服务器套接字通道的选择器，即选择到该 SocketChannel 的选择器</span></span><br><span class="line">            <span class="comment">// 设置选择器关心请求为读操作，设置数据读取的缓冲器容量为处理器初始化时候的缓冲器容量</span></span><br><span class="line">            socketChannel.register( selectionKey . selector () , SelectionKey . OP_READ ,  ByteBuffer . allocate ( bufferSize )) ;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span>  <span class="title">handleRead</span> <span class="params">( SelectionKey  selectionKey )</span>  <span class="keyword">throws</span>  IOException  </span>&#123;</span><br><span class="line">            <span class="comment">// 获取套接字通道</span></span><br><span class="line">            SocketChannel  socketChannel = ( SocketChannel )  selectionKey . channel () ;</span><br><span class="line">            <span class="comment">// 获取缓冲器并进行重置 ,selectionKey.attachment() 为获取选择器键的附加对象</span></span><br><span class="line">            ByteBuffer  byteBuffer = ( ByteBuffer ) selectionKey .attachment() ;</span><br><span class="line">            byteBuffer.clear() ;</span><br><span class="line">            <span class="comment">// 没有内容则关闭通道</span></span><br><span class="line">            <span class="keyword">if</span>  (socketChannel. read (byteBuffer) == - <span class="number">1</span> ) &#123;</span><br><span class="line">                socketChannel.close() ;</span><br><span class="line">            &#125;  <span class="keyword">else</span>  &#123;</span><br><span class="line">                <span class="comment">// 将缓冲器转换为读状态</span></span><br><span class="line">                byteBuffer.flip() ;</span><br><span class="line">                <span class="comment">// 将缓冲器中接收到的值按 localCharset 格式编码保存</span></span><br><span class="line">                String  receivedRequestData =  Charset . forName ( localCharset ). newDecoder ().decode(byteBuffer).toString() ;</span><br><span class="line">                System . out .println( <span class="string">" 接收到客户端的请求数据： "</span> +receivedRequestData) ;</span><br><span class="line">                <span class="comment">// 返回响应数据给客户端</span></span><br><span class="line">                String  responseData =  <span class="string">" 已接收到你的请求数据，响应数据为： ( 响应数据 )"</span> ;</span><br><span class="line">                byteBuffer =  ByteBuffer . wrap (responseData.getBytes( localCharset )) ;</span><br><span class="line">                socketChannel. write (byteBuffer) ;</span><br><span class="line">                <span class="comment">// 关闭通道</span></span><br><span class="line">                socketChannel.close() ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Jetty对socket的多路复用技术实现"><a href="#Jetty对socket的多路复用技术实现" class="headerlink" title="Jetty对socket的多路复用技术实现"></a>Jetty对socket的多路复用技术实现</h4><p>Jetty主要是依赖底层Java Nio的多路复用技术，并且封装成为高吞吐量的服务器。封装主要分成两部分：</p>
+<ul>
+<li>Connector -&gt; Acceptor: 当新的请求到达Jetty时，Jetty ServerConnector会拿到一个非阻塞、新的_acceptChannel：ServerSocketChannel，其关联的selector用于接收所有后续Accept/Update/onSelected/close/ReplaceKey事件。Acceptor作为Selector的回调类，提供了所有socketchannel事件的回调方法。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Called by &#123;<span class="doctag">@link</span> #open()&#125; to obtain the accepting channel.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> ServerSocketChannel used to accept connections.</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@throws</span> IOException if unable to obtain or configure the server channel</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">protected</span> ServerSocketChannel <span class="title">openAcceptChannel</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">     ServerSocketChannel serverChannel = <span class="keyword">null</span>;</span><br><span class="line">     <span class="keyword">if</span> (isInheritChannel())</span><br><span class="line">     &#123;</span><br><span class="line">         Channel channel = System.inheritedChannel();</span><br><span class="line">         <span class="keyword">if</span> (channel <span class="keyword">instanceof</span> ServerSocketChannel)</span><br><span class="line">             serverChannel = (ServerSocketChannel)channel;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">             LOG.warn(<span class="string">"Unable to use System.inheritedChannel() [&#123;&#125;]. Trying a new ServerSocketChannel at &#123;&#125;:&#123;&#125;"</span>, channel, getHost(), getPort());</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">if</span> (serverChannel == <span class="keyword">null</span>)</span><br><span class="line">     &#123;</span><br><span class="line">         InetSocketAddress bindAddress = getHost() == <span class="keyword">null</span> ? <span class="keyword">new</span> InetSocketAddress(getPort()) : <span class="keyword">new</span> InetSocketAddress(getHost(), getPort());</span><br><span class="line">         serverChannel = ServerSocketChannel.open();</span><br><span class="line">         setSocketOption(serverChannel, StandardSocketOptions.SO_REUSEADDR, getReuseAddress());</span><br><span class="line">         setSocketOption(serverChannel, StandardSocketOptions.SO_REUSEPORT, isReusePort());</span><br><span class="line">         <span class="keyword">try</span></span><br><span class="line">         &#123;</span><br><span class="line">             serverChannel.bind(bindAddress, getAcceptQueueSize());</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">catch</span> (Throwable e)</span><br><span class="line">         &#123;</span><br><span class="line">             IO.close(serverChannel);</span><br><span class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Failed to bind to "</span> + bindAddress, e);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> serverChannel;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>SelectorManager -&gt; ManagedSelector -&gt; Selector: SelectorManager负责维护一组可以复用的Selector实例，对于每个_acceptChannel：ServerSocketChannel非阻塞实例，可以注册一个Selector实例用于监听相应的SelectionKey事件。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 创建一个selector实例,并且用一个新的生产者线程不断监听channel中的事件。</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doStart</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.doStart();</span><br><span class="line"></span><br><span class="line">        _selector = _selectorManager.newSelector();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// The producer used by the strategies will never</span></span><br><span class="line">        <span class="comment">// be idle (either produces a task or blocks).</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// The normal strategy obtains the produced task, schedules</span></span><br><span class="line">        <span class="comment">// a new thread to produce more, runs the task and then exits.</span></span><br><span class="line">        _selectorManager.execute(_strategy::produce);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Set started only if we really are started</span></span><br><span class="line">        Start start = <span class="keyword">new</span> Start();</span><br><span class="line">        submit(start);</span><br><span class="line">        start._started.await();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Selector事件的生产者/消费者模式：选择器本身是可以复用的，也就是大量请求创建的大量socketchannel是可以共享一个选择器实例，并且通过selectedKey.channel()获得相应的channel实例。这相较于传统的一个请求一个线程模式提高了线程利用率，避免了大量请求带来的线程池饥饿问题。同时，selector本身的事件也需要有很好的资源复用，否则，生产者产生的大量任务同时也会让消费者线程饥饿造成阻塞。Jetty为了解决这个问题采用了一种新的消费模式: EPC,即 eat what you kill消费者和生产者同线程优先处理模式。</p>
+<p> <a href="https://github.com/eclipse/jetty.project/blob/jetty-10.0.x/jetty-util/src/main/java/org/eclipse/jetty/util/thread/strategy/ExecuteProduceConsume.java" target="_blank" rel="noopener">ExectuteProduceConsume</a></p>
+<ol>
+<li>SelectorProducer类提供了一个循环loop负责阻塞查询select()并且将查询到的事件/任务提交到_updates队列中。</li>
+</ol>
+</li>
+</ul>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Runnable <span class="title">produce</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Runnable task = processSelected();</span><br><span class="line">            <span class="keyword">if</span> (task != <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">return</span> task;</span><br><span class="line"></span><br><span class="line">            processUpdates();</span><br><span class="line"></span><br><span class="line">            updateKeys();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!select())</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>产生的任务主要分四种:</p>
+<ul>
+<li>processSelected(): 处理selected事件产生真正的task,或者处理connect事件。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Runnable <span class="title">processSelected</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (_cursor.hasNext())</span><br><span class="line">    &#123;</span><br><span class="line">        SelectionKey key = _cursor.next();</span><br><span class="line">        Object attachment = key.attachment();</span><br><span class="line">        SelectableChannel channel = key.channel();</span><br><span class="line">        <span class="keyword">if</span> (key.isValid())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                LOG.debug(<span class="string">"selected &#123;&#125; &#123;&#125; &#123;&#125; "</span>, safeReadyOps(key), key, attachment);</span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (attachment <span class="keyword">instanceof</span> Selectable)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// Try to produce a task</span></span><br><span class="line">                    Runnable task = ((Selectable)attachment).onSelected();</span><br><span class="line">                    <span class="keyword">if</span> (task != <span class="keyword">null</span>)</span><br><span class="line">                        <span class="keyword">return</span> task;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (key.isConnectable())</span><br><span class="line">                &#123;</span><br><span class="line">                    processConnect(key, (Connect)attachment);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"key="</span> + key + <span class="string">", att="</span> + attachment + <span class="string">", iOps="</span> + safeInterestOps(key) + <span class="string">", rOps="</span> + safeReadyOps(key));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> (CancelledKeyException x)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                    LOG.debug(<span class="string">"Ignoring cancelled key for channel &#123;&#125;"</span>, channel);</span><br><span class="line">                IO.close(attachment <span class="keyword">instanceof</span> EndPoint ? (EndPoint)attachment : channel);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> (Throwable x)</span><br><span class="line">            &#123;</span><br><span class="line">                LOG.warn(<span class="string">"Could not process key for channel &#123;&#125;"</span>, channel, x);</span><br><span class="line">                IO.close(attachment <span class="keyword">instanceof</span> EndPoint ? (EndPoint)attachment : channel);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                LOG.debug(<span class="string">"Selector loop ignoring invalid key for channel &#123;&#125;"</span>, channel);</span><br><span class="line">            IO.close(attachment <span class="keyword">instanceof</span> EndPoint ? (EndPoint)attachment : channel);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>processUpdates(): 将updates中的所有SelectorUpdate实例处理完，应该是Selector内部的事件，例如Start，DumpKeys，Acceptor，Accept，Connect，CloseConnection，StopSelector等，有update方法实现具体update内容。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processUpdates</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> (AutoLock l = _lock.lock())</span><br><span class="line">    &#123;</span><br><span class="line">        Deque&lt;SelectorUpdate&gt; updates = _updates;</span><br><span class="line">        _updates = _updateable;</span><br><span class="line">        _updateable = updates;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">        LOG.debug(<span class="string">"updateable &#123;&#125;"</span>, _updateable.size());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (SelectorUpdate update : _updateable)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (_selector == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                LOG.debug(<span class="string">"update &#123;&#125;"</span>, update);</span><br><span class="line">            update.update(_selector);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Throwable x)</span><br><span class="line">        &#123;</span><br><span class="line">            LOG.warn(<span class="string">"Cannot update selector &#123;&#125;"</span>, ManagedSelector.<span class="keyword">this</span>, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    _updateable.clear();</span><br><span class="line"></span><br><span class="line">    Selector selector;</span><br><span class="line">    <span class="keyword">int</span> updates;</span><br><span class="line">    <span class="keyword">try</span> (AutoLock l = _lock.lock())</span><br><span class="line">    &#123;</span><br><span class="line">        updates = _updates.size();</span><br><span class="line">        _selecting = updates == <span class="number">0</span>;</span><br><span class="line">        selector = _selecting ? <span class="keyword">null</span> : _selector;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">        LOG.debug(<span class="string">"updates &#123;&#125;"</span>, updates);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (selector != <span class="keyword">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">            LOG.debug(<span class="string">"wakeup on updates &#123;&#125;"</span>, <span class="keyword">this</span>);</span><br><span class="line">        selector.wakeup();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>updateKeys(): 处理Selectable实例的updateKey和_keys清理</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateKeys</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Do update keys for only previously selected keys.</span></span><br><span class="line">    <span class="comment">// This will update only those keys whose selection did not cause an</span></span><br><span class="line">    <span class="comment">// updateKeys update to be submitted.</span></span><br><span class="line">    <span class="keyword">for</span> (SelectionKey key : _keys)</span><br><span class="line">    &#123;</span><br><span class="line">        Object attachment = key.attachment();</span><br><span class="line">        <span class="keyword">if</span> (attachment <span class="keyword">instanceof</span> Selectable)</span><br><span class="line">            ((Selectable)attachment).updateKey();</span><br><span class="line">    &#125;</span><br><span class="line">    _keys.clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>processConnect(key, attachment): 处理connect请求</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processConnect</span><span class="params">(SelectionKey key, Connect connect)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SelectableChannel channel = key.channel();</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        key.attach(connect.attachment);</span><br><span class="line">        <span class="keyword">boolean</span> connected = _selectorManager.doFinishConnect(channel);</span><br><span class="line">        <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">            LOG.debug(<span class="string">"Connected &#123;&#125; &#123;&#125;"</span>, connected, channel);</span><br><span class="line">        <span class="keyword">if</span> (connected)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (connect.timeout.cancel())</span><br><span class="line">            &#123;</span><br><span class="line">                key.interestOps(<span class="number">0</span>);</span><br><span class="line">                execute(<span class="keyword">new</span> CreateEndPoint(connect, key));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> SocketTimeoutException(<span class="string">"Concurrent Connect Timeout"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ConnectException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Throwable x)</span><br><span class="line">    &#123;</span><br><span class="line">        connect.failed(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>select(): 阻塞调用Selector.select()方法获取selectionKeys事件。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">select</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">try</span></span><br><span class="line">       &#123;</span><br><span class="line">           Selector selector = _selector;</span><br><span class="line">           <span class="keyword">if</span> (selector != <span class="keyword">null</span>)</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                   LOG.debug(<span class="string">"Selector &#123;&#125; waiting with &#123;&#125; keys"</span>, selector, selector.keys().size());</span><br><span class="line">                   <span class="comment">//阻塞等待select()返回</span></span><br><span class="line">               <span class="keyword">int</span> selected = ManagedSelector.<span class="keyword">this</span>.select(selector);</span><br><span class="line">               <span class="comment">// The selector may have been recreated.</span></span><br><span class="line">               selector = _selector;</span><br><span class="line">               <span class="keyword">if</span> (selector != <span class="keyword">null</span>)</span><br><span class="line">               &#123;</span><br><span class="line">                   <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                       LOG.debug(<span class="string">"Selector &#123;&#125; woken up from select, &#123;&#125;/&#123;&#125;/&#123;&#125; selected"</span>, selector, selected, selector.selectedKeys().size(), selector.keys().size());</span><br><span class="line"></span><br><span class="line">                   <span class="keyword">int</span> updates;</span><br><span class="line">                   <span class="keyword">try</span> (AutoLock l = _lock.lock())</span><br><span class="line">                   &#123;</span><br><span class="line">                       <span class="comment">// finished selecting</span></span><br><span class="line">                       _selecting = <span class="keyword">false</span>;</span><br><span class="line">                       updates = _updates.size();</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">                   _keys = selector.selectedKeys();</span><br><span class="line">                   <span class="keyword">int</span> selectedKeys = _keys.size();</span><br><span class="line">                   <span class="keyword">if</span> (selectedKeys &gt; <span class="number">0</span>)</span><br><span class="line">                       _keyStats.record(selectedKeys);</span><br><span class="line">                   _cursor = selectedKeys &gt; <span class="number">0</span> ? _keys.iterator() : Collections.emptyIterator();</span><br><span class="line">                   <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                       LOG.debug(<span class="string">"Selector &#123;&#125; processing &#123;&#125; keys, &#123;&#125; updates"</span>, selector, selectedKeys, updates);</span><br><span class="line"></span><br><span class="line">                   <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">catch</span> (Throwable x)</span><br><span class="line">       &#123;</span><br><span class="line">           IO.close(_selector);</span><br><span class="line">           _selector = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span> (isRunning())</span><br><span class="line">           &#123;</span><br><span class="line">               LOG.warn(<span class="string">"Fatal select() failure"</span>, x);</span><br><span class="line">               onSelectFailed(x);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span></span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                   LOG.warn(<span class="string">"select() failure"</span>, x);</span><br><span class="line">               <span class="keyword">else</span></span><br><span class="line">                   LOG.warn(<span class="string">"select() failure &#123;&#125;"</span>, x.toString());</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Jetty多协议支持"><a href="#Jetty多协议支持" class="headerlink" title="Jetty多协议支持"></a>Jetty多协议支持</h1><p>Jetty的多协议支持包括HTTP0.9 1.1 2.0和ws等等，其实这些协议本质上都是基于TCP/IP层socket协议上的应用层协议，也就是说，在I/O层面都是通过socket协议的握手和通信规则，只是在内容传输上会有不同。例如早期的http协议是不面向连接的，也就是说即使建立了socket连接，也会在http回应发出后被断开，从而在每次http请求产生更多的IO开销。http也可以复用socket连接，只需要池化管理socket连接即可。而websocket协议则是通过http请求后的upgrade请求建立长连接，从而达到双向全双工通信的效果，所以能够高效的利用socket连接。</p>
+<h2 id="JettyWebsocketServlet"><a href="#JettyWebsocketServlet" class="headerlink" title="JettyWebsocketServlet"></a>JettyWebsocketServlet</h2><p>在socket连接建立后，Jetty会将request真正的进行处理，主要是通过servlet和filter中的逻辑进行内容处理。主要是通过service方法为入口。当Jetty处理完socket连接IO事件processConnect后，会创建CreateEndPoint任务让selectormanager创建客户端点,并且调用newConnection方法-&gt;getDefaultConnectionFactory().newConnection方法创建Connection实例，最终调用connectionOpened -&gt; connection.onOpen方法处理不同协议Connection onOpen后续逻辑。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createEndPoint</span><span class="params">(SelectableChannel channel, SelectionKey selectionKey)</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       EndPoint endPoint = _selectorManager.newEndPoint(channel, <span class="keyword">this</span>, selectionKey);</span><br><span class="line">       Object context = selectionKey.attachment();</span><br><span class="line">       Connection connection = _selectorManager.newConnection(channel, endPoint, context);</span><br><span class="line">       endPoint.setConnection(connection);</span><br><span class="line">       submit(selector -&gt;</span><br><span class="line">       &#123;</span><br><span class="line">           SelectionKey key = selectionKey;</span><br><span class="line">           <span class="keyword">if</span> (key.selector() != selector)</span><br><span class="line">           &#123;</span><br><span class="line">               key = channel.keyFor(selector);</span><br><span class="line">               <span class="keyword">if</span> (key != <span class="keyword">null</span> &amp;&amp; endPoint <span class="keyword">instanceof</span> Selectable)</span><br><span class="line">                   ((Selectable)endPoint).replaceKey(key);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (key != <span class="keyword">null</span>)</span><br><span class="line">               key.attach(endPoint);</span><br><span class="line">       &#125;, <span class="keyword">true</span>);</span><br><span class="line">       endPoint.onOpen();</span><br><span class="line">       endPointOpened(endPoint);</span><br><span class="line">       _selectorManager.connectionOpened(connection, context);</span><br><span class="line">       <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">           LOG.debug(<span class="string">"Created &#123;&#125;"</span>, endPoint);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>http请求会采用HttpConnection实例，而websocket会采用NegotiatingClientConnection实例。HTTP协议的handle是基于状态机<a href="https://github.com/eclipse/jetty.project/blob/f69c479d1919552081462be578d4d1a0c0815f8f/jetty-server/src/main/java/org/eclipse/jetty/server/HttpChannelState.java#L45" target="_blank" rel="noopener">HttpHandleState</a>实现，根据不同状态生成不同的action，如dispatch/handling/async_error/blocking等。最终request应该会dispatch用到不同servlet的service方法，进行websocket升级处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Action <span class="title">handling</span><span class="params">()</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">try</span> (AutoLock l = lock())</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">               LOG.debug(<span class="string">"handling &#123;&#125;"</span>, toStringLocked());</span><br><span class="line"></span><br><span class="line">           <span class="keyword">switch</span> (_state)</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">case</span> IDLE:</span><br><span class="line">                   <span class="keyword">if</span> (_requestState != RequestState.BLOCKING)</span><br><span class="line">                       <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(getStatusStringLocked());</span><br><span class="line">                   _initial = <span class="keyword">true</span>;</span><br><span class="line">                   _state = State.HANDLING;</span><br><span class="line">                   <span class="keyword">return</span> Action.DISPATCH;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">case</span> WOKEN:</span><br><span class="line">                   <span class="keyword">if</span> (_event != <span class="keyword">null</span> &amp;&amp; _event.getThrowable() != <span class="keyword">null</span> &amp;&amp; !_sendError)</span><br><span class="line">                   &#123;</span><br><span class="line">                       _state = State.HANDLING;</span><br><span class="line">                       <span class="keyword">return</span> Action.ASYNC_ERROR;</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">                   Action action = nextAction(<span class="keyword">true</span>);</span><br><span class="line">                   <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                       LOG.debug(<span class="string">"nextAction(true) &#123;&#125; &#123;&#125;"</span>, action, toStringLocked());</span><br><span class="line">                   <span class="keyword">return</span> action;</span><br><span class="line"></span><br><span class="line">               <span class="keyword">default</span>:</span><br><span class="line">                   <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(getStatusStringLocked());</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这是HttpChannel实例中具体的handle方法,负责执行不同的action，其中最主要的就是dispatch方法，负责分发request到不同的servelet进行服务器用户逻辑处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handle</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">          LOG.debug(<span class="string">"handle &#123;&#125; &#123;&#125; "</span>, _request.getHttpURI(), <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">      HttpChannelState.Action action = _state.handling();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Loop here to handle async request redispatches.</span></span><br><span class="line">      <span class="comment">// The loop is controlled by the call to async.unhandle in the</span></span><br><span class="line">      <span class="comment">// finally block below.  Unhandle will return false only if an async dispatch has</span></span><br><span class="line">      <span class="comment">// already happened when unhandle is called.</span></span><br><span class="line">      loop:</span><br><span class="line">      <span class="keyword">while</span> (!getServer().isStopped())</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="keyword">try</span></span><br><span class="line">          &#123;</span><br><span class="line">              <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                  LOG.debug(<span class="string">"action &#123;&#125; &#123;&#125;"</span>, action, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">              <span class="keyword">switch</span> (action)</span><br><span class="line">              &#123;</span><br><span class="line">                  <span class="keyword">case</span> TERMINATED:</span><br><span class="line">                      onCompleted();</span><br><span class="line">                      <span class="keyword">break</span> loop;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> WAIT:</span><br><span class="line">                      <span class="comment">// break loop without calling unhandle</span></span><br><span class="line">                      <span class="keyword">break</span> loop;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> DISPATCH:</span><br><span class="line">                  &#123;</span><br><span class="line">                      <span class="keyword">if</span> (!_request.hasMetaData())</span><br><span class="line">                          <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"state="</span> + _state);</span><br><span class="line"></span><br><span class="line">                      dispatch(DispatcherType.REQUEST, () -&gt;</span><br><span class="line">                      &#123;</span><br><span class="line">                          <span class="keyword">for</span> (HttpConfiguration.Customizer customizer : _configuration.getCustomizers())</span><br><span class="line">                          &#123;</span><br><span class="line">                              customizer.customize(getConnector(), _configuration, _request);</span><br><span class="line">                              <span class="keyword">if</span> (_request.isHandled())</span><br><span class="line">                                  <span class="keyword">return</span>;</span><br><span class="line">                          &#125;</span><br><span class="line">                          getServer().handle(HttpChannel.<span class="keyword">this</span>);</span><br><span class="line">                      &#125;);</span><br><span class="line"></span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> ASYNC_DISPATCH:</span><br><span class="line">                  &#123;</span><br><span class="line">                      dispatch(DispatcherType.ASYNC, () -&gt; getServer().handleAsync(<span class="keyword">this</span>));</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> ASYNC_TIMEOUT:</span><br><span class="line">                      _state.onTimeout();</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> SEND_ERROR:</span><br><span class="line">                  &#123;</span><br><span class="line">                      <span class="keyword">try</span></span><br><span class="line">                      &#123;</span><br><span class="line">                          <span class="comment">// Get ready to send an error response</span></span><br><span class="line">                          _response.resetContent();</span><br><span class="line"></span><br><span class="line">                          <span class="comment">// the following is needed as you cannot trust the response code and reason</span></span><br><span class="line">                          <span class="comment">// as those could have been modified after calling sendError</span></span><br><span class="line">                          Integer code = (Integer)_request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);</span><br><span class="line">                          <span class="keyword">if</span> (code == <span class="keyword">null</span>)</span><br><span class="line">                              code = HttpStatus.INTERNAL_SERVER_ERROR_500;</span><br><span class="line">                          _response.setStatus(code);</span><br><span class="line"></span><br><span class="line">                          <span class="comment">// The handling of the original dispatch failed and we are now going to either generate</span></span><br><span class="line">                          <span class="comment">// and error response ourselves or dispatch for an error page.  If there is content left over</span></span><br><span class="line">                          <span class="comment">// from the failed dispatch, then we try to consume it here and if we fail we add a</span></span><br><span class="line">                          <span class="comment">// Connection:close.  This can't be deferred to COMPLETE as the response will be committed</span></span><br><span class="line">                          <span class="comment">// by then.</span></span><br><span class="line">                          ensureConsumeAllOrNotPersistent();</span><br><span class="line"></span><br><span class="line">                          ContextHandler.Context context = (ContextHandler.Context)_request.getAttribute(ErrorHandler.ERROR_CONTEXT);</span><br><span class="line">                          ErrorHandler errorHandler = ErrorHandler.getErrorHandler(getServer(), context == <span class="keyword">null</span> ? <span class="keyword">null</span> : context.getContextHandler());</span><br><span class="line"></span><br><span class="line">                          <span class="comment">// If we can't have a body, then create a minimal error response.</span></span><br><span class="line">                          <span class="keyword">if</span> (HttpStatus.hasNoBody(_response.getStatus()) || errorHandler == <span class="keyword">null</span> || !errorHandler.errorPageForMethod(_request.getMethod()))</span><br><span class="line">                          &#123;</span><br><span class="line">                              sendResponseAndComplete();</span><br><span class="line">                              <span class="keyword">break</span>;</span><br><span class="line">                          &#125;</span><br><span class="line"></span><br><span class="line">                          dispatch(DispatcherType.ERROR, () -&gt;</span><br><span class="line">                          &#123;</span><br><span class="line">                              errorHandler.handle(<span class="keyword">null</span>, _request, _request, _response);</span><br><span class="line">                              _request.setHandled(<span class="keyword">true</span>);</span><br><span class="line">                          &#125;);</span><br><span class="line">                      &#125;</span><br><span class="line">                      <span class="keyword">catch</span> (Throwable x)</span><br><span class="line">                      &#123;</span><br><span class="line">                          <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">                              LOG.debug(<span class="string">"Could not perform ERROR dispatch, aborting"</span>, x);</span><br><span class="line">                          <span class="keyword">if</span> (_state.isResponseCommitted())</span><br><span class="line">                              abort(x);</span><br><span class="line">                          <span class="keyword">else</span></span><br><span class="line">                          &#123;</span><br><span class="line">                              <span class="keyword">try</span></span><br><span class="line">                              &#123;</span><br><span class="line">                                  _response.resetContent();</span><br><span class="line">                                  sendResponseAndComplete();</span><br><span class="line">                              &#125;</span><br><span class="line">                              <span class="keyword">catch</span> (Throwable t)</span><br><span class="line">                              &#123;</span><br><span class="line">                                  <span class="keyword">if</span> (x != t)</span><br><span class="line">                                      x.addSuppressed(t);</span><br><span class="line">                                  abort(x);</span><br><span class="line">                              &#125;</span><br><span class="line">                          &#125;</span><br><span class="line">                      &#125;</span><br><span class="line">                      <span class="keyword">finally</span></span><br><span class="line">                      &#123;</span><br><span class="line">                          <span class="comment">// clean up the context that was set in Response.sendError</span></span><br><span class="line">                          _request.removeAttribute(ErrorHandler.ERROR_CONTEXT);</span><br><span class="line">                      &#125;</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> ASYNC_ERROR:</span><br><span class="line">                  &#123;</span><br><span class="line">                      <span class="keyword">throw</span> _state.getAsyncContextEvent().getThrowable();</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> READ_CALLBACK:</span><br><span class="line">                  &#123;</span><br><span class="line">                      ContextHandler handler = _state.getContextHandler();</span><br><span class="line">                      <span class="keyword">if</span> (handler != <span class="keyword">null</span>)</span><br><span class="line">                          handler.handle(_request, _request.getHttpInput());</span><br><span class="line">                      <span class="keyword">else</span></span><br><span class="line">                          _request.getHttpInput().run();</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> WRITE_CALLBACK:</span><br><span class="line">                  &#123;</span><br><span class="line">                      ContextHandler handler = _state.getContextHandler();</span><br><span class="line">                      <span class="keyword">if</span> (handler != <span class="keyword">null</span>)</span><br><span class="line">                          handler.handle(_request, _response.getHttpOutput());</span><br><span class="line">                      <span class="keyword">else</span></span><br><span class="line">                          _response.getHttpOutput().run();</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">case</span> COMPLETE:</span><br><span class="line">                  &#123;</span><br><span class="line">                      <span class="keyword">if</span> (!_response.isCommitted())</span><br><span class="line">                      &#123;</span><br><span class="line">                          <span class="keyword">if</span> (!_request.isHandled() &amp;&amp; !_response.getHttpOutput().isClosed())</span><br><span class="line">                          &#123;</span><br><span class="line">                              <span class="comment">// The request was not actually handled</span></span><br><span class="line">                              _response.sendError(HttpStatus.NOT_FOUND_404);</span><br><span class="line">                              <span class="keyword">break</span>;</span><br><span class="line">                          &#125;</span><br><span class="line"></span><br><span class="line">                          <span class="comment">// Indicate Connection:close if we can't consume all.</span></span><br><span class="line">                          <span class="keyword">if</span> (_response.getStatus() &gt;= <span class="number">200</span>)</span><br><span class="line">                              ensureConsumeAllOrNotPersistent();</span><br><span class="line">                      &#125;</span><br><span class="line"></span><br><span class="line">                      <span class="comment">// RFC 7230, section 3.3.</span></span><br><span class="line">                      <span class="keyword">if</span> (!_request.isHead() &amp;&amp;</span><br><span class="line">                          _response.getStatus() != HttpStatus.NOT_MODIFIED_304 &amp;&amp;</span><br><span class="line">                          !_response.isContentComplete(_response.getHttpOutput().getWritten()))</span><br><span class="line">                      &#123;</span><br><span class="line">                          <span class="keyword">if</span> (sendErrorOrAbort(<span class="string">"Insufficient content written"</span>))</span><br><span class="line">                              <span class="keyword">break</span>;</span><br><span class="line">                      &#125;</span><br><span class="line"></span><br><span class="line">                      <span class="comment">// If send error is called we need to break.</span></span><br><span class="line">                      <span class="keyword">if</span> (checkAndPrepareUpgrade())</span><br><span class="line">                          <span class="keyword">break</span>;</span><br><span class="line">                      </span><br><span class="line">                      <span class="comment">// Set a close callback on the HttpOutput to make it an async callback</span></span><br><span class="line">                      _response.completeOutput(Callback.from(NON_BLOCKING, () -&gt; _state.completed(<span class="keyword">null</span>), _state::completed));</span><br><span class="line"></span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                  <span class="keyword">default</span>:</span><br><span class="line">                      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="keyword">this</span>.toString());</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">catch</span> (Throwable failure)</span><br><span class="line">          &#123;</span><br><span class="line">              <span class="keyword">if</span> (<span class="string">"org.eclipse.jetty.continuation.ContinuationThrowable"</span>.equals(failure.getClass().getName()))</span><br><span class="line">                  LOG.trace(<span class="string">"IGNORED"</span>, failure);</span><br><span class="line">              <span class="keyword">else</span></span><br><span class="line">                  handleException(failure);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          action = _state.unhandle();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">          LOG.debug(<span class="string">"!handle &#123;&#125; &#123;&#125;"</span>, action, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">boolean</span> suspended = action == Action.WAIT;</span><br><span class="line">      <span class="keyword">return</span> !suspended;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/09/26/Authentication/" rel="next" title="Authentication">
+                <i class="fa fa-chevron-left"></i> Authentication
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">果核&肉肉</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Jetty-I-O-Model"><span class="nav-number">1.</span> <span class="nav-text">Jetty I/O Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jetty-Server"><span class="nav-number">2.</span> <span class="nav-text">Jetty Server</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jetty-ServerConnector"><span class="nav-number">2.1.</span> <span class="nav-text">Jetty ServerConnector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jetty-AbstractConnector"><span class="nav-number">2.1.1.</span> <span class="nav-text">Jetty AbstractConnector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jetty-SelectorManager与ManagedSelector"><span class="nav-number">2.1.2.</span> <span class="nav-text">Jetty SelectorManager与ManagedSelector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-Nio的多路复用技术"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Java Nio的多路复用技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Jetty对socket的多路复用技术实现"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">Jetty对socket的多路复用技术实现</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jetty多协议支持"><span class="nav-number">3.</span> <span class="nav-text">Jetty多协议支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JettyWebsocketServlet"><span class="nav-number">3.1.</span> <span class="nav-text">JettyWebsocketServlet</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">果核&肉肉</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+
+
+  <script src="https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
