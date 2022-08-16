@@ -360,6 +360,368 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2020/10/30/Effective-Java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="果核&肉肉">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/10/30/Effective-Java/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/3/index.html">Effective Java</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-10-30 15:11:53 / 修改时间：15:11:54" itemprop="dateCreated datePublished" datetime="2020-10-30T15:11:53+08:00">2020-10-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文是Effetive Java一书提出地90条Java代码规范建议，具体内容需要查看相应地书籍内容，本文仅作为索引复习回忆。</p>
+<h1 id="创建与销毁对象"><a href="#创建与销毁对象" class="headerlink" title="创建与销毁对象"></a>创建与销毁对象</h1><ol>
+<li><p>用静态工厂方法代替构造器</p>
+</li>
+<li><p>遇到多个构造器参数时要考虑使用构建器(builder)</p>
+</li>
+<li><p>用私有构造器或者枚举类型强化Singleton属性</p>
+</li>
+<li><p>通过私有构造器强化不可实例化的能力</p>
+</li>
+<li><p>优先考虑依赖注入来引用资源</p>
+</li>
+<li><p>避免创建不必要的对象</p>
+</li>
+<li><p>消除过期的对象引用</p>
+</li>
+<li><p>避免使用中介方法和清除方法</p>
+</li>
+<li><p>try-with-resources优先于try-finally</p>
+</li>
+</ol>
+<h1 id="对于所有对象都通用的方法"><a href="#对于所有对象都通用的方法" class="headerlink" title="对于所有对象都通用的方法"></a>对于所有对象都通用的方法</h1><ol start="10">
+<li><p>覆盖Equals时请遵守通用约定</p>
+</li>
+<li><p>覆盖equals时总要覆盖hashCode</p>
+</li>
+<li><p>始终要覆盖toString</p>
+</li>
+<li><p>谨慎的覆盖clone</p>
+</li>
+<li><p>考虑实现Comparable接口</p>
+</li>
+</ol>
+<h1 id="类和接口"><a href="#类和接口" class="headerlink" title="类和接口"></a>类和接口</h1><ol start="15">
+<li><p>使用类和成员的可访问性最小化</p>
+</li>
+<li><p>要在公有类而非公有域中使用访问方法</p>
+</li>
+<li><p>使可变性最小化</p>
+</li>
+<li><p>复合优先于集成</p>
+</li>
+<li><p>要么设计继承并提供文档说明，要么继承</p>
+</li>
+<li><p>接口优于抽象类</p>
+</li>
+<li><p>为后代设计接口</p>
+</li>
+<li><p>接口只用于定义类型</p>
+</li>
+<li><p>类层次优于标签类</p>
+</li>
+<li><p>静态成员类由于非静态成员类</p>
+</li>
+<li><p>限制源文件为单个顶级类</p>
+</li>
+</ol>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><ol start="26">
+<li><p>请不要使用原生态类型</p>
+</li>
+<li><p>消除非受检的警告</p>
+</li>
+<li><p>列表由于数组</p>
+</li>
+<li><p>优先考虑泛型</p>
+</li>
+<li><p>优先考虑泛型方法</p>
+</li>
+<li><p>利用有限限制通配符来提升API的灵活性</p>
+</li>
+<li><p>谨慎并用泛型和可变参数</p>
+</li>
+<li><p>优先考虑类型安全的异构容器</p>
+</li>
+</ol>
+<h1 id="枚举和注解"><a href="#枚举和注解" class="headerlink" title="枚举和注解"></a>枚举和注解</h1><ol start="34">
+<li><p>用enum代替int常量</p>
+</li>
+<li><p>用实例域代替序数</p>
+</li>
+<li><p>用EnumSet代替位域</p>
+</li>
+<li><p>用EnumMap代替序数索引</p>
+</li>
+<li><p>用接口模拟可扩展的枚举</p>
+</li>
+<li><p>注解优先于明明模式</p>
+</li>
+<li><p>坚持使用Override注解</p>
+</li>
+<li><p>用标记接口定义类型</p>
+</li>
+</ol>
+<h1 id="Lamda和stream"><a href="#Lamda和stream" class="headerlink" title="Lamda和stream"></a>Lamda和stream</h1><ol start="42">
+<li><p>Lamda优先于匿名类</p>
+</li>
+<li><p>方法引用优先于Lamda</p>
+</li>
+<li><p>坚持使用标准的函数接口</p>
+</li>
+<li><p>谨慎使用Stream</p>
+</li>
+<li><p>优先选择Stream中无副作用的函数</p>
+</li>
+<li><p>Stream要优先用Collection作为返回类型</p>
+</li>
+<li><p>谨慎使用Stream并行</p>
+</li>
+</ol>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><ol start="49">
+<li><p>检查参数的有效性</p>
+</li>
+<li><p>必要时进行保护性拷贝</p>
+</li>
+<li><p>谨慎设计方法签名</p>
+</li>
+<li><p>慎用重载</p>
+</li>
+<li><p>慎用可变参数</p>
+</li>
+<li><p>返回零长度的数组或者集合，而不是null</p>
+</li>
+<li><p>谨慎返回optional</p>
+</li>
+<li><p>为所有导出的API元素编写文档注释</p>
+</li>
+</ol>
+<h1 id="通用编程"><a href="#通用编程" class="headerlink" title="通用编程"></a>通用编程</h1><ol start="57">
+<li><p>将局部变量的作用域最小化</p>
+</li>
+<li><p>for-each循环优先传统的for循环</p>
+</li>
+<li><p>了解和使用类库</p>
+</li>
+<li><p>如果需要精确的答案，请避免使用float和double</p>
+</li>
+<li><p>基本类型优先于装箱基本类型</p>
+</li>
+<li><p>如果其他类型更适合，则尽量避免使用字符串</p>
+</li>
+<li><p>了解字符串连接的性能</p>
+</li>
+<li><p>通过接口引用对象</p>
+</li>
+<li><p>接口优先于反射机制</p>
+</li>
+<li><p>谨慎地使用本地方法</p>
+</li>
+<li><p>谨慎地进行优化</p>
+</li>
+<li><p>遵守普遍接受的命名惯例</p>
+</li>
+</ol>
+<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><ol start="69">
+<li><p>只针对异常的情况才使用异常</p>
+</li>
+<li><p>对可恢复的情况使用受检异常，对编程错误使用运行时异常</p>
+</li>
+<li><p>避免不必要地使用受检异常</p>
+</li>
+<li><p>优先使用标准的异常</p>
+</li>
+<li><p>抛出与抽象对应的异常</p>
+</li>
+<li><p>每个方法抛出的所有异常都要建立文档</p>
+</li>
+<li><p>在细节消息中包含失败捕获信息</p>
+</li>
+<li><p>努力使失败保持原子性</p>
+</li>
+<li><p>不要忽略异常</p>
+</li>
+</ol>
+<h1 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h1><ol start="78">
+<li><p>同步访问共享的可变数据</p>
+</li>
+<li><p>避免过度同步</p>
+</li>
+<li><p>executor，task和stream优先于线程</p>
+</li>
+<li><p>并发工具优先于wait和notify</p>
+</li>
+<li><p>线程安全性的文档化</p>
+</li>
+<li><p>慎用延迟初始化</p>
+</li>
+<li><p>不要依赖于线程调度器</p>
+</li>
+</ol>
+<h1 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h1><ol start="85">
+<li><p>其他方法优先于Java序列化</p>
+</li>
+<li><p>谨慎地实现Serializable接口</p>
+</li>
+<li><p>考虑使用自定义地序列化形式</p>
+</li>
+<li><p>保护性地编写readOjbect方法</p>
+</li>
+<li><p>对于实例控制，枚举类型优先于readResolve</p>
+</li>
+<li><p>考虑用序列化代理代替序列化实例</p>
+</li>
+</ol>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2020/02/22/Microservice-Architecture/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2738,323 +3100,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/24/Java-Memory-Model/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/24/Java-Memory-Model/" class="post-title-link" itemprop="https://sunnyhll.github.io/page/3/index.html">Java Memory Model</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-24 14:19:13" itemprop="dateCreated datePublished" datetime="2018-12-24T14:19:13+08:00">2018-12-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-11-20 09:14:07" itemprop="dateModified" datetime="2020-11-20T09:14:07+08:00">2020-11-20</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本文将从JMM的理论模型和系统设计角度切入讲述并发工具的内存语义与实现细节。</p>
-<h1 id="JMM存在的目的"><a href="#JMM存在的目的" class="headerlink" title="JMM存在的目的"></a>JMM存在的目的</h1><p>Java虚拟机规范中试图定义一种Java内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各个平台下都能达到一致的内存访问效果。</p>
-<p><img src="/2018/12/24/Java-Memory-Model/JMM.jpg" alt="JMM"></p>
-<h1 id="JVM内存模型操作"><a href="#JVM内存模型操作" class="headerlink" title="JVM内存模型操作"></a>JVM内存模型操作</h1><p><strong>主内存操作</strong></p>
-<ul>
-<li>lock：将一个变量表示为一条线程独占的状态。</li>
-<li>unlock: 将一个处于锁定状态的变量释放，释放后的变量才可以被其他线程锁定。</li>
-<li>read: 将一个变量的值从主内存传输到线程的工作内存中，以便随后的load动作使用。</li>
-<li>write: 将store操作从工作内存中得到的变量值放入主内存的变量中。</li>
-</ul>
-<p><strong>工作内存操作</strong></p>
-<ul>
-<li>load: 把read操作从主内存得到的变量值放入到工作内存的变量副本中。</li>
-<li>use: 把工作内存中的一个变量值传递给执行引擎，每当虚拟机遇到需要使用变量复制的字节码指令时执行这个操作。</li>
-<li>assign: 把一个执行引擎的接收到的值赋值给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。 </li>
-<li>store: 把工作内存中一个变量的值传送到主内存中，以便随后的write操作使用。</li>
-</ul>
-<h2 id="内存操作执行基本规则"><a href="#内存操作执行基本规则" class="headerlink" title="内存操作执行基本规则"></a>内存操作执行基本规则</h2><ul>
-<li><p>不允许read和load、store和write操作之一单独出现，即不允许一个变量从主内存读取了但工作内存不接受，或者从工作内存发起回写了但主内存不接受的情况出现。</p>
-</li>
-<li><p>不允许一个线程丢弃它的最近的assign操作，即变量在工作内存中改变了之后必须把该变化同步回主内存。</p>
-</li>
-<li><p>不允许一个线程无原因地（没有发生过任何assign操作）把数据从线程的工作内存同步回主内存中。</p>
-</li>
-<li><p>一个新的变量只能在主内存中“诞生”，不允许在工作内存中直接使用一个未被初始化（load或assign）的变量，换句话说，就是对一个变量实施use、store操作之前，必须先执行过了assign和load操作。</p>
-</li>
-<li><p>一个变量在同一个时刻只允许一条线程对其进行lock操作，但lock操作可以被同一条线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁。</p>
-</li>
-<li><p>如果对一个变量执行lock操作，那将会清空工作内存中此变量的值，在执行引擎使用这个变量前，需要重新执行load或assign操作初始化变量的值。</p>
-</li>
-<li><p>如果一个变量事先没有被lock操作锁定，那就不允许对它执行unlock操作，也不允许去unlock一个被其他线程锁定住的变量。</p>
-</li>
-<li><p>对一个变量执行unlock操作之前，必须先把此变量同步回主内存中（执行store、write操作）。</p>
-</li>
-</ul>
-<h1 id="JVM内存模型特性"><a href="#JVM内存模型特性" class="headerlink" title="JVM内存模型特性"></a>JVM内存模型特性</h1><ul>
-<li>原子性 JVM对基本数据类型的访问读写（上述操作）是具备原子性的。</li>
-<li>可见性 当一个线程修改了共享变量的值，其他线程能够立刻知道这个修改。而volatile变量较普通变量能够保证多线程场景下线程在每次读写前都能刷新。</li>
-<li>有序性 本线程内，操作都是有序；多线程场景下，线程间操作是无序的。</li>
-</ul>
-<h2 id="Happen-Before先行发生法则"><a href="#Happen-Before先行发生法则" class="headerlink" title="Happen-Before先行发生法则"></a>Happen-Before先行发生法则</h2><p>先行发生是JMM中定义的两项操作之前的偏序关系，如果说操作A先行发生于操作B，其实就是说发生操作B之前，操作A产生的影响能够被B观察到，“影响”包括修改了内存中共享变量的值、发送了消息、调用了方法等。</p>
-<p>具体体现：</p>
-<ul>
-<li><p><strong>程序次序规则（Program Order Rule）</strong>：在一个线程内，按照程序代码顺序，书写在前面的操作先行发生于书写在后面的操作。准确地说，应该是控制流顺序而不是程序代码顺序，因为要考虑分支、循环等结构。</p>
-</li>
-<li><p><strong>管程锁定规则（Monitor Lock Rule）</strong>：一个unlock操作先行发生于后面对同一个锁的lock操作。这里必须强调的是同一个锁，而“后面”是指时间上的先后顺序。</p>
-</li>
-<li><p><strong>volatile变量规则（Volatile Variable Rule）</strong>：对一个volatile变量的写操作先行发生于后面对这个变量的读操作，这里的“后面”同样是指时间上的先后顺序。</p>
-</li>
-<li><p><strong>线程终止规则（Thread Termination Rule）</strong>：线程中的所有操作都先行发生于对此线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值等手段检测到线程已经终止执行。</p>
-</li>
-<li><p><strong>线程中断规则（Thread Interruption Rule）</strong>：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过Thread.interrupted()方法检测到是否有中断发生。</p>
-</li>
-<li><p><strong>对象终结规则（Finalizer Rule）</strong>：一个对象的初始化完成（构造函数执行结束）先行发生于它的finalize()方法的开始。</p>
-</li>
-<li><p><strong>传递性（Transitivity）</strong>：如果操作A先行发生于操作B，操作B先行发生于操作C，那就可以得出操作A先行发生于操作C的结论。</p>
-</li>
-</ul>
-<h1 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h1><p>编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段。</p>
-<h2 id="单线程重排序："><a href="#单线程重排序：" class="headerlink" title="单线程重排序："></a>单线程重排序：</h2><ul>
-<li><strong>数据依赖性</strong>：程序的任意两个操作的执行是可能具有一定的依赖性，不能改变。</li>
-<li><strong>as-if-serial语义</strong>：单线程程序的执行结果不能改变。</li>
-<li><strong>程序顺序规则</strong>: happens-before的顺序规则不能修改。</li>
-</ul>
-<h2 id="多线程重排序："><a href="#多线程重排序：" class="headerlink" title="多线程重排序："></a>多线程重排序：</h2><ul>
-<li><strong>顺序一致性模型</strong>：概念上模型只有一个单一的全局内存，所有操作线程在每一步操作后看到的内存内容都是一致的。实际上并不能完全保证，只能保证同步程序在进出临界区内代码各个线程的内存视图能够一致。</li>
-</ul>
-<h1 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h1><p>硬件层的内存屏障分为两种：Load Barrier 和 Store Barrier即读屏障和写屏障。<br>内存屏障有两个作用：</p>
-<ol>
-<li>阻止屏障两侧的指令重排序；</li>
-<li>强制把写缓冲区/高速缓存中的脏数据等写回主内存，让缓存中相应的数据失效。</li>
-</ol>
-<p>对于Load Barrier来说，在指令前插入Load Barrier，可以让高速缓存中的数据失效，强制从新从主内存加载数据；</p>
-<p>对于Store Barrier来说，在指令后插入Store Barrier，能让写入缓存中的最新数据更新写入主内存，让其他线程可见。</p>
-<h2 id="java内存屏障"><a href="#java内存屏障" class="headerlink" title="java内存屏障"></a>java内存屏障</h2><p>java的内存屏障通常所谓的四种即LoadLoad,StoreStore,LoadStore,StoreLoad实际上也是上述两种的组合，完成一系列的屏障和数据同步功能。</p>
-<ul>
-<li>LoadLoad屏障：对于这样的语句Load1; LoadLoad; Load2，在Load2及后续读取操作要读取的数据被访问前，保证Load1要读取的数据被读取完毕。</li>
-<li>StoreStore屏障：对于这样的语句Store1; StoreStore; Store2，在Store2及后续写入操作执行前，保证Store1的写入操作对其它处理器可见。</li>
-<li>LoadStore屏障：对于这样的语句Load1; LoadStore; Store2，在Store2及后续写入操作被刷出前，保证Load1要读取的数据被读取完毕。</li>
-<li>StoreLoad屏障：对于这样的语句Store1; StoreLoad; Load2，在Load2及后续所有读取操作执行前，保证Store1的写入对所有处理器可见。它的开销是四种屏障中最大的。在大多数处理器的实现中，这个屏障是个万能屏障，兼具其它三种内存屏障的功能</li>
-</ul>
-<h1 id="Java同步工具的内存语义及实现"><a href="#Java同步工具的内存语义及实现" class="headerlink" title="Java同步工具的内存语义及实现"></a>Java同步工具的内存语义及实现</h1><h2 id="锁的内存语义及实现"><a href="#锁的内存语义及实现" class="headerlink" title="锁的内存语义及实现"></a>锁的内存语义及实现</h2><p>锁的语义决定了临界区代码的执行具有原子性。</p>
-<h3 id="内存语义"><a href="#内存语义" class="headerlink" title="内存语义"></a>内存语义</h3><p>锁的释放可以让线程向获取同一个锁的线程发送消息。<br>锁的获取可以让线程对应的内存失效使得临界代码必须从主内存获取共享变量。</p>
-<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>公平锁获取通过AbstractQueuedSynchronizer即AQS实现，通过一个整型的volatile变量state来维护同步状态。拿锁时，tryAcquire方法会查看state值是否为0，即无锁状态，并将state值设置为传入变量acquires，如果state不为0，且owner不是current线程，则返回false.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> acquires)</span></span>&#123;</span><br><span class="line">  <span class="keyword">final</span> Thread current = Thread.currentThread();</span><br><span class="line">  <span class="keyword">int</span> c = getState();</span><br><span class="line">  <span class="keyword">if</span>(c == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>( isFirst(current)) &amp;&amp; compareAndSetState(<span class="number">0</span>, acquires) &#123;</span><br><span class="line">      setExclusiveOwnerThread(current);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(current == getExclusiveOwnerThread())&#123;</span><br><span class="line">    <span class="keyword">int</span> nextc = c + acquires;</span><br><span class="line">    <span class="keyword">if</span>(nextc &lt; <span class="number">0</span>)</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">"Max lock count exceeded"</span>);</span><br><span class="line">      setState(nextc);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>非公平锁的获取不需要tryAcquire方法中通过isFirst(current))方法进行竞争，而是直接调用compareAndSetState(int expect, int update)。</p>
-<p>(非)公平锁释放通过tryRelease(int releases)实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">tryRelease</span><span class="params">(<span class="keyword">int</span> releases)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> c = getState() - releases;</span><br><span class="line">  <span class="keyword">if</span>( Thread.currentThread() != getExclusiveOwnerThread())</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IlleagalMonitorStateException();</span><br><span class="line">    <span class="keyword">boolean</span> free = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">if</span>( c == <span class="number">0</span>)&#123;</span><br><span class="line">      free = <span class="keyword">true</span>;</span><br><span class="line">      setExclusiveOwnerThread(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    setState(c);</span><br><span class="line">    <span class="keyword">return</span> free;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="CAS-内存语义及操作内容"><a href="#CAS-内存语义及操作内容" class="headerlink" title="CAS 内存语义及操作内容"></a>CAS 内存语义及操作内容</h2><h3 id="内存语义-1"><a href="#内存语义-1" class="headerlink" title="内存语义"></a>内存语义</h3><p>CAS更新操作，同时具有volatile读和volatile写的内存语义。</p>
-<h3 id="操作内容"><a href="#操作内容" class="headerlink" title="操作内容"></a>操作内容</h3><p>CAS是处理器的一种操作，是native方法API。</p>
-<ol>
-<li>确保对内存读-改-写的原子性。</li>
-<li>禁止CAS指令前后读写指令重排。</li>
-<li>把缓存区的<strong>所有</strong>数据刷新到内存中。</li>
-</ol>
-<h2 id="volatile-内存语义及实现"><a href="#volatile-内存语义及实现" class="headerlink" title="volatile 内存语义及实现"></a>volatile 内存语义及实现</h2><h3 id="内存语义-2"><a href="#内存语义-2" class="headerlink" title="内存语义"></a>内存语义</h3><p>volatile写与锁的释放有相同的内存语义，volatile读与锁的获取有相同内存语义。</p>
-<h3 id="实现细节-1"><a href="#实现细节-1" class="headerlink" title="实现细节"></a>实现细节</h3><ul>
-<li>通过插入内存屏障，来组织编译器/操作系统进行指令重排序。</li>
-<li><p>通过关联读/写操作和使用操作（用之前必须从主内存读，assign后必须写入主内存，以及写happens-before读规则）强制CPU的缓存失效来保证内存可见性。<br>volatile的内存屏障策略如下：</p>
-</li>
-<li><p>在每个volatile写操作前插入StoreStore屏障，在写操作后插入StoreLoad屏障；<br><img src="/2018/12/24/Java-Memory-Model/VolatileWrite.png" alt="volatile-write"></p>
-</li>
-<li>在每个volatile读操作后分别插入LoadLoad屏障，和LoadStore屏障；<br><img src="/2018/12/24/Java-Memory-Model/VolatileRead.png" alt="volatile-read"></li>
-</ul>
-<p>由于内存屏障的作用，避免了volatile变量和其它指令重排序、线程之间实现了通信，使得volatile表现出了锁的特性。</p>
-<p>volatile强制缓存失效策略如下:</p>
-<ul>
-<li><p><strong>线程的Load、read和Use进行关联</strong>:只有当线程T对变量V执行的前一个动作是load的时候，线程T才能对变量V执行use动作；并且，只有当线程T对变量V执行的后一个动作是use的时候，线程T才能对变量V执行load动作。线程T对变量V的use动作可以认为是和线程T对变量V的load、read动作相关联，必须连续一起出现（这条规则要求在工作内存中，每次使用V前都必须先从主内存刷新最新的值，用于保证能看见其他线程对变量V所做的修改后的值）。</p>
-</li>
-<li><p><strong>Assign和所有线程的store，write进行关联</strong>只有当线程T对变量V执行的前一个动作是assign的时候，线程T才能对变量V执行store动作；并且，只有当线程T对变量V执行的后一个动作是store的时候，线程T才能对变量V执行assign动作。线程T对变量V的assign动作可以认为是和线程T对变量V的store、write动作相关联，必须连续一起出现（这条规则要求在工作内存中，每次修改V后都必须立刻同步回主内存中，用于保证其他线程可以看到自己对变量V所做的修改）。</p>
-</li>
-<li><p><strong>不同变量的上述的两段操作顺序一致</strong>假定动作A是线程T对变量V实施的use或assign动作，假定动作F是和动作A相关联的load或store动作，假定动作P是和动作F相应的对变量V的read或write动作；类似的，假定动作B是线程T对变量W实施的use或assign动作，假定动作G是和动作B相关联的load或store动作，假定动作Q是和动作G相应的对变量W的read或write动作。如果A先于B，那么P先于Q（这条规则要求volatile修饰的变量不会被指令重排序优化，保证代码的执行顺序与程序的顺序相同）。</p>
-<blockquote>
-<p>Happens before法则: 前一个操作的执行结果要对第二个操作可见。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="final-内存语义与实现细节"><a href="#final-内存语义与实现细节" class="headerlink" title="final 内存语义与实现细节"></a>final 内存语义与实现细节</h2><p>final关键字可以放在static域，实例成员域，和局部变量三种变量前。其中final修饰的局部变量的可以作为线程的局部变量传递给子线程。也能保证并发情况下的内存语义。</p>
-<h3 id="内存语义-3"><a href="#内存语义-3" class="headerlink" title="内存语义"></a>内存语义</h3><p>对于final域，编译器和CPU会遵循两个重排序规则：</p>
-<ul>
-<li>新建对象过程中，构造体中对final域的初始化写入和这个对象赋值给其他引用变量，这两个操作不能重排序；（废话嘛）</li>
-<li>初次读包含final域的对象引用和读取这个final域，这两个操作不能重排序；（晦涩，意思就是先赋值引用，再调用final值）</li>
-</ul>
-<p>总之上面规则的意思可以这样理解，必需保证一个对象的所有final域被写入完毕后才能引用和读取。这也是内存屏障的起的作用：</p>
-<h3 id="实现细节-2"><a href="#实现细节-2" class="headerlink" title="实现细节"></a>实现细节</h3><ul>
-<li><p>写final域：在编译器写final域完毕，构造体结束之前，会插入一个StoreStore屏障，保证前面的对final写入对其他线程/CPU可见，并阻止this指针赋值与final域写被重排序(this = new Object(){ finalField = …})。（如果没有，普通域的写可以被重排到构造函数外）<br><img src="/2018/12/24/Java-Memory-Model/FinalWrite.png" alt="final-write"></p>
-</li>
-<li><p>写final域的成员域:构造函数内对一个final引用的对象的成员域的写入，与随后在构造函数外把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序。<br><img src="/2018/12/24/Java-Memory-Model/FinalElementWrite.png" alt="final-element-write"></p>
-</li>
-<li><p>读final域：在上述规则2中，两步操作不能重排序的机理就是在读final域前插入了LoadLoad屏障，这个阻止了读取this引用和读取final域的重排序（isntance.finalField）。<br><img src="/2018/12/24/Java-Memory-Model/FinalRead.png" alt="final-read"></p>
-</li>
-</ul>
-<p>X86处理器中，由于CPU不会对写-写操作进行重排序，所以StoreStore屏障会被省略；而X86也不会对逻辑上有先后依赖关系的操作进行重排序，所以LoadLoad也会变省略。</p>
-<blockquote>
-<p>只要对象是正确构造的（被构造对象的引用在构造函数中没有“逸出”），那么不需要使用同步（指 lock 和 volatile 的使用），就可以保证任意线程都能看到这个 final 域在构造函数中被初始化之后的值。</p>
-</blockquote>
-<p>this逸出代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FinalReferenceEscapeExample</span> </span>&#123;</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">static</span> FinalReferenceEscapeExample obj;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FinalReferenceEscapeExample</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    i = <span class="number">1</span>;                              <span class="comment">//1写final域</span></span><br><span class="line">    obj = <span class="keyword">this</span>;                          <span class="comment">//2 this引用在此“逸出”</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">new</span> FinalReferenceEscapeExample ();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> reader &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj != <span class="keyword">null</span>) &#123;                     <span class="comment">//3</span></span><br><span class="line">        <span class="keyword">int</span> temp = obj.i;                 <span class="comment">//4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Concurrent包的内存语义及实现"><a href="#Concurrent包的内存语义及实现" class="headerlink" title="Concurrent包的内存语义及实现"></a>Concurrent包的内存语义及实现</h2><p>Concurrent包底层实现依赖如下图所示：</p>
-<p><img src="/2018/12/24/Java-Memory-Model/Concurrent.png" alt="Cocurrent"></p>
-<h1 id="延迟初始化问题讨论"><a href="#延迟初始化问题讨论" class="headerlink" title="延迟初始化问题讨论"></a>延迟初始化问题讨论</h1><p>延迟初始化是在需要实例的时候再进行初始化，从而达到提升程序初始化性能的目的。然而延迟初始化需要考虑多线程并发访问，和指令重排序问题。</p>
-<h2 id="静态域延迟初始化"><a href="#静态域延迟初始化" class="headerlink" title="静态域延迟初始化"></a>静态域延迟初始化</h2><p>静态域的延迟初始化能通过final关键词实现，因为final静态域能保证多线程安全初始化，同事也能保证computeFieldValue()方法不会溢出FieldHolder的构造方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FieldHolder</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">final</span> FieldType field = computeFieldValue();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> FieldType <span class="title">getField</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> FieldHolder.field;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="成员域延迟初始化"><a href="#成员域延迟初始化" class="headerlink" title="成员域延迟初始化"></a>成员域延迟初始化</h2><h3 id="单重检查模式"><a href="#单重检查模式" class="headerlink" title="单重检查模式"></a>单重检查模式</h3><p>单重检查模式能够确保大多数情况的fiel的同步，但是当computeFieldValue()执行和field赋值可以重排序，导致在第一次检查时其他线程可能看到不完整的field值，并返回。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> FieldType field;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> FieldType <span class="title">getField</span><span class="params">()</span></span>&#123;</span><br><span class="line">  FieldType result = field;</span><br><span class="line">  <span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123;</span><br><span class="line">    field = result = computeFieldValue();</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="双重检查模式"><a href="#双重检查模式" class="headerlink" title="双重检查模式"></a>双重检查模式</h3><p>双重检查模式通过synchronized和volatile的内存语义，3, 4对其他线程可见，且其他线程在1处的读不会重排序到2语块的内部，能够确保在线程更新field值时，与其他线程查看field值之间的读写能够顺序执行。</p>
-<p>局部变量result的使用能够保证尽量少次数的访问field和取锁，提升运行效率。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> FieldType field;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> FieldType <span class="title">getField</span><span class="params">()</span></span>&#123;</span><br><span class="line">  FieldType result = field;</span><br><span class="line">  <span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123;</span><br><span class="line">    result = field;</span><br><span class="line">    <span class="keyword">if</span>(result == <span class="keyword">null</span>)&#123; <span class="comment">// 1</span></span><br><span class="line">      synchornized(<span class="keyword">this</span>)&#123; <span class="comment">// 2</span></span><br><span class="line">        field = result = computeFieldValue(); <span class="comment">//3, 4</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3102,7 +3147,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
