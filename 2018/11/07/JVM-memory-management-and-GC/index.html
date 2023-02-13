@@ -26,27 +26,27 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="Java memory allocationJava虚拟机管理内存会包括以下几个运行时数据区域，如下图所示。  JVM运行时数据区域简介程序计数器(Program Counter Register)程序计数器时当前线程执行字节码的行号指示器。每条线程有独立的程序计数器。  如果线程执行Java方法，这个技术及记录的时真该执行的虚拟机字节码指令的地址。 如果线程执行的时Native方法，这个计数器值">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/MarkWord.PNG">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/reference.PNG">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/MarkSwap.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/Copying.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/MarkCompact.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/GCRegions.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/GCs.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/SerialGC.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/ParNewGC.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/PSPold.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/CMS.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/G1.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/GCArgs.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//jvm_memory_allocation.PNG">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//MarkWord.PNG">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//reference.PNG">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CMarkSwap.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CCopying.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CMarkCompact.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CGCRegions.png">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CGCs.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CSerialGC.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CParNewGC.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CPSPold.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CCMS.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CG1.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-memory-management-and-GC%5CGCArgs.jpg">
 <meta property="article:published_time" content="2018-11-07T08:58:46.000Z">
 <meta property="article:modified_time" content="2021-01-12T02:02:19.694Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG">
+<meta name="twitter:image" content="https://sunnyhll.github.io/.io//jvm_memory_allocation.PNG">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/">
@@ -104,7 +104,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -272,7 +272,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="Java-memory-allocation"><a href="#Java-memory-allocation" class="headerlink" title="Java memory allocation"></a>Java memory allocation</h1><p>Java虚拟机管理内存会包括以下几个运行时数据区域，如下图所示。</p>
-<p><img src="/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG" alt="jvm"></p>
+<p><img src="/.io//jvm_memory_allocation.PNG" alt="jvm"></p>
 <h2 id="JVM运行时数据区域简介"><a href="#JVM运行时数据区域简介" class="headerlink" title="JVM运行时数据区域简介"></a>JVM运行时数据区域简介</h2><h3 id="程序计数器-Program-Counter-Register"><a href="#程序计数器-Program-Counter-Register" class="headerlink" title="程序计数器(Program Counter Register)"></a>程序计数器(Program Counter Register)</h3><p>程序计数器时当前线程执行字节码的行号指示器。每条线程有独立的程序计数器。</p>
 <ul>
 <li>如果线程执行Java方法，这个技术及记录的时真该执行的虚拟机字节码指令的地址。</li>
@@ -288,10 +288,11 @@
 <h3 id="Java堆"><a href="#Java堆" class="headerlink" title="Java堆"></a>Java堆</h3><p>Java堆是虚拟机所管理的内存，被所有线程共享的，目的是存放对象实例。Java堆是垃圾收集器(GC)主要管理的区域。</p>
 <h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>方法区是用于存储虚拟机的类信息，常量，静态变量，即时编译器编译后的代码等数据，被所有线程共享。在HotSpot虚拟机中，方法区又叫做“永久代”，是因为GC分代收集扩展至方法区，使得方法区由GC中的永久代区域实现。</p>
 <h4 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h4><p>运行时常量池是方法区的一部分。本来在方法区中的类信息就包含了除类的版本、字段、方法、接口等描述信息之外，还有一项信息便是常量池，用于存放编译生成的各种字面量和符号引用。常量池信息将在类加载后进入方法区的运行时常量池中存放。同时，一些方法如String类的intern()方法也能将字符串加入运行时常量池。所以在类信息加载完成后，常量池也不是大小就不变的。</p>
-<h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p>直接内存并不是与JVM运行时数据区的一部分。JDK1.4后引入的NIO(New I/O)类，引入了一种基于通道(Channel)与缓冲区(Buffer)的I/O方式。它可以使用Native函数库直接分配对外内存，然后通过Java堆中的DirectByteBuffer对象作为这块内存的引用进行操作。直接内存不属于JVM GC的管理范畴，可以用-Xmx进行设定。</p>
+<h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p>直接内存并不是与JVM运行时数据区的一部分。JDK1.4后引入的NIO(New I&#x2F;O)类，引入了一种基于通道(Channel)与缓冲区(Buffer)的I&#x2F;O方式。它可以使用Native函数库直接分配对外内存，然后通过Java堆中的DirectByteBuffer对象作为这块内存的引用进行操作。直接内存不属于JVM GC的管理范畴，可以用-Xmx进行设定。</p>
 <h2 id="JVM对象的创建"><a href="#JVM对象的创建" class="headerlink" title="JVM对象的创建"></a>JVM对象的创建</h2><p>当JVM遇到一条new指令时，会做出什么样的处理呢?</p>
 <ol>
-<li>检查指令参数是否能在常量池中定位到一个类的符号引用，并确保其被正确的加载、解析和初始化；</li>
+<li><p>检查指令参数是否能在常量池中定位到一个类的符号引用，并确保其被正确的加载、解析和初始化；</p>
+</li>
 <li><p>在Java堆上分配内存，有两种空闲内存分配方式：</p>
 <ul>
 <li>空闲列表： 基于Mark-Sweep算法的收集器的GC，如CMS；</li>
@@ -306,14 +307,16 @@
 </li>
 <li><p>为新创建对象设置好初始值；</p>
 </li>
-<li>对对象的对象头信息(Object header)进行相关必要设置，如：<ul>
+<li><p>对对象的对象头信息(Object header)进行相关必要设置，如：</p>
+<ul>
 <li>类型指向</li>
 <li>类的元数据</li>
 <li>对象哈希值</li>
 <li>对象的GC年代信息</li>
 </ul>
 </li>
-<li>类文件bytecode中的&lt; init&gt;方法执行；</li>
+<li><p>类文件bytecode中的&lt; init&gt;方法执行；</p>
+</li>
 </ol>
 <blockquote>
 <p>init方法是Java的class文件中的各种构造方法经过JIT解释后生成的bytecode代码，一般由invokespecial操作码所调用。</p>
@@ -322,14 +325,14 @@
 <h2 id="JVM对象的内存布局"><a href="#JVM对象的内存布局" class="headerlink" title="JVM对象的内存布局"></a>JVM对象的内存布局</h2><p>当JVM对象被创建好了，会被分配在Java堆上，存储布局可以分为三个区域：对象头(header)、实例数据(instance data)和对齐填充(padding)。</p>
 <h3 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h3><p>对象头包括两部分，一部分是”Mark Word”,另一部分是类型指针。</p>
 <ul>
-<li>Mark word: 长度为32bit或64bit。HotSpot 32位虚拟机中具体的对象头存储内容取决于对象的锁状态值，如下：<br><img src="/2018/11/07/JVM-memory-management-and-GC/MarkWord.PNG" alt="Markword"></li>
+<li>Mark word: 长度为32bit或64bit。HotSpot 32位虚拟机中具体的对象头存储内容取决于对象的锁状态值，如下：<br>  <img src="/.io//MarkWord.PNG" alt="Markword"></li>
 <li>类型指针: 长度为32bit或64bit，用于存储指向类元数据的指针，并不是所有的虚拟机实现都必须在对象数据上保留类型指针。</li>
 <li>数组长度：长度为32bit，当对象为数组时，用于存储数组的长度。注：此数组并非ArrayList泛型，后者属于引用类型。</li>
 </ul>
 <h3 id="实例数据"><a href="#实例数据" class="headerlink" title="实例数据"></a>实例数据</h3><p>实例数据部分存储了类对象的所有类型的字段内容。每种虚拟机有自己定义好的参数和字段的分配策略。</p>
 <h3 id="对齐填充"><a href="#对齐填充" class="headerlink" title="对齐填充"></a>对齐填充</h3><p>对齐填充的存在是为了满足HotSpot VM自动内存管理系统要求，保证所有对象的地址都是8字节的整数倍。</p>
 <h2 id="Java基础类型内存布局"><a href="#Java基础类型内存布局" class="headerlink" title="Java基础类型内存布局"></a>Java基础类型内存布局</h2><p>java的基本数据类型共有8种，即int,short,long,byte,float,double,boolean,char(注意，并没有String的基本类型)。Java基础类型变量是在(Java虚拟机)栈上分配的，当变量的作用域运行结束后，通过出栈的方式回收分配在栈上的变量内存。</p>
-<p>当声明分配一个int类型变量a = 3时，JVM会先为该变量创建一个变量为a的引用，再在栈上搜索是否存在字面值为3的引用。</p>
+<p>当声明分配一个int类型变量a &#x3D; 3时，JVM会先为该变量创建一个变量为a的引用，再在栈上搜索是否存在字面值为3的引用。</p>
 <ul>
 <li>如果找到，就直接将a指向3的地址。</li>
 <li>如果没有找到，就分配一个内存存放字面值3，并将a指向这个地址。<br>因此说，基础类型字面值在同一个栈上是共享的。</li>
@@ -338,9 +341,9 @@
 <h2 id="JVM对象的访问定位"><a href="#JVM对象的访问定位" class="headerlink" title="JVM对象的访问定位"></a>JVM对象的访问定位</h2><p>对象的访问定位如下图，HOTSOPT用的是第2种算法：</p>
 <ol>
 <li>使用句柄（先指向堆里的句柄池，再从句柄池找到指针，优点是只需要修改句柄, 缺点就是句柄池也是开销）；</li>
-<li>直接指针（减少性能开销）: 需要存2个数据， 到对象实例数据的指针，到对象类数据的指针。<br><img src="/2018/11/07/JVM-memory-management-and-GC/reference.PNG" alt="reference"></li>
+<li>直接指针（减少性能开销）: 需要存2个数据， 到对象实例数据的指针，到对象类数据的指针。<br><img src="/.io//reference.PNG" alt="reference"></li>
 </ol>
-<h1 id="Garbage-Collection-of-JVM"><a href="#Garbage-Collection-of-JVM" class="headerlink" title="Garbage Collection of JVM"></a>Garbage Collection of JVM</h1><h2 id="GC定义"><a href="#GC定义" class="headerlink" title="GC定义"></a>GC定义</h2><p>Garbage Collection（垃圾回收/GC）是JVM对于Java堆上内存在运行时进行的动态管理，主要是对Java堆上不再被引用的对象进行回收。Minor GC是主要快速回收Eden区和Survivor区对象内存，Full GC则会对老年代也进行回收，后者可能会影响性能。</p>
+<h1 id="Garbage-Collection-of-JVM"><a href="#Garbage-Collection-of-JVM" class="headerlink" title="Garbage Collection of JVM"></a>Garbage Collection of JVM</h1><h2 id="GC定义"><a href="#GC定义" class="headerlink" title="GC定义"></a>GC定义</h2><p>Garbage Collection（垃圾回收&#x2F;GC）是JVM对于Java堆上内存在运行时进行的动态管理，主要是对Java堆上不再被引用的对象进行回收。Minor GC是主要快速回收Eden区和Survivor区对象内存，Full GC则会对老年代也进行回收，后者可能会影响性能。</p>
 <h2 id="如何确定对象是否需要回收？"><a href="#如何确定对象是否需要回收？" class="headerlink" title="如何确定对象是否需要回收？"></a>如何确定对象是否需要回收？</h2><h3 id="引用计数算法（Reference-Counting）"><a href="#引用计数算法（Reference-Counting）" class="headerlink" title="引用计数算法（Reference Counting）"></a>引用计数算法（Reference Counting）</h3><p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被使用的。</p>
 <p>缺点：存在循环引用的问题。</p>
 <h3 id="可达性分析算法（Reachability-Analysis）"><a href="#可达性分析算法（Reachability-Analysis）" class="headerlink" title="可达性分析算法（Reachability Analysis）"></a>可达性分析算法（Reachability Analysis）</h3><p>通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连（用图论的话来说，就是从GC Roots到这个对象不可达）时，则证明此对象是不可用的。</p>
@@ -351,12 +354,12 @@
 <li>方法去中常量引用的对象</li>
 <li>本地方法栈中JNI（Native方法）引用的对象。</li>
 </ul>
-<h2 id="如何对对象进行回收？"><a href="#如何对对象进行回收？" class="headerlink" title="如何对对象进行回收？"></a>如何对对象进行回收？</h2><h3 id="标记——清除算法"><a href="#标记——清除算法" class="headerlink" title="标记——清除算法"></a>标记——清除算法</h3><p><img src="/2018/11/07/JVM-memory-management-and-GC/MarkSwap.jpg" alt="MarkSwap"></p>
-<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p><img src="/2018/11/07/JVM-memory-management-and-GC/Copying.jpg" alt="Copying"></p>
-<h3 id="标记——整理算法"><a href="#标记——整理算法" class="headerlink" title="标记——整理算法"></a>标记——整理算法</h3><p><img src="/2018/11/07/JVM-memory-management-and-GC/MarkCompact.jpg" alt="MarkCompact"></p>
+<h2 id="如何对对象进行回收？"><a href="#如何对对象进行回收？" class="headerlink" title="如何对对象进行回收？"></a>如何对对象进行回收？</h2><h3 id="标记——清除算法"><a href="#标记——清除算法" class="headerlink" title="标记——清除算法"></a>标记——清除算法</h3><p><img src="/.io//JVM-memory-management-and-GC%5CMarkSwap.jpg" alt="MarkSwap"></p>
+<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p><img src="/.io//JVM-memory-management-and-GC%5CCopying.jpg" alt="Copying"></p>
+<h3 id="标记——整理算法"><a href="#标记——整理算法" class="headerlink" title="标记——整理算法"></a>标记——整理算法</h3><p><img src="/.io//JVM-memory-management-and-GC%5CMarkCompact.jpg" alt="MarkCompact"></p>
 <h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>对于新生代和老年代的对象进行不同的清理算法，一般来说，复制算法适合新生代，标记-清除算法和标记整理算法更适合老年代内存。</p>
 <h2 id="JVM对象内存管理策略"><a href="#JVM对象内存管理策略" class="headerlink" title="JVM对象内存管理策略"></a>JVM对象内存管理策略</h2><p>GC管理的内存分为三类区域，分别是Eden+Survivor（新生代），Tenured（老年代）和Permanent（永久代）。</p>
-<p><img src="/2018/11/07/JVM-memory-management-and-GC/GCRegions.png" alt="GCregion"></p>
+<p><img src="/.io//JVM-memory-management-and-GC%5CGCRegions.png" alt="GCregion"></p>
 <ol>
 <li><p>对象优先在Eden分配</p>
 </li>
@@ -367,13 +370,13 @@
 <li><p>动态对象年龄判定：当Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或者等于该年龄的对象可以直接进入老年代，无须等到MaxTenuringThreshold中要求的年龄。这是为了防止Survivor区溢出。</p>
 </li>
 </ol>
-<h2 id="JVM常用的垃圾收集器"><a href="#JVM常用的垃圾收集器" class="headerlink" title="JVM常用的垃圾收集器"></a>JVM常用的垃圾收集器</h2><p><img src="/2018/11/07/JVM-memory-management-and-GC/GCs.jpg" alt="GCs"></p>
+<h2 id="JVM常用的垃圾收集器"><a href="#JVM常用的垃圾收集器" class="headerlink" title="JVM常用的垃圾收集器"></a>JVM常用的垃圾收集器</h2><p><img src="/.io//JVM-memory-management-and-GC%5CGCs.jpg" alt="GCs"></p>
 <h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3><p>单线程处理<strong>新生代</strong>GC。复制算法。STW</p>
-<p><img src="/2018/11/07/JVM-memory-management-and-GC/SerialGC.jpg" alt="Serial/SerialOld"></p>
+<p><img src="/.io//JVM-memory-management-and-GC%5CSerialGC.jpg" alt="Serial/SerialOld"></p>
 <h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>采用多线程处理<strong>新生代</strong>GC。复制算法。STW</p>
-<p><img src="/2018/11/07/JVM-memory-management-and-GC/ParNewGC.jpg" alt="ParNew"></p>
-<h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>处理算法和ParNewGC完全一样。<br>但是，Parallel Scavenge收集器的特点是它的关注点与其他收集器不同，CMS等收集器的关注点是尽可能地缩短垃圾收集时用户线程的停顿时间，而Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量（Throughput）。所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量 = 运行用户代码时间 /（运行用户代码时间 +垃圾收集时间），虚拟机总共运行了100分钟，其中垃圾收集花掉1分钟，那吞吐量就是99%。</p>
-<p><img src="/2018/11/07/JVM-memory-management-and-GC/PSPold.jpg" alt="ParallelScavengeAndParOld"></p>
+<p><img src="/.io//JVM-memory-management-and-GC%5CParNewGC.jpg" alt="ParNew"></p>
+<h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>处理算法和ParNewGC完全一样。<br>但是，Parallel Scavenge收集器的特点是它的关注点与其他收集器不同，CMS等收集器的关注点是尽可能地缩短垃圾收集时用户线程的停顿时间，而Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量（Throughput）。所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量 &#x3D; 运行用户代码时间 &#x2F;（运行用户代码时间 +垃圾收集时间），虚拟机总共运行了100分钟，其中垃圾收集花掉1分钟，那吞吐量就是99%。</p>
+<p><img src="/.io//JVM-memory-management-and-GC%5CPSPold.jpg" alt="ParallelScavengeAndParOld"></p>
 <h3 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h3><p>单线程处理<strong>老年代</strong>GC。采用标记-整理算法。STW</p>
 <h3 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h3><p>多线程处理<strong>老年代</strong>GC。采用标记整理算法。STW</p>
 <h3 id="CMS-Concurrent-Mark-Sweep-收集器"><a href="#CMS-Concurrent-Mark-Sweep-收集器" class="headerlink" title="CMS(Concurrent Mark Sweep)收集器"></a>CMS(Concurrent Mark Sweep)收集器</h3><p>四个阶段（基于标记-清理算法）：</p>
@@ -383,10 +386,10 @@
 <li>再次标记 STW</li>
 <li>并发清理</li>
 </ul>
-<p><img src="/2018/11/07/JVM-memory-management-and-GC/CMS.jpg" alt="CMS"></p>
+<p><img src="/.io//JVM-memory-management-and-GC%5CCMS.jpg" alt="CMS"></p>
 <p>问题：</p>
 <ol>
-<li>并发清理时预留空间不够造成并发清理(Concurrent Mode Failure)失败=&gt;浮动垃圾(Floating Gabage)过多。</li>
+<li>并发清理时预留空间不够造成并发清理(Concurrent Mode Failure)失败&#x3D;&gt;浮动垃圾(Floating Gabage)过多。</li>
 <li>内存碎片化问题。一旦发生大对象触发的FullGC，Serial Old回收则会出现长时间STW。</li>
 </ol>
 <ul>
@@ -426,7 +429,7 @@
 <ul>
 <li>标记-清除-复制算法整理 STW<br>只对新生代区块进行清理，但是也会需要扫描所有region的Rset，否则不知道有哪些Old-&gt;Young的引用。</li>
 </ul>
-<p>Mixed GC:<br>处理Mixed GC时只将将部分old区块进行回收。Rset记录了其他区块对本区块的引用。最终的扫描区域为Young+对Rset进行扫描，缩短了原来需要扫描整个Old时间。而且Young<->Old的引用都能快速找到。</-></p>
+<p>Mixed GC:<br>处理Mixed GC时只将将部分old区块进行回收。Rset记录了其他区块对本区块的引用。最终的扫描区域为Young+对Rset进行扫描，缩短了原来需要扫描整个Old时间。而且Young&lt;-&gt;Old的引用都能快速找到。</p>
 <p>并发标记分为四个阶段(基于标记-整理算法)：</p>
 <ul>
 <li>初始标记 STW</li>
@@ -435,10 +438,10 @@
 <li>筛选回收 STW 根据停顿时间要求筛选出Old中的Cset集合，作为回收目标。</li>
 </ul>
 <p>回收evacuation阶段（小区块进行复制整理避免碎片）：<br>需要STW，将选出的Cset中的对象进行复制到新的区块，清除掉原来的区块，达到收集的效果。</p>
-<p><img src="/2018/11/07/JVM-memory-management-and-GC/G1.jpg" alt="G1"></p>
+<p><img src="/.io//JVM-memory-management-and-GC%5CG1.jpg" alt="G1"></p>
 <h3 id="ZGC-Z-Garbage-Collector-收集器"><a href="#ZGC-Z-Garbage-Collector-收集器" class="headerlink" title="ZGC(Z Garbage Collector)收集器"></a>ZGC(Z Garbage Collector)收集器</h3><p>ZGC（Z Garbage Collector）是一款由Oracle公司研发的，以低延迟为首要目标的一款垃圾收集器。它是基于动态Region内存布局，（暂时）不设年龄分代，使用了读屏障、染色指针和内存多重映射等技术来实现可并发的标记-整理算法的收集器。在JDK 11新加入，还在实验阶段，主要特点是：回收TB级内存（最大4T），停顿时间不超过10ms。m目前ZGC是实验性功能，可以通过<code>-XX:+UnlockExperimentalVMOptions -XX:+UseZGC</code>参数启动ZGC。</p>
-<h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><p><img src="/2018/11/07/JVM-memory-management-and-GC/GCArgs.jpg" alt="GCArgs"></p>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+<h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><p><img src="/.io//JVM-memory-management-and-GC%5CGCArgs.jpg" alt="GCArgs"></p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
     </div>
 
     

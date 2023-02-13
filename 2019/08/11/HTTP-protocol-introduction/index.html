@@ -26,16 +26,16 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="HTTP 协议HTTP协议属于应用层协议，其设计目的是为了方便文本内容的分享与发布。HTTP协议是Web资源共享的基础，与URL(文档地址定位符)，HTML共同构建了Web世界。 HTTP协议属于点到点通信协议，请求访问资源的一端称为客户端，提供资源相应的一端称为服务器。 HTTP协议方法 GET：请求访问资源。 POST：传输主体内容。 PUT：传输内容，幂等传输。 HEAD: 获得报文首部，用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/2019/08/11/HTTP-protocol-introduction/HTTPS.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2019/08/11/HTTP-protocol-introduction/BASIC.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2019/08/11/HTTP-protocol-introduction/DIGEST.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2019/08/11/HTTP-protocol-introduction/FORMBASED.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CHTTPS.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CBASIC.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CDIGEST.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CFORMBASED.jpg">
 <meta property="article:published_time" content="2019-08-11T13:57:54.000Z">
 <meta property="article:modified_time" content="2019-08-11T13:58:11.977Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/2019/08/11/HTTP-protocol-introduction/HTTPS.jpg">
+<meta name="twitter:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CHTTPS.jpg">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2019/08/11/HTTP-protocol-introduction/">
@@ -93,7 +93,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">HTTP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP协议方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP协议架构中的转发功能节点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS"><span class="nav-number">2.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP协议的缺点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-over-SSL-TSL"><span class="nav-number">2.2.</span> <span class="nav-text">HTTP over SSL&#x2F;TSL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WebSocket%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">WebSocket协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">用户认证问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Web安全问题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">HTTP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP协议方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP协议架构中的转发功能节点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS"><span class="nav-number">2.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP协议的缺点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-over-SSL-x2F-TSL"><span class="nav-number">2.2.</span> <span class="nav-text">HTTP over SSL&#x2F;TSL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WebSocket%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">WebSocket协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">用户认证问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Web安全问题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -270,39 +270,37 @@
 <h2 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h2><table>
 <thead>
 <tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">类别</th>
-<th style="text-align:left">原因短语</th>
+<th align="left"></th>
+<th align="left">类别</th>
+<th align="left">原因短语</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">1XX</td>
-<td style="text-align:left">Informational(信息性状态码)</td>
-<td style="text-align:left">接收的请求正在处理</td>
+<tbody><tr>
+<td align="left">1XX</td>
+<td align="left">Informational(信息性状态码)</td>
+<td align="left">接收的请求正在处理</td>
 </tr>
 <tr>
-<td style="text-align:left">2XX</td>
-<td style="text-align:left">Success（成功状态码）</td>
-<td style="text-align:left">请求正常处理完毕</td>
+<td align="left">2XX</td>
+<td align="left">Success（成功状态码）</td>
+<td align="left">请求正常处理完毕</td>
 </tr>
 <tr>
-<td style="text-align:left">3XX</td>
-<td style="text-align:left">Redirection（重定向状态码）</td>
-<td style="text-align:left">需要进行附加操作以完成请求</td>
+<td align="left">3XX</td>
+<td align="left">Redirection（重定向状态码）</td>
+<td align="left">需要进行附加操作以完成请求</td>
 </tr>
 <tr>
-<td style="text-align:left">4XX</td>
-<td style="text-align:left">Client Error（客户端错误状态码）</td>
-<td style="text-align:left">服务器无法处理请求</td>
+<td align="left">4XX</td>
+<td align="left">Client Error（客户端错误状态码）</td>
+<td align="left">服务器无法处理请求</td>
 </tr>
 <tr>
-<td style="text-align:left">5XX</td>
-<td style="text-align:left">Server Error(服务器错误状态码)</td>
-<td style="text-align:left">服务器处理请求出错</td>
+<td align="left">5XX</td>
+<td align="left">Server Error(服务器错误状态码)</td>
+<td align="left">服务器处理请求出错</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="HTTP协议架构中的转发功能节点"><a href="#HTTP协议架构中的转发功能节点" class="headerlink" title="HTTP协议架构中的转发功能节点"></a>HTTP协议架构中的转发功能节点</h2><ul>
 <li>代理：代理服务器的基本行为是接收客户端发送的请求转发给其他服务器，不改变请求URI。分为两类：<ol>
 <li>缓存代理：缓存内容。</li>
@@ -317,33 +315,33 @@
 <li>无法验证通信方身份，会被伪装；</li>
 <li>无法验证报文的完整性，会被篡改。</li>
 </ol>
-<h2 id="HTTP-over-SSL-TSL"><a href="#HTTP-over-SSL-TSL" class="headerlink" title="HTTP over SSL/TSL"></a>HTTP over SSL/TSL</h2><p>SSL/TSL协议独立与HTTP协议，存在于HTTP和TCP协议之间，在建立HTTP连接之前，先建立SSL通信机制，交换加密密钥，从而在HTTP通信报文可以进行加密传输。</p>
-<p>HTTPS 协议通信握手/分手协议步骤：</p>
-<p><img src="/2019/08/11/HTTP-protocol-introduction/HTTPS.jpg" alt="HTTPS"></p>
+<h2 id="HTTP-over-SSL-x2F-TSL"><a href="#HTTP-over-SSL-x2F-TSL" class="headerlink" title="HTTP over SSL&#x2F;TSL"></a>HTTP over SSL&#x2F;TSL</h2><p>SSL&#x2F;TSL协议独立与HTTP协议，存在于HTTP和TCP协议之间，在建立HTTP连接之前，先建立SSL通信机制，交换加密密钥，从而在HTTP通信报文可以进行加密传输。</p>
+<p>HTTPS 协议通信握手&#x2F;分手协议步骤：</p>
+<p><img src="/.io//HTTP-protocol-introduction%5CHTTPS.jpg" alt="HTTPS"></p>
 <p>握手主要分为4个阶段:</p>
 <ol>
-<li>SSL证书请求，及公钥获取。&lt;= 由于非对称加密机制的效率较低，安全性高，只用作密钥交互。</li>
+<li>SSL证书请求，及公钥获取。&lt;&#x3D; 由于非对称加密机制的效率较低，安全性高，只用作密钥交互。</li>
 <li>客户端密钥加密发送。</li>
 <li>服务器端密钥确认。</li>
-<li>数据传输… &lt;= 数据传输阶段的加密是基于协商确定的对称密钥发送，效率较高。</li>
+<li>数据传输… &lt;&#x3D; 数据传输阶段的加密是基于协商确定的对称密钥发送，效率较高。</li>
 </ol>
 <h1 id="WebSocket协议"><a href="#WebSocket协议" class="headerlink" title="WebSocket协议"></a>WebSocket协议</h1><p>Web浏览器支持的全双工通信协议，在HTTP部首加入upgrade：websocket字段，服务器通过返回状态码101 swtiching protocols响应连接，一旦服务器与客户端建立WebSocket协议的通信连接，之后所有的通信都用这个专用协议进行。</p>
 <ul>
 <li>推送功能： 服务器可以直接发送数据到客户端。</li>
 <li>减少通信量：保持连接的状态减少HTTP协议的连接开销。</li>
 </ul>
-<h1 id="用户认证问题"><a href="#用户认证问题" class="headerlink" title="用户认证问题"></a>用户认证问题</h1><p>HTTP/1.1常见的认证方式如下：</p>
+<h1 id="用户认证问题"><a href="#用户认证问题" class="headerlink" title="用户认证问题"></a>用户认证问题</h1><p>HTTP&#x2F;1.1常见的认证方式如下：</p>
 <ul>
-<li>BASIC认证：直接提交用户名密码完成认证。<br><img src="/2019/08/11/HTTP-protocol-introduction/BASIC.jpg" alt="BASIC"></li>
-<li>DIGEST认证：客户端根据服务器端的质询码生成响应码完成认证。<br><img src="/2019/08/11/HTTP-protocol-introduction/DIGEST.jpg" alt="DIGEST"></li>
+<li>BASIC认证：直接提交用户名密码完成认证。<br><img src="/.io//HTTP-protocol-introduction%5CBASIC.jpg" alt="BASIC"></li>
+<li>DIGEST认证：客户端根据服务器端的质询码生成响应码完成认证。<br><img src="/.io//HTTP-protocol-introduction%5CDIGEST.jpg" alt="DIGEST"></li>
 <li>SSL客户端认证：凭借HTTPS的客户端认证证书完成认证。</li>
-<li>FormBase认证：在用户登录信息以表单形式提交后，服务器端发放Session ID用于用户认证状态的绑定和保持。<br><img src="/2019/08/11/HTTP-protocol-introduction/FORMBASED.jpg" alt="FORM"></li>
+<li>FormBase认证：在用户登录信息以表单形式提交后，服务器端发放Session ID用于用户认证状态的绑定和保持。<br><img src="/.io//HTTP-protocol-introduction%5CFORMBASED.jpg" alt="FORM"></li>
 <li>Kerberos认证：</li>
 <li>NTLM认证：</li>
 <li>SSO认证：</li>
 </ul>
 <h1 id="Web安全问题"><a href="#Web安全问题" class="headerlink" title="Web安全问题"></a>Web安全问题</h1><ul>
-<li>跨站脚本工具XSS：通过执行非法HTML标签/JS脚本进行攻击。<ol>
+<li>跨站脚本工具XSS：通过执行非法HTML标签&#x2F;JS脚本进行攻击。<ol>
 <li>表单中插入非法标签执行JS脚本。</li>
 <li>基于用户Cookie的窃取攻击</li>
 </ol>
@@ -362,7 +360,7 @@
 <li>目录遍历攻击: 访问无疑公开的文件目录。</li>
 <li>远程文件包含漏洞：引入其他包，例如System包进行代码污染。</li>
 </ul>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
     </div>
 
     

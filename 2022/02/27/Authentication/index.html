@@ -26,21 +26,21 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="Authentication服务鉴权机制用户在访问系统或者服务时，服务器端需要验证用户是否拥有访问的权力，这个过程称为鉴权。在服务器-客户端架构的软件系统中，当一个没有经过鉴权的用户登录时，服务器可能会返回鉴权请求。鉴权是一种客户端和服务器协同认证的方式，有多种方式可以实现：  HTTP Basic Authentication session-cookie Token 验证(JWT) OAuth">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/2022/02/27/Authentication/CookieAuth.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2022/02/27/Authentication/TokenAuth.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2022/02/27/Authentication/OIDCAuth.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/2022/02/27/Authentication/AuthorizationCodeOAuth.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2022/02/27/Authentication/ImplicitOAuth.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2022/02/27/Authentication/PasswordOAuth.png">
-<meta property="og:image" content="https://sunnyhll.github.io/2022/02/27/Authentication/ClientCertOAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//CookieAuth.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//TokenAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//OIDCAuth.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//AuthorizationCodeOAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//ImplicitOAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//PasswordOAuth.png">
+<meta property="og:image" content="https://sunnyhll.github.io/.io//ClientCertOAuth.png">
 <meta property="article:published_time" content="2022-02-27T09:14:56.144Z">
 <meta property="article:modified_time" content="2022-02-27T09:14:56.144Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
-<meta property="article:tag" content="Authentication">
 <meta property="article:tag" content="Microservice">
+<meta property="article:tag" content="Authentication">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/2022/02/27/Authentication/CookieAuth.jpg">
+<meta name="twitter:image" content="https://sunnyhll.github.io/.io//CookieAuth.jpg">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2022/02/27/Authentication/">
@@ -98,7 +98,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -149,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication%E6%9C%8D%E5%8A%A1%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">Authentication服务鉴权机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-Basic-Authentication"><span class="nav-number">2.</span> <span class="nav-text">HTTP Basic Authentication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session-cookie%E9%89%B4%E6%9D%83"><span class="nav-number">3.</span> <span class="nav-text">session-cookie鉴权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Token-%E9%AA%8C%E8%AF%81-JWT"><span class="nav-number">4.</span> <span class="nav-text">Token 验证(JWT)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth2-OIDC%E8%AE%A4%E8%AF%81"><span class="nav-number">5.</span> <span class="nav-text">OAuth2&#x2F;OIDC认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OAuth2%E6%8E%88%E6%9D%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">OAuth2授权模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F-%E6%9C%80%E4%B8%BA%E5%B8%B8%E8%A7%81"><span class="nav-number">5.1.1.</span> <span class="nav-text">授权码模式(最为常见)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.1.2.</span> <span class="nav-text">简化模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.1.3.</span> <span class="nav-text">密码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.1.4.</span> <span class="nav-text">客户端证书模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication%E5%AE%9E%E6%88%98"><span class="nav-number">6.</span> <span class="nav-text">Authentication实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#siteminder-sso-preauth"><span class="nav-number">6.1.</span> <span class="nav-text">siteminder sso + preauth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spnego-auth"><span class="nav-number">6.2.</span> <span class="nav-text">spnego auth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oidc-oauth2-ping-federate"><span class="nav-number">6.3.</span> <span class="nav-text">oidc oauth2 + ping federate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ping-Identity%E6%98%AF%E6%94%AF%E6%8C%81OIDC%E5%92%8COAuth2%E6%A0%87%E5%87%86%E7%9A%84%E4%BC%81%E4%B8%9A%E5%8C%96%E4%BA%A7%E5%93%81"><span class="nav-number">6.3.1.</span> <span class="nav-text">Ping Identity是支持OIDC和OAuth2标准的企业化产品</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication%E6%9C%8D%E5%8A%A1%E9%89%B4%E6%9D%83%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">Authentication服务鉴权机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-Basic-Authentication"><span class="nav-number">2.</span> <span class="nav-text">HTTP Basic Authentication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session-cookie%E9%89%B4%E6%9D%83"><span class="nav-number">3.</span> <span class="nav-text">session-cookie鉴权</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Token-%E9%AA%8C%E8%AF%81-JWT"><span class="nav-number">4.</span> <span class="nav-text">Token 验证(JWT)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth2-x2F-OIDC%E8%AE%A4%E8%AF%81"><span class="nav-number">5.</span> <span class="nav-text">OAuth2&#x2F;OIDC认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OAuth2%E6%8E%88%E6%9D%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">OAuth2授权模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%88%E6%9D%83%E7%A0%81%E6%A8%A1%E5%BC%8F-%E6%9C%80%E4%B8%BA%E5%B8%B8%E8%A7%81"><span class="nav-number">5.1.1.</span> <span class="nav-text">授权码模式(最为常见)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.1.2.</span> <span class="nav-text">简化模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.1.3.</span> <span class="nav-text">密码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.1.4.</span> <span class="nav-text">客户端证书模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authentication%E5%AE%9E%E6%88%98"><span class="nav-number">6.</span> <span class="nav-text">Authentication实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#siteminder-sso-preauth"><span class="nav-number">6.1.</span> <span class="nav-text">siteminder sso + preauth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spnego-auth"><span class="nav-number">6.2.</span> <span class="nav-text">spnego auth</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oidc-oauth2-ping-federate"><span class="nav-number">6.3.</span> <span class="nav-text">oidc oauth2 + ping federate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ping-Identity%E6%98%AF%E6%94%AF%E6%8C%81OIDC%E5%92%8COAuth2%E6%A0%87%E5%87%86%E7%9A%84%E4%BC%81%E4%B8%9A%E5%8C%96%E4%BA%A7%E5%93%81"><span class="nav-number">6.3.1.</span> <span class="nav-text">Ping Identity是支持OIDC和OAuth2标准的企业化产品</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -267,7 +267,7 @@
 </ul>
 <h1 id="HTTP-Basic-Authentication"><a href="#HTTP-Basic-Authentication" class="headerlink" title="HTTP Basic Authentication"></a>HTTP Basic Authentication</h1><p>HTTP认证时一种无状态的认证模式，因此用户在提供相关凭据的请求中能够得到认证用户的访问，而服务器本身在接下来的请求中并不能持续保持登录状态。</p>
 <p>HTTP基本认证的具体流程如下:</p>
-<p>在你访问一个需要HTTP Basic Authentication的URL的时候，如果你没有提供用户名和密码，服务器就会返回401，返回Header中会包含类似”WWW-Authenticate: Basic realm=”test””信息。如果你直接在浏览器中打开，浏览器会弹出对话框提示你输入用户名和密码。</p>
+<p>在你访问一个需要HTTP Basic Authentication的URL的时候，如果你没有提供用户名和密码，服务器就会返回401，返回Header中会包含类似”WWW-Authenticate: Basic realm&#x3D;”test””信息。如果你直接在浏览器中打开，浏览器会弹出对话框提示你输入用户名和密码。</p>
 <p>要在发送请求的时候添加HTTP Basic Authentication认证信息到请求中，有两种方法:</p>
 <ol>
 <li>在请求头中添加Authorization信息：Authorization: “Basic {用户名:密码}的base64加密字符串”。</li>
@@ -281,9 +281,9 @@
 <li>或者也能读取返回头中的 Authorization: Negotiate NTLMSSP{八字节质询码} ，并在请求头部中加入 Authorization: Negotiate NTLM{加密的质询码和明码用户名}</li>
 </ul>
 </li>
-<li><p>“WWW-Authenticate: Digest realm=”test”,qop=”auth”,nonce=”{md5加密时间},opaque=”{不透明字符串}”摘要认证协议，能避免明文传输数据。</p>
+<li><p>“WWW-Authenticate: Digest realm&#x3D;”test”,qop&#x3D;”auth”,nonce&#x3D;”{md5加密时间},opaque&#x3D;”{不透明字符串}”摘要认证协议，能避免明文传输数据。</p>
 <ul>
-<li>在请求中需要加入 Authoriztion: Digest username=”guest”,realm=”test”,nonce=”{同上},qop=”auth”,nc=”00000001”,response=”{通过md5加密的user paswd httpmethod uri等信息}”,cnonce=”{客户端提供的非明文字符串}”,uri=”{uri信息}”</li>
+<li>在请求中需要加入 Authoriztion: Digest username&#x3D;”guest”,realm&#x3D;”test”,nonce&#x3D;”{同上},qop&#x3D;”auth”,nc&#x3D;”00000001”,response&#x3D;”{通过md5加密的user paswd httpmethod uri等信息}”,cnonce&#x3D;”{客户端提供的非明文字符串}”,uri&#x3D;”{uri信息}”</li>
 <li>服务器需要检查时间在允许范围内，而且response匹配本地生成值。使用MD5算法的优势在于可以很快正向哈希，而无法短时间内逆向哈希得出用户密码等信息。</li>
 </ul>
 </li>
@@ -291,13 +291,13 @@
 <h1 id="session-cookie鉴权"><a href="#session-cookie鉴权" class="headerlink" title="session-cookie鉴权"></a>session-cookie鉴权</h1><p>Session是HTTP协议中为了支持有状态的通信而发明的会话机制，本质上是通过服务器为用户建立sessionid从而保证用户的状态信息能够在服务器端保存。用户不需要反复进行登录认证就能保持会话。</p>
 <p>而Cookie则是一种特殊的HTTP头部，能够在HTTP通信中保存一定的用户信息，如sessionid从而达到认证用户的目的。由于Cookie本身是针对某一域名而产生的，所以在发送Cookie过程中必须提供正确域名的sessionid才行。</p>
 <p>具体流程如下：</p>
-<p><img src="/2022/02/27/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
+<p><img src="/.io//CookieAuth.jpg" alt="cookieAuth"></p>
 <p>Cookie鉴权常用Single Sign On场景，例如，于对于企业中的不同子域名的验证，可以通过结合SAML, CAS等协议完成。对于不同网络更加广泛的第三方验证则有OIDC协议支持。</p>
 <h1 id="Token-验证-JWT"><a href="#Token-验证-JWT" class="headerlink" title="Token 验证(JWT)"></a>Token 验证(JWT)</h1><p>Token验证方式和Seesion验证方式很类似，不同的是Token本身包含一些有意义的信息：用户名、密码、过期时间等。Token本身由服务器签发，客户端请求的发送中需要包含 Authorization : JWT “{jwt token}”，服务器提取token信息通过相同的算法验证即可。相较于Session验证方式节约了分布式系统中服务器存储sessionid和用户信息的开销，只需要服务器拥有相同的密钥即可。</p>
 <p>具体流程如下:</p>
-<p><img src="/2022/02/27/Authentication/TokenAuth.png" alt="tokenAuth"></p>
+<p><img src="/.io//TokenAuth.png" alt="tokenAuth"></p>
 <p>JWT(json-web-token)算法细节：</p>
-<p>JWT由三部分”{header}.{payload}.{signature}’,两种算法生成，公式如下：<br>    signature = sha256(base64(header)+’.’+base64(payload),{服务器密钥})</p>
+<p>JWT由三部分”{header}.{payload}.{signature}’,两种算法生成，公式如下：<br>    signature &#x3D; sha256(base64(header)+’.’+base64(payload),{服务器密钥})</p>
 <ol>
 <li>header包含算法和类别信息, </li>
 <li>payload为加密部分，包含公有声明和私有声明，公有声明为约定的key，私有为公司定制key，</li>
@@ -305,8 +305,8 @@
 <li>sha256为header中写的加密算法，基于服务器密钥生成不同的加密签名,具有不可逆性</li>
 <li>base64为编码算法，可逆运算</li>
 </ol>
-<h1 id="OAuth2-OIDC认证"><a href="#OAuth2-OIDC认证" class="headerlink" title="OAuth2/OIDC认证"></a>OAuth2/OIDC认证</h1><p>OIDC 即Open ID Connect, 是一种基于OAuth2授权流程，并且扩展了身份认证层的一种新的认证机制。</p>
-<p>OIDC认证模型主要包含如下四个角色和一个令牌（完整术语参见<a href="http://openid.net/specs/openid-connect-core-1_0.html#Terminology）：" target="_blank" rel="noopener">http://openid.net/specs/openid-connect-core-1_0.html#Terminology）：</a></p>
+<h1 id="OAuth2-x2F-OIDC认证"><a href="#OAuth2-x2F-OIDC认证" class="headerlink" title="OAuth2&#x2F;OIDC认证"></a>OAuth2&#x2F;OIDC认证</h1><p>OIDC 即Open ID Connect, 是一种基于OAuth2授权流程，并且扩展了身份认证层的一种新的认证机制。</p>
+<p>OIDC认证模型主要包含如下四个角色和一个令牌（完整术语参见<a target="_blank" rel="noopener" href="http://openid.net/specs/openid-connect-core-1_0.html#Terminology%EF%BC%89%EF%BC%9A">http://openid.net/specs/openid-connect-core-1_0.html#Terminology）：</a></p>
 <ul>
 <li>EU用户：End User：一个人类用户。</li>
 <li>RP客户端：Relying Party ,用来代指OAuth2中的受信任的客户端，身份认证和授权信息的消费方；</li>
@@ -315,7 +315,7 @@
 <li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。通过OP提供。</li>
 </ul>
 <p>认证流程如下：</p>
-<p><img src="/2022/02/27/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
+<p><img src="/.io//OIDCAuth.jpg" alt="OIDCAuth"></p>
 <p>其中，UserIndo EndPoint是一个受OAuth2保护的资源。在RP得到Access Token后可以请求此资源，然后获得一组EU相关的Claims，这些信息可以说是ID Token的扩展，比如如果你觉得ID Token中只需包含EU的唯一标识sub即可（避免ID Token过于庞大），然后通过此接口获取完整的EU的信息。此资源必须部署在TLS之上。</p>
 <p>OIDC的支持的授权流程如下：</p>
 <ol>
@@ -343,53 +343,57 @@
 <li>引导用户到认证服务器进行登录（此步骤需要携带客户端应用的clientId，可以是html直接转发认证服务器），用户输入用户名、密码</li>
 <li>认证成功后，认证服务器向客户端应用发一个授权码code</li>
 <li>客户端应用拿着授权码code，和clientId，clientSecret，去换取access_token</li>
-<li>返回access_token给客户端应用 </li>
+<li>返回access_token给客户端应用</li>
 </ol>
-<p><img src="/2022/02/27/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
+<p><img src="/.io//AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
 <p>这种场景下，用户名、密码、客户端应用信息，都没有直接暴露在浏览器，是web下是最安全的。</p>
 <h3 id="简化模式"><a href="#简化模式" class="headerlink" title="简化模式"></a>简化模式</h3><p>授权码模式的简化，用户认证成功后，直接将token返回给浏览器。因为某些应用没有前端服务器，只有一堆静态的html（很少见），这种模式，一般不用。</p>
-<p><img src="/2022/02/27/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
+<p><img src="/.io//ImplicitOAuth.png" alt="ImplicitOAuth"></p>
 <h3 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h3><p>适用场景：手机app ，这个客户端应用是你完全可以信任的，你的app就是自己公司开发的。但是这个模式并不适合在web场景下用，在web下，用户名密码并不是直接填给自己写的应用的，而是填在浏览器呈现的一个页面上的，这个浏览器是客户端应用的一个代理，浏览器是没法保证安全性的。</p>
-<p><img src="/2022/02/27/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
+<p><img src="/.io//PasswordOAuth.png" alt="PasswordOAuth"></p>
 <h3 id="客户端证书模式"><a href="#客户端证书模式" class="headerlink" title="客户端证书模式"></a>客户端证书模式</h3><p>客户端应用直接发 clientId、clientSecret给认证服务器，发的令牌是针对客户端应用的，不是针对用户的。跟没授权一样，令牌不能识别用户身份。</p>
-<p><img src="/2022/02/27/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
-<h1 id="Authentication实战"><a href="#Authentication实战" class="headerlink" title="Authentication实战"></a>Authentication实战</h1><p>本章将着重描述如何在java springboot应用中实现相应的认证流程。springboot提供了一站式应用的开发模式，但是认证流程是需要spring security，同时具体的认证核心模块需要spring securty keberos或者spring security oauth组件支持。下文将主要介绍如何利用这两个模块实现具体的基于siteminder/spnego/oauth协议的认证流程。</p>
+<p><img src="/.io//ClientCertOAuth.png" alt="ClientOAuth"></p>
+<h1 id="Authentication实战"><a href="#Authentication实战" class="headerlink" title="Authentication实战"></a>Authentication实战</h1><p>本章将着重描述如何在java springboot应用中实现相应的认证流程。springboot提供了一站式应用的开发模式，但是认证流程是需要spring security，同时具体的认证核心模块需要spring securty keberos或者spring security oauth组件支持。下文将主要介绍如何利用这两个模块实现具体的基于siteminder&#x2F;spnego&#x2F;oauth协议的认证流程。</p>
 <h2 id="siteminder-sso-preauth"><a href="#siteminder-sso-preauth" class="headerlink" title="siteminder sso + preauth"></a>siteminder sso + preauth</h2><p>Siteminder是企业级认证产品，它提供了一站式认证中间件，从应用开发者的角度来看，就是采用了外部认证系统，应用不需要重新进行认证而是可以直接从siteminder处理过的http request header中提取SM_USER中拿到userprincipal()。因此从spring securty框架的角度之需要直接读取认证后的信息，而不需要再对request进行认证验证。这通常是一种企业内网用户认证采用的sso机制，因为用户之需要进行简单认证后就能得到对多种内部webapp的访问toekn，而且不需要进行细粒度的鉴权的场景适合大部分内部应用，但是，因为外部网站可容易会被假的header所欺骗，安全性较差而不会采用这种方式进行验证。</p>
-<h2 id="spnego-auth"><a href="#spnego-auth" class="headerlink" title="spnego auth"></a>spnego auth</h2><p>SPNEGO是微软设计的一种企业级认证协议，底层支持多种token协议，因此是应用proid常用的一种方式，因为应用的id会常常跑在不同的window/linux环境，而spnego能够支持多种密钥认证从而对跨系统认证能有很好的支持，这种认证方式需要用户自己执行认证检查，所以需要spring-security-keberos模块的相关auth provider进行验证。</p>
+<h2 id="spnego-auth"><a href="#spnego-auth" class="headerlink" title="spnego auth"></a>spnego auth</h2><p>SPNEGO是微软设计的一种企业级认证协议，底层支持多种token协议，因此是应用proid常用的一种方式，因为应用的id会常常跑在不同的window&#x2F;linux环境，而spnego能够支持多种密钥认证从而对跨系统认证能有很好的支持，这种认证方式需要用户自己执行认证检查，所以需要spring-security-keberos模块的相关auth provider进行验证。</p>
 <h2 id="oidc-oauth2-ping-federate"><a href="#oidc-oauth2-ping-federate" class="headerlink" title="oidc oauth2 + ping federate"></a>oidc oauth2 + ping federate</h2><p>oauth标准的实现一般是用oidc协议，spring security oauth2拥有对oauth2标准的鉴权模型的实现，并且可以通过适当的配置完成oidc用户验证。oauth单独并不能完成验证鉴权功能，需要部署一个oauth provider例如云服务商azure AD等，企业级内部可以自己部署ping federate服务器完成auth信息提供功能，并且向下兼容sso（即open Id）功能。</p>
-<h3 id="Ping-Identity是支持OIDC和OAuth2标准的企业化产品"><a href="#Ping-Identity是支持OIDC和OAuth2标准的企业化产品" class="headerlink" title="Ping Identity是支持OIDC和OAuth2标准的企业化产品"></a>Ping Identity是支持OIDC和OAuth2标准的企业化产品</h3><p>以<a href="https://abc.com作为签发域名，PingIdentity具体支持方式如下：" target="_blank" rel="noopener">https://abc.com作为签发域名，PingIdentity具体支持方式如下：</a></p>
+<h3 id="Ping-Identity是支持OIDC和OAuth2标准的企业化产品"><a href="#Ping-Identity是支持OIDC和OAuth2标准的企业化产品" class="headerlink" title="Ping Identity是支持OIDC和OAuth2标准的企业化产品"></a>Ping Identity是支持OIDC和OAuth2标准的企业化产品</h3><p>以<a href="https://abc.com作为签发域名，PingIdentity具体支持方式如下：">https://abc.com作为签发域名，PingIdentity具体支持方式如下：</a></p>
 <ul>
-<li>openid配置查询Url：<a href="https://abc.com/.well-known/openid-configuration" target="_blank" rel="noopener">https://abc.com/.well-known/openid-configuration</a> 返回json配置提供相关的认证终端信息，例如：</li>
+<li>openid配置查询Url：<a target="_blank" rel="noopener" href="https://abc.com/.well-known/openid-configuration">https://abc.com/.well-known/openid-configuration</a> 返回json配置提供相关的认证终端信息，例如：</li>
 </ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "issuer": "https://abc.com", // </span><br><span class="line">  "authorization_endpoint": "https://abc.com/as/authorization.oauth2",</span><br><span class="line">  "token_endpoint": "https://abc.com/as/token.oauth2",</span><br><span class="line">  "revocation_endpoint": "https://abc.com/idp/userinfo.openid",</span><br><span class="line">  "introspection_endpoint": "https://abc.com/as/inrospect.oauth2",</span><br><span class="line">  "jwks_uri": "https://abc.com/pf/JWKS",</span><br><span class="line">  "outh_jwks_uri": "https://abc.ocm/ext/oauth/JWKS",</span><br><span class="line">  </span><br><span class="line">  "scopes_supported" : [</span><br><span class="line">    "address",</span><br><span class="line">    "phone",</span><br><span class="line">    "openid",</span><br><span class="line">    "profile",</span><br><span class="line">    <span class="string">"email"</span></span><br><span class="line">  ],</span><br><span class="line">  "claims_supported": [</span><br><span class="line">    "email",</span><br><span class="line">    "email_verified",</span><br><span class="line">    "family_name",</span><br><span class="line">    "given_name",</span><br><span class="line">    "name",</span><br><span class="line">    "preferred_username",</span><br><span class="line">    <span class="string">"sub"</span></span><br><span class="line">  ],</span><br><span class="line">  "grant_types_supported": [</span><br><span class="line">    "implicit",</span><br><span class="line">    "authorization_code",</span><br><span class="line">    "refresh_token",</span><br><span class="line">    "password",</span><br><span class="line">    <span class="string">"client_credentials"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;issuer&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://abc.com&quot;</span><span class="punctuation">,</span> <span class="comment">// </span></span><br><span class="line">  <span class="attr">&quot;authorization_endpoint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://abc.com/as/authorization.oauth2&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;token_endpoint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://abc.com/as/token.oauth2&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;revocation_endpoint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://abc.com/idp/userinfo.openid&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;introspection_endpoint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://abc.com/as/inrospect.oauth2&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;jwks_uri&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://abc.com/pf/JWKS&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;outh_jwks_uri&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://abc.ocm/ext/oauth/JWKS&quot;</span><span class="punctuation">,</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">&quot;scopes_supported&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;address&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;phone&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;openid&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;profile&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;email&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;claims_supported&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;email&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;email_verified&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;family_name&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;given_name&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;name&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;preferred_username&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;sub&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;grant_types_supported&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;implicit&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;authorization_code&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;refresh_token&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;password&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;client_credentials&quot;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>authorization_code 授权码流程</li>
 </ul>
 <ol>
 <li>用户发起请求到授权码endpoint：</li>
 </ol>
-<p>打开chrome.exe，发起 GET <a href="https://abc.com/as/authorization.oauth2?client_id=foo&amp;response_type=code&amp;redirect=https%3A%2F%2Fabc.com%2Freal%2Fdocs%2F&amp;scope=openid" target="_blank" rel="noopener">https://abc.com/as/authorization.oauth2?client_id=foo&amp;response_type=code&amp;redirect=https%3A%2F%2Fabc.com%2Freal%2Fdocs%2F&amp;scope=openid</a> 请求</p>
-<p>Chrome界面 redirect to url: <a href="https://abc.com/real/docs/?code=XXXXXXXXXXXXXXXXXX" target="_blank" rel="noopener">https://abc.com/real/docs/?code=XXXXXXXXXXXXXXXXXX</a> 获得授权码。</p>
+<p>打开chrome.exe，发起 GET <a target="_blank" rel="noopener" href="https://abc.com/as/authorization.oauth2?client_id=foo&response_type=code&redirect=https://abc.com/real/docs/&scope=openid">https://abc.com/as/authorization.oauth2?client_id=foo&amp;response_type=code&amp;redirect=https%3A%2F%2Fabc.com%2Freal%2Fdocs%2F&amp;scope=openid</a> 请求</p>
+<p>Chrome界面 redirect to url: <a target="_blank" rel="noopener" href="https://abc.com/real/docs/?code=XXXXXXXXXXXXXXXXXX">https://abc.com/real/docs/?code=XXXXXXXXXXXXXXXXXX</a> 获得授权码。</p>
 <ol start="2">
 <li>用户用返回授权码发起token请求：</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -k --data <span class="string">"grant_type=authorization_code"</span> --data <span class="string">"client_id=foo"</span> --data <span class="string">"code=xxxxxxx"</span> --data <span class="string">"redirect_uri=https://abc.com/real/docs/"</span> https://abc.com/as/token.oauth2</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -k --data <span class="string">&quot;grant_type=authorization_code&quot;</span> --data <span class="string">&quot;client_id=foo&quot;</span> --data <span class="string">&quot;code=xxxxxxx&quot;</span> --data <span class="string">&quot;redirect_uri=https://abc.com/real/docs/&quot;</span> https://abc.com/as/token.oauth2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>返回token json:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"id_token"</span> : <span class="string">"xxxxxxxxxxxxxxxxx"</span>,</span><br><span class="line">  <span class="attr">"access_token"</span> : <span class="string">"xxxxxxxxxxxxxx"</span>,</span><br><span class="line">  <span class="attr">"refresh_token"</span>: <span class="string">"xxxxxxxxxxxxxxxxxx"</span>,</span><br><span class="line">  <span class="attr">"token_type"</span>: <span class="string">"Bearer"</span>,</span><br><span class="line">  <span class="attr">"expires_in"</span>: <span class="number">7200</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;id_token&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;xxxxxxxxxxxxxxxxx&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;access_token&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;xxxxxxxxxxxxxx&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;refresh_token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxxxxxxxxxxxxxxxxx&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;token_type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Bearer&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;expires_in&quot;</span><span class="punctuation">:</span> <span class="number">7200</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
 <ol start="3">
 <li>用户刷新过期token请求：</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -k --data <span class="string">"grant_type=refresh_token"</span> --data <span class="string">"client_id=foo"</span> --data <span class="string">"refresh_token=XXXXXXXXXX"</span> --data <span class="string">"redirect_uri=https://abc.com/real/docs/"</span> https://abc.com/as/token.oauth2</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -k --data <span class="string">&quot;grant_type=refresh_token&quot;</span> --data <span class="string">&quot;client_id=foo&quot;</span> --data <span class="string">&quot;refresh_token=XXXXXXXXXX&quot;</span> --data <span class="string">&quot;redirect_uri=https://abc.com/real/docs/&quot;</span> https://abc.com/as/token.oauth2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>JWT 验证流程：</li>
 </ul>
 <ol>
-<li><p>对于RSA加密算法加密的token，需要公私钥才能进行加解密。 “jwks_uri”: “<a href="https://abc.com/pf/JWKS&quot;" target="_blank" rel="noopener">https://abc.com/pf/JWKS&quot;</a>, 认证服务器会用私钥将内容加密并且作为jwt的签名部分签发给客户端，资源服务器拿到jwt token后，需要用公钥解密签名，并且和明文的payload的进行比较确认没有篡改则为有效。整个算法过程有已有的实现例如jose4j。</p>
+<li><p>对于RSA加密算法加密的token，需要公私钥才能进行加解密。 “jwks_uri”: “<a target="_blank" rel="noopener" href="https://abc.com/pf/JWKS">https://abc.com/pf/JWKS</a>“, 认证服务器会用私钥将内容加密并且作为jwt的签名部分签发给客户端，资源服务器拿到jwt token后，需要用公钥解密签名，并且和明文的payload的进行比较确认没有篡改则为有效。整个算法过程有已有的实现例如jose4j。</p>
 </li>
 <li><p>对于对称加密算法的token，假设资源服务器和认证服务器都已经知道密钥内容，客户端拿到jwt token后，资源服务器需要利用密钥进行解密，并且验证payload的合法性即可。</p>
 </li>
 </ol>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
     </div>
 
     
@@ -399,8 +403,8 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E8%82%89%E8%82%89/" rel="tag"># 肉肉</a>
-              <a href="/tags/Authentication/" rel="tag"># Authentication</a>
               <a href="/tags/Microservice/" rel="tag"># Microservice</a>
+              <a href="/tags/Authentication/" rel="tag"># Authentication</a>
           </div>
 
         

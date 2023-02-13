@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -265,19 +265,20 @@
 <li><p>Install code server on Linux subsystem</p>
 </li>
 </ol>
-<p>Github: <a href="https://github.com/cdr/code-server" target="_blank" rel="noopener">https://github.com/cdr/code-server</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install</span></span><br><span class="line">curl -fsSL https://code-server.dev/install.sh | sh</span><br><span class="line"><span class="comment"># add code-server to daemon won't work for linux subsystem</span></span><br></pre></td></tr></table></figure>
+<p>Github: <a target="_blank" rel="noopener" href="https://github.com/cdr/code-server">https://github.com/cdr/code-server</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install</span></span><br><span class="line">curl -fsSL https://code-server.dev/install.sh | sh</span><br><span class="line"><span class="comment"># add code-server to daemon won&#x27;t work for linux subsystem</span></span><br></pre></td></tr></table></figure>
 <h2 id="installation-of-externsions-of-vs-coode-on-code-server"><a href="#installation-of-externsions-of-vs-coode-on-code-server" class="headerlink" title="installation of externsions of vs coode on code server"></a>installation of externsions of vs coode on code server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code-server --install-extension bierner.markdown-mermaid</span><br></pre></td></tr></table></figure>
+
 <h2 id="demo-using-iPad"><a href="#demo-using-iPad" class="headerlink" title="demo using iPad"></a>demo using iPad</h2><ol>
 <li><p>start code-server with public cloud reverse proxy</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code-server --link</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code-server --<span class="built_in">link</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>allow inbound port of code-server on azure.portal</p>
 </li>
-<li><p>access via https://$hostname-$login/cdr/co</p>
+<li><p>access via https:&#x2F;&#x2F;$hostname-$login&#x2F;cdr&#x2F;co</p>
 </li>
 </ol>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
     </div>
 
     
