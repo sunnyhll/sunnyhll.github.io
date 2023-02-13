@@ -1,151 +1,53 @@
 <!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang="zh-CN">
+<head>
   <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sunnyhll.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
-
-
-
-
-
-
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '6.5.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-  
-
-
-
-
-  <meta name="description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
-<meta name="keywords" content="肉肉,Microservice">
+    <meta name="description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Microservices via Spring Cloud">
 <meta property="og:url" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/index.html">
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStream.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStreamConsume.jpg">
 <meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png">
-<meta property="og:updated_time" content="2020-12-18T02:32:31.439Z">
+<meta property="article:published_time" content="2020-12-07T02:53:17.000Z">
+<meta property="article:modified_time" content="2020-12-18T02:32:31.439Z">
+<meta property="article:author" content="果核&amp;肉肉">
+<meta property="article:tag" content="肉肉">
+<meta property="article:tag" content="Microservice">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Microservices via Spring Cloud">
-<meta name="twitter:description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
 <meta name="twitter:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png">
 
 
+<link rel="canonical" href="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/">
 
 
 
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/","path":"2020/12/07/Microservices-via-Spring-Cloud/","title":"Microservices via Spring Cloud"}</script>
 
-  <link rel="canonical" href="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/">
-
-
-
-<script type="text/javascript" id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  <title>Microservices via Spring Cloud | 微观天下</title>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Microservices via Spring Cloud | 微观天下</title>
   
-
-
-
 
 
 
@@ -155,337 +57,210 @@
 
 
   <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
-
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
-
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">微观天下</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
-    
   </div>
 
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">微观天下</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
   </div>
 </div>
 
 
 
 <nav class="site-nav">
-  
-    <ul id="menu" class="menu">
-      
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
-
-  </li>
-
-      
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
-        </li>
-      
-    </ul>
-  
-
-  
-    
-
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
 
 
-  
-
-
-
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
 </div>
-    </header>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">Spring Cloud微服务框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">Spring Cloud常用组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API%E7%BD%91%E5%85%B3"><span class="nav-number">2.1.</span> <span class="nav-text">API网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud-Gateway%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">2.2.</span> <span class="nav-text">Spring Cloud Gateway源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E2%80%94%E2%80%94%E6%9C%8D%E5%8A%A1%E9%AA%8C%E8%AF%81%E5%92%8C%E6%8E%88%E6%9D%83"><span class="nav-number">2.2.1.</span> <span class="nav-text">安全——服务验证和授权</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Netflix"><span class="nav-number">3.</span> <span class="nav-text">Spring Cloud Netflix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Eureka%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">3.1.</span> <span class="nav-text">Netflix Eureka服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">Netflix Ribbon负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%E6%AF%94%E8%BE%83"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ribbon负载均衡策略比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Feign%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86RPC%E8%B0%83%E7%94%A8"><span class="nav-number">3.3.</span> <span class="nav-text">Netflix Feign动态代理RPC调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Hystrix%E6%9C%8D%E5%8A%A1%E5%BC%B9%E6%80%A7%E4%BF%9D%E8%AF%81"><span class="nav-number">3.4.</span> <span class="nav-text">Netflix Hystrix服务弹性保证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hystrix%E7%86%94%E6%96%AD%E6%9C%BA%E5%88%B6%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">3.4.1.</span> <span class="nav-text">Hystrix熔断机制源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hystrix%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">Hystrix手写代码示例</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Alibaba"><span class="nav-number">4.</span> <span class="nav-text">Spring Cloud Alibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos-%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%EF%BC%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%8C%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">4.1.</span> <span class="nav-text">Nacos 配置中心，负载均衡，服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">4.1.1.</span> <span class="nav-text">Nacos服务注册源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel-%E5%BC%B9%E6%80%A7%E9%99%90%E6%B5%81-%E7%86%94%E6%96%AD%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">Sentinel 弹性限流&#x2F;熔断模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentinel%E5%92%8CHystrix%E5%AF%B9%E6%AF%94"><span class="nav-number">4.2.1.</span> <span class="nav-text">Sentinel和Hystrix对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seata-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="nav-number">4.3.</span> <span class="nav-text">Seata 分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E7%90%86%E8%AE%BA"><span class="nav-number">4.3.1.</span> <span class="nav-text">分布式事务解决理论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#X-Open%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">X&#x2F;Open分布式事务模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.1.2.</span> <span class="nav-text">两段提交协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.3.1.3.</span> <span class="nav-text">三段提交协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">4.3.2.</span> <span class="nav-text">分布式事务解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seata%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">4.3.3.</span> <span class="nav-text">Seata源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud-Stream-%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%B5%81%E5%A4%84%E7%90%86"><span class="nav-number">4.4.</span> <span class="nav-text">Spring Cloud Stream 发布&#x2F;订阅流处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%80%9A%E4%BF%A1%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">4.4.1.</span> <span class="nav-text">RocketMQ 分布式消息通信源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-%E6%B6%88%E6%81%AF%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.2.</span> <span class="nav-text">RocketMQ 消息使用场景与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-%E9%A1%BA%E5%BA%8F%E6%B6%88%E6%81%AF%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.2.1.</span> <span class="nav-text">RocketMQ 顺序消息实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-%E6%99%AE%E9%80%9A%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.2.2.</span> <span class="nav-text">RocketMQ 普通消息发送实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-%E6%B6%88%E6%81%AF%E5%B9%B6%E5%8F%91%E6%B6%88%E8%B4%B9%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.2.3.</span> <span class="nav-text">RocketMQ 消息并发消费实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.2.4.</span> <span class="nav-text">RocketMQ 分布式事务消息实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.4.2.5.</span> <span class="nav-text">RocketMQ消费模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">4.4.3.</span> <span class="nav-text">RocketMQ实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.4.3.1.</span> <span class="nav-text">高性能设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1"><span class="nav-number">4.4.3.2.</span> <span class="nav-text">高可用设计</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">果核&肉肉</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
 
     
+  </aside>
 
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-          <div id="content" class="content">
-            
+    </div>
 
-  <div id="posts" class="posts-expand">
-    
+    <div class="main-inner post posts-expand">
+
 
   
 
-  
+
+<div class="post-block">
   
   
 
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="果核&肉肉">
-      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="果核&肉肉">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="微观天下">
+      <meta itemprop="description" content="">
     </span>
 
-    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Microservices via Spring Cloud | 微观天下">
+      <meta itemprop="description" content="">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Microservices via Spring Cloud
+        </h1>
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Microservices via Spring Cloud
-              
-            
-          </h1>
-        
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-        <div class="post-meta">
-          <span class="post-time">
+      <time title="创建时间：2020-12-07 10:53:17" itemprop="dateCreated datePublished" datetime="2020-12-07T10:53:17+08:00">2020-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-12-18 10:32:31" itemprop="dateModified" datetime="2020-12-18T10:32:31+08:00">2020-12-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
 
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-12-07 10:53:17" itemprop="dateCreated datePublished" datetime="2020-12-07T10:53:17+08:00">2020-12-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-12-18 10:32:31" itemprop="dateModified" datetime="2020-12-18T10:32:31+08:00">2020-12-18</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-            <i class="fa fa-eye"></i>
-             阅读次数： 
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-
-          
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
         <p>目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。</p>
 <p>采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经从设计逐渐落地，开发者社区逐渐贡献出云生态的组件框架，能够让这一战略目标变为可执行方案。</p>
 <h1 id="Spring-Cloud微服务框架"><a href="#Spring-Cloud微服务框架" class="headerlink" title="Spring Cloud微服务框架"></a>Spring Cloud微服务框架</h1><p>Spring家族拥有多个方向的项目，目前最为领先行业的就是Spring Framework, Spring Boot, Spring Cloud三大方向，分别致力于帮助开发者开发系统，简化应用初始搭建，以及实现微服务开发设计。</p>
@@ -722,782 +497,114 @@
 <li>exactly-only-once仅此一次</li>
 </ul>
 <h3 id="RocketMQ实现原理"><a href="#RocketMQ实现原理" class="headerlink" title="RocketMQ实现原理"></a>RocketMQ实现原理</h3><h4 id="高性能设计"><a href="#高性能设计" class="headerlink" title="高性能设计"></a>高性能设计</h4><h4 id="高可用设计"><a href="#高可用设计" class="headerlink" title="高可用设计"></a>高可用设计</h4><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
-      
     </div>
 
     
-
     
-    
-    
-
-    
-
-    
-       
-    
-    
-
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/肉肉/" rel="tag"># 肉肉</a>
-          
-            <a href="/tags/Microservice/" rel="tag"># Microservice</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/11/07/Office-365-Addin-ESC-POC/" rel="next" title="Office 365 Addin ESC POC">
-                <i class="fa fa-chevron-left"></i> Office 365 Addin ESC POC
-              </a>
-            
+          <div class="post-tags">
+              <a href="/tags/%E8%82%89%E8%82%89/" rel="tag"># 肉肉</a>
+              <a href="/tags/Microservice/" rel="tag"># Microservice</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/12/07/Java-Questions-and-Answers/" rel="prev" title="Java Questions and Answers">
-                Java Questions and Answers <i class="fa fa-chevron-right"></i>
-              </a>
-            
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/11/07/Office-365-Addin-ESC-POC/" rel="prev" title="Office 365 Addin ESC POC">
+                  <i class="fa fa-chevron-left"></i> Office 365 Addin ESC POC
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/07/Java-Questions-and-Answers/" rel="next" title="Java Questions and Answers">
+                  Java Questions and Answers <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-        </div>
-      
-
-      
-      
     </footer>
-  </div>
-  
-  
-  
   </article>
-
-
-  </div>
-
-
-          </div>
-          
-
-  
+</div>
 
 
 
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">果核&肉肉</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          
-            <nav class="site-state motion-element">
-              
-                <div class="site-state-item site-state-posts">
-                
-                  <a href="/archives/">
-                
-                    <span class="site-state-item-count">47</span>
-                    <span class="site-state-item-name">日志</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">分类</span>
-                  </a>
-                </div>
-              
-
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">17</span>
-                    <span class="site-state-item-name">标签</span>
-                  </a>
-                </div>
-              
-            </nav>
-          
-
-          
-
-          
-
-          
-
-          
-          
-
-          
-            
-          
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud微服务框架"><span class="nav-number">1.</span> <span class="nav-text">Spring Cloud微服务框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud常用组件"><span class="nav-number">2.</span> <span class="nav-text">Spring Cloud常用组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#API网关"><span class="nav-number">2.1.</span> <span class="nav-text">API网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud-Gateway源码分析"><span class="nav-number">2.2.</span> <span class="nav-text">Spring Cloud Gateway源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全——服务验证和授权"><span class="nav-number">2.2.1.</span> <span class="nav-text">安全——服务验证和授权</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Netflix"><span class="nav-number">3.</span> <span class="nav-text">Spring Cloud Netflix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Eureka服务注册"><span class="nav-number">3.1.</span> <span class="nav-text">Netflix Eureka服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Ribbon负载均衡"><span class="nav-number">3.2.</span> <span class="nav-text">Netflix Ribbon负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ribbon负载均衡策略比较"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ribbon负载均衡策略比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Feign动态代理RPC调用"><span class="nav-number">3.3.</span> <span class="nav-text">Netflix Feign动态代理RPC调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netflix-Hystrix服务弹性保证"><span class="nav-number">3.4.</span> <span class="nav-text">Netflix Hystrix服务弹性保证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hystrix熔断机制源码分析"><span class="nav-number">3.4.1.</span> <span class="nav-text">Hystrix熔断机制源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hystrix手写代码示例"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">Hystrix手写代码示例</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Alibaba"><span class="nav-number">4.</span> <span class="nav-text">Spring Cloud Alibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos-配置中心，负载均衡，服务注册"><span class="nav-number">4.1.</span> <span class="nav-text">Nacos 配置中心，负载均衡，服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos服务注册源码分析"><span class="nav-number">4.1.1.</span> <span class="nav-text">Nacos服务注册源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sentinel-弹性限流-熔断模式"><span class="nav-number">4.2.</span> <span class="nav-text">Sentinel 弹性限流/熔断模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentinel和Hystrix对比"><span class="nav-number">4.2.1.</span> <span class="nav-text">Sentinel和Hystrix对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seata-分布式事务"><span class="nav-number">4.3.</span> <span class="nav-text">Seata 分布式事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务解决理论"><span class="nav-number">4.3.1.</span> <span class="nav-text">分布式事务解决理论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#X-Open分布式事务模型"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">X/Open分布式事务模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两段提交协议"><span class="nav-number">4.3.1.2.</span> <span class="nav-text">两段提交协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三段提交协议"><span class="nav-number">4.3.1.3.</span> <span class="nav-text">三段提交协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务解决方案"><span class="nav-number">4.3.2.</span> <span class="nav-text">分布式事务解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seata源码分析"><span class="nav-number">4.3.3.</span> <span class="nav-text">Seata源码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud-Stream-发布-订阅流处理"><span class="nav-number">4.4.</span> <span class="nav-text">Spring Cloud Stream 发布/订阅流处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-分布式消息通信源码分析"><span class="nav-number">4.4.1.</span> <span class="nav-text">RocketMQ 分布式消息通信源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ-消息使用场景与实现"><span class="nav-number">4.4.2.</span> <span class="nav-text">RocketMQ 消息使用场景与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-顺序消息实现"><span class="nav-number">4.4.2.1.</span> <span class="nav-text">RocketMQ 顺序消息实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-普通消息发送实现"><span class="nav-number">4.4.2.2.</span> <span class="nav-text">RocketMQ 普通消息发送实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-消息并发消费实现"><span class="nav-number">4.4.2.3.</span> <span class="nav-text">RocketMQ 消息并发消费实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ-分布式事务消息实现"><span class="nav-number">4.4.2.4.</span> <span class="nav-text">RocketMQ 分布式事务消息实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RocketMQ消费模式"><span class="nav-number">4.4.2.5.</span> <span class="nav-text">RocketMQ消费模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RocketMQ实现原理"><span class="nav-number">4.4.3.</span> <span class="nav-text">RocketMQ实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高性能设计"><span class="nav-number">4.4.3.1.</span> <span class="nav-text">高性能设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高可用设计"><span class="nav-number">4.4.3.2.</span> <span class="nav-text">高可用设计</span></a></li></ol></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
 
 
-        
-      </div>
-    </main>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">果核&肉肉</span>
-
-  
-
-  
 </div>
-
-
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
-
-
-
-
-
-
-  <script src="https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js"></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize("");
-    }
-  </script>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv" title="总访客量">
-      <i class="fa fa-user"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
     </span>
-  
-
-  
-    <span class="site-pv" title="总访问量">
-      <i class="fa fa-eye"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
     </span>
-  
 </div>
-
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-	
-    
-
-    
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
+    </div>
+  </footer>
+
   
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
-
-
-
-
-
-
-
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
 
 
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
