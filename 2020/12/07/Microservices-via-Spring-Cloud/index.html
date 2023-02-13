@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"sunnyhll.github.io","root":"/blog/","images":"/blog/images","scheme":"Muse","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sunnyhll.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
 <meta property="og:type" content="article">
@@ -26,17 +26,17 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="目前各大科技公司都提供了各种云平台服务，对于普通地金融科技公司而言，从传统的内部维护基础架构的日子一去不复返。策略转向了开发面向多平台，多终端的服务开发，其中前端开发倾向于web，后端开发倾向于自包含而且能灵活大量部署的微服务架构。如何从传统的开发风格转变为适应云平台服务的应用开发成为了一个需要攻坚的课题。 采用微服务架构拥有诸多好处，在本文中将不做赘述，可参见微服务架构一文。目前，微服务架构已经">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStream.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStreamConsume.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png">
+<meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png">
+<meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStream.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStreamConsume.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png">
 <meta property="article:published_time" content="2020-12-07T02:53:17.000Z">
 <meta property="article:modified_time" content="2020-12-18T02:32:31.439Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
 <meta property="article:tag" content="Microservice">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/blog/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png">
+<meta name="twitter:image" content="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/">
@@ -57,7 +57,7 @@
 
 
   <noscript>
-    <link rel="stylesheet" href="/blog/css/noscript.css">
+    <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
 </head>
 
@@ -77,7 +77,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
       <p class="site-title">微观天下</p>
       <i class="logo-line"></i>
@@ -94,7 +94,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -157,18 +157,18 @@
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        <a href="/blog/archives/">
+        <a href="/archives/">
           <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-          <a href="/blog/categories/">
+          <a href="/categories/">
         <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-          <a href="/blog/tags/">
+          <a href="/tags/">
         <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -199,7 +199,7 @@
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2020/12/07/Microservices-via-Spring-Cloud/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="果核&肉肉">
     </span>
 
@@ -240,7 +240,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
         </span>
     </span>
 
@@ -390,7 +390,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="Sentinel-弹性限流-x2F-熔断模式"><a href="#Sentinel-弹性限流-x2F-熔断模式" class="headerlink" title="Sentinel 弹性限流&#x2F;熔断模式"></a>Sentinel 弹性限流&#x2F;熔断模式</h2><h3 id="Sentinel和Hystrix对比"><a href="#Sentinel和Hystrix对比" class="headerlink" title="Sentinel和Hystrix对比"></a>Sentinel和Hystrix对比</h3><p><img src="/blog/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png" alt="SH"></p>
+<h2 id="Sentinel-弹性限流-x2F-熔断模式"><a href="#Sentinel-弹性限流-x2F-熔断模式" class="headerlink" title="Sentinel 弹性限流&#x2F;熔断模式"></a>Sentinel 弹性限流&#x2F;熔断模式</h2><h3 id="Sentinel和Hystrix对比"><a href="#Sentinel和Hystrix对比" class="headerlink" title="Sentinel和Hystrix对比"></a>Sentinel和Hystrix对比</h3><p><img src="/2020/12/07/Microservices-via-Spring-Cloud/SentinelHystrix.png" alt="SH"></p>
 <h2 id="Seata-分布式事务"><a href="#Seata-分布式事务" class="headerlink" title="Seata 分布式事务"></a>Seata 分布式事务</h2><p>分布式事务解决了分布式系统中存储数据（数据库&#x2F;缓存)一致性问题。</p>
 <h3 id="分布式事务解决理论"><a href="#分布式事务解决理论" class="headerlink" title="分布式事务解决理论"></a>分布式事务解决理论</h3><h4 id="X-x2F-Open分布式事务模型"><a href="#X-x2F-Open分布式事务模型" class="headerlink" title="X&#x2F;Open分布式事务模型"></a>X&#x2F;Open分布式事务模型</h4><ul>
 <li>AP: Application 应用程序</li>
@@ -447,7 +447,7 @@
 <li>Bindings 绑定生成的桥梁，支持Kafka，RabbitMQ中间件</li>
 </ul>
 <h3 id="RocketMQ-分布式消息通信源码分析"><a href="#RocketMQ-分布式消息通信源码分析" class="headerlink" title="RocketMQ 分布式消息通信源码分析"></a>RocketMQ 分布式消息通信源码分析</h3><p>消息发送流程源码分析：</p>
-<p><img src="/blog/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStream.jpg" alt="MQProducer"></p>
+<p><img src="/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStream.jpg" alt="MQProducer"></p>
 <p>除了负责和Spring Cloud服务器中的Messaging集成之外，RocketMQ Binder还负责和MQ中间件集群通信，源码分发布&#x2F;订阅两部分，分别如下:</p>
 <ul>
 <li>使用RocketMQTemplate真正发送MQ消息到中间件</li>
@@ -455,7 +455,7 @@
 <li>消息的消费分为顺序消费和并发消费，分别由DefaultMessageListenerOrderly,DefaultMessageListenerConcurrently实现，通过binders的配置设定。</li>
 </ul>
 <p>消息订阅流程源码分析：</p>
-<p><img src="/blog/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStreamConsume.jpg" alt="MQProducer"></p>
+<p><img src="/2020/12/07/Microservices-via-Spring-Cloud/SpringCloudStreamConsume.jpg" alt="MQProducer"></p>
 <p>其中，服务器对消息的接收，是基于注解方式注入到响应的业务方法中的。这就是在业务代码中，不需要为接收信息创建MessageChannel，却能拿到信息体中的反序列化后信息。</p>
 <h3 id="RocketMQ-消息使用场景与实现"><a href="#RocketMQ-消息使用场景与实现" class="headerlink" title="RocketMQ 消息使用场景与实现"></a>RocketMQ 消息使用场景与实现</h3><h4 id="RocketMQ-顺序消息实现"><a href="#RocketMQ-顺序消息实现" class="headerlink" title="RocketMQ 顺序消息实现"></a>RocketMQ 顺序消息实现</h4><p>顺序发送消费场景：订单创建、支付、退款流程处理，数据库BinLog信息消费等等。</p>
 <ul>
@@ -471,7 +471,7 @@
 </ul>
 <h4 id="RocketMQ-消息并发消费实现"><a href="#RocketMQ-消息并发消费实现" class="headerlink" title="RocketMQ 消息并发消费实现"></a>RocketMQ 消息并发消费实现</h4><p>并发消费场景下，消息队列允许Consumer的线程消费池可以向同一个队列消费信息，并且每个消费线程消费信息会有自己的进度信息。</p>
 <h4 id="RocketMQ-分布式事务消息实现"><a href="#RocketMQ-分布式事务消息实现" class="headerlink" title="RocketMQ 分布式事务消息实现"></a>RocketMQ 分布式事务消息实现</h4><p>为分布式事务处理提供了通信基础。</p>
-<p><img src="/blog/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png" alt="RMQ"></p>
+<p><img src="/2020/12/07/Microservices-via-Spring-Cloud/RocketMQ.png" alt="RMQ"></p>
 <p>Rocket发送事务消息：</p>
 <p>Rocket发送事务消息是二次提交的，第一次发送prepare提交到服务器时消息主题会替换为RMQ_SYS_TRANS_HALF_TOPIC。等到本地事务执行完毕以后才进行二次提交，这时会发送给原本消息的topic。</p>
 <ol>
@@ -500,20 +500,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/%E8%82%89%E8%82%89/" rel="tag"># 肉肉</a>
-              <a href="/blog/tags/Microservice/" rel="tag"># Microservice</a>
+              <a href="/tags/%E8%82%89%E8%82%89/" rel="tag"># 肉肉</a>
+              <a href="/tags/Microservice/" rel="tag"># Microservice</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog/2020/11/07/Office-365-Addin-ESC-POC/" rel="prev" title="Office 365 Addin ESC POC">
+                <a href="/2020/11/07/Office-365-Addin-ESC-POC/" rel="prev" title="Office 365 Addin ESC POC">
                   <i class="fa fa-chevron-left"></i> Office 365 Addin ESC POC
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2020/12/07/Java-Questions-and-Answers/" rel="next" title="Java Questions and Answers">
+                <a href="/2020/12/07/Java-Questions-and-Answers/" rel="next" title="Java Questions and Answers">
                   Java Questions and Answers <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -585,10 +585,10 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/blog/js/third-party/search/local-search.js"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 

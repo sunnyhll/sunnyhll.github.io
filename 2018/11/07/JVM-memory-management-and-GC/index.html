@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"sunnyhll.github.io","root":"/blog/","images":"/blog/images","scheme":"Muse","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/blog/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/blog/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sunnyhll.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Java memory allocationJava虚拟机管理内存会包括以下几个运行时数据区域，如下图所示。  JVM运行时数据区域简介程序计数器(Program Counter Register)程序计数器时当前线程执行字节码的行号指示器。每条线程有独立的程序计数器。  如果线程执行Java方法，这个技术及记录的时真该执行的虚拟机字节码指令的地址。 如果线程执行的时Native方法，这个计数器值">
 <meta property="og:type" content="article">
@@ -26,27 +26,27 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="Java memory allocationJava虚拟机管理内存会包括以下几个运行时数据区域，如下图所示。  JVM运行时数据区域简介程序计数器(Program Counter Register)程序计数器时当前线程执行字节码的行号指示器。每条线程有独立的程序计数器。  如果线程执行Java方法，这个技术及记录的时真该执行的虚拟机字节码指令的地址。 如果线程执行的时Native方法，这个计数器值">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/2018/11/07/JVM-memory-management-and-GC/MarkWord.PNG">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/2018/11/07/JVM-memory-management-and-GC/reference.PNG">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CMarkSwap.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CCopying.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CMarkCompact.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CGCRegions.png">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CGCs.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CSerialGC.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CParNewGC.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CPSPold.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CCMS.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CG1.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/blog/JVM-memory-management-and-GC%5CGCArgs.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG">
+<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/MarkWord.PNG">
+<meta property="og:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/reference.PNG">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CMarkSwap.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CCopying.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CMarkCompact.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CGCRegions.png">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CGCs.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CSerialGC.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CParNewGC.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CPSPold.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CCMS.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CG1.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-memory-management-and-GC%5CGCArgs.jpg">
 <meta property="article:published_time" content="2018-11-07T08:58:46.000Z">
 <meta property="article:modified_time" content="2021-01-12T02:02:19.694Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/blog/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG">
+<meta name="twitter:image" content="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/">
@@ -67,7 +67,7 @@
 
 
   <noscript>
-    <link rel="stylesheet" href="/blog/css/noscript.css">
+    <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
 </head>
 
@@ -87,7 +87,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
       <p class="site-title">微观天下</p>
       <i class="logo-line"></i>
@@ -104,7 +104,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -167,18 +167,18 @@
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        <a href="/blog/archives/">
+        <a href="/archives/">
           <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-          <a href="/blog/categories/">
+          <a href="/categories/">
         <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-          <a href="/blog/tags/">
+          <a href="/tags/">
         <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
@@ -209,7 +209,7 @@
     <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="果核&肉肉">
     </span>
 
@@ -250,7 +250,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
         </span>
     </span>
 
@@ -272,7 +272,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="Java-memory-allocation"><a href="#Java-memory-allocation" class="headerlink" title="Java memory allocation"></a>Java memory allocation</h1><p>Java虚拟机管理内存会包括以下几个运行时数据区域，如下图所示。</p>
-<p><img src="/blog/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG" alt="jvm"></p>
+<p><img src="/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG" alt="jvm"></p>
 <h2 id="JVM运行时数据区域简介"><a href="#JVM运行时数据区域简介" class="headerlink" title="JVM运行时数据区域简介"></a>JVM运行时数据区域简介</h2><h3 id="程序计数器-Program-Counter-Register"><a href="#程序计数器-Program-Counter-Register" class="headerlink" title="程序计数器(Program Counter Register)"></a>程序计数器(Program Counter Register)</h3><p>程序计数器时当前线程执行字节码的行号指示器。每条线程有独立的程序计数器。</p>
 <ul>
 <li>如果线程执行Java方法，这个技术及记录的时真该执行的虚拟机字节码指令的地址。</li>
@@ -325,7 +325,7 @@
 <h2 id="JVM对象的内存布局"><a href="#JVM对象的内存布局" class="headerlink" title="JVM对象的内存布局"></a>JVM对象的内存布局</h2><p>当JVM对象被创建好了，会被分配在Java堆上，存储布局可以分为三个区域：对象头(header)、实例数据(instance data)和对齐填充(padding)。</p>
 <h3 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h3><p>对象头包括两部分，一部分是”Mark Word”,另一部分是类型指针。</p>
 <ul>
-<li>Mark word: 长度为32bit或64bit。HotSpot 32位虚拟机中具体的对象头存储内容取决于对象的锁状态值，如下：<br>  <img src="/blog/2018/11/07/JVM-memory-management-and-GC/MarkWord.PNG" alt="Markword"></li>
+<li>Mark word: 长度为32bit或64bit。HotSpot 32位虚拟机中具体的对象头存储内容取决于对象的锁状态值，如下：<br>  <img src="/2018/11/07/JVM-memory-management-and-GC/MarkWord.PNG" alt="Markword"></li>
 <li>类型指针: 长度为32bit或64bit，用于存储指向类元数据的指针，并不是所有的虚拟机实现都必须在对象数据上保留类型指针。</li>
 <li>数组长度：长度为32bit，当对象为数组时，用于存储数组的长度。注：此数组并非ArrayList泛型，后者属于引用类型。</li>
 </ul>
@@ -341,7 +341,7 @@
 <h2 id="JVM对象的访问定位"><a href="#JVM对象的访问定位" class="headerlink" title="JVM对象的访问定位"></a>JVM对象的访问定位</h2><p>对象的访问定位如下图，HOTSOPT用的是第2种算法：</p>
 <ol>
 <li>使用句柄（先指向堆里的句柄池，再从句柄池找到指针，优点是只需要修改句柄, 缺点就是句柄池也是开销）；</li>
-<li>直接指针（减少性能开销）: 需要存2个数据， 到对象实例数据的指针，到对象类数据的指针。<br><img src="/blog/2018/11/07/JVM-memory-management-and-GC/reference.PNG" alt="reference"></li>
+<li>直接指针（减少性能开销）: 需要存2个数据， 到对象实例数据的指针，到对象类数据的指针。<br><img src="/2018/11/07/JVM-memory-management-and-GC/reference.PNG" alt="reference"></li>
 </ol>
 <h1 id="Garbage-Collection-of-JVM"><a href="#Garbage-Collection-of-JVM" class="headerlink" title="Garbage Collection of JVM"></a>Garbage Collection of JVM</h1><h2 id="GC定义"><a href="#GC定义" class="headerlink" title="GC定义"></a>GC定义</h2><p>Garbage Collection（垃圾回收&#x2F;GC）是JVM对于Java堆上内存在运行时进行的动态管理，主要是对Java堆上不再被引用的对象进行回收。Minor GC是主要快速回收Eden区和Survivor区对象内存，Full GC则会对老年代也进行回收，后者可能会影响性能。</p>
 <h2 id="如何确定对象是否需要回收？"><a href="#如何确定对象是否需要回收？" class="headerlink" title="如何确定对象是否需要回收？"></a>如何确定对象是否需要回收？</h2><h3 id="引用计数算法（Reference-Counting）"><a href="#引用计数算法（Reference-Counting）" class="headerlink" title="引用计数算法（Reference Counting）"></a>引用计数算法（Reference Counting）</h3><p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被使用的。</p>
@@ -354,12 +354,12 @@
 <li>方法去中常量引用的对象</li>
 <li>本地方法栈中JNI（Native方法）引用的对象。</li>
 </ul>
-<h2 id="如何对对象进行回收？"><a href="#如何对对象进行回收？" class="headerlink" title="如何对对象进行回收？"></a>如何对对象进行回收？</h2><h3 id="标记——清除算法"><a href="#标记——清除算法" class="headerlink" title="标记——清除算法"></a>标记——清除算法</h3><p><img src="/blog/JVM-memory-management-and-GC%5CMarkSwap.jpg" alt="MarkSwap"></p>
-<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p><img src="/blog/JVM-memory-management-and-GC%5CCopying.jpg" alt="Copying"></p>
-<h3 id="标记——整理算法"><a href="#标记——整理算法" class="headerlink" title="标记——整理算法"></a>标记——整理算法</h3><p><img src="/blog/JVM-memory-management-and-GC%5CMarkCompact.jpg" alt="MarkCompact"></p>
+<h2 id="如何对对象进行回收？"><a href="#如何对对象进行回收？" class="headerlink" title="如何对对象进行回收？"></a>如何对对象进行回收？</h2><h3 id="标记——清除算法"><a href="#标记——清除算法" class="headerlink" title="标记——清除算法"></a>标记——清除算法</h3><p><img src="/JVM-memory-management-and-GC%5CMarkSwap.jpg" alt="MarkSwap"></p>
+<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p><img src="/JVM-memory-management-and-GC%5CCopying.jpg" alt="Copying"></p>
+<h3 id="标记——整理算法"><a href="#标记——整理算法" class="headerlink" title="标记——整理算法"></a>标记——整理算法</h3><p><img src="/JVM-memory-management-and-GC%5CMarkCompact.jpg" alt="MarkCompact"></p>
 <h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>对于新生代和老年代的对象进行不同的清理算法，一般来说，复制算法适合新生代，标记-清除算法和标记整理算法更适合老年代内存。</p>
 <h2 id="JVM对象内存管理策略"><a href="#JVM对象内存管理策略" class="headerlink" title="JVM对象内存管理策略"></a>JVM对象内存管理策略</h2><p>GC管理的内存分为三类区域，分别是Eden+Survivor（新生代），Tenured（老年代）和Permanent（永久代）。</p>
-<p><img src="/blog/JVM-memory-management-and-GC%5CGCRegions.png" alt="GCregion"></p>
+<p><img src="/JVM-memory-management-and-GC%5CGCRegions.png" alt="GCregion"></p>
 <ol>
 <li><p>对象优先在Eden分配</p>
 </li>
@@ -370,13 +370,13 @@
 <li><p>动态对象年龄判定：当Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或者等于该年龄的对象可以直接进入老年代，无须等到MaxTenuringThreshold中要求的年龄。这是为了防止Survivor区溢出。</p>
 </li>
 </ol>
-<h2 id="JVM常用的垃圾收集器"><a href="#JVM常用的垃圾收集器" class="headerlink" title="JVM常用的垃圾收集器"></a>JVM常用的垃圾收集器</h2><p><img src="/blog/JVM-memory-management-and-GC%5CGCs.jpg" alt="GCs"></p>
+<h2 id="JVM常用的垃圾收集器"><a href="#JVM常用的垃圾收集器" class="headerlink" title="JVM常用的垃圾收集器"></a>JVM常用的垃圾收集器</h2><p><img src="/JVM-memory-management-and-GC%5CGCs.jpg" alt="GCs"></p>
 <h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3><p>单线程处理<strong>新生代</strong>GC。复制算法。STW</p>
-<p><img src="/blog/JVM-memory-management-and-GC%5CSerialGC.jpg" alt="Serial/SerialOld"></p>
+<p><img src="/JVM-memory-management-and-GC%5CSerialGC.jpg" alt="Serial/SerialOld"></p>
 <h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>采用多线程处理<strong>新生代</strong>GC。复制算法。STW</p>
-<p><img src="/blog/JVM-memory-management-and-GC%5CParNewGC.jpg" alt="ParNew"></p>
+<p><img src="/JVM-memory-management-and-GC%5CParNewGC.jpg" alt="ParNew"></p>
 <h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>处理算法和ParNewGC完全一样。<br>但是，Parallel Scavenge收集器的特点是它的关注点与其他收集器不同，CMS等收集器的关注点是尽可能地缩短垃圾收集时用户线程的停顿时间，而Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量（Throughput）。所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量 &#x3D; 运行用户代码时间 &#x2F;（运行用户代码时间 +垃圾收集时间），虚拟机总共运行了100分钟，其中垃圾收集花掉1分钟，那吞吐量就是99%。</p>
-<p><img src="/blog/JVM-memory-management-and-GC%5CPSPold.jpg" alt="ParallelScavengeAndParOld"></p>
+<p><img src="/JVM-memory-management-and-GC%5CPSPold.jpg" alt="ParallelScavengeAndParOld"></p>
 <h3 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h3><p>单线程处理<strong>老年代</strong>GC。采用标记-整理算法。STW</p>
 <h3 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h3><p>多线程处理<strong>老年代</strong>GC。采用标记整理算法。STW</p>
 <h3 id="CMS-Concurrent-Mark-Sweep-收集器"><a href="#CMS-Concurrent-Mark-Sweep-收集器" class="headerlink" title="CMS(Concurrent Mark Sweep)收集器"></a>CMS(Concurrent Mark Sweep)收集器</h3><p>四个阶段（基于标记-清理算法）：</p>
@@ -386,7 +386,7 @@
 <li>再次标记 STW</li>
 <li>并发清理</li>
 </ul>
-<p><img src="/blog/JVM-memory-management-and-GC%5CCMS.jpg" alt="CMS"></p>
+<p><img src="/JVM-memory-management-and-GC%5CCMS.jpg" alt="CMS"></p>
 <p>问题：</p>
 <ol>
 <li>并发清理时预留空间不够造成并发清理(Concurrent Mode Failure)失败&#x3D;&gt;浮动垃圾(Floating Gabage)过多。</li>
@@ -438,9 +438,9 @@
 <li>筛选回收 STW 根据停顿时间要求筛选出Old中的Cset集合，作为回收目标。</li>
 </ul>
 <p>回收evacuation阶段（小区块进行复制整理避免碎片）：<br>需要STW，将选出的Cset中的对象进行复制到新的区块，清除掉原来的区块，达到收集的效果。</p>
-<p><img src="/blog/JVM-memory-management-and-GC%5CG1.jpg" alt="G1"></p>
+<p><img src="/JVM-memory-management-and-GC%5CG1.jpg" alt="G1"></p>
 <h3 id="ZGC-Z-Garbage-Collector-收集器"><a href="#ZGC-Z-Garbage-Collector-收集器" class="headerlink" title="ZGC(Z Garbage Collector)收集器"></a>ZGC(Z Garbage Collector)收集器</h3><p>ZGC（Z Garbage Collector）是一款由Oracle公司研发的，以低延迟为首要目标的一款垃圾收集器。它是基于动态Region内存布局，（暂时）不设年龄分代，使用了读屏障、染色指针和内存多重映射等技术来实现可并发的标记-整理算法的收集器。在JDK 11新加入，还在实验阶段，主要特点是：回收TB级内存（最大4T），停顿时间不超过10ms。m目前ZGC是实验性功能，可以通过<code>-XX:+UnlockExperimentalVMOptions -XX:+UseZGC</code>参数启动ZGC。</p>
-<h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><p><img src="/blog/JVM-memory-management-and-GC%5CGCArgs.jpg" alt="GCArgs"></p>
+<h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><p><img src="/JVM-memory-management-and-GC%5CGCArgs.jpg" alt="GCArgs"></p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
     </div>
 
@@ -450,20 +450,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/%E8%82%89%E8%82%89/" rel="tag"># 肉肉</a>
-              <a href="/blog/tags/JVM/" rel="tag"># JVM</a>
+              <a href="/tags/%E8%82%89%E8%82%89/" rel="tag"># 肉肉</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog/2018/10/11/Leetcode-901-Online-Stock-Span/" rel="prev" title="Leetcode 901 Online Stock Span">
+                <a href="/2018/10/11/Leetcode-901-Online-Stock-Span/" rel="prev" title="Leetcode 901 Online Stock Span">
                   <i class="fa fa-chevron-left"></i> Leetcode 901 Online Stock Span
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog/2018/11/17/Phoenix-Project-Reading-Notes/" rel="next" title="Phoenix Project Reading Notes">
+                <a href="/2018/11/17/Phoenix-Project-Reading-Notes/" rel="next" title="Phoenix Project Reading Notes">
                   Phoenix Project Reading Notes <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -535,10 +535,10 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/motion.js"></script><script src="/blog/js/schemes/muse.js"></script><script src="/blog/js/next-boot.js"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/blog/js/third-party/search/local-search.js"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
