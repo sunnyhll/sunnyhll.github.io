@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="Java异步计算方法与异步网络通信框架Java异步方法异步方法(Java asynchronized programming)是提升程序性能的一个有效手段，采用已经封装好的方法，让JVM去控制线程的创建和回收管理，减少了线程的阻塞，让程序员更加关注方法的设计。 Callable,Future, 和FutureTask Callable  Callable接口使用泛型去定义它的返回类型。Execut">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//Reactor.png">
+<meta property="og:image" content="https://sunnyhll.github.io/2020/12/18/Java-NIO/Reactor.png">
 <meta property="article:published_time" content="2020-12-18T06:40:42.000Z">
 <meta property="article:modified_time" content="2020-12-24T09:41:21.447Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/.io//Reactor.png">
+<meta name="twitter:image" content="https://sunnyhll.github.io/2020/12/18/Java-NIO/Reactor.png">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2020/12/18/Java-NIO/">
@@ -375,7 +375,7 @@
 <h1 id="题外话-C-异步编程方法"><a href="#题外话-C-异步编程方法" class="headerlink" title="题外话: C#异步编程方法"></a>题外话: C#异步编程方法</h1><p>C#异步编程框架依赖于CLR的实现，更加高效和简单明了，而Java的异步方法依赖线程池实现。</p>
 <h1 id="Java-NIO网络编程框架"><a href="#Java-NIO网络编程框架" class="headerlink" title="Java NIO网络编程框架"></a>Java NIO网络编程框架</h1><p>在网络编程领域，节点间式依赖TCP&#x2F;UDP协议进行通信，Java提供的Socket实现在JDK 1.4以前是阻塞I&#x2F;O, 也就是说每一个Socket连接，JVM中会分配一个线程阻塞等待连接建立，数据通信，在高并发场景下会发生线程池线程用尽的情况，为了优化网络通信效率，出现了非阻塞&#x2F;异步I&#x2F;O的设计方案。</p>
 <h2 id="Reactor模式设计思想"><a href="#Reactor模式设计思想" class="headerlink" title="Reactor模式设计思想"></a>Reactor模式设计思想</h2><p>Netty通信框架的设计思想是基于Reactor模式思想，这是一种基于事件驱动的设计思想。能够高效的解决很多程序设计中的线程不必要阻塞问题。Java NIO也是基于Reactor设计思想实现的，在JVM本地方法层面做到了多路复用I&#x2F;O。</p>
-<p><img src="/.io//Reactor.png" alt="NettyNIO"></p>
+<p><img src="/2020/12/18/Java-NIO/Reactor.png" alt="NettyNIO"></p>
 <p>Reactor模式中的五个角色:</p>
 <ol>
 <li>Handle(句柄或描述符，在Windows下称为句柄，在Linux下称为描述符)：<br> 本质上表示一种资源(比如说文件描述符，或是针对网络编程中的socket描述符)，是由操作系统提供的；该资源用于表示一个个的事件，事件既可以来自于外部，也可以来自于内部；外部事件比如说客户端的连接请求，客户端发送过来的数据等；内部事件比如说操作系统产生的定时事件等。它本质上就是一个文件描述符，Handle是事件产生的发源地。</li>

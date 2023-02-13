@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="数组时间复杂度   操作 时间复杂度    查询 Lookup O(1)   插入 Insert O(n)   删除 Delete O(n)   前插 Prepend&#x2F;Pushfront O(n)   后插 Append&#x2F;Pushback O(1)   删除有序数组中的重复项LC26题目链接 1234567891011class Solution &amp;#123;    publi">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//LC206.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//LC25.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/%E4%B8%83%E5%A4%A9%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%94%E8%AE%B0/LC206.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/%E4%B8%83%E5%A4%A9%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%94%E8%AE%B0/LC25.jpg">
 <meta property="article:published_time" content="2022-11-14T02:12:36.000Z">
 <meta property="article:modified_time" content="2022-11-17T07:13:03.110Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/.io//LC206.jpg">
+<meta name="twitter:image" content="https://sunnyhll.github.io/%E4%B8%83%E5%A4%A9%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%94%E8%AE%B0/LC206.jpg">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2022/11/14/%E4%B8%83%E5%A4%A9%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%94%E8%AE%B0/">
@@ -334,11 +334,11 @@
 </tr>
 </tbody></table>
 <h2 id="反转链表问题"><a href="#反转链表问题" class="headerlink" title="反转链表问题"></a>反转链表问题</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">LC206题目链接</a></p>
-<p><img src="/.io//LC206.jpg" alt="LC206"></p>
+<p><img src="/./%E4%B8%83%E5%A4%A9%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%94%E8%AE%B0/LC206.jpg" alt="LC206"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode() &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">reverseList</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">last</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (head != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">ListNode</span> <span class="variable">nextHead</span> <span class="operator">=</span> head.next; <span class="comment">// 缓存因为next会被修改</span></span><br><span class="line">            head.next = last; <span class="comment">// 跟新next指针</span></span><br><span class="line">            last = head; <span class="comment">//更新上一个节点为当前节点</span></span><br><span class="line">            head = nextHead; <span class="comment">// 更新当前节点 推进</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="K个一组翻转链表"><a href="#K个一组翻转链表" class="headerlink" title="K个一组翻转链表"></a>K个一组翻转链表</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-nodes-in-k-group/">LC25题目链接</a></p>
-<p><img src="/.io//LC25.jpg" alt="LC25"></p>
+<p><img src="/./%E4%B8%83%E5%A4%A9%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%94%E8%AE%B0/LC25.jpg" alt="LC25"></p>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul>
 <li>分组：每k个元素的头尾节点确定</li>
 <li>子问题：针对每一组k个元素的反转问题</li>

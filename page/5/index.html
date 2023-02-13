@@ -853,9 +853,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="Ubuntu-on-Windows-10"><a href="#Ubuntu-on-Windows-10" class="headerlink" title="Ubuntu on Windows 10"></a>Ubuntu on Windows 10</h2><ol>
-<li>Enable Developer mode for Win 10<br><img src="/.io//ubuntu-subsystem%5CDeveloper-mode.PNG" alt="Developer-mode"></li>
-<li>Add Windows Linux subsystem<br><img src="/.io//ubuntu-subsystem%5CLinux-subsystem.PNG" alt="Linux-subsystem"></li>
-<li>Install Ubuntu&#x2F;SUSE&#x2F;*** from App Store<br><img src="/.io//ubuntu-subsystem%5CInstall-ubuntu.PNG" alt="Install-ubuntu"></li>
+<li>Enable Developer mode for Win 10<br><img src="/ubuntu-subsystem%5CDeveloper-mode.PNG" alt="Developer-mode"></li>
+<li>Add Windows Linux subsystem<br><img src="/ubuntu-subsystem%5CLinux-subsystem.PNG" alt="Linux-subsystem"></li>
+<li>Install Ubuntu&#x2F;SUSE&#x2F;*** from App Store<br><img src="/ubuntu-subsystem%5CInstall-ubuntu.PNG" alt="Install-ubuntu"></li>
 </ol>
 <h2 id="Update-package-sources"><a href="#Update-package-sources" class="headerlink" title="Update package sources"></a>Update package sources</h2><ol>
 <li>Edit &#x2F;etc&#x2F;apt&#x2F;source.list<blockquote>
@@ -1017,7 +1017,7 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dynamic length int array declaration!!!</span></span><br><span class="line"><span class="type">int</span>[] factorial = <span class="keyword">new</span> <span class="title class_">int</span>[n+<span class="number">1</span>];</span><br><span class="line"><span class="comment">// create an array of factorial lookup</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    factorial[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        sum *= i;</span><br><span class="line">        factorial[i] = sum;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>对于元素生成，可以运用List<Integer>类型的灵活性而避免在元素中挪动数字造成的时间开销。即使int array也可以作为一种高效的数据结构。</Integer></p>
+<p>对于元素生成，可以运用List<Integer>类型的灵活性而避免在元素中挪动数字造成的时间开销。即使int array也可以作为一种高效的数据结构。</p>
 </blockquote>
 <blockquote>
 <p>在程序实现中，递归算法会产生较高的空间开销，在for循环可以完成计算的情况下，优先采用后者。</p>
@@ -1181,7 +1181,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-10-09 10:56:13" itemprop="dateModified" datetime="2021-10-09T10:56:13+08:00">2021-10-09</time>
+      <time title="修改时间：2023-02-13 12:37:31" itemprop="dateModified" datetime="2023-02-13T12:37:31+08:00">2023-02-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1287,24 +1287,24 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li>配置_config.yaml文件</li>
+<li>配置_config.yaml文件( “hexo-generator-searchdb”: “^1.4.1”后需要更新配置)</li>
 </ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">content:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>配置next主题的_config.yaml文件</li>
 </ol>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Local search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/flashlab/hexo-generator-search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># if auto, trigger search by changing input</span></span><br><span class="line">  <span class="comment"># if manual, trigger search by pressing enter key or search button</span></span><br><span class="line">  <span class="attr">trigger:</span> <span class="string">auto</span></span><br><span class="line">  <span class="comment"># show top n results per article, show all results by setting to -1</span></span><br><span class="line">  <span class="attr">top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="hexo-UML图绘制"><a href="#hexo-UML图绘制" class="headerlink" title="hexo UML图绘制"></a>hexo UML图绘制</h3><h4 id="顺序图-Sequence-Diagram"><a href="#顺序图-Sequence-Diagram" class="headerlink" title="顺序图(Sequence Diagram)"></a>顺序图(Sequence Diagram)</h4><img src="http://www.plantuml.com/plantuml/svg/Syp9J4vLqBLJSCfFib9mB2t9ICqhoKnEBCdCprC8IYqiJIqkuGBAAUW2rJY256DHLLoGdrUSoiNbY6fONZvGNP52OaafDaCXYcrqTT5KOpSS0000">
+<h3 id="hexo-UML图绘制"><a href="#hexo-UML图绘制" class="headerlink" title="hexo UML图绘制"></a>hexo UML图绘制</h3><h4 id="顺序图-Sequence-Diagram"><a href="#顺序图-Sequence-Diagram" class="headerlink" title="顺序图(Sequence Diagram)"></a>顺序图(Sequence Diagram)</h4><img  src=http://www.plantuml.com/plantuml/svg/Syp9J4vLqBLJSCfFib9mB2t9ICqhoKnEBCdCprC8IYqiJIqkuGBAAUW2rJY256DHLLoGdrUSoiNbY6fONZvGNP52OaafDaCXYcrqTT5KOpSS0000>
 
 <h4 id="类图（Class-Diagram）"><a href="#类图（Class-Diagram）" class="headerlink" title="类图（Class Diagram）"></a>类图（Class Diagram）</h4><ol>
 <li>强耦合关系</li>
 </ol>
-<img src="http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuNBEIImkDZ1KiAdHrLM0S8mKh1IURPxzj6UQWe7HyztBdtNkDp24A3G4ATJJWoWq12bykcxUyxuD2eP648QX8PT3QbuAq6G0">
+<img  src=http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuNBEIImkDZ1KiAdHrLM0S8mKh1IURPxzj6UQWe7HyztBdtNkDp24A3G4ATJJWoWq12bykcxUyxuD2eP648QX8PT3QbuAq6G0>
 
 <ol start="2">
-<li>弱耦合关系<img src="http://www.plantuml.com/plantuml/svg/NT3TIW9150Vm-vxYNCSg4txMHLWzYM1tLj3QlQBfqkSkRX5BjJT64eGj6GokwzESCpEzHQCp97WrPywV-V5dQcwhVjwwE6bk7JNhhiigaC_lWvchi0UuU54_Zy0gE8_CpAeowY5l_tR7vFNfAbRTpA5vGfVVgXDQPXToESliCCsO46II7Y3_bA5--gKlXvIyYlQximh4pO3yOBcrI06s_nLMr8fCU-Hxm8hYQS8AkePU2CytJHnp8ByJ3rFCXiiuZ2d8A1YBvrWtLeEfbKjmjfRBMbQTQ2MNp82pFYixo4V8F-HeXelh3Otk9vY-8R-rREtujA4_yGy0"></li>
+<li>弱耦合关系<img  src=http://www.plantuml.com/plantuml/svg/NT3TIW9150Vm-vxYNCSg4txMHLWzYM1tLj3QlQBfqkSkRX5BjJT64eGj6GokwzESCpEzHQCp97WrPywV-V5dQcwhVjwwE6bk7JNhhiigaC_lWvchi0UuU54_Zy0gE8_CpAeowY5l_tR7vFNfAbRTpA5vGfVVgXDQPXToESliCCsO46II7Y3_bA5--gKlXvIyYlQximh4pO3yOBcrI06s_nLMr8fCU-Hxm8hYQS8AkePU2CytJHnp8ByJ3rFCXiiuZ2d8A1YBvrWtLeEfbKjmjfRBMbQTQ2MNp82pFYixo4V8F-HeXelh3Otk9vY-8R-rREtujA4_yGy0></li>
 </ol>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       

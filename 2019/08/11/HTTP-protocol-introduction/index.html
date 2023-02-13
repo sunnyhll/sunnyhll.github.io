@@ -26,16 +26,16 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="HTTP 协议HTTP协议属于应用层协议，其设计目的是为了方便文本内容的分享与发布。HTTP协议是Web资源共享的基础，与URL(文档地址定位符)，HTML共同构建了Web世界。 HTTP协议属于点到点通信协议，请求访问资源的一端称为客户端，提供资源相应的一端称为服务器。 HTTP协议方法 GET：请求访问资源。 POST：传输主体内容。 PUT：传输内容，幂等传输。 HEAD: 获得报文首部，用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CHTTPS.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CBASIC.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CDIGEST.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CFORMBASED.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CHTTPS.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CBASIC.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CDIGEST.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CFORMBASED.jpg">
 <meta property="article:published_time" content="2019-08-11T13:57:54.000Z">
 <meta property="article:modified_time" content="2019-08-11T13:58:11.977Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/.io//HTTP-protocol-introduction%5CHTTPS.jpg">
+<meta name="twitter:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CHTTPS.jpg">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2019/08/11/HTTP-protocol-introduction/">
@@ -317,7 +317,7 @@
 </ol>
 <h2 id="HTTP-over-SSL-x2F-TSL"><a href="#HTTP-over-SSL-x2F-TSL" class="headerlink" title="HTTP over SSL&#x2F;TSL"></a>HTTP over SSL&#x2F;TSL</h2><p>SSL&#x2F;TSL协议独立与HTTP协议，存在于HTTP和TCP协议之间，在建立HTTP连接之前，先建立SSL通信机制，交换加密密钥，从而在HTTP通信报文可以进行加密传输。</p>
 <p>HTTPS 协议通信握手&#x2F;分手协议步骤：</p>
-<p><img src="/.io//HTTP-protocol-introduction%5CHTTPS.jpg" alt="HTTPS"></p>
+<p><img src="/HTTP-protocol-introduction%5CHTTPS.jpg" alt="HTTPS"></p>
 <p>握手主要分为4个阶段:</p>
 <ol>
 <li>SSL证书请求，及公钥获取。&lt;&#x3D; 由于非对称加密机制的效率较低，安全性高，只用作密钥交互。</li>
@@ -332,10 +332,10 @@
 </ul>
 <h1 id="用户认证问题"><a href="#用户认证问题" class="headerlink" title="用户认证问题"></a>用户认证问题</h1><p>HTTP&#x2F;1.1常见的认证方式如下：</p>
 <ul>
-<li>BASIC认证：直接提交用户名密码完成认证。<br><img src="/.io//HTTP-protocol-introduction%5CBASIC.jpg" alt="BASIC"></li>
-<li>DIGEST认证：客户端根据服务器端的质询码生成响应码完成认证。<br><img src="/.io//HTTP-protocol-introduction%5CDIGEST.jpg" alt="DIGEST"></li>
+<li>BASIC认证：直接提交用户名密码完成认证。<br><img src="/HTTP-protocol-introduction%5CBASIC.jpg" alt="BASIC"></li>
+<li>DIGEST认证：客户端根据服务器端的质询码生成响应码完成认证。<br><img src="/HTTP-protocol-introduction%5CDIGEST.jpg" alt="DIGEST"></li>
 <li>SSL客户端认证：凭借HTTPS的客户端认证证书完成认证。</li>
-<li>FormBase认证：在用户登录信息以表单形式提交后，服务器端发放Session ID用于用户认证状态的绑定和保持。<br><img src="/.io//HTTP-protocol-introduction%5CFORMBASED.jpg" alt="FORM"></li>
+<li>FormBase认证：在用户登录信息以表单形式提交后，服务器端发放Session ID用于用户认证状态的绑定和保持。<br><img src="/HTTP-protocol-introduction%5CFORMBASED.jpg" alt="FORM"></li>
 <li>Kerberos认证：</li>
 <li>NTLM认证：</li>
 <li>SSO认证：</li>

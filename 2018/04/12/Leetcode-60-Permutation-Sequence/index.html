@@ -291,7 +291,7 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dynamic length int array declaration!!!</span></span><br><span class="line"><span class="type">int</span>[] factorial = <span class="keyword">new</span> <span class="title class_">int</span>[n+<span class="number">1</span>];</span><br><span class="line"><span class="comment">// create an array of factorial lookup</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    factorial[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;</span><br><span class="line">        sum *= i;</span><br><span class="line">        factorial[i] = sum;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>对于元素生成，可以运用List<Integer>类型的灵活性而避免在元素中挪动数字造成的时间开销。即使int array也可以作为一种高效的数据结构。</Integer></p>
+<p>对于元素生成，可以运用List<Integer>类型的灵活性而避免在元素中挪动数字造成的时间开销。即使int array也可以作为一种高效的数据结构。</p>
 </blockquote>
 <blockquote>
 <p>在程序实现中，递归算法会产生较高的空间开销，在for循环可以完成计算的情况下，优先采用后者。</p>

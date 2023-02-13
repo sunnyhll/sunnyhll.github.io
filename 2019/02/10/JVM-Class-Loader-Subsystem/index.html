@@ -26,27 +26,27 @@
 <meta property="og:site_name" content="微观天下">
 <meta property="og:description" content="Class文件结构Class文件时一组以8位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在Class文件之中，中间没有添加任何分隔符，这使得整个Class文件中存储的内容几乎全部是程序运行的必要数据。 Class文件本身是由下图的这些数据类型组成，这些数据项之间并没有分隔符，而是通过约定好的规范和表结构填入对应的信息，从而将Java语言代码翻译成字节码。Class文件数据项包含如下">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CClassFileDataType.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CConstantFlag.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CConstantPool.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CClassAccessFlag.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CField.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CFieldAccessFlag.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CDescriptor.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CField.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CMethodAccessFlag.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CAttributeInfo.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CAttributeCollection.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5COptCode.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CClassLoader.jpg">
-<meta property="og:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CParentsDelegationModel.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CClassFileDataType.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CConstantFlag.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CConstantPool.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CClassAccessFlag.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CField.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CFieldAccessFlag.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CDescriptor.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CField.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CMethodAccessFlag.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CAttributeInfo.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CAttributeCollection.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5COptCode.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CClassLoader.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CParentsDelegationModel.jpg">
 <meta property="article:published_time" content="2019-02-10T12:44:33.000Z">
 <meta property="article:modified_time" content="2020-12-29T02:18:38.989Z">
 <meta property="article:author" content="果核&amp;肉肉">
 <meta property="article:tag" content="肉肉">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sunnyhll.github.io/.io//JVM-Class-Loader-Subsystem%5CClassFileDataType.jpg">
+<meta name="twitter:image" content="https://sunnyhll.github.io/JVM-Class-Loader-Subsystem%5CClassFileDataType.jpg">
 
 
 <link rel="canonical" href="https://sunnyhll.github.io/2019/02/10/JVM-Class-Loader-Subsystem/">
@@ -273,7 +273,7 @@
     <div class="post-body" itemprop="articleBody">
         <h1 id="Class文件结构"><a href="#Class文件结构" class="headerlink" title="Class文件结构"></a>Class文件结构</h1><p>Class文件时一组以8位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在Class文件之中，中间没有添加任何分隔符，这使得整个Class文件中存储的内容几乎全部是程序运行的必要数据。</p>
 <p>Class文件本身是由下图的这些数据类型组成，这些数据项之间并没有分隔符，而是通过约定好的规范和表结构填入对应的信息，从而将Java语言代码翻译成字节码。Class文件数据项包含如下这些类型。</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CClassFileDataType.jpg" alt="ClassFileDataType"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CClassFileDataType.jpg" alt="ClassFileDataType"></p>
 <h2 id="1-魔数"><a href="#1-魔数" class="headerlink" title="1. 魔数"></a>1. 魔数</h2><p>第1~4字节：0xCAFEBABE</p>
 <h2 id="2-Class文件的版本"><a href="#2-Class文件的版本" class="headerlink" title="2. Class文件的版本"></a>2. Class文件的版本</h2><p>第5、6字节：次版本号（4x.0~4x.65535）</p>
 <p>第7、8字节：主版本号 （45~）</p>
@@ -290,9 +290,9 @@
 </li>
 </ul>
 <p>常量池中每一项常量都是一个表。JDK中定义了14种结构的表结构数据，如下图所示：</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CConstantFlag.jpg" alt="ConstantFlag"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CConstantFlag.jpg" alt="ConstantFlag"></p>
 <p>表开始的第一位都是一个u1类型的标志位（binary 0000 0000 0000 0000 中某几位为1），代表本表属于哪种常量类型，而后则遵从常量表自己的格式填入数据，结构总表如下所示。</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CConstantPool.jpg" alt="ConstantPool"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CConstantPool.jpg" alt="ConstantPool"></p>
 <h2 id="4-访问标志"><a href="#4-访问标志" class="headerlink" title="4. 访问标志"></a>4. 访问标志</h2><p>常量池后面两个字节：以16个标志位识别类或接口层次的访问信息，包括：</p>
 <pre><code>1. Class是类还是接口；
 2. 是否为public类型；
@@ -300,14 +300,14 @@
 4. 如果是类的话，是否被声明为final。
 </code></pre>
 <p>访问标志本身总共由16个标志位可以使用，具体代表如下图所示：</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CClassAccessFlag.jpg" alt="AccessFlag"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CClassAccessFlag.jpg" alt="AccessFlag"></p>
 <h2 id="5-类索引、父类索引和接口索引集合"><a href="#5-类索引、父类索引和接口索引集合" class="headerlink" title="5. 类索引、父类索引和接口索引集合"></a>5. 类索引、父类索引和接口索引集合</h2><p>类索引和父类索引都是一个u2类型的数据，而接口索引集合是一组u2类型的数据的集合，Class文件中由这三项数据确定这个类的全限定名。</p>
 <p>类索引和父类索引都指向了一个CONSTANT_Class_info类，而接口所以则第一位是接口的个数，后面跟了相应个数的索引分别指向CONSTANT_Class_info类。</p>
 <h2 id="6-字段表集合"><a href="#6-字段表集合" class="headerlink" title="6. 字段表集合"></a>6. 字段表集合</h2><p>字段表用于描述接口或者类中声明的变量。字段包括类级变量以及实例级变量，但不包括在方法内部声明的局部变量。</p>
 <p>字段结构如下所示：</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CField.jpg" alt="Field"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CField.jpg" alt="Field"></p>
 <p>字段的访问标志位有如下这些表格，标志位值和Class访问标志定义一样，但是支持的标志个数不一样：</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CFieldAccessFlag.jpg" alt="FieldAccessFlag"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CFieldAccessFlag.jpg" alt="FieldAccessFlag"></p>
 <ol>
 <li><p>name_index保存的是对常量池CONSTANT_Utf8的引用，保存了方法简单名称。</p>
 <p> 全限定名和简单名称很好理解，“org&#x2F;fenixsoft&#x2F;clazz&#x2F;TestClass”是这个类的全限定名，仅仅是把类全名中的“.”替换成了“&#x2F;”而已，为了使连续的多个全限定名之间不产生混淆，在使用时最后一般会加入一个“;”表示全限定名结束。简单名称是指没有类型和参数修饰的方法或者字段名称，这个类中的inc()方法和m字段的简单名称分别是“inc”和“m”。</p>
@@ -320,19 +320,19 @@
 </li>
 </ul>
 <p> 描述符支持如下类型：</p>
-<p> <img src="/.io//JVM-Class-Loader-Subsystem%5CDescriptor.jpg" alt="Descriptor"></p>
+<p> <img src="/JVM-Class-Loader-Subsystem%5CDescriptor.jpg" alt="Descriptor"></p>
 </li>
 </ol>
 <h2 id="7-方法表集合"><a href="#7-方法表集合" class="headerlink" title="7. 方法表集合"></a>7. 方法表集合</h2><p>方法表用于描述接口或者类中声明的方法，包括类级方法以及实例方法。表结构跟字段表相似，在此不再赘述。</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CField.jpg" alt="Field"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CField.jpg" alt="Field"></p>
 <p>方法的访问标志与字段不同，如下图:</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CMethodAccessFlag.jpg" alt="MethodAccessFlag"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CMethodAccessFlag.jpg" alt="MethodAccessFlag"></p>
 <h2 id="8-属性表集合"><a href="#8-属性表集合" class="headerlink" title="8. 属性表集合"></a>8. 属性表集合</h2><p>属性表并不是单独存在的表，而是在Class文件、字段表、方法表都可以携带自己的属性表集合，用于描述某些场景专有的信息。属性表结构对后续属性进行了总表，结构如下:</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CAttributeInfo.jpg" alt="AttrubuteInfo"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CAttributeInfo.jpg" alt="AttrubuteInfo"></p>
 <p>目前虚拟机规范定义了下列属性：</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CAttributeCollection.jpg" alt="Attrubute_info"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CAttributeCollection.jpg" alt="Attrubute_info"></p>
 <h1 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a>字节码指令</h1><p>Java编译器将代码的操作本身处理生成了字节码指令，放在了Code属性中，JVM读取指令进行执行。JVM支持的字节码指令和操作数如表格所示:</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5COptCode.jpg" alt="OptCode"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5COptCode.jpg" alt="OptCode"></p>
 <h1 id="Class加载时机"><a href="#Class加载时机" class="headerlink" title="Class加载时机"></a>Class加载时机</h1><p>5大主动引用场景：</p>
 <ol>
 <li>遇到new、getstatic、putstatic或invokestatic这4条字节码指令时，如果类没有进行过初始化，则需要先触发其初始化。生成这4条指令的最常见的Java代码场景是：使用new关键字实例化对象的时候、读取或设置一个类的静态字段（被final修饰、已在编译期把结果放入常量池的静态字段除外）的时候，以及调用一个类的静态方法的时候。</li>
@@ -348,7 +348,7 @@
 <li>常量在编译阶段会存入调用类的常量池中，本质上没有直接引用到定义敞亮的类，因此不会触发定义常量的类的初始化。</li>
 </ol>
 <h1 id="Class加载过程"><a href="#Class加载过程" class="headerlink" title="Class加载过程"></a>Class加载过程</h1><p>类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：加载（Loading）、验证（Verification）、准备（Preparation）、解析（Resolution）、初始化（Initialization）、使用（Using）和卸载（Unloading）7个阶段。其中验证、准备、解析3个部分统称为连接（Linking），这7个阶段的发生顺序如下图所示。</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CClassLoader.jpg" alt="ClassLoader"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CClassLoader.jpg" alt="ClassLoader"></p>
 <h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><ol>
 <li><p>通过一个类的全限定名来获取定义此类的二进制字节流</p>
 </li>
@@ -465,18 +465,18 @@
 
 <h2 id="类加载器类型"><a href="#类加载器类型" class="headerlink" title="类加载器类型"></a>类加载器类型</h2><p>目前只存在两种不同的类加载器：一种是启动类加载器(Bootstrap ClassLoader)，C++语言实现，虚拟机自身的一部分；另一种就是所有其他类加载器，继承自抽象类java.lang.ClassLoader。</p>
 <ul>
-<li>启动类加载器（Bootstrap ClassLoader）：前面已经介绍过，这个类将器负责将存放在<JAVA_HOME>\lib目录中的，或者被-Xbootclasspath参数所指定的路径中的，并且是虚拟机识别的（仅按照文件名识别，如rt.jar，名字不符合的类库即使放在lib目录中也不会被加载）类库加载到虚拟机内存中。启动类加载器无法被Java程序直接引用，用户在编写自定义类加载器时，如果需要把加载请求委派给引导类加载器，那直接使用null代替即可，如下列代码清单所示为java.lang.ClassLoader.getClassLoader()方法的代码片段。</JAVA_HOME></li>
+<li>启动类加载器（Bootstrap ClassLoader）：前面已经介绍过，这个类将器负责将存放在<JAVA_HOME>\lib目录中的，或者被-Xbootclasspath参数所指定的路径中的，并且是虚拟机识别的（仅按照文件名识别，如rt.jar，名字不符合的类库即使放在lib目录中也不会被加载）类库加载到虚拟机内存中。启动类加载器无法被Java程序直接引用，用户在编写自定义类加载器时，如果需要把加载请求委派给引导类加载器，那直接使用null代替即可，如下列代码清单所示为java.lang.ClassLoader.getClassLoader()方法的代码片段。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ClassLoader <span class="title function_">getClassLoader</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ClassLoader</span> <span class="variable">cl</span> <span class="operator">=</span> getClassLoader0();</span><br><span class="line">    <span class="keyword">if</span>(cl == <span class="literal">null</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">SecurityManager</span> <span class="variable">sm</span> <span class="operator">=</span> System.getSecurityManger();</span><br><span class="line">    <span class="keyword">if</span>(sm != <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="type">ClassLoader</span> <span class="variable">ccl</span> <span class="operator">=</span> ClassLoader.getCallerClassLoader();</span><br><span class="line">        <span class="keyword">if</span>(ccl != <span class="literal">null</span> &amp;&amp; ccl != cl &amp;&amp; !cl.isAncestor(ccl))&#123;</span><br><span class="line">            sm.checkPermission(SecurityConstants.GET_CLASSLOADER_PERMISSION);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>扩展类加载器（Extension ClassLoader）：这个加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载<JAVA_HOME>\lib\ext目录中的，或者被java.ext.dirs系统变量所指定的路径中的所有类库，开发者可以直接使用扩展类加载器。</JAVA_HOME></p>
+<li><p>扩展类加载器（Extension ClassLoader）：这个加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载<JAVA_HOME>\lib\ext目录中的，或者被java.ext.dirs系统变量所指定的路径中的所有类库，开发者可以直接使用扩展类加载器。</p>
 </li>
 <li><p>应用程序类加载器（Application ClassLoader）：这个类加载器由sun.misc.Launcher$App-ClassLoader实现。由于这个类加载器是ClassLoader中的getSystemClassLoader()方法的返回值，所以一般也称它为系统类加载器。它负责加载用户类路径（ClassPath）上所指定的类库，开发者可以直接使用这个类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</p>
 </li>
 </ul>
 <h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>图中展示的类加载器之间的这种层次关系，称为类加载器的双亲委派模型（Parents Delegation Model）。双亲委派模型要求除了顶层的启动类加载器外，其余的类加载器都应当有自己的父类加载器。这里类加载器之间的父子关系一般不会以继承（Inheritance）的关系来实现，而是都使用组合（Composition）关系来复用父加载器的代码。</p>
-<p><img src="/.io//JVM-Class-Loader-Subsystem%5CParentsDelegationModel.jpg" alt="ParentDelegationModel"></p>
+<p><img src="/JVM-Class-Loader-Subsystem%5CParentsDelegationModel.jpg" alt="ParentDelegationModel"></p>
 <p>双亲委派模型的工作过程是：</p>
 <ol>
 <li>所有的加载请求都委派给父类加载器去完成。</li>
