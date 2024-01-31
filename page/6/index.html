@@ -147,7 +147,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -158,7 +158,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -175,6 +175,361 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/19/Angular-5-with-Angular-CLI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="果核&肉肉">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 微观天下">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/04/19/Angular-5-with-Angular-CLI/" class="post-title-link" itemprop="url">Angular 5 with Angular CLI</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-04-19 22:12:45" itemprop="dateCreated datePublished" datetime="2018-04-19T22:12:45+08:00">2018-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-22 10:51:51" itemprop="dateModified" datetime="2021-06-22T10:51:51+08:00">2021-06-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Angular-5-Overview"><a href="#Angular-5-Overview" class="headerlink" title="Angular 5 Overview"></a>Angular 5 Overview</h2><p>Angular 5的快速开发，测试和部署可以使用Angular CLI工具完成。Angular 5是基于Typescript语言开发的Web前端框架。</p>
+<h3 id="Angular-5-quick-start"><a href="#Angular-5-quick-start" class="headerlink" title="Angular 5 quick start"></a>Angular 5 quick start</h3><ul>
+<li>Environment Setup</li>
+<li>ng command</li>
+<li>Project structure definition<blockquote>
+<p>More at: <a target="_blank" rel="noopener" href="https://angular.io/guide/quickstart">https://angular.io/guide/quickstart</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Angular-5-basic-prject-development-tutorial"><a href="#Angular-5-basic-prject-development-tutorial" class="headerlink" title="Angular 5 basic prject development tutorial"></a>Angular 5 basic prject development tutorial</h3><h4 id="Application-shell"><a href="#Application-shell" class="headerlink" title="Application shell"></a>Application shell</h4><p>Angular 5应用的基本框架，可以用ng new {projectname}命令生成，一个简单的Angular项目需要包含一个app module和app component。在app component中，会定义一个<app-root></app-root>控件，作为整个Angular app的入口，一般写在index.html中。</p>
+<h4 id="Angular-Component"><a href="#Angular-Component" class="headerlink" title="Angular Component"></a>Angular Component</h4><p>在已经有的app component基础上，可以用ng generate component {dir&#x2F;componetname}命令生成更多的组件，新的组件组成元素和app component一样，也是html模板，ts组件功能定义，和css组件风格。一般意义上，在ts中定义控件directive的名称，在html模板中，可以直接调用该directive。</p>
+<p>每个已经创建好的component会被自动import进入app.module.ts文件，从而在Angular应用启动时，能自动寻找到对应的component并加载。如果developer需要在自己定义的component中引用其他component&#x2F;service组件，也需要定义相似的import语句，否则Angualr引擎并不能成功识别调用组件。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Angular components</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">BrowserModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/platform-browser&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NgModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/core&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">FormsModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/forms&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Angular application shell</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AppComponent</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.component&#x27;</span>;</span><br><span class="line"><span class="comment">//Additional costomized components</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroesComponent</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./heroes/heroes.component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroDetailComponent</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./hero-detail/hero-detail.component&#x27;</span>;</span><br><span class="line"><span class="comment">//Additional service modules</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroService</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./hero.service&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  <span class="attr">declarations</span>: [</span><br><span class="line">    <span class="title class_">AppComponent</span>,</span><br><span class="line">    <span class="title class_">HeroesComponent</span>,</span><br><span class="line">    <span class="title class_">HeroDetailComponent</span>,</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">imports</span>: [</span><br><span class="line">    <span class="title class_">BrowserModule</span>,</span><br><span class="line">    <span class="title class_">FormsModule</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">providers</span>: [</span><br><span class="line">    <span class="title class_">HeroService</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">bootstrap</span>: [ <span class="title class_">AppComponent</span> ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Angular-Service"><a href="#Angular-Service" class="headerlink" title="Angular Service"></a>Angular Service</h4><p>Angular提供了service module来支持现在Web前端数据获取和更新功能。可以用ng generate service {dir&#x2F;servicename} –module&#x3D;app命令来生成。</p>
+<h4 id="Angular-Routing"><a href="#Angular-Routing" class="headerlink" title="Angular Routing"></a>Angular Routing</h4><p>Angular提供了routing来允许Web前端以single page application(SPA)方式渲染多个url的页面。可以用ng generate module app-routing –flat –module&#x3D;app生成app.routing.ts模块。app routing模块隐式定义了<router-outlet></router-outlet>控件，这是一个可以根据输入url进行跳转的控件。一般放在app componet html模板中，作为Angular应用的跳转渲染单元。这个控件本身，并不能提供跳转入口，一般需要写锚，在html模板显式来定义url。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">&quot;/heroes&quot;</span>&gt;</span>Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">routerLink</span>=<span class="string">&quot;/heroes&quot;</span>&gt;</span>Heroes<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，app routing模块本身，定义了url跳转的逻辑。由于Angualar的html模块本身具有嵌套性，因而在routing逻辑中，只要引入自定义的directive控件，就能自动渲染出控件中所嵌套的所有元素。可以说，Angular的程序设计思想，就是基于模板设计的，每个模板都是一个自定义的DOM元素，允许在Angular的控制域中任意的复用。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NgModule</span> &#125;             <span class="keyword">from</span> <span class="string">&#x27;@angular/core&#x27;</span>;</span><br><span class="line"><span class="comment">// Angular routing module</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">RouterModule</span>, <span class="title class_">Routes</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/router&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">DashboardComponent</span> &#125;   <span class="keyword">from</span> <span class="string">&#x27;./dashboard/dashboard.component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroesComponent</span> &#125;      <span class="keyword">from</span> <span class="string">&#x27;./heroes/heroes.component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroDetailComponent</span> &#125;  <span class="keyword">from</span> <span class="string">&#x27;./hero-detail/hero-detail.component&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="attr">routes</span>: <span class="title class_">Routes</span> = [</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">redirectTo</span>: <span class="string">&#x27;/dashboard&#x27;</span>, <span class="attr">pathMatch</span>: <span class="string">&#x27;full&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">&#x27;dashboard&#x27;</span>, <span class="attr">component</span>: <span class="title class_">DashboardComponent</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">&#x27;detail/:id&#x27;</span>, <span class="attr">component</span>: <span class="title class_">HeroDetailComponent</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">&#x27;heroes&#x27;</span>, <span class="attr">component</span>: <span class="title class_">HeroesComponent</span> &#125;</span><br><span class="line">];</span><br><span class="line"> </span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  <span class="attr">imports</span>: [ <span class="title class_">RouterModule</span>.<span class="title function_">forRoot</span>(routes) ],</span><br><span class="line">  <span class="attr">exports</span>: [ <span class="title class_">RouterModule</span> ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">AppRoutingModule</span> &#123;&#125;      </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Angular-HTTP"><a href="#Angular-HTTP" class="headerlink" title="Angular HTTP"></a>Angular HTTP</h4><p>Angular提供了HttpClient库作为Restful API的utility来完成Web前端的服务器数据交互。在程序中，HttpClient库一般本身不会单独存在于componnet中，而是作为Angular Service模块的底层调用库。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Service module</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Injectable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/core&#x27;</span>;</span><br><span class="line"><span class="comment">// import httpclient Angular module</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HttpClient</span>, <span class="title class_">HttpHeaders</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@angular/common/http&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Observable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs/Observable&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="keyword">of</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs/observable/of&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; catchError, map, tap &#125; <span class="keyword">from</span> <span class="string">&#x27;rxjs/operators&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Hero</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./hero&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MessageService</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./message.service&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> httpOptions = &#123;</span><br><span class="line">  <span class="attr">headers</span>: <span class="keyword">new</span> <span class="title class_">HttpHeaders</span>(&#123; <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span> &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">HeroService</span> &#123;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">private</span> heroesUrl = <span class="string">&#x27;api/heroes&#x27;</span>;  <span class="comment">// URL to web api</span></span><br><span class="line"> </span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> http: HttpClient,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> messageService: MessageService</span>) &#123; &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** GET heroes from the server */</span></span><br><span class="line">  getHeroes (): <span class="title class_">Observable</span>&lt;<span class="title class_">Hero</span>[]&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="property">get</span>&lt;<span class="title class_">Hero</span>[]&gt;(<span class="variable language_">this</span>.<span class="property">heroesUrl</span>)</span><br><span class="line">      .<span class="title function_">pipe</span>(</span><br><span class="line">        <span class="title function_">tap</span>(<span class="function"><span class="params">heroes</span> =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">`fetched heroes`</span>)),</span><br><span class="line">        <span class="title function_">catchError</span>(<span class="variable language_">this</span>.<span class="title function_">handleError</span>(<span class="string">&#x27;getHeroes&#x27;</span>, []))</span><br><span class="line">      );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** GET hero by id. Return `undefined` when id not found */</span></span><br><span class="line">  getHeroNo404&lt;<span class="title class_">Data</span>&gt;(<span class="attr">id</span>: <span class="built_in">number</span>): <span class="title class_">Observable</span>&lt;<span class="title class_">Hero</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.heroesUrl&#125;</span>/?id=<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="property">get</span>&lt;<span class="title class_">Hero</span>[]&gt;(url)</span><br><span class="line">      .<span class="title function_">pipe</span>(</span><br><span class="line">        <span class="title function_">map</span>(<span class="function"><span class="params">heroes</span> =&gt;</span> heroes[<span class="number">0</span>]), <span class="comment">// returns a &#123;0|1&#125; element array</span></span><br><span class="line">        <span class="title function_">tap</span>(<span class="function"><span class="params">h</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> outcome = h ? <span class="string">`fetched`</span> : <span class="string">`did not find`</span>;</span><br><span class="line">          <span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;outcome&#125;</span> hero id=<span class="subst">$&#123;id&#125;</span>`</span>);</span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="title function_">catchError</span>(<span class="variable language_">this</span>.<span class="property">handleError</span>&lt;<span class="title class_">Hero</span>&gt;(<span class="string">`getHero id=<span class="subst">$&#123;id&#125;</span>`</span>))</span><br><span class="line">      );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** GET hero by id. Will 404 if id not found */</span></span><br><span class="line">  <span class="title function_">getHero</span>(<span class="attr">id</span>: <span class="built_in">number</span>): <span class="title class_">Observable</span>&lt;<span class="title class_">Hero</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.heroesUrl&#125;</span>/<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="property">get</span>&lt;<span class="title class_">Hero</span>&gt;(url).<span class="title function_">pipe</span>(</span><br><span class="line">      <span class="title function_">tap</span>(<span class="function"><span class="params">_</span> =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">`fetched hero id=<span class="subst">$&#123;id&#125;</span>`</span>)),</span><br><span class="line">      <span class="title function_">catchError</span>(<span class="variable language_">this</span>.<span class="property">handleError</span>&lt;<span class="title class_">Hero</span>&gt;(<span class="string">`getHero id=<span class="subst">$&#123;id&#125;</span>`</span>))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* GET heroes whose name contains search term */</span></span><br><span class="line">  <span class="title function_">searchHeroes</span>(<span class="attr">term</span>: <span class="built_in">string</span>): <span class="title class_">Observable</span>&lt;<span class="title class_">Hero</span>[]&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!term.<span class="title function_">trim</span>()) &#123;</span><br><span class="line">      <span class="comment">// if not search term, return empty hero array.</span></span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">of</span>([]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="property">get</span>&lt;<span class="title class_">Hero</span>[]&gt;(<span class="string">`api/heroes/?name=<span class="subst">$&#123;term&#125;</span>`</span>).<span class="title function_">pipe</span>(</span><br><span class="line">      <span class="title function_">tap</span>(<span class="function"><span class="params">_</span> =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">`found heroes matching &quot;<span class="subst">$&#123;term&#125;</span>&quot;`</span>)),</span><br><span class="line">      <span class="title function_">catchError</span>(<span class="variable language_">this</span>.<span class="property">handleError</span>&lt;<span class="title class_">Hero</span>[]&gt;(<span class="string">&#x27;searchHeroes&#x27;</span>, []))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//////// Save methods //////////</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** POST: add a new hero to the server */</span></span><br><span class="line">  addHero (<span class="attr">hero</span>: <span class="title class_">Hero</span>): <span class="title class_">Observable</span>&lt;<span class="title class_">Hero</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="property">post</span>&lt;<span class="title class_">Hero</span>&gt;(<span class="variable language_">this</span>.<span class="property">heroesUrl</span>, hero, httpOptions).<span class="title function_">pipe</span>(</span><br><span class="line">      <span class="title function_">tap</span>(<span class="function">(<span class="params">hero: Hero</span>) =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">`added hero w/ id=<span class="subst">$&#123;hero.id&#125;</span>`</span>)),</span><br><span class="line">      <span class="title function_">catchError</span>(<span class="variable language_">this</span>.<span class="property">handleError</span>&lt;<span class="title class_">Hero</span>&gt;(<span class="string">&#x27;addHero&#x27;</span>))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** DELETE: delete the hero from the server */</span></span><br><span class="line">  deleteHero (<span class="attr">hero</span>: <span class="title class_">Hero</span> | <span class="built_in">number</span>): <span class="title class_">Observable</span>&lt;<span class="title class_">Hero</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> id = <span class="keyword">typeof</span> hero === <span class="string">&#x27;number&#x27;</span> ? hero : hero.<span class="property">id</span>;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.heroesUrl&#125;</span>/<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="property">delete</span>&lt;<span class="title class_">Hero</span>&gt;(url, httpOptions).<span class="title function_">pipe</span>(</span><br><span class="line">      <span class="title function_">tap</span>(<span class="function"><span class="params">_</span> =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">`deleted hero id=<span class="subst">$&#123;id&#125;</span>`</span>)),</span><br><span class="line">      <span class="title function_">catchError</span>(<span class="variable language_">this</span>.<span class="property">handleError</span>&lt;<span class="title class_">Hero</span>&gt;(<span class="string">&#x27;deleteHero&#x27;</span>))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** PUT: update the hero on the server */</span></span><br><span class="line">  updateHero (<span class="attr">hero</span>: <span class="title class_">Hero</span>): <span class="title class_">Observable</span>&lt;<span class="built_in">any</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">http</span>.<span class="title function_">put</span>(<span class="variable language_">this</span>.<span class="property">heroesUrl</span>, hero, httpOptions).<span class="title function_">pipe</span>(</span><br><span class="line">      <span class="title function_">tap</span>(<span class="function"><span class="params">_</span> =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">`updated hero id=<span class="subst">$&#123;hero.id&#125;</span>`</span>)),</span><br><span class="line">      <span class="title function_">catchError</span>(<span class="variable language_">this</span>.<span class="property">handleError</span>&lt;<span class="built_in">any</span>&gt;(<span class="string">&#x27;updateHero&#x27;</span>))</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Handle Http operation that failed.</span></span><br><span class="line"><span class="comment">   * Let the app continue.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> <span class="variable">operation</span> - name of the operation that failed</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> <span class="variable">result</span> - optional value to return as the observable result</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> handleError&lt;T&gt; (operation = <span class="string">&#x27;operation&#x27;</span>, result?: T) &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="attr">error</span>: <span class="built_in">any</span>): <span class="title class_">Observable</span>&lt;T&gt; =&gt; &#123;</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> send the error to remote logging infrastructure</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">error</span>(error); <span class="comment">// log to console instead</span></span><br><span class="line"> </span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> better job of transforming error for user consumption</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;operation&#125;</span> failed: <span class="subst">$&#123;error.message&#125;</span>`</span>);</span><br><span class="line"> </span><br><span class="line">      <span class="comment">// Let the app keep running by returning an empty result.</span></span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">of</span>(result <span class="keyword">as</span> T);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/** Log a HeroService message with the MessageService */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="title function_">log</span>(<span class="params">message: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">messageService</span>.<span class="title function_">add</span>(<span class="string">&#x27;HeroService: &#x27;</span> + message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>HttpClient除了和真正的服务器交互外，还可以和in-memory的数据服务器进行虚拟交互，也就是说，在不修改(略微)原有程序代码的情况下，可以自己运用一个npm package设立一个in-memory的数据服务器，HttpClient并不知道request已经被这个in-memory服务器拦截并返回内存中的数据。</p>
+<p>在前后端分离的开发过程中，如果要引用此功能，需要预先安装angular-in-memory-web-api的npm包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install angular-in-memory-web-api@0.5 --save</span><br></pre></td></tr></table></figure>
+<p>然后，创建in-memory-data.service模块，存储内存中的数据，作为HttpClient访问交互的相关数据。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">InMemoryDbService</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;angular-in-memory-web-api&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">InMemoryDataService</span> <span class="keyword">implements</span> <span class="title class_">InMemoryDbService</span> &#123;</span><br><span class="line">  <span class="title function_">createDb</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> heroes = [</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">11</span>, <span class="attr">name</span>: <span class="string">&#x27;Mr. Nice&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">12</span>, <span class="attr">name</span>: <span class="string">&#x27;Narco&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">13</span>, <span class="attr">name</span>: <span class="string">&#x27;Bombasto&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">14</span>, <span class="attr">name</span>: <span class="string">&#x27;Celeritas&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">15</span>, <span class="attr">name</span>: <span class="string">&#x27;Magneta&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">16</span>, <span class="attr">name</span>: <span class="string">&#x27;RubberMan&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">17</span>, <span class="attr">name</span>: <span class="string">&#x27;Dynama&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">18</span>, <span class="attr">name</span>: <span class="string">&#x27;Dr IQ&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">19</span>, <span class="attr">name</span>: <span class="string">&#x27;Magma&#x27;</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">id</span>: <span class="number">20</span>, <span class="attr">name</span>: <span class="string">&#x27;Tornado&#x27;</span> &#125;</span><br><span class="line">    ];</span><br><span class="line">    <span class="keyword">return</span> &#123;heroes&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，在app module模块中引入对in-memory-web-api的引用，和in-memory-data service模块的使用，并配置好in-memeory-server对应的data&#x2F;service来源。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NgModule</span> &#125;       <span class="keyword">from</span> <span class="string">&#x27;@angular/core&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">BrowserModule</span> &#125;  <span class="keyword">from</span> <span class="string">&#x27;@angular/platform-browser&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">FormsModule</span> &#125;    <span class="keyword">from</span> <span class="string">&#x27;@angular/forms&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HttpClientModule</span> &#125;    <span class="keyword">from</span> <span class="string">&#x27;@angular/common/http&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import in-memroy-data servier related module </span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HttpClientInMemoryWebApiModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;angular-in-memory-web-api&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">InMemoryDataService</span> &#125;  <span class="keyword">from</span> <span class="string">&#x27;./in-memory-data.service&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AppRoutingModule</span> &#125;     <span class="keyword">from</span> <span class="string">&#x27;./app-routing.module&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AppComponent</span> &#125;         <span class="keyword">from</span> <span class="string">&#x27;./app.component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">DashboardComponent</span> &#125;   <span class="keyword">from</span> <span class="string">&#x27;./dashboard/dashboard.component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroDetailComponent</span> &#125;  <span class="keyword">from</span> <span class="string">&#x27;./hero-detail/hero-detail.component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroesComponent</span> &#125;      <span class="keyword">from</span> <span class="string">&#x27;./heroes/heroes.component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroSearchComponent</span> &#125;  <span class="keyword">from</span> <span class="string">&#x27;./hero-search/hero-search.component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HeroService</span> &#125;          <span class="keyword">from</span> <span class="string">&#x27;./hero.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MessageService</span> &#125;       <span class="keyword">from</span> <span class="string">&#x27;./message.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MessagesComponent</span> &#125;    <span class="keyword">from</span> <span class="string">&#x27;./messages/messages.component&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  <span class="attr">imports</span>: [</span><br><span class="line">    <span class="title class_">BrowserModule</span>,</span><br><span class="line">    <span class="title class_">FormsModule</span>,</span><br><span class="line">    <span class="title class_">AppRoutingModule</span>,</span><br><span class="line">    <span class="title class_">HttpClientModule</span>,</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// The HttpClientInMemoryWebApiModule module intercepts HTTP requests</span></span><br><span class="line">    <span class="comment">// and returns simulated server responses.</span></span><br><span class="line">    <span class="comment">// Remove it when a real server is ready to receive requests.</span></span><br><span class="line">    <span class="title class_">HttpClientInMemoryWebApiModule</span>.<span class="title function_">forRoot</span>(</span><br><span class="line">      <span class="title class_">InMemoryDataService</span>, &#123; <span class="attr">dataEncapsulation</span>: <span class="literal">false</span> &#125;</span><br><span class="line">    )</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">declarations</span>: [</span><br><span class="line">    <span class="title class_">AppComponent</span>,</span><br><span class="line">    <span class="title class_">DashboardComponent</span>,</span><br><span class="line">    <span class="title class_">HeroesComponent</span>,</span><br><span class="line">    <span class="title class_">HeroDetailComponent</span>,</span><br><span class="line">    <span class="title class_">MessagesComponent</span>,</span><br><span class="line">    <span class="title class_">HeroSearchComponent</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">providers</span>: [ <span class="title class_">HeroService</span>, <span class="title class_">MessageService</span> ],</span><br><span class="line">  <span class="attr">bootstrap</span>: [ <span class="title class_">AppComponent</span> ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">AppModule</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Angular-Data-Model-–-Class"><a href="#Angular-Data-Model-–-Class" class="headerlink" title="Angular Data Model – Class"></a>Angular Data Model – Class</h3><p>In Angular 5, data model is encapsulated through classes, mainly for rendering templates in components. Creating a new class by Angular Cli:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ng generate class &#123;classname&#125;</span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/14/Leetcode-560-Subarray-Sum-Equals-K/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="果核&肉肉">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 微观天下">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/04/14/Leetcode-560-Subarray-Sum-Equals-K/" class="post-title-link" itemprop="url">Leetcode 560: Subarray Sum Equals K</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-04-14 23:06:39" itemprop="dateCreated datePublished" datetime="2018-04-14T23:06:39+08:00">2018-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-05-06 22:15:35" itemprop="dateModified" datetime="2019-05-06T22:15:35+08:00">2019-05-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Algorithms/" itemprop="url" rel="index"><span itemprop="name">Algorithms</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>Given an array of integers and an integer k, you need to find the total number of continuous subarrays whose sum equals to k.</p>
+<p>Example 1:</p>
+<p>Input:nums &#x3D; [1,1,1], k &#x3D; 2</p>
+<p>Output: 2</p>
+<p>Note:<br>The length of the array is in range [1, 20,000].<br>The range of numbers in the array is [-1000, 1000] and the range of the integer k is [-1e7, 1e7].</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>本题不属于某类经典类型的算法题。本题的解题关键在于深刻理解子数组和的计算方法，以及和为K的子数组和个数的求解技巧。</p>
+<p>首先，需要求得长度为n的数组的和为K的连续子数组的个数，设为A(n)。统计连续子数组的和，以及和的分布则成为解题的前提条件。在统计连续子数组的和的过程中，我们可以采用穷举法，将所有子数组的和都进行一次统计，也能运用一些巧妙的方法，只统计部分子数组的和的个数，计算出和为K的子数组和的个数。</p>
+<p>为了达到优化子数组和统计的方法，可以仔细思考子数组和的计算方法。不难得出，子数组和的计算方法其实源于两个从零开始的数组和之差。也就是说，假设从A[m]到A[n]之间的子数组和S[m<del>n] &#x3D; S[0</del>n] - S[0-m]。如果在已知S[0~i] (i&#x3D;0,…,n-1)的值，就能轻松求解出所有子数组的和。</p>
+<p>然而，这样的方法用于求所有的子数组的和，并不能简化计算复杂度。要找到和为K的子数组的个数，就等于需要便利S[0<del>i] (i&#x3D;0,…,n)，并且找出末尾为第i个元素的子数组序列和为K的个数。由此不难推出，末尾为第i个元素的子数组序列和为K的个数，等价于S[m</del>i] (m&#x3D;1,…,i-1)中和为K的个数，也等价于S[0<del>m] (m&#x3D;1,…,i-1)中和为S[0</del>i]-K的子数组个数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Number(末尾为第i个元素的子数组序列和为K的个数)=Number(S[0~m] (m=1,...,i-1)中和为S[0~i]-K的子数组个数);</span><br><span class="line"></span><br><span class="line">Number(n长数组子数组序列和为K的个数)=sigma(Number(末尾为第i个元素的子数组序列和为K的个数)) (i=0,...n-1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><p>本题解的优劣则取决于统计子数组和的计算量。</p>
+<ol>
+<li>运用hashmap数据结构存取所有的子数组和，经过两次for循环遍历得出所有子数组可能性下的和的值，并统计入hashmap中。本解法的时间复杂度是O(n^2)。</li>
+<li>优化后的算法采用hashmap数据结构存取S[0~i] (i&#x3D;0,…n-1)，并且在每次计算后计算以i结尾的连续子数组和为K的个数。将所有数字相加则为综合。本解法的时间复杂度是O(n)。</li>
+</ol>
+<h3 id="实现技巧"><a href="#实现技巧" class="headerlink" title="实现技巧"></a>实现技巧</h3><blockquote>
+<p>边界条件考虑：</p>
+<ul>
+<li>K&#x3D;0的情况。</li>
+<li>K&#x3D;S[0~i] (i&#x3D;0,…,n-1)中的任意一个情况</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">subarraySum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;Integer, Integer&gt; ();</span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">total</span> <span class="operator">=</span><span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i&lt; nums.length; ++i)&#123;</span><br><span class="line">            sum += nums[i];  </span><br><span class="line">            <span class="comment">// don&#x27;t forget margin k = 0, check previous count before adding this count to avoid confustion.</span></span><br><span class="line">            <span class="keyword">if</span>( map.containsKey(sum-k))</span><br><span class="line">                total += map.get(sum-k);</span><br><span class="line">            <span class="keyword">if</span>(k == sum)</span><br><span class="line">                total += <span class="number">1</span>;</span><br><span class="line">               </span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(sum))</span><br><span class="line">                map.put(sum, map.get(sum)+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                map.put(sum, <span class="number">1</span>);                </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/14/ubuntu-subsystem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="果核&肉肉">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 微观天下">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/04/14/ubuntu-subsystem/" class="post-title-link" itemprop="url">Ubuntu-subsystem</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-04-14 23:01:49" itemprop="dateCreated datePublished" datetime="2018-04-14T23:01:49+08:00">2018-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-06-22 10:53:12" itemprop="dateModified" datetime="2021-06-22T10:53:12+08:00">2021-06-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Runbooks/" itemprop="url" rel="index"><span itemprop="name">Runbooks</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Ubuntu-on-Windows-10"><a href="#Ubuntu-on-Windows-10" class="headerlink" title="Ubuntu on Windows 10"></a>Ubuntu on Windows 10</h2><ol>
+<li>Enable Developer mode for Win 10<br><img src="/ubuntu-subsystem%5CDeveloper-mode.PNG" alt="Developer-mode"></li>
+<li>Add Windows Linux subsystem<br><img src="/ubuntu-subsystem%5CLinux-subsystem.PNG" alt="Linux-subsystem"></li>
+<li>Install Ubuntu&#x2F;SUSE&#x2F;*** from App Store<br><img src="/ubuntu-subsystem%5CInstall-ubuntu.PNG" alt="Install-ubuntu"></li>
+</ol>
+<h2 id="Update-package-sources"><a href="#Update-package-sources" class="headerlink" title="Update package sources"></a>Update package sources</h2><ol>
+<li>Edit &#x2F;etc&#x2F;apt&#x2F;source.list<blockquote>
+<p>#中国数学物理大学源</p>
+<p>deb <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid main multiverse restricted universe</p>
+<p>deb <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid-backports main multiverse restricted universe</p>
+<p>deb <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid-proposed main multiverse restricted universe</p>
+<p>deb <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid-security main multiverse restricted universe</p>
+<p>deb <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid-updates main multiverse restricted universe</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid main multiverse restricted universe</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid-backports main multiverse restricted universe</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid-proposed main multiverse restricted universe</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid-security main multiverse restricted universe</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://debian.ustc.edu.cn/ubuntu/">http://debian.ustc.edu.cn/ubuntu/</a> vivid-updates main multiverse restricted universe</p>
+<p>#阿里云的源：</p>
+<p>deb <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid main restricted universe multiverse</p>
+<p>deb <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid-security main restricted universe multiverse</p>
+<p>deb <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid-updates main restricted universe multiverse</p>
+<p>deb <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid-proposed main restricted universe multiverse</p>
+<p>deb <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid-backports main restricted universe multiverse</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid main restricted universe multiverse</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid-security main restricted universe multiverse</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid-updates main restricted universe multiverse</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid-proposed main restricted universe multiverse</p>
+<p>deb-src <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu/">http://mirrors.aliyun.com/ubuntu/</a> vivid-backports main restricted universe multiverse</p>
+</blockquote>
+</li>
+</ol>
+<p>作者：sarleon<br>链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/41311332/answer/90517838">https://www.zhihu.com/question/41311332/answer/90517838</a></p>
+<ol start="2">
+<li>Run apt to udpate<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Intall-Nodejs-and-npm"><a href="#Intall-Nodejs-and-npm" class="headerlink" title="Intall Nodejs and npm"></a>Intall Nodejs and npm</h2><ul>
+<li><p>Install from Ubuntu apt tool</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install nodejs nodejs-legacy npm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>npm self update for npm</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g npm@latest</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>npm update nodejs using package n</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g n</span><br><span class="line">$ sudo n stable <span class="comment">#get latest stable</span></span><br><span class="line">$ sudo n latest <span class="comment">#get latest version</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -607,7 +962,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
