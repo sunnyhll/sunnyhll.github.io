@@ -153,7 +153,7 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -184,7 +184,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/24/Java-Memory-Model/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/24/Java/Java-Memory-Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/24/Java-Memory-Model/" class="post-title-link" itemprop="url">Java Memory Model</a>
+          <a href="/2018/12/24/Java/Java-Memory-Model/" class="post-title-link" itemprop="url">Java Memory Model</a>
         </h2>
 
         <div class="post-meta-container">
@@ -220,7 +220,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-11-20 09:14:07" itemprop="dateModified" datetime="2020-11-20T09:14:07+08:00">2020-11-20</time>
+      <time title="修改时间：2024-02-08 12:55:39" itemprop="dateModified" datetime="2024-02-08T12:55:39+08:00">2024-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -244,7 +244,7 @@
     <div class="post-body" itemprop="articleBody">
           <p>本文将从JMM的理论模型和系统设计角度切入讲述并发工具的内存语义与实现细节。</p>
 <h1 id="JMM存在的目的"><a href="#JMM存在的目的" class="headerlink" title="JMM存在的目的"></a>JMM存在的目的</h1><p>Java虚拟机规范中试图定义一种Java内存模型来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各个平台下都能达到一致的内存访问效果。</p>
-<p><img src="/2018/12/24/Java-Memory-Model/JMM.jpg" alt="JMM"></p>
+<p><img src="/2018/12/24/Java/Java-Memory-Model/JMM.jpg" alt="JMM"></p>
 <h1 id="JVM内存模型操作"><a href="#JVM内存模型操作" class="headerlink" title="JVM内存模型操作"></a>JVM内存模型操作</h1><p><strong>主内存操作</strong></p>
 <ul>
 <li>lock：将一个变量表示为一条线程独占的状态。</li>
@@ -345,9 +345,9 @@
 </li>
 <li><p>通过关联读&#x2F;写操作和使用操作（用之前必须从主内存读，assign后必须写入主内存，以及写happens-before读规则）强制CPU的缓存失效来保证内存可见性。<br>volatile的内存屏障策略如下：</p>
 </li>
-<li><p>在每个volatile写操作前插入StoreStore屏障，在写操作后插入StoreLoad屏障；<br><img src="/Java-Memory-Model%5CVolatileWrite.png" alt="volatile-write"></p>
+<li><p>在每个volatile写操作前插入StoreStore屏障，在写操作后插入StoreLoad屏障；<br><img src="/2018/12/24/Java/Java-Memory-Model/VolatileWrite.png" alt="volatile-write"></p>
 </li>
-<li><p>在每个volatile读操作后分别插入LoadLoad屏障，和LoadStore屏障；<br><img src="/Java-Memory-Model%5CVolatileRead.png" alt="volatile-read"></p>
+<li><p>在每个volatile读操作后分别插入LoadLoad屏障，和LoadStore屏障；<br><img src="/2018/12/24/Java/Java-Memory-Model/VolatileRead.png" alt="volatile-read"></p>
 </li>
 </ul>
 <p>由于内存屏障的作用，避免了volatile变量和其它指令重排序、线程之间实现了通信，使得volatile表现出了锁的特性。</p>
@@ -371,11 +371,11 @@
 </ul>
 <p>总之上面规则的意思可以这样理解，必需保证一个对象的所有final域被写入完毕后才能引用和读取。这也是内存屏障的起的作用：</p>
 <h3 id="实现细节-2"><a href="#实现细节-2" class="headerlink" title="实现细节"></a>实现细节</h3><ul>
-<li><p>写final域：在编译器写final域完毕，构造体结束之前，会插入一个StoreStore屏障，保证前面的对final写入对其他线程&#x2F;CPU可见，并阻止this指针赋值与final域写被重排序(this &#x3D; new Object(){ finalField &#x3D; …})。（如果没有，普通域的写可以被重排到构造函数外）<br><img src="/Java-Memory-Model%5CFinalWrite.png" alt="final-write"></p>
+<li><p>写final域：在编译器写final域完毕，构造体结束之前，会插入一个StoreStore屏障，保证前面的对final写入对其他线程&#x2F;CPU可见，并阻止this指针赋值与final域写被重排序(this &#x3D; new Object(){ finalField &#x3D; …})。（如果没有，普通域的写可以被重排到构造函数外）<br><img src="/2018/12/24/Java/Java-Memory-Model/FinalWrite.png" alt="final-write"></p>
 </li>
-<li><p>写final域的成员域:构造函数内对一个final引用的对象的成员域的写入，与随后在构造函数外把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序。<br><img src="/Java-Memory-Model%5CFinalElementWrite.png" alt="final-element-write"></p>
+<li><p>写final域的成员域:构造函数内对一个final引用的对象的成员域的写入，与随后在构造函数外把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序。<br><img src="/2018/12/24/Java/Java-Memory-Model/FinalElementWrite.png" alt="final-element-write"></p>
 </li>
-<li><p>读final域：在上述规则2中，两步操作不能重排序的机理就是在读final域前插入了LoadLoad屏障，这个阻止了读取this引用和读取final域的重排序（isntance.finalField）。<br><img src="/Java-Memory-Model%5CFinalRead.png" alt="final-read"></p>
+<li><p>读final域：在上述规则2中，两步操作不能重排序的机理就是在读final域前插入了LoadLoad屏障，这个阻止了读取this引用和读取final域的重排序（isntance.finalField）。<br><img src="/2018/12/24/Java/Java-Memory-Model/FinalRead.png" alt="final-read"></p>
 </li>
 </ul>
 <p>X86处理器中，由于CPU不会对写-写操作进行重排序，所以StoreStore屏障会被省略；而X86也不会对逻辑上有先后依赖关系的操作进行重排序，所以LoadLoad也会变省略。</p>
@@ -386,7 +386,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FinalReferenceEscapeExample</span> &#123;</span><br><span class="line"><span class="keyword">final</span> <span class="type">int</span> i;</span><br><span class="line"><span class="keyword">static</span> FinalReferenceEscapeExample obj;</span><br><span class="line"><span class="keyword">public</span> <span class="title function_">FinalReferenceEscapeExample</span> <span class="params">()</span> &#123;</span><br><span class="line">    i = <span class="number">1</span>;                              <span class="comment">//1写final域</span></span><br><span class="line">    obj = <span class="built_in">this</span>;                          <span class="comment">//2 this引用在此“逸出”</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">writer</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">FinalReferenceEscapeExample</span> ();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> reader &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj != <span class="literal">null</span>) &#123;                     <span class="comment">//3</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> obj.i;                 <span class="comment">//4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="Concurrent包的内存语义及实现"><a href="#Concurrent包的内存语义及实现" class="headerlink" title="Concurrent包的内存语义及实现"></a>Concurrent包的内存语义及实现</h2><p>Concurrent包底层实现依赖如下图所示：</p>
-<p><img src="/2018/12/24/Java-Memory-Model/Concurrent.png" alt="Cocurrent"></p>
+<p><img src="/2018/12/24/Java/Java-Memory-Model/Concurrent.png" alt="Cocurrent"></p>
 <h1 id="延迟初始化问题讨论"><a href="#延迟初始化问题讨论" class="headerlink" title="延迟初始化问题讨论"></a>延迟初始化问题讨论</h1><p>延迟初始化是在需要实例的时候再进行初始化，从而达到提升程序初始化性能的目的。然而延迟初始化需要考虑多线程并发访问，和指令重排序问题。</p>
 <h2 id="静态域延迟初始化"><a href="#静态域延迟初始化" class="headerlink" title="静态域延迟初始化"></a>静态域延迟初始化</h2><p>静态域的延迟初始化能通过final关键词实现，因为final静态域能保证多线程安全初始化，同事也能保证computeFieldValue()方法不会溢出FieldHolder的构造方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">FieldHolder</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">FieldType</span> <span class="variable">field</span> <span class="operator">=</span> computeFieldValue();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> FieldType <span class="title function_">getField</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> FieldHolder.field;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -422,7 +422,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/12/Java-Concurrency/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/12/Java/Java-Concurrency/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -440,7 +440,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/12/Java-Concurrency/" class="post-title-link" itemprop="url">Java Concurrency</a>
+          <a href="/2018/12/12/Java/Java-Concurrency/" class="post-title-link" itemprop="url">Java Concurrency</a>
         </h2>
 
         <div class="post-meta-container">
@@ -458,7 +458,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-12-24 17:40:06" itemprop="dateModified" datetime="2020-12-24T17:40:06+08:00">2020-12-24</time>
+      <time title="修改时间：2024-02-08 12:55:31" itemprop="dateModified" datetime="2024-02-08T12:55:31+08:00">2024-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -481,7 +481,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="线程概念"><a href="#线程概念" class="headerlink" title="线程概念"></a>线程概念</h1><p>线程是一种轻量级的进程内的执行单元，线程共用进程中的内存地址空间，但是拥有自己的调用栈，寄存器，程序计数器和局部变量。线程状态如下：</p>
-<p><img src="/2018/12/12/Java-Concurrency/ThreadStatus.jpg" alt="ThreadStatus"></p>
+<p><img src="/2018/12/12/Java/Java-Concurrency/ThreadStatus.jpg" alt="ThreadStatus"></p>
 <ol>
 <li>新建状态(New) : 线程对象被创建后，就进入了新建状态。例如，Thread thread &#x3D; new Thread()。</li>
 <li>就绪状态(Runnable): 也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的start()方法，从而来启动该线程。例如，thread.start()。处于就绪状态的线程，随时可能被CPU调度执行。</li>
@@ -520,7 +520,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyCallable</span> <span class="keyword">implements</span> <span class="title class_">Callable</span>&lt;String&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        <span class="comment">//return the thread name executing this callable task</span></span><br><span class="line">        <span class="keyword">return</span> Thread.currentThread().getName();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span>&#123;</span><br><span class="line"></span><br><span class="line">    Callable&lt;String&gt; oneCallable = <span class="keyword">new</span> <span class="title class_">MyCallable</span>();</span><br><span class="line">    FutureTask&lt;String&gt; oneTask = <span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;String&gt;(oneCallable);</span><br><span class="line"></span><br><span class="line">    <span class="type">Thread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(oneTask);</span><br><span class="line">    System.out.println(Thead.currentThread().getName());</span><br><span class="line"></span><br><span class="line">    t.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
-<li><p>通过线程池本身ThreadPoolExecutor进行task管理。线程池是一个功能强大的多线程工具，在每一个新的Runnable提交的时候，会有如下流程处理：<img src="/2018/12/12/Java-Concurrency/workflow.jpg" alt="Workflow"><br>在线程池处理task过程中，会需要如下参数控制流程：<img src="/2018/12/12/Java-Concurrency/Threadpool.jpg" alt="ThreadPool.jpg"></p>
+<li><p>通过线程池本身ThreadPoolExecutor进行task管理。线程池是一个功能强大的多线程工具，在每一个新的Runnable提交的时候，会有如下流程处理：<img src="/2018/12/12/Java/Java-Concurrency/workflow.jpg" alt="Workflow"><br>在线程池处理task过程中，会需要如下参数控制流程：<img src="/2018/12/12/Java/Java-Concurrency/Threadpool.jpg" alt="ThreadPool.jpg"></p>
 </li>
 <li><p>通过线程池工厂Executors生成<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html">ExecutorService</a>接口下的实例,创建并执行任务。</p>
 </li>
@@ -598,7 +598,7 @@
 <li>take() 移除元素，当队列为空时，获取元素的线程会等待队列变为非空。</li>
 <li>put() 增加元素，当队列满的时候，队列会阻塞插入元素的线程，直到队列不满。</li>
 </ul>
-<p><img src="/Java-Concurrency%5CBlockingQueue.png" alt="BlockingQueues"></p>
+<p><img src="/2018/12/12/Java/Java-Concurrency/BlockingQueue.png" alt="BlockingQueues"></p>
 <p>阻塞队列支持四种处理方式，如上图所示，包含7个阻塞队列：</p>
 <ol>
 <li>ArrayBlockingQueue, 由数组结构组成的有界阻塞队列。</li>
@@ -691,7 +691,7 @@
 </ol>
 <p>读锁，没有线程hold写锁的时候，写锁可以给出，或者读锁可以给多线程访问。<br>写锁，没有线程hold读锁和写锁的时候，读锁可以给出，一旦写锁先被hold，读锁是不允许再被hold。</p>
 <p>读写锁的特性如下：</p>
-<p><img src="/Java-Concurrency%5CRWLock.png" alt="RWLock.png"></p>
+<p><img src="/2018/12/12/Java/Java-Concurrency/RWLock.png" alt="RWLock.png"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReadWriteMap</span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Map&lt;String, Data&gt; m = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;String, Data&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="type">ReentrantReadWriteLock</span> <span class="variable">rw1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantReadWriteLock</span>();</span><br><span class="line">    <span class="keyword">final</span> <span class="type">Lock</span> <span class="variable">r</span> <span class="operator">=</span> rw1.readLock();</span><br><span class="line">    <span class="keyword">final</span> <span class="type">Lock</span> <span class="variable">w</span> <span class="operator">=</span> rw1.writeLock();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Data <span class="title function_">get</span> <span class="params">(String key)</span>&#123;</span><br><span class="line">        r.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> m.get(key)</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123; r.unlock();&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Data <span class="title function_">put</span> <span class="params">(String key, Data value)</span>&#123;</span><br><span class="line">        w.lock();</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> m.put(key, value);</span><br><span class="line">        &#125; <span class="keyword">finally</span>&#123;</span><br><span class="line">            w.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="并发集合Concurrent-collection"><a href="#并发集合Concurrent-collection" class="headerlink" title="并发集合Concurrent collection"></a>并发集合Concurrent collection</h3><ol>
@@ -795,7 +795,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/11/Java-Streams/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/11/Java/Java-Streams/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -813,7 +813,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/11/Java-Streams/" class="post-title-link" itemprop="url">Java Stream API</a>
+          <a href="/2018/12/11/Java/Java-Streams/" class="post-title-link" itemprop="url">Java Stream API</a>
         </h2>
 
         <div class="post-meta-container">
@@ -854,7 +854,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="Java-Streams"><a href="#Java-Streams" class="headerlink" title="Java Streams"></a>Java Streams</h1><p>Java在JDK1.8中引入了Stream API,支持对流的处理。流处理类似于对于数据库数据流进行只读操作后求得某种结果，有如下特点:</p>
-<p><img src="/2018/12/11/Java-Streams/JavaStream.png" alt="Java-Streams"></p>
+<p><img src="/2018/12/11/Java/Java-Streams/JavaStream.png" alt="Java-Streams"></p>
 <ol>
 <li>stream不存储数据</li>
 <li>stream不改变源数据</li>
@@ -980,7 +980,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/08/Java-Collections/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/12/08/Java/Java-Collections/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -998,7 +998,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/08/Java-Collections/" class="post-title-link" itemprop="url">Java集合框架</a>
+          <a href="/2018/12/08/Java/Java-Collections/" class="post-title-link" itemprop="url">Java集合框架</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1047,7 +1047,7 @@
 <li>该框架允许不同类型的集合，以类似的方式工作，具有高度的互操作性。</li>
 <li>对一个集合的扩展和适应必须是简单的。<br>为此，整个集合框架就围绕一组标准接口而设计。你可以直接使用这些接口的标准实现，如下图所示，诸如： LinkedList, HashSet, 和 TreeSet 等,除此之外你也可以通过这些接口实现自己的集合。</li>
 </ul>
-<p><img src="/2018/12/08/Java-Collections/JavaCollectionsUML.gif" alt="JavaCollectionsUML"></p>
+<p><img src="/2018/12/08/Java/Java-Collections/JavaCollectionsUML.gif" alt="JavaCollectionsUML"></p>
 <p>从上面的集合框架图可以看到，Java 集合框架主要包括两种类型的容器，一种是集合（Collection），存储一个元素集合，另一种是图（Map），存储键&#x2F;值对映射。Collection 接口又有 3 种子类型，List、Set 和 Queue，再下面是一些抽象类，最后是具体实现类，常用的有 ArrayList、LinkedList、HashSet、LinkedHashSet、HashMap、LinkedHashMap 等等。</p>
 <p>集合框架是一个用来代表和操纵集合的统一架构。所有的集合框架都包含如下内容：</p>
 <ul>
@@ -1056,7 +1056,7 @@
 <li>算法：是实现集合接口的对象里的方法执行的一些有用的计算，例如：搜索和排序。这些算法被称为多态，那是因为相同的方法可以在相似的接口上有着不同的实现。<br>除了集合，该框架也定义了几个 Map 接口和类。Map 里存储的是键&#x2F;值对。尽管 Map 不是集合，但是它们完全整合在集合中。</li>
 </ul>
 <p>集合框架体系如图所示:</p>
-<p><img src="/2018/12/08/Java-Collections/java-coll-architecture.png" alt="JavaCollArch"></p>
+<p><img src="/2018/12/08/Java/Java-Collections/java-coll-architecture.png" alt="JavaCollArch"></p>
 <h2 id="集合接口"><a href="#集合接口" class="headerlink" title="集合接口"></a>集合接口</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/collections/interfaces/collection.html">Collection 接口</a></li>
 </ol>
@@ -1273,7 +1273,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/11/17/Phoenix-Project-Reading-Notes/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/11/17/%E7%94%9F%E6%B4%BB/Phoenix-Project-Reading-Notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1291,7 +1291,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/17/Phoenix-Project-Reading-Notes/" class="post-title-link" itemprop="url">Phoenix Project Reading Notes</a>
+          <a href="/2018/11/17/%E7%94%9F%E6%B4%BB/Phoenix-Project-Reading-Notes/" class="post-title-link" itemprop="url">Phoenix Project Reading Notes</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1309,7 +1309,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-02-13 14:51:36" itemprop="dateModified" datetime="2023-02-13T14:51:36+08:00">2023-02-13</time>
+      <time title="修改时间：2024-02-08 12:36:32" itemprop="dateModified" datetime="2024-02-08T12:36:32+08:00">2024-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1317,7 +1317,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
+          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
         </span>
     </span>
 
@@ -1358,7 +1358,7 @@
 <blockquote>
 <p>等待时间是工作中心中某个资源忙碌成都的函数。下图横轴坐标上是工作重心中给定资源的忙碌百分比，纵坐标轴上是大致的等待时间（更确切的说是队列长度）。等待时间&#x3D;忙碌时间百分比&#x2F;空闲时间百分比。曲线的形状表明，当资源使用率超过80%时，等待时间就会直线上升。这会对项目交付产生灾难性后果。</p>
 </blockquote>
-<p><img src="/2018/11/17/Phoenix-Project-Reading-Notes/WaitingTime.jpg" alt="waitingtime"></p>
+<p><img src="/2018/11/17/%E7%94%9F%E6%B4%BB/Phoenix-Project-Reading-Notes/WaitingTime.jpg" alt="waitingtime"></p>
 <p>看板对于IT中的半成品问题是最有效、最简单的一种对策。两本书推荐阅读：</p>
 <ol>
 <li>《个人看板:了解工作&#x2F;驾驭生活》by吉姆·本森和托尼安妮·德马里亚·巴里</li>
@@ -1441,7 +1441,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/11/07/JVM-memory-management-and-GC/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/11/07/Java/JVM-memory-management-and-GC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1459,7 +1459,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/07/JVM-memory-management-and-GC/" class="post-title-link" itemprop="url">JVM memory management and GC</a>
+          <a href="/2018/11/07/Java/JVM-memory-management-and-GC/" class="post-title-link" itemprop="url">JVM memory management and GC</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1477,7 +1477,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-01-12 10:02:19" itemprop="dateModified" datetime="2021-01-12T10:02:19+08:00">2021-01-12</time>
+      <time title="修改时间：2024-02-08 12:55:11" itemprop="dateModified" datetime="2024-02-08T12:55:11+08:00">2024-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1500,7 +1500,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="Java-memory-allocation"><a href="#Java-memory-allocation" class="headerlink" title="Java memory allocation"></a>Java memory allocation</h1><p>Java虚拟机管理内存会包括以下几个运行时数据区域，如下图所示。</p>
-<p><img src="/2018/11/07/JVM-memory-management-and-GC/jvm_memory_allocation.PNG" alt="jvm"></p>
+<p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/jvm_memory_allocation.PNG" alt="jvm"></p>
 <h2 id="JVM运行时数据区域简介"><a href="#JVM运行时数据区域简介" class="headerlink" title="JVM运行时数据区域简介"></a>JVM运行时数据区域简介</h2><h3 id="程序计数器-Program-Counter-Register"><a href="#程序计数器-Program-Counter-Register" class="headerlink" title="程序计数器(Program Counter Register)"></a>程序计数器(Program Counter Register)</h3><p>程序计数器时当前线程执行字节码的行号指示器。每条线程有独立的程序计数器。</p>
 <ul>
 <li>如果线程执行Java方法，这个技术及记录的时真该执行的虚拟机字节码指令的地址。</li>
@@ -1553,7 +1553,7 @@
 <h2 id="JVM对象的内存布局"><a href="#JVM对象的内存布局" class="headerlink" title="JVM对象的内存布局"></a>JVM对象的内存布局</h2><p>当JVM对象被创建好了，会被分配在Java堆上，存储布局可以分为三个区域：对象头(header)、实例数据(instance data)和对齐填充(padding)。</p>
 <h3 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h3><p>对象头包括两部分，一部分是”Mark Word”,另一部分是类型指针。</p>
 <ul>
-<li>Mark word: 长度为32bit或64bit。HotSpot 32位虚拟机中具体的对象头存储内容取决于对象的锁状态值，如下：<br>  <img src="/2018/11/07/JVM-memory-management-and-GC/MarkWord.PNG" alt="Markword"></li>
+<li>Mark word: 长度为32bit或64bit。HotSpot 32位虚拟机中具体的对象头存储内容取决于对象的锁状态值，如下：<br>  <img src="/2018/11/07/Java/JVM-memory-management-and-GC/MarkWord.PNG" alt="Markword"></li>
 <li>类型指针: 长度为32bit或64bit，用于存储指向类元数据的指针，并不是所有的虚拟机实现都必须在对象数据上保留类型指针。</li>
 <li>数组长度：长度为32bit，当对象为数组时，用于存储数组的长度。注：此数组并非ArrayList泛型，后者属于引用类型。</li>
 </ul>
@@ -1569,7 +1569,7 @@
 <h2 id="JVM对象的访问定位"><a href="#JVM对象的访问定位" class="headerlink" title="JVM对象的访问定位"></a>JVM对象的访问定位</h2><p>对象的访问定位如下图，HOTSOPT用的是第2种算法：</p>
 <ol>
 <li>使用句柄（先指向堆里的句柄池，再从句柄池找到指针，优点是只需要修改句柄, 缺点就是句柄池也是开销）；</li>
-<li>直接指针（减少性能开销）: 需要存2个数据， 到对象实例数据的指针，到对象类数据的指针。<br><img src="/2018/11/07/JVM-memory-management-and-GC/reference.PNG" alt="reference"></li>
+<li>直接指针（减少性能开销）: 需要存2个数据， 到对象实例数据的指针，到对象类数据的指针。<br><img src="/2018/11/07/Java/JVM-memory-management-and-GC/reference.PNG" alt="reference"></li>
 </ol>
 <h1 id="Garbage-Collection-of-JVM"><a href="#Garbage-Collection-of-JVM" class="headerlink" title="Garbage Collection of JVM"></a>Garbage Collection of JVM</h1><h2 id="GC定义"><a href="#GC定义" class="headerlink" title="GC定义"></a>GC定义</h2><p>Garbage Collection（垃圾回收&#x2F;GC）是JVM对于Java堆上内存在运行时进行的动态管理，主要是对Java堆上不再被引用的对象进行回收。Minor GC是主要快速回收Eden区和Survivor区对象内存，Full GC则会对老年代也进行回收，后者可能会影响性能。</p>
 <h2 id="如何确定对象是否需要回收？"><a href="#如何确定对象是否需要回收？" class="headerlink" title="如何确定对象是否需要回收？"></a>如何确定对象是否需要回收？</h2><h3 id="引用计数算法（Reference-Counting）"><a href="#引用计数算法（Reference-Counting）" class="headerlink" title="引用计数算法（Reference Counting）"></a>引用计数算法（Reference Counting）</h3><p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被使用的。</p>
@@ -1582,12 +1582,12 @@
 <li>方法去中常量引用的对象</li>
 <li>本地方法栈中JNI（Native方法）引用的对象。</li>
 </ul>
-<h2 id="如何对对象进行回收？"><a href="#如何对对象进行回收？" class="headerlink" title="如何对对象进行回收？"></a>如何对对象进行回收？</h2><h3 id="标记——清除算法"><a href="#标记——清除算法" class="headerlink" title="标记——清除算法"></a>标记——清除算法</h3><p><img src="/JVM-memory-management-and-GC%5CMarkSwap.jpg" alt="MarkSwap"></p>
-<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p><img src="/JVM-memory-management-and-GC%5CCopying.jpg" alt="Copying"></p>
-<h3 id="标记——整理算法"><a href="#标记——整理算法" class="headerlink" title="标记——整理算法"></a>标记——整理算法</h3><p><img src="/JVM-memory-management-and-GC%5CMarkCompact.jpg" alt="MarkCompact"></p>
+<h2 id="如何对对象进行回收？"><a href="#如何对对象进行回收？" class="headerlink" title="如何对对象进行回收？"></a>如何对对象进行回收？</h2><h3 id="标记——清除算法"><a href="#标记——清除算法" class="headerlink" title="标记——清除算法"></a>标记——清除算法</h3><p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/MarkSwap.jpg" alt="MarkSwap"></p>
+<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/Copying.jpg" alt="Copying"></p>
+<h3 id="标记——整理算法"><a href="#标记——整理算法" class="headerlink" title="标记——整理算法"></a>标记——整理算法</h3><p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/MarkCompact.jpg" alt="MarkCompact"></p>
 <h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>对于新生代和老年代的对象进行不同的清理算法，一般来说，复制算法适合新生代，标记-清除算法和标记整理算法更适合老年代内存。</p>
 <h2 id="JVM对象内存管理策略"><a href="#JVM对象内存管理策略" class="headerlink" title="JVM对象内存管理策略"></a>JVM对象内存管理策略</h2><p>GC管理的内存分为三类区域，分别是Eden+Survivor（新生代），Tenured（老年代）和Permanent（永久代）。</p>
-<p><img src="/JVM-memory-management-and-GC%5CGCRegions.png" alt="GCregion"></p>
+<p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/GCRegions.png" alt="GCregion"></p>
 <ol>
 <li><p>对象优先在Eden分配</p>
 </li>
@@ -1598,13 +1598,13 @@
 <li><p>动态对象年龄判定：当Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于或者等于该年龄的对象可以直接进入老年代，无须等到MaxTenuringThreshold中要求的年龄。这是为了防止Survivor区溢出。</p>
 </li>
 </ol>
-<h2 id="JVM常用的垃圾收集器"><a href="#JVM常用的垃圾收集器" class="headerlink" title="JVM常用的垃圾收集器"></a>JVM常用的垃圾收集器</h2><p><img src="/JVM-memory-management-and-GC%5CGCs.jpg" alt="GCs"></p>
+<h2 id="JVM常用的垃圾收集器"><a href="#JVM常用的垃圾收集器" class="headerlink" title="JVM常用的垃圾收集器"></a>JVM常用的垃圾收集器</h2><p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/GCs.jpg" alt="GCs"></p>
 <h3 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h3><p>单线程处理<strong>新生代</strong>GC。复制算法。STW</p>
-<p><img src="/JVM-memory-management-and-GC%5CSerialGC.jpg" alt="Serial/SerialOld"></p>
+<p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/SerialGC.jpg" alt="Serial/SerialOld"></p>
 <h3 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h3><p>采用多线程处理<strong>新生代</strong>GC。复制算法。STW</p>
-<p><img src="/JVM-memory-management-and-GC%5CParNewGC.jpg" alt="ParNew"></p>
+<p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/ParNewGC.jpg" alt="ParNew"></p>
 <h3 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h3><p>处理算法和ParNewGC完全一样。<br>但是，Parallel Scavenge收集器的特点是它的关注点与其他收集器不同，CMS等收集器的关注点是尽可能地缩短垃圾收集时用户线程的停顿时间，而Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量（Throughput）。所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量 &#x3D; 运行用户代码时间 &#x2F;（运行用户代码时间 +垃圾收集时间），虚拟机总共运行了100分钟，其中垃圾收集花掉1分钟，那吞吐量就是99%。</p>
-<p><img src="/JVM-memory-management-and-GC%5CPSPold.jpg" alt="ParallelScavengeAndParOld"></p>
+<p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/PSPold.jpg" alt="ParallelScavengeAndParOld"></p>
 <h3 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h3><p>单线程处理<strong>老年代</strong>GC。采用标记-整理算法。STW</p>
 <h3 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h3><p>多线程处理<strong>老年代</strong>GC。采用标记整理算法。STW</p>
 <h3 id="CMS-Concurrent-Mark-Sweep-收集器"><a href="#CMS-Concurrent-Mark-Sweep-收集器" class="headerlink" title="CMS(Concurrent Mark Sweep)收集器"></a>CMS(Concurrent Mark Sweep)收集器</h3><p>四个阶段（基于标记-清理算法）：</p>
@@ -1614,7 +1614,7 @@
 <li>再次标记 STW</li>
 <li>并发清理</li>
 </ul>
-<p><img src="/JVM-memory-management-and-GC%5CCMS.jpg" alt="CMS"></p>
+<p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/CMS.jpg" alt="CMS"></p>
 <p>问题：</p>
 <ol>
 <li>并发清理时预留空间不够造成并发清理(Concurrent Mode Failure)失败&#x3D;&gt;浮动垃圾(Floating Gabage)过多。</li>
@@ -1666,9 +1666,9 @@
 <li>筛选回收 STW 根据停顿时间要求筛选出Old中的Cset集合，作为回收目标。</li>
 </ul>
 <p>回收evacuation阶段（小区块进行复制整理避免碎片）：<br>需要STW，将选出的Cset中的对象进行复制到新的区块，清除掉原来的区块，达到收集的效果。</p>
-<p><img src="/JVM-memory-management-and-GC%5CG1.jpg" alt="G1"></p>
+<p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/G1.jpg" alt="G1"></p>
 <h3 id="ZGC-Z-Garbage-Collector-收集器"><a href="#ZGC-Z-Garbage-Collector-收集器" class="headerlink" title="ZGC(Z Garbage Collector)收集器"></a>ZGC(Z Garbage Collector)收集器</h3><p>ZGC（Z Garbage Collector）是一款由Oracle公司研发的，以低延迟为首要目标的一款垃圾收集器。它是基于动态Region内存布局，（暂时）不设年龄分代，使用了读屏障、染色指针和内存多重映射等技术来实现可并发的标记-整理算法的收集器。在JDK 11新加入，还在实验阶段，主要特点是：回收TB级内存（最大4T），停顿时间不超过10ms。m目前ZGC是实验性功能，可以通过<code>-XX:+UnlockExperimentalVMOptions -XX:+UseZGC</code>参数启动ZGC。</p>
-<h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><p><img src="/JVM-memory-management-and-GC%5CGCArgs.jpg" alt="GCArgs"></p>
+<h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><p><img src="/2018/11/07/Java/JVM-memory-management-and-GC/GCArgs.jpg" alt="GCArgs"></p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
@@ -1695,7 +1695,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/10/11/Leetcode-901-Online-Stock-Span/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/10/11/Algorithms/Leetcode-901-Online-Stock-Span/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1713,7 +1713,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/10/11/Leetcode-901-Online-Stock-Span/" class="post-title-link" itemprop="url">Leetcode 901 Online Stock Span</a>
+          <a href="/2018/10/11/Algorithms/Leetcode-901-Online-Stock-Span/" class="post-title-link" itemprop="url">Leetcode 901 Online Stock Span</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1814,7 +1814,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/10/02/Angular-5-template-syntax/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/10/02/JS/Angular-5-template-syntax/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1832,7 +1832,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/10/02/Angular-5-template-syntax/" class="post-title-link" itemprop="url">Angular 5 Components & Templates</a>
+          <a href="/2018/10/02/JS/Angular-5-template-syntax/" class="post-title-link" itemprop="url">Angular 5 Components & Templates</a>
         </h2>
 
         <div class="post-meta-container">
@@ -2024,7 +2024,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/05/13/Leetcode-523-Continuous-Subarray-Sum/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/05/13/Algorithms/Leetcode-523-Continuous-Subarray-Sum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2042,7 +2042,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/05/13/Leetcode-523-Continuous-Subarray-Sum/" class="post-title-link" itemprop="url">Leetcode 523 Continuous Subarray Sum</a>
+          <a href="/2018/05/13/Algorithms/Leetcode-523-Continuous-Subarray-Sum/" class="post-title-link" itemprop="url">Leetcode 523 Continuous Subarray Sum</a>
         </h2>
 
         <div class="post-meta-container">
@@ -2169,7 +2169,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/30/My-Book-List/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2018/04/30/%E7%94%9F%E6%B4%BB/My-Book-List/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2187,7 +2187,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/04/30/My-Book-List/" class="post-title-link" itemprop="url">My Book List</a>
+          <a href="/2018/04/30/%E7%94%9F%E6%B4%BB/My-Book-List/" class="post-title-link" itemprop="url">My Book List</a>
         </h2>
 
         <div class="post-meta-container">

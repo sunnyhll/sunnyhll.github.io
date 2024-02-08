@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sunnyhll.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.16.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="HTTP 协议HTTP协议属于应用层协议，其设计目的是为了方便文本内容的分享与发布。HTTP协议是Web资源共享的基础，与URL(文档地址定位符)，HTML共同构建了Web世界。 HTTP协议属于点到点通信协议，请求访问资源的一端称为客户端，提供资源相应的一端称为服务器。 HTTP协议方法 GET：请求访问资源。 POST：传输主体内容。 PUT：传输内容，幂等传输。 HEAD: 获得报文首部，用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP protocol introduction">
+<meta property="og:url" content="https://sunnyhll.github.io/2019/08/11/%E6%9E%B6%E6%9E%84/Web/HTTP-protocol-introduction/index.html">
+<meta property="og:site_name" content="微观天下">
+<meta property="og:description" content="HTTP 协议HTTP协议属于应用层协议，其设计目的是为了方便文本内容的分享与发布。HTTP协议是Web资源共享的基础，与URL(文档地址定位符)，HTML共同构建了Web世界。 HTTP协议属于点到点通信协议，请求访问资源的一端称为客户端，提供资源相应的一端称为服务器。 HTTP协议方法 GET：请求访问资源。 POST：传输主体内容。 PUT：传输内容，幂等传输。 HEAD: 获得报文首部，用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CHTTPS.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CBASIC.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CDIGEST.jpg">
+<meta property="og:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CFORMBASED.jpg">
+<meta property="article:published_time" content="2019-08-11T13:57:54.000Z">
+<meta property="article:modified_time" content="2024-02-08T04:39:24.585Z">
+<meta property="article:author" content="果核&amp;肉肉">
+<meta property="article:tag" content="肉肉">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sunnyhll.github.io/HTTP-protocol-introduction%5CHTTPS.jpg">
+
+
+<link rel="canonical" href="https://sunnyhll.github.io/2019/08/11/%E6%9E%B6%E6%9E%84/Web/HTTP-protocol-introduction/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sunnyhll.github.io/2019/08/11/%E6%9E%B6%E6%9E%84/Web/HTTP-protocol-introduction/","path":"2019/08/11/架构/Web/HTTP-protocol-introduction/","title":"HTTP protocol introduction"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTTP protocol introduction | 微观天下</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">微观天下</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <!--- For hide TOC in encryption -->
+              <div id="toc-div">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">HTTP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP协议方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E6%9E%B6%E6%9E%84%E4%B8%AD%E7%9A%84%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP协议架构中的转发功能节点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS"><span class="nav-number">2.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP协议的缺点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-over-SSL-x2F-TSL"><span class="nav-number">2.2.</span> <span class="nav-text">HTTP over SSL&#x2F;TSL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WebSocket%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.</span> <span class="nav-text">WebSocket协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">用户认证问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Web安全问题</span></a></li></ol></div>
+            </div><!-- end of hide -->
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">果核&肉肉</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2019/08/11/%E6%9E%B6%E6%9E%84/Web/HTTP-protocol-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="果核&肉肉">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HTTP protocol introduction | 微观天下">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP protocol introduction
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-11 21:57:54" itemprop="dateCreated datePublished" datetime="2019-08-11T21:57:54+08:00">2019-08-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-08 12:39:24" itemprop="dateModified" datetime="2024-02-08T12:39:24+08:00">2024-02-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">架构</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9E%B6%E6%9E%84/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="HTTP-协议"><a href="#HTTP-协议" class="headerlink" title="HTTP 协议"></a>HTTP 协议</h1><p>HTTP协议属于应用层协议，其设计目的是为了方便文本内容的分享与发布。HTTP协议是Web资源共享的基础，与URL(文档地址定位符)，HTML共同构建了Web世界。</p>
+<p>HTTP协议属于点到点通信协议，请求访问资源的一端称为客户端，提供资源相应的一端称为服务器。</p>
+<h2 id="HTTP协议方法"><a href="#HTTP协议方法" class="headerlink" title="HTTP协议方法"></a>HTTP协议方法</h2><ul>
+<li>GET：请求访问资源。</li>
+<li>POST：传输主体内容。</li>
+<li>PUT：传输内容，幂等传输。</li>
+<li>HEAD: 获得报文首部，用于确认资源有效性和更新日期。</li>
+<li>DELETE: 删除内容。</li>
+<li>OPTIONS: 询问资源支持方法。</li>
+<li>TRACE：追踪路径，用于计算客户端到服务器端的跳数。</li>
+<li>CONNECT: 要求用socket协议连接代理。</li>
+</ul>
+<p>HTTP方法本身是无状态协议，为了支持复杂有状态场景，引入了Cookie技术，确保认证客户端通信的上下文是连续的。</p>
+<h2 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">类别</th>
+<th align="left">原因短语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1XX</td>
+<td align="left">Informational(信息性状态码)</td>
+<td align="left">接收的请求正在处理</td>
+</tr>
+<tr>
+<td align="left">2XX</td>
+<td align="left">Success（成功状态码）</td>
+<td align="left">请求正常处理完毕</td>
+</tr>
+<tr>
+<td align="left">3XX</td>
+<td align="left">Redirection（重定向状态码）</td>
+<td align="left">需要进行附加操作以完成请求</td>
+</tr>
+<tr>
+<td align="left">4XX</td>
+<td align="left">Client Error（客户端错误状态码）</td>
+<td align="left">服务器无法处理请求</td>
+</tr>
+<tr>
+<td align="left">5XX</td>
+<td align="left">Server Error(服务器错误状态码)</td>
+<td align="left">服务器处理请求出错</td>
+</tr>
+</tbody></table>
+<h2 id="HTTP协议架构中的转发功能节点"><a href="#HTTP协议架构中的转发功能节点" class="headerlink" title="HTTP协议架构中的转发功能节点"></a>HTTP协议架构中的转发功能节点</h2><ul>
+<li>代理：代理服务器的基本行为是接收客户端发送的请求转发给其他服务器，不改变请求URI。分为两类：<ol>
+<li>缓存代理：缓存内容。</li>
+<li>透明代理：纯粹内容转发，不做缓存。</li>
+</ol>
+</li>
+<li>网关：网关为通信链路上的服务器提供非HTTP协议连接，例如与信用卡结算系统联动，数据库联动等。</li>
+<li>隧道：隧道的建立能够确保客户端与服务器之间安全的通信。也能扩展HTTP通信协议，例如支持推送功能等等。</li>
+</ul>
+<h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><h2 id="HTTP协议的缺点："><a href="#HTTP协议的缺点：" class="headerlink" title="HTTP协议的缺点："></a>HTTP协议的缺点：</h2><ol>
+<li>明文信息会被窃听；</li>
+<li>无法验证通信方身份，会被伪装；</li>
+<li>无法验证报文的完整性，会被篡改。</li>
+</ol>
+<h2 id="HTTP-over-SSL-x2F-TSL"><a href="#HTTP-over-SSL-x2F-TSL" class="headerlink" title="HTTP over SSL&#x2F;TSL"></a>HTTP over SSL&#x2F;TSL</h2><p>SSL&#x2F;TSL协议独立与HTTP协议，存在于HTTP和TCP协议之间，在建立HTTP连接之前，先建立SSL通信机制，交换加密密钥，从而在HTTP通信报文可以进行加密传输。</p>
+<p>HTTPS 协议通信握手&#x2F;分手协议步骤：</p>
+<p><img src="/HTTP-protocol-introduction%5CHTTPS.jpg" alt="HTTPS"></p>
+<p>握手主要分为4个阶段:</p>
+<ol>
+<li>SSL证书请求，及公钥获取。&lt;&#x3D; 由于非对称加密机制的效率较低，安全性高，只用作密钥交互。</li>
+<li>客户端密钥加密发送。</li>
+<li>服务器端密钥确认。</li>
+<li>数据传输… &lt;&#x3D; 数据传输阶段的加密是基于协商确定的对称密钥发送，效率较高。</li>
+</ol>
+<h1 id="WebSocket协议"><a href="#WebSocket协议" class="headerlink" title="WebSocket协议"></a>WebSocket协议</h1><p>Web浏览器支持的全双工通信协议，在HTTP部首加入upgrade：websocket字段，服务器通过返回状态码101 swtiching protocols响应连接，一旦服务器与客户端建立WebSocket协议的通信连接，之后所有的通信都用这个专用协议进行。</p>
+<ul>
+<li>推送功能： 服务器可以直接发送数据到客户端。</li>
+<li>减少通信量：保持连接的状态减少HTTP协议的连接开销。</li>
+</ul>
+<h1 id="用户认证问题"><a href="#用户认证问题" class="headerlink" title="用户认证问题"></a>用户认证问题</h1><p>HTTP&#x2F;1.1常见的认证方式如下：</p>
+<ul>
+<li>BASIC认证：直接提交用户名密码完成认证。<br><img src="/HTTP-protocol-introduction%5CBASIC.jpg" alt="BASIC"></li>
+<li>DIGEST认证：客户端根据服务器端的质询码生成响应码完成认证。<br><img src="/HTTP-protocol-introduction%5CDIGEST.jpg" alt="DIGEST"></li>
+<li>SSL客户端认证：凭借HTTPS的客户端认证证书完成认证。</li>
+<li>FormBase认证：在用户登录信息以表单形式提交后，服务器端发放Session ID用于用户认证状态的绑定和保持。<br><img src="/HTTP-protocol-introduction%5CFORMBASED.jpg" alt="FORM"></li>
+<li>Kerberos认证：</li>
+<li>NTLM认证：</li>
+<li>SSO认证：</li>
+</ul>
+<h1 id="Web安全问题"><a href="#Web安全问题" class="headerlink" title="Web安全问题"></a>Web安全问题</h1><ul>
+<li>跨站脚本工具XSS：通过执行非法HTML标签&#x2F;JS脚本进行攻击。<ol>
+<li>表单中插入非法标签执行JS脚本。</li>
+<li>基于用户Cookie的窃取攻击</li>
+</ol>
+</li>
+<li>SQL注入攻击：通过加入SQL结束符，强制加入SQL语句执行。</li>
+<li>OS命令攻击:通过Shell脚本注入执行系统命令。</li>
+<li>HTTP部首注入攻击：通过访问URL加入换行符，注入HTTP首部字段进行攻击。<ol>
+<li>Cookie设置字段生效。</li>
+<li>HTTP响应截断攻击，强制显示伪造内容。</li>
+</ol>
+</li>
+<li>邮件首部注入攻击: <ol>
+<li>BCC邮件泄露。</li>
+</ol>
+</li>
+<li>目录遍历攻击: 访问无疑公开的文件目录。</li>
+<li>远程文件包含漏洞：引入其他包，例如System包进行代码污染。</li>
+</ul>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%82%89%E8%82%89/" rel="tag"># 肉肉</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/04/24/Java/Java-Xml-Libraries/" rel="prev" title="Java Xml Libraries">
+                  <i class="fa fa-chevron-left"></i> Java Xml Libraries
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/10/19/JS/Angular-Observables/" rel="next" title="RxJs Observables">
+                  RxJs Observables <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">果核&肉肉</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":"forest","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
