@@ -49,7 +49,7 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-</head>
+<!-- hexo injector head_end start --><link rel="manifest" href="/manifest.json" /><!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -526,9 +526,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-01-31 19:57:39 / 修改时间：19:58:00" itemprop="dateCreated datePublished" datetime="2024-01-31T19:57:39+08:00">2024-01-31</time>
+      <time title="创建时间：2024-01-31 19:57:39" itemprop="dateCreated datePublished" datetime="2024-01-31T19:57:39+08:00">2024-01-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-08 13:49:21" itemprop="dateModified" datetime="2024-02-08T13:49:21+08:00">2024-02-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -580,6 +586,8 @@
 </li>
 <li><input disabled="" type="checkbox"> 领域相关背景书籍：<ul>
 <li><input disabled="" type="checkbox"> 阅读CM bitemporal DB设计学习</li>
+<li><input disabled="" type="checkbox"> 阅读CM Risk Calc设计学习</li>
+<li><input disabled="" type="checkbox"> 阅读CM Risk Pivoting设计学习</li>
 <li><input disabled="" type="checkbox"> 阅读Kindle《债券投资策略》,了解债券市场基本知识</li>
 <li><input disabled="" type="checkbox"> 阅读Kindle《债券组合投资》</li>
 <li><input disabled="" type="checkbox"> 阅读Kindle《投资组合绩效测评实用方法》</li>
@@ -1689,5 +1697,14 @@
 
 
 
-</body>
+<!-- hexo injector body_end start --><script>
+// Check that service workers are supported
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
+</script>
+<!-- hexo injector body_end end --></body>
 </html>
