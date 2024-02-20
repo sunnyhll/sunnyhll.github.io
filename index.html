@@ -184,7 +184,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/" class="post-title-link" itemprop="url">Authentication</a>
+          <a href="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/" class="post-title-link" itemprop="url">Authentication</a>
         </h2>
 
         <div class="post-meta-container">
@@ -212,9 +212,8 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-02-08 12:37:00 / 修改时间：12:36:52" itemprop="dateCreated datePublished" datetime="2024-02-08T12:37:00+08:00">2024-02-08</time>
+      <time title="创建时间：2024-02-19 12:57:37" itemprop="dateCreated datePublished" datetime="2024-02-19T12:57:37+08:00">2024-02-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,11 +272,11 @@
 <h1 id="session-cookie鉴权"><a href="#session-cookie鉴权" class="headerlink" title="session-cookie鉴权"></a>session-cookie鉴权</h1><p>Session是HTTP协议中为了支持有状态的通信而发明的会话机制，本质上是通过服务器为用户建立sessionid从而保证用户的状态信息能够在服务器端保存。用户不需要反复进行登录认证就能保持会话。</p>
 <p>而Cookie则是一种特殊的HTTP头部，能够在HTTP通信中保存一定的用户信息，如sessionid从而达到认证用户的目的。由于Cookie本身是针对某一域名而产生的，所以在发送Cookie过程中必须提供正确域名的sessionid才行。</p>
 <p>具体流程如下：</p>
-<p><img src="/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
+<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
 <p>Cookie鉴权常用Single Sign On场景，例如，于对于企业中的不同子域名的验证，可以通过结合SAML, CAS等协议完成。对于不同网络更加广泛的第三方验证则有OIDC协议支持。</p>
 <h1 id="Token-验证-JWT"><a href="#Token-验证-JWT" class="headerlink" title="Token 验证(JWT)"></a>Token 验证(JWT)</h1><p>Token验证方式和Seesion验证方式很类似，不同的是Token本身包含一些有意义的信息：用户名、密码、过期时间等。Token本身由服务器签发，客户端请求的发送中需要包含 Authorization : JWT “{jwt token}”，服务器提取token信息通过相同的算法验证即可。相较于Session验证方式节约了分布式系统中服务器存储sessionid和用户信息的开销，只需要服务器拥有相同的密钥即可。</p>
 <p>具体流程如下:</p>
-<p><img src="/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/TokenAuth.png" alt="tokenAuth"></p>
+<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/TokenAuth.png" alt="tokenAuth"></p>
 <p>JWT(json-web-token)算法细节：</p>
 <p>JWT由三部分”{header}.{payload}.{signature}’,两种算法生成，公式如下：<br>    signature &#x3D; sha256(base64(header)+’.’+base64(payload),{服务器密钥})</p>
 <ol>
@@ -297,7 +296,7 @@
 <li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。通过OP提供。</li>
 </ul>
 <p>认证流程如下：</p>
-<p><img src="/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
+<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
 <p>其中，UserIndo EndPoint是一个受OAuth2保护的资源。在RP得到Access Token后可以请求此资源，然后获得一组EU相关的Claims，这些信息可以说是ID Token的扩展，比如如果你觉得ID Token中只需包含EU的唯一标识sub即可（避免ID Token过于庞大），然后通过此接口获取完整的EU的信息。此资源必须部署在TLS之上。</p>
 <p>OIDC的支持的授权流程如下：</p>
 <ol>
@@ -327,14 +326,14 @@
 <li>客户端应用拿着授权码code，和clientId，clientSecret，去换取access_token</li>
 <li>返回access_token给客户端应用</li>
 </ol>
-<p><img src="/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
+<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
 <p>这种场景下，用户名、密码、客户端应用信息，都没有直接暴露在浏览器，是web下是最安全的。</p>
 <h3 id="简化模式"><a href="#简化模式" class="headerlink" title="简化模式"></a>简化模式</h3><p>授权码模式的简化，用户认证成功后，直接将token返回给浏览器。因为某些应用没有前端服务器，只有一堆静态的html（很少见），这种模式，一般不用。</p>
-<p><img src="/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
+<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
 <h3 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h3><p>适用场景：手机app ，这个客户端应用是你完全可以信任的，你的app就是自己公司开发的。但是这个模式并不适合在web场景下用，在web下，用户名密码并不是直接填给自己写的应用的，而是填在浏览器呈现的一个页面上的，这个浏览器是客户端应用的一个代理，浏览器是没法保证安全性的。</p>
-<p><img src="/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
+<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
 <h3 id="客户端证书模式"><a href="#客户端证书模式" class="headerlink" title="客户端证书模式"></a>客户端证书模式</h3><p>客户端应用直接发 clientId、clientSecret给认证服务器，发的令牌是针对客户端应用的，不是针对用户的。跟没授权一样，令牌不能识别用户身份。</p>
-<p><img src="/2024/02/08/%E6%9E%B6%E6%9E%84/Web/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
+<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
 <h1 id="Authentication实战"><a href="#Authentication实战" class="headerlink" title="Authentication实战"></a>Authentication实战</h1><p>本章将着重描述如何在java springboot应用中实现相应的认证流程。springboot提供了一站式应用的开发模式，但是认证流程是需要spring security，同时具体的认证核心模块需要spring securty keberos或者spring security oauth组件支持。下文将主要介绍如何利用这两个模块实现具体的基于siteminder&#x2F;spnego&#x2F;oauth协议的认证流程。</p>
 <h2 id="siteminder-sso-preauth"><a href="#siteminder-sso-preauth" class="headerlink" title="siteminder sso + preauth"></a>siteminder sso + preauth</h2><p>Siteminder是企业级认证产品，它提供了一站式认证中间件，从应用开发者的角度来看，就是采用了外部认证系统，应用不需要重新进行认证而是可以直接从siteminder处理过的http request header中提取SM_USER中拿到userprincipal()。因此从spring securty框架的角度之需要直接读取认证后的信息，而不需要再对request进行认证验证。这通常是一种企业内网用户认证采用的sso机制，因为用户之需要进行简单认证后就能得到对多种内部webapp的访问toekn，而且不需要进行细粒度的鉴权的场景适合大部分内部应用，但是，因为外部网站可容易会被假的header所欺骗，安全性较差而不会采用这种方式进行验证。</p>
 <h2 id="spnego-auth"><a href="#spnego-auth" class="headerlink" title="spnego auth"></a>spnego auth</h2><p>SPNEGO是微软设计的一种企业级认证协议，底层支持多种token协议，因此是应用proid常用的一种方式，因为应用的id会常常跑在不同的window&#x2F;linux环境，而spnego能够支持多种密钥认证从而对跨系统认证能有很好的支持，这种认证方式需要用户自己执行认证检查，所以需要spring-security-keberos模块的相关auth provider进行验证。</p>
@@ -375,7 +374,7 @@
 <li><p>对于对称加密算法的token，假设资源服务器和认证服务器都已经知道密钥内容，客户端拿到jwt token后，资源服务器需要利用密钥进行解密，并且验证payload的合法性即可。</p>
 </li>
 </ol>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+<h2 id="Jetty-Session-Model"><a href="#Jetty-Session-Model" class="headerlink" title="Jetty Session Model"></a>Jetty Session Model</h2><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
 
@@ -498,7 +497,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2024/01/31/%E7%94%9F%E6%B4%BB/2024%E5%B9%B4%E5%BA%A6%E4%B8%AA%E4%BA%BA%E8%AE%A1%E5%88%92/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2024/01/31/%E7%94%9F%E6%B4%BB/2024%E5%B9%B4%E5%BA%A6%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -516,7 +515,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/31/%E7%94%9F%E6%B4%BB/2024%E5%B9%B4%E5%BA%A6%E4%B8%AA%E4%BA%BA%E8%AE%A1%E5%88%92/" class="post-title-link" itemprop="url">2024年度个人计划</a>
+          <a href="/2024/01/31/%E7%94%9F%E6%B4%BB/2024%E5%B9%B4%E5%BA%A6%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">2024年度个人规划</a>
         </h2>
 
         <div class="post-meta-container">
@@ -534,7 +533,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-08 13:49:21" itemprop="dateModified" datetime="2024-02-08T13:49:21+08:00">2024-02-08</time>
+      <time title="修改时间：2024-02-20 17:29:22" itemprop="dateModified" datetime="2024-02-20T17:29:22+08:00">2024-02-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -603,7 +602,131 @@
 </ul>
 </li>
 </ul>
-<h1 id="个人感悟"><a href="#个人感悟" class="headerlink" title="个人感悟"></a>个人感悟</h1><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+<h1 id="个人感悟"><a href="#个人感悟" class="headerlink" title="个人感悟"></a>个人感悟</h1><h2 id="《非暴力沟通》读后感"><a href="#《非暴力沟通》读后感" class="headerlink" title="《非暴力沟通》读后感"></a>《非暴力沟通》读后感</h2><h3 id="非暴力沟通四要素"><a href="#非暴力沟通四要素" class="headerlink" title="非暴力沟通四要素"></a>非暴力沟通四要素</h3><ul>
+<li>首先，留意发生的事情，清楚地表达观察结果，而不判断或评估。</li>
+<li>接着，表达感受，例如受伤、害怕、喜悦、开心、气愤等等。</li>
+<li>然后，说出哪些需要导致那样的感受。</li>
+<li>最后，提出非暴力沟通的第四个要素——具体的请求。这一要素明确告知他人，我们期待他采取何种行动，来满足我们。</li>
+</ul>
+<h3 id="观察误区"><a href="#观察误区" class="headerlink" title="观察误区"></a>观察误区</h3><ul>
+<li>道德评判：对他人的评价实际上反映了我们的需要和价值观。应该直接说出我们的价值观，而不会指责他人。</li>
+<li>比较：比较也是一种评判。</li>
+<li>回避责任： 我们可以用负责任的语言代替回避责任的语言。补充我为什么要这么做，以及自己的感受。</li>
+<li>强人所难：我们无法强迫他人按我们的期待生活。认为“某人应当受到惩罚”使我们难以体会到心中的爱。</li>
+</ul>
+<h3 id="区分观察与评论"><a href="#区分观察与评论" class="headerlink" title="区分观察与评论"></a>区分观察与评论</h3><p>将观察和评论混为一谈，人们将倾向于听到批评，甚至会产生逆反心理。不带评论的观察是人类智力的最高形式。</p>
+<p><img src="/./2023%E5%B9%B4%E5%BA%A6%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92/observationAndJudgement.jpg" alt="observationAndJudgement"></p>
+<h3 id="体会和表达感受"><a href="#体会和表达感受" class="headerlink" title="体会和表达感受"></a>体会和表达感受</h3><ul>
+<li><p>示弱有助于解决冲突。</p>
+</li>
+<li><p>区分感受和自我评价：当我们说“我觉得”，我们常常并不是在表达感受，而是在表达想法。</p>
+<ol>
+<li>下列词语可用来表达我们的需要得到满足时的感受：</li>
+</ol>
+<ul>
+<li>兴奋 喜悦 欣喜 甜蜜 精力充沛 兴高采烈感激 </li>
+<li>感动 乐观 自信 振作 振奋 开心</li>
+<li>高兴 快乐 愉快 幸福 陶醉 满足 欣慰 心旷神怡喜出望外</li>
+<li>平静 自在 舒适 放松 踏实 安全 温暖 放心 无忧无虑</li>
+</ul>
+<ol start="2">
+<li>下列词语可用来表达我们的需要没有得到满足时的感受：</li>
+</ol>
+<ul>
+<li>害怕 担心 焦虑 忧虑 着急 紧张 心神不宁 心烦意乱</li>
+<li>忧伤 沮丧 灰心 气馁 泄气 绝望 伤感 凄凉 悲伤</li>
+<li>恼怒 愤怒 烦恼 苦恼 生气 厌烦 不满 不快 不耐烦不高兴</li>
+<li>震惊 失望 困惑 茫然 寂寞 孤独 郁闷 难过 悲观</li>
+<li>沉重 麻木 精疲力尽 委靡不振 疲惫不堪 昏昏欲睡无精打采</li>
+<li>尴尬 惭愧 内疚 妒忌 遗憾 不舒服</li>
+</ul>
+</li>
+</ul>
+<h3 id="感受的根源——需要"><a href="#感受的根源——需要" class="headerlink" title="感受的根源——需要"></a>感受的根源——需要</h3><ul>
+<li><p>听到不中听的话，人的四种反应：</p>
+<ol>
+<li>认为自己犯了错</li>
+<li>指责对方</li>
+<li>了解我们的感受和需要。这时，我们可能会发现我们有些伤心，因为我们看重信任和接纳。</li>
+<li>用心体会他人的感受和需要。这时，我们也许就会想“他伤心可能是因为他需要体贴和支持”。</li>
+</ol>
+</li>
+<li><p>根据我长期以来的经验，一旦人们开始谈论需要，而不指责对方，他们就有可能找到办法来满足双方的需要。</p>
+<ol>
+<li>自由选择（Autonomy）自由制定计划来实现这些梦想、目标和方向</li>
+<li>庆祝（Celebration）庆祝生命的创造力以及梦想的实现</li>
+<li>言行一致（Integrity）真诚Authenticity创造Creativity意义Meaning自我肯定Self-worth</li>
+<li>滋养身体（Physical Nurturance）</li>
+<li>玩耍（Play）</li>
+<li>情意相通（Spiritual Communion）</li>
+<li>相互依存（Interdependence）</li>
+</ol>
+</li>
+</ul>
+<h3 id="请求帮助"><a href="#请求帮助" class="headerlink" title="请求帮助"></a>请求帮助</h3><p>请求别人帮助时候，需要更具具体的目的而做出不同的请求：</p>
+<ul>
+<li>提出具体而且清晰的请求</li>
+<li>明确谈话的目的</li>
+<li>请求反馈能确保对方准确把握我们的意思</li>
+<li>参加集体讨论时，说清楚我们希望得到怎样的反馈</li>
+<li>请求没有得到满足时，提出请求的人如果批评和指责，那就是命令；如果想利用对方的内疚来达到目的，也是命令。</li>
+</ul>
+<h3 id="用全身心倾听"><a href="#用全身心倾听" class="headerlink" title="用全身心倾听"></a>用全身心倾听</h3><p>在倾听他人的观察、感受、需要和请求之后，我们可以主动表达我们的理解。如果我们已经准确领会了他们的意思，我们的反馈将帮助他们意识到这一点。反之，如果我们的理解还不到位，他们也就有机会来纠正我们。此外，这样做还有助于人们体会自己的状况，从而深入了解自己。</p>
+<p>当对方得到充分的倾听，（a）我们将体会到气氛变得轻松；（b）他会停止谈话。</p>
+<p>当我们痛苦得无法倾听他人时，我们需要（1）体会自己的感受和需要（2）大声地提出请求（3）换一个环境。</p>
+<h3 id="爱自己"><a href="#爱自己" class="headerlink" title="爱自己"></a>爱自己</h3><p>非暴力沟通最重要的应用也许是培养对自己的爱。</p>
+<ul>
+<li><p>非暴力沟通的忧伤：当我们的行为无法满足自身的需要，我们体会着人生的悲哀和内心的渴望。</p>
+</li>
+<li><p>非暴力沟通自我宽恕：感到遗憾时，我们试图了解过去的行为所要满足的需要。</p>
+</li>
+<li><p>让我们的行动基于对生命的爱，而非恐惧、内疚、羞愧或义务。</p>
+</li>
+<li><p>不论你选择做什么，了解自己为什么要那样做。”我选择做______是因为我想______”</p>
+</li>
+</ul>
+<h3 id="充分表达愤怒"><a href="#充分表达愤怒" class="headerlink" title="充分表达愤怒"></a>充分表达愤怒</h3><ul>
+<li><p>生气的原因在于我们的想法——对他人的评判和指责。希望他人因为内疚发生改变，就是将刺激和原因混为一谈。我们无须压抑愤怒，只要我们专注于他人的感受和需要，愤怒也就不再存在。</p>
+</li>
+<li><p>愤怒驱使我们去惩罚他人。留意头脑中出现的暴力想法，而不评判它们。</p>
+</li>
+<li><p>当我们意识到自己的需要，愤怒就转变为服务需要的情感。职责别人没做的事情，往往是我们想要对方做到的事情，而这件事情会满足我们的某些需求。</p>
+</li>
+</ul>
+<p>表达愤怒的步骤：</p>
+<ol>
+<li>停下来。呼吸。</li>
+<li>留意我们的指责。</li>
+<li>体会我们的需要。</li>
+<li>表达感受和尚未满足的需要。</li>
+</ol>
+<h3 id="运用强制力避免伤害"><a href="#运用强制力避免伤害" class="headerlink" title="运用强制力避免伤害"></a>运用强制力避免伤害</h3><p>使用防卫性的强制力，是为了保护自己或他人，而不是为了惩罚、羞辱或谴责他人。</p>
+<p>此时，我们希望痛苦能让他们：</p>
+<ol>
+<li>意识到自己的过错；</li>
+<li>感到懊悔；</li>
+<li>改变行为。</li>
+</ol>
+<p>然而，在实际生活中，惩罚往往加强了对方的敌意和抵触心理，使双方的关系更加疏远。</p>
+<p>有两个问题可以帮助我们认识惩罚的局限性。</p>
+<ul>
+<li>第一个问题是，如果我不喜欢他现在的行为，那我希望他怎么做？如果我们只问这个问题，惩罚可能是有效果的，因为威胁或惩罚可以对他人的行为产生影响。</li>
+<li>然而，通过第二个问题，我们就可以清楚地看到惩罚的局限性：我希望他基于怎样的原因去做我想要他做的事情？</li>
+</ul>
+<h3 id="重获生活的热情"><a href="#重获生活的热情" class="headerlink" title="重获生活的热情"></a>重获生活的热情</h3><ul>
+<li>认识情感的根源在于个人的需要和想法，并以建设性的语言提出明确的请求</li>
+<li>专注于我们想要做的，而不是追究错在哪里。</li>
+<li>体会自己的感受和需要可以释放压力。</li>
+<li>体会他人的感受和需要也可以释放压力。</li>
+</ul>
+<h3 id="表达感激"><a href="#表达感激" class="headerlink" title="表达感激"></a>表达感激</h3><p>用非暴力沟通的方式表达感激时，我们只是为了庆祝他人的行为提升了我们的生活品质，而不是想得到任何回报。</p>
+<ol>
+<li>对方做了什么事情使我们的生活得到了改善；</li>
+<li>我们有哪些需要得到了满足；</li>
+<li>我们的心情怎么样？</li>
+</ol>
+<p>在别人表达感激时，人们通常有两种截然不同的反应。一种是自我膨胀，相信我们比别人优越；另一种是假谦虚，否定别人的欣赏，耸耸肩说：“哦，这没什么。”</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
 
@@ -665,7 +788,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-08 12:46:45" itemprop="dateModified" datetime="2024-02-08T12:46:45+08:00">2024-02-08</time>
+      <time title="修改时间：2024-02-19 11:40:53" itemprop="dateModified" datetime="2024-02-19T11:40:53+08:00">2024-02-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -726,6 +849,8 @@
 <p>在服务器端，需要利用haproxy做外部网卡IP的端口转发到内部地址127.0.0.1，建立外网网卡与内网之间的网桥.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install haproxy</span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">cp</span> /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加上一下端口转发规则</span></span><br><span class="line"></span><br><span class="line">frontend apps</span><br><span class="line">    <span class="built_in">bind</span> SERVER_IP:80</span><br><span class="line">    <span class="built_in">bind</span> SERVER_IP:443</span><br><span class="line">    option tcplog</span><br><span class="line">    mode tcp</span><br><span class="line">    default_backend apps</span><br><span class="line"></span><br><span class="line">backend apps</span><br><span class="line">    mode tcp</span><br><span class="line">    balance roundrobin</span><br><span class="line">    option ssl-hello-chk</span><br><span class="line">    server webserver1 CRC_IP check</span><br><span class="line"></span><br><span class="line">frontend api</span><br><span class="line">    <span class="built_in">bind</span> SERVER_IP:6443</span><br><span class="line">    option tcplog</span><br><span class="line">    mode tcp</span><br><span class="line">    default_backend api</span><br><span class="line"></span><br><span class="line">backend api</span><br><span class="line">    mode tcp</span><br><span class="line">    balance roundrobin</span><br><span class="line">    option ssl-hello-chk</span><br><span class="line">    server webserver1 CRC_IP:6443 check</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更改IP地址</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> SERVER_IP=$(hostname --ip-address)</span><br><span class="line"><span class="built_in">export</span> CRC_IP=$(crc ip)</span><br><span class="line">sudo sed -i <span class="string">&quot;s/SERVER_IP/<span class="variable">$SERVER_IP</span>/g&quot;</span> haproxy.cfg</span><br><span class="line">sudo sed -i <span class="string">&quot;s/CRC_IP/<span class="variable">$CRC_IP</span>/g&quot;</span> haproxy.cfg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务haproxy</span></span><br><span class="line">sudo ststemctl start haproxy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 诊断</span></span><br><span class="line"></span><br><span class="line">sudo apt install net-tools</span><br></pre></td></tr></table></figure>
 
+<h3 id="Java-API创建Route资源"><a href="#Java-API创建Route资源" class="headerlink" title="Java API创建Route资源"></a>Java API创建Route资源</h3><h4 id="Useful-Code-example"><a href="#Useful-Code-example" class="headerlink" title="Useful Code example"></a>Useful Code example</h4><p><a target="_blank" rel="noopener" href="https://github.com/kubernetes-client/java/wiki/3.-Code-Examples">https://github.com/kubernetes-client/java/wiki/3.-Code-Examples</a></p>
+<h4 id="Leader-Election-Example"><a href="#Leader-Election-Example" class="headerlink" title="Leader Election Example"></a>Leader Election Example</h4><p><a target="_blank" rel="noopener" href="https://github.com/kubernetes-client/java/blob/master/examples/examples-release-18/src/main/java/io/kubernetes/client/examples/LeaderElectionExample.java">https://github.com/kubernetes-client/java/blob/master/examples/examples-release-18/src/main/java/io/kubernetes/client/examples/LeaderElectionExample.java</a></p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
@@ -788,7 +913,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-04 17:50:54" itemprop="dateModified" datetime="2024-02-04T17:50:54+08:00">2024-02-04</time>
+      <time title="修改时间：2024-02-20 17:25:54" itemprop="dateModified" datetime="2024-02-20T17:25:54+08:00">2024-02-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1027,7 +1152,7 @@
 <li><p>新的节奏：到了新的生活阶段，即使一个成功的领导者也需要适应新的节奏，培养新的兴趣爱好来填满自己的生活。</p>
 </li>
 </ul>
-<h2 id="《走对小学的每一步》：陪伴，为孩子打下扎实基础-读后感"><a href="#《走对小学的每一步》：陪伴，为孩子打下扎实基础-读后感" class="headerlink" title="《走对小学的每一步》：陪伴，为孩子打下扎实基础 读后感"></a>《走对小学的每一步》：陪伴，为孩子打下扎实基础 读后感</h2><h3 id="一年级，培养控制力"><a href="#一年级，培养控制力" class="headerlink" title="一年级，培养控制力"></a>一年级，培养控制力</h3><h4 id="习惯力：教育就是养成良好的习惯"><a href="#习惯力：教育就是养成良好的习惯" class="headerlink" title="习惯力：教育就是养成良好的习惯"></a>习惯力：教育就是养成良好的习惯</h4><ul>
+<h2 id="《走对小学的每一步》陪伴，为孩子打下扎实基础-读后感"><a href="#《走对小学的每一步》陪伴，为孩子打下扎实基础-读后感" class="headerlink" title="《走对小学的每一步》陪伴，为孩子打下扎实基础 读后感"></a>《走对小学的每一步》陪伴，为孩子打下扎实基础 读后感</h2><h3 id="一年级，培养控制力"><a href="#一年级，培养控制力" class="headerlink" title="一年级，培养控制力"></a>一年级，培养控制力</h3><h4 id="习惯力：教育就是养成良好的习惯"><a href="#习惯力：教育就是养成良好的习惯" class="headerlink" title="习惯力：教育就是养成良好的习惯"></a>习惯力：教育就是养成良好的习惯</h4><ul>
 <li>时间习惯：把时间“主权”还给孩子</li>
 <li>学习习惯：写作业不再“鸡飞狗跳”</li>
 <li>阅读习惯：让孩子任性去读！</li>
@@ -1080,78 +1205,6 @@
 <li><p>建立正确的边界和规则意识</p>
 </li>
 </ul>
-<h2 id="《非暴力沟通》"><a href="#《非暴力沟通》" class="headerlink" title="《非暴力沟通》"></a>《非暴力沟通》</h2><h3 id="非暴力沟通四要素"><a href="#非暴力沟通四要素" class="headerlink" title="非暴力沟通四要素"></a>非暴力沟通四要素</h3><ul>
-<li>首先，留意发生的事情，清楚地表达观察结果，而不判断或评估。</li>
-<li>接着，表达感受，例如受伤、害怕、喜悦、开心、气愤等等。</li>
-<li>然后，说出哪些需要导致那样的感受。</li>
-<li>最后，提出非暴力沟通的第四个要素——具体的请求。这一要素明确告知他人，我们期待他采取何种行动，来满足我们。</li>
-</ul>
-<h3 id="观察误区"><a href="#观察误区" class="headerlink" title="观察误区"></a>观察误区</h3><ul>
-<li>道德评判：对他人的评价实际上反映了我们的需要和价值观。应该直接说出我们的价值观，而不会指责他人。</li>
-<li>比较：比较也是一种评判。</li>
-<li>回避责任： 我们可以用负责任的语言代替回避责任的语言。补充我为什么要这么做，以及自己的感受。</li>
-<li>强人所难：我们无法强迫他人按我们的期待生活。认为“某人应当受到惩罚”使我们难以体会到心中的爱。</li>
-</ul>
-<h3 id="区分观察与评论"><a href="#区分观察与评论" class="headerlink" title="区分观察与评论"></a>区分观察与评论</h3><p>将观察和评论混为一谈，人们将倾向于听到批评，甚至会产生逆反心理。不带评论的观察是人类智力的最高形式。</p>
-<p><img src="/2023/10/08/%E7%94%9F%E6%B4%BB/2023%E5%B9%B4%E5%BA%A6%E4%B8%AA%E4%BA%BA%E8%A7%84%E5%88%92/observationAndJudgement.jpg" alt="observationAndJudgement"></p>
-<h3 id="体会和表达感受"><a href="#体会和表达感受" class="headerlink" title="体会和表达感受"></a>体会和表达感受</h3><ul>
-<li><p>示弱有助于解决冲突。</p>
-</li>
-<li><p>区分感受和自我评价：当我们说“我觉得”，我们常常并不是在表达感受，而是在表达想法。</p>
-<ol>
-<li>下列词语可用来表达我们的需要得到满足时的感受：</li>
-</ol>
-<ul>
-<li>兴奋 喜悦 欣喜 甜蜜 精力充沛 兴高采烈感激 </li>
-<li>感动 乐观 自信 振作 振奋 开心</li>
-<li>高兴 快乐 愉快 幸福 陶醉 满足 欣慰 心旷神怡喜出望外</li>
-<li>平静 自在 舒适 放松 踏实 安全 温暖 放心 无忧无虑</li>
-</ul>
-<ol start="2">
-<li>下列词语可用来表达我们的需要没有得到满足时的感受：</li>
-</ol>
-<ul>
-<li>害怕 担心 焦虑 忧虑 着急 紧张 心神不宁 心烦意乱</li>
-<li>忧伤 沮丧 灰心 气馁 泄气 绝望 伤感 凄凉 悲伤</li>
-<li>恼怒 愤怒 烦恼 苦恼 生气 厌烦 不满 不快 不耐烦不高兴</li>
-<li>震惊 失望 困惑 茫然 寂寞 孤独 郁闷 难过 悲观</li>
-<li>沉重 麻木 精疲力尽 委靡不振 疲惫不堪 昏昏欲睡无精打采</li>
-<li>尴尬 惭愧 内疚 妒忌 遗憾 不舒服</li>
-</ul>
-</li>
-</ul>
-<h3 id="感受的根源——需要"><a href="#感受的根源——需要" class="headerlink" title="感受的根源——需要"></a>感受的根源——需要</h3><ul>
-<li><p>听到不中听的话，人的四种反应：</p>
-<ol>
-<li>认为自己犯了错</li>
-<li>指责对方</li>
-<li>了解我们的感受和需要。这时，我们可能会发现我们有些伤心，因为我们看重信任和接纳。</li>
-<li>用心体会他人的感受和需要。这时，我们也许就会想“他伤心可能是因为他需要体贴和支持”。</li>
-</ol>
-</li>
-<li><p>根据我长期以来的经验，一旦人们开始谈论需要，而不指责对方，他们就有可能找到办法来满足双方的需要。</p>
-<ol>
-<li>自由选择（Autonomy）自由制定计划来实现这些梦想、目标和方向</li>
-<li>庆祝（Celebration）庆祝生命的创造力以及梦想的实现</li>
-<li>言行一致（Integrity）真诚Authenticity创造Creativity意义Meaning自我肯定Self-worth</li>
-<li>滋养身体（Physical Nurturance）</li>
-<li>玩耍（Play）</li>
-<li>情意相通（Spiritual Communion）</li>
-<li>相互依存（Interdependence）</li>
-</ol>
-</li>
-</ul>
-<h3 id="请求帮助"><a href="#请求帮助" class="headerlink" title="请求帮助"></a>请求帮助</h3><p>请求别人帮助时候，需要更具具体的目的而做出不同的请求：</p>
-<ul>
-<li>提出具体而且清晰的请求</li>
-<li>明确谈话的目的</li>
-<li>请求反馈能确保对方准确把握我们的意思</li>
-<li>参加集体讨论时，说清楚我们希望得到怎样的反馈</li>
-<li>请求没有得到满足时，提出请求的人如果批评和指责，那就是命令；如果想利用对方的内疚来达到目的，也是命令。</li>
-</ul>
-<h3 id="用全身心倾听"><a href="#用全身心倾听" class="headerlink" title="用全身心倾听"></a>用全身心倾听</h3><p>在倾听他人的观察、感受、需要和请求之后，我们可以主动表达我们的理解。如果我们已经准确领会了他们的意思，我们的反馈将帮助他们意识到这一点。反之，如果我们的理解还不到位，他们也就有机会来纠正我们。此外，这样做还有助于人们体会自己的状况，从而深入了解自己。</p>
-<p>当对方得到充分的倾听，（a）我们将体会到气氛变得轻松；（b）他会停止谈话。</p>
-<p>当我们痛苦得无法倾听他人时，我们需要（1）体会自己的感受和需要（2）大声地提出请求（3）换一个环境。</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
