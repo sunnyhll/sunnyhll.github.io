@@ -184,7 +184,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/" class="post-title-link" itemprop="url">Authentication</a>
+          <a href="/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/" class="post-title-link" itemprop="url">Authentication</a>
         </h2>
 
         <div class="post-meta-container">
@@ -213,7 +213,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-02-19 12:57:37" itemprop="dateCreated datePublished" datetime="2024-02-19T12:57:37+08:00">2024-02-19</time>
+      <time title="创建时间：2024-03-09 19:14:46" itemprop="dateCreated datePublished" datetime="2024-03-09T19:14:46+08:00">2024-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -272,11 +272,11 @@
 <h1 id="session-cookie鉴权"><a href="#session-cookie鉴权" class="headerlink" title="session-cookie鉴权"></a>session-cookie鉴权</h1><p>Session是HTTP协议中为了支持有状态的通信而发明的会话机制，本质上是通过服务器为用户建立sessionid从而保证用户的状态信息能够在服务器端保存。用户不需要反复进行登录认证就能保持会话。</p>
 <p>而Cookie则是一种特殊的HTTP头部，能够在HTTP通信中保存一定的用户信息，如sessionid从而达到认证用户的目的。由于Cookie本身是针对某一域名而产生的，所以在发送Cookie过程中必须提供正确域名的sessionid才行。</p>
 <p>具体流程如下：</p>
-<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
+<p><img src="/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/CookieAuth.jpg" alt="cookieAuth"></p>
 <p>Cookie鉴权常用Single Sign On场景，例如，于对于企业中的不同子域名的验证，可以通过结合SAML, CAS等协议完成。对于不同网络更加广泛的第三方验证则有OIDC协议支持。</p>
 <h1 id="Token-验证-JWT"><a href="#Token-验证-JWT" class="headerlink" title="Token 验证(JWT)"></a>Token 验证(JWT)</h1><p>Token验证方式和Seesion验证方式很类似，不同的是Token本身包含一些有意义的信息：用户名、密码、过期时间等。Token本身由服务器签发，客户端请求的发送中需要包含 Authorization : JWT “{jwt token}”，服务器提取token信息通过相同的算法验证即可。相较于Session验证方式节约了分布式系统中服务器存储sessionid和用户信息的开销，只需要服务器拥有相同的密钥即可。</p>
 <p>具体流程如下:</p>
-<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/TokenAuth.png" alt="tokenAuth"></p>
+<p><img src="/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/TokenAuth.png" alt="tokenAuth"></p>
 <p>JWT(json-web-token)算法细节：</p>
 <p>JWT由三部分”{header}.{payload}.{signature}’,两种算法生成，公式如下：<br>    signature &#x3D; sha256(base64(header)+’.’+base64(payload),{服务器密钥})</p>
 <ol>
@@ -296,7 +296,7 @@
 <li>ID Token认证令牌：JWT格式的数据，包含EU身份认证的信息。通过OP提供。</li>
 </ul>
 <p>认证流程如下：</p>
-<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
+<p><img src="/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/OIDCAuth.jpg" alt="OIDCAuth"></p>
 <p>其中，UserIndo EndPoint是一个受OAuth2保护的资源。在RP得到Access Token后可以请求此资源，然后获得一组EU相关的Claims，这些信息可以说是ID Token的扩展，比如如果你觉得ID Token中只需包含EU的唯一标识sub即可（避免ID Token过于庞大），然后通过此接口获取完整的EU的信息。此资源必须部署在TLS之上。</p>
 <p>OIDC的支持的授权流程如下：</p>
 <ol>
@@ -326,14 +326,14 @@
 <li>客户端应用拿着授权码code，和clientId，clientSecret，去换取access_token</li>
 <li>返回access_token给客户端应用</li>
 </ol>
-<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
+<p><img src="/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/AuthorizationCodeOAuth.png" alt="AuthorizationCodeOAuth"></p>
 <p>这种场景下，用户名、密码、客户端应用信息，都没有直接暴露在浏览器，是web下是最安全的。</p>
 <h3 id="简化模式"><a href="#简化模式" class="headerlink" title="简化模式"></a>简化模式</h3><p>授权码模式的简化，用户认证成功后，直接将token返回给浏览器。因为某些应用没有前端服务器，只有一堆静态的html（很少见），这种模式，一般不用。</p>
-<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
+<p><img src="/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/ImplicitOAuth.png" alt="ImplicitOAuth"></p>
 <h3 id="密码模式"><a href="#密码模式" class="headerlink" title="密码模式"></a>密码模式</h3><p>适用场景：手机app ，这个客户端应用是你完全可以信任的，你的app就是自己公司开发的。但是这个模式并不适合在web场景下用，在web下，用户名密码并不是直接填给自己写的应用的，而是填在浏览器呈现的一个页面上的，这个浏览器是客户端应用的一个代理，浏览器是没法保证安全性的。</p>
-<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
+<p><img src="/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/PasswordOAuth.png" alt="PasswordOAuth"></p>
 <h3 id="客户端证书模式"><a href="#客户端证书模式" class="headerlink" title="客户端证书模式"></a>客户端证书模式</h3><p>客户端应用直接发 clientId、clientSecret给认证服务器，发的令牌是针对客户端应用的，不是针对用户的。跟没授权一样，令牌不能识别用户身份。</p>
-<p><img src="/2024/02/19/%E6%9E%B6%E6%9E%84/Web/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
+<p><img src="/2024/03/09/%E6%9E%B6%E6%9E%84/Web/Authentication/ClientCertOAuth.png" alt="ClientOAuth"></p>
 <h1 id="Authentication实战"><a href="#Authentication实战" class="headerlink" title="Authentication实战"></a>Authentication实战</h1><p>本章将着重描述如何在java springboot应用中实现相应的认证流程。springboot提供了一站式应用的开发模式，但是认证流程是需要spring security，同时具体的认证核心模块需要spring securty keberos或者spring security oauth组件支持。下文将主要介绍如何利用这两个模块实现具体的基于siteminder&#x2F;spnego&#x2F;oauth协议的认证流程。</p>
 <h2 id="siteminder-sso-preauth"><a href="#siteminder-sso-preauth" class="headerlink" title="siteminder sso + preauth"></a>siteminder sso + preauth</h2><p>Siteminder是企业级认证产品，它提供了一站式认证中间件，从应用开发者的角度来看，就是采用了外部认证系统，应用不需要重新进行认证而是可以直接从siteminder处理过的http request header中提取SM_USER中拿到userprincipal()。因此从spring securty框架的角度之需要直接读取认证后的信息，而不需要再对request进行认证验证。这通常是一种企业内网用户认证采用的sso机制，因为用户之需要进行简单认证后就能得到对多种内部webapp的访问toekn，而且不需要进行细粒度的鉴权的场景适合大部分内部应用，但是，因为外部网站可容易会被假的header所欺骗，安全性较差而不会采用这种方式进行验证。</p>
 <h2 id="spnego-auth"><a href="#spnego-auth" class="headerlink" title="spnego auth"></a>spnego auth</h2><p>SPNEGO是微软设计的一种企业级认证协议，底层支持多种token协议，因此是应用proid常用的一种方式，因为应用的id会常常跑在不同的window&#x2F;linux环境，而spnego能够支持多种密钥认证从而对跨系统认证能有很好的支持，这种认证方式需要用户自己执行认证检查，所以需要spring-security-keberos模块的相关auth provider进行验证。</p>
@@ -533,7 +533,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-20 17:48:47" itemprop="dateModified" datetime="2024-02-20T17:48:47+08:00">2024-02-20</time>
+      <time title="修改时间：2024-03-10 20:40:14" itemprop="dateModified" datetime="2024-03-10T20:40:14+08:00">2024-03-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -576,32 +576,9 @@
 <li><input disabled="" type="checkbox"> 高效能人士&#x2F;家庭的七个习惯</li>
 </ul>
 </li>
-<li><input disabled="" type="checkbox"> 个人充电：阅读书籍10本<ul>
-<li><input disabled="" type="checkbox"> 职场、人性相关书籍, 有助平衡心态和目标：<ul>
-<li><input disabled="" type="checkbox"> 学习领域预判思考方式，快速决策得出可执行尽量正确的选择</li>
-<li><input disabled="" type="checkbox"> 合理授权，对于不同的选择，可以借由别人去实践通过验证</li>
-<li><input disabled="" type="checkbox"> 学习衍生品定价规则，交易系统，风险合规服务</li>
+<li><input disabled="" type="checkbox"> 个人充电：<br>‘</li>
 </ul>
-</li>
-<li><input disabled="" type="checkbox"> 领域相关背景书籍：<ul>
-<li><input disabled="" type="checkbox"> 阅读CM bitemporal DB设计学习</li>
-<li><input disabled="" type="checkbox"> 阅读CM Risk Calc设计学习</li>
-<li><input disabled="" type="checkbox"> 阅读CM Risk Pivoting设计学习</li>
-<li><input disabled="" type="checkbox"> 阅读Kindle《债券投资策略》,了解债券市场基本知识</li>
-<li><input disabled="" type="checkbox"> 阅读Kindle《债券组合投资》</li>
-<li><input disabled="" type="checkbox"> 阅读Kindle《投资组合绩效测评实用方法》</li>
-<li><input disabled="" type="checkbox"> 阅读《国富论》，了解经典生产理论以及劳动者与雇佣者的基本关系</li>
-<li><input disabled="" type="checkbox"> 阅读《利率互换通关秘籍》，了解利率基本概念</li>
-</ul>
-</li>
-<li><input disabled="" type="checkbox"> 育儿和教育书籍：</li>
-<li><input disabled="" type="checkbox"> 技术相关书籍：<ul>
-<li><input disabled="" type="checkbox"> Kubernets权威指南: 学习K8S部署技术</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>阅读书籍10本<br>    - [ ] 职场、人性相关书籍, 有助平衡心态和目标：<br>        - [ ] 学习领域预判思考方式，快速决策得出可执行尽量正确的选择<br>        - [ ] 合理授权，对于不同的选择，可以借由别人去实践通过验证<br>        - [ ] 学习衍生品定价规则，交易系统，风险合规服务<br>    - [ ] 领域相关背景书籍：<br>      - [ ] 阅读CM bitemporal DB设计学习<br>      - [ ] 阅读CM Risk Calc设计学习<br>      - [ ] 阅读CM Risk Pivoting设计学习<br>      - [ ] 阅读Kindle《债券投资策略》,了解债券市场基本知识<br>      - [ ] 阅读Kindle《债券组合投资》<br>      - [ ] 阅读Kindle《投资组合绩效测评实用方法》<br>      - [ ] 阅读《国富论》，了解经典生产理论以及劳动者与雇佣者的基本关系<br>      - [ ] 阅读《利率互换通关秘籍》，了解利率基本概念<br>    - [ ] 育儿和教育书籍：<br>    - [ ] 技术相关书籍：<br>      - [ ] Kubernetes权威指南: 学习K8S部署技术</p>
 <h1 id="个人感悟"><a href="#个人感悟" class="headerlink" title="个人感悟"></a>个人感悟</h1><h2 id="《非暴力沟通》读后感"><a href="#《非暴力沟通》读后感" class="headerlink" title="《非暴力沟通》读后感"></a>《非暴力沟通》读后感</h2><h3 id="非暴力沟通四要素"><a href="#非暴力沟通四要素" class="headerlink" title="非暴力沟通四要素"></a>非暴力沟通四要素</h3><ul>
 <li>首先，留意发生的事情，清楚地表达观察结果，而不判断或评估。</li>
 <li>接着，表达感受，例如受伤、害怕、喜悦、开心、气愤等等。</li>
@@ -674,6 +651,11 @@
 <h3 id="用全身心倾听"><a href="#用全身心倾听" class="headerlink" title="用全身心倾听"></a>用全身心倾听</h3><p>在倾听他人的观察、感受、需要和请求之后，我们可以主动表达我们的理解。如果我们已经准确领会了他们的意思，我们的反馈将帮助他们意识到这一点。反之，如果我们的理解还不到位，他们也就有机会来纠正我们。此外，这样做还有助于人们体会自己的状况，从而深入了解自己。</p>
 <p>当对方得到充分的倾听，（a）我们将体会到气氛变得轻松；（b）他会停止谈话。</p>
 <p>当我们痛苦得无法倾听他人时，我们需要（1）体会自己的感受和需要（2）大声地提出请求（3）换一个环境。</p>
+<h3 id="倾听的力量"><a href="#倾听的力量" class="headerlink" title="倾听的力量"></a>倾听的力量</h3><p>倾听可以使我们了解他人语言背后的感受和需要，能够更好的与他们坦诚沟通。</p>
+<ul>
+<li>倾听可以辅助提醒对方了解自己的内心感受。</li>
+<li>倾听是建立信任感的有效手段。</li>
+</ul>
 <h3 id="爱自己"><a href="#爱自己" class="headerlink" title="爱自己"></a>爱自己</h3><p>非暴力沟通最重要的应用也许是培养对自己的爱。</p>
 <ul>
 <li><p>非暴力沟通的忧伤：当我们的行为无法满足自身的需要，我们体会着人生的悲哀和内心的渴望。</p>
@@ -788,7 +770,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-19 11:40:53" itemprop="dateModified" datetime="2024-02-19T11:40:53+08:00">2024-02-19</time>
+      <time title="修改时间：2024-03-09 19:14:46" itemprop="dateModified" datetime="2024-03-09T19:14:46+08:00">2024-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -913,7 +895,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-20 17:25:54" itemprop="dateModified" datetime="2024-02-20T17:25:54+08:00">2024-02-20</time>
+      <time title="修改时间：2024-03-09 19:18:04" itemprop="dateModified" datetime="2024-03-09T19:18:04+08:00">2024-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
