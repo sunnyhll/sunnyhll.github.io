@@ -574,7 +574,7 @@
 <li>创建ItemSend相关配置<br>目前微软已经有开源的示例代码于<a target="_blank" rel="noopener" href="https://github.com/OfficeDev/outlook-add-in-command-demo%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%BD%9C%E4%B8%BA%E5%8F%82%E8%80%83%E3%80%82">https://github.com/OfficeDev/outlook-add-in-command-demo，可以作为参考。</a><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Event</span> <span class="attr">Type</span>=<span class="string">&quot;ItemSend&quot;</span> <span class="attr">FunctionExecution</span>=<span class="string">&quot;synchronous&quot;</span> <span class="attr">FunctionName</span>=<span class="string">&quot;itemSendHandler&quot;</span> /&gt;</span> </span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>注意配置上下文需要在VersionOverrides 1.1框架下。</p>
-<h2 id="O365-环境准备"><a href="#O365-环境准备" class="headerlink" title="O365 环境准备"></a>O365 环境准备</h2><p>对于跨平台的O365 Addin，一个合法的O365账号是需要的，而且需要拥有上传插件的权限。在用用MSDN订阅的情况下，可以创建合适的E3等级Office Tenant。例如本文则使用<a href="mailto:&#104;&#117;&#97;&#110;&#103;&#115;&#x75;&#x6e;&#64;&#x73;&#x75;&#x6e;&#x6e;&#x79;&#x68;&#x6c;&#x6c;&#46;&#111;&#110;&#109;&#105;&#99;&#114;&#111;&#115;&#111;&#102;&#116;&#46;&#99;&#111;&#109;">&#104;&#117;&#97;&#110;&#103;&#115;&#x75;&#x6e;&#64;&#x73;&#x75;&#x6e;&#x6e;&#x79;&#x68;&#x6c;&#x6c;&#46;&#111;&#110;&#109;&#105;&#99;&#114;&#111;&#115;&#111;&#102;&#116;&#46;&#99;&#111;&#109;</a>作为测试账号，密码为系统密码。</p>
+<h2 id="O365-环境准备"><a href="#O365-环境准备" class="headerlink" title="O365 环境准备"></a>O365 环境准备</h2><p>对于跨平台的O365 Addin，一个合法的O365账号是需要的，而且需要拥有上传插件的权限。在用用MSDN订阅的情况下，可以创建合适的E3等级Office Tenant。例如本文则使用<a href="mailto:&#x68;&#x75;&#97;&#x6e;&#x67;&#115;&#117;&#x6e;&#64;&#115;&#x75;&#x6e;&#110;&#x79;&#104;&#x6c;&#108;&#46;&#111;&#x6e;&#x6d;&#105;&#99;&#x72;&#x6f;&#x73;&#x6f;&#102;&#x74;&#46;&#x63;&#111;&#x6d;">&#x68;&#x75;&#97;&#x6e;&#x67;&#115;&#117;&#x6e;&#64;&#115;&#x75;&#x6e;&#110;&#x79;&#104;&#x6c;&#108;&#46;&#111;&#x6e;&#x6d;&#105;&#99;&#x72;&#x6f;&#x73;&#x6f;&#102;&#x74;&#46;&#x63;&#111;&#x6d;</a>作为测试账号，密码为系统密码。</p>
 <p>Web Addin查看可以点击Outlook桌面客户端的Manage Addin按钮，也可以在<a target="_blank" rel="noopener" href="https://outlook.office365.com/owa/?path=/options/manageapps">https://outlook.office365.com/owa/?path=/options/manageapps</a> 链接中看到。可以看到即使安装了很多插件，这些插件却不是实时安装在本地Outlook桌面客户端上的， 而是在需要访问的时候才进行加载执行的。</p>
 <h3 id="开启ItemSend事件监听"><a href="#开启ItemSend事件监听" class="headerlink" title="开启ItemSend事件监听"></a>开启ItemSend事件监听</h3><p>相关<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/powershell/exchange/exchange-online/connect-to-exchange-online-powershell/connect-to-exchange-online-powershell?view=exchange-ps">链接</a>.</p>
 <h3 id="“My-Custom-Roles”权限"><a href="#“My-Custom-Roles”权限" class="headerlink" title="“My Custom Roles”权限"></a>“My Custom Roles”权限</h3><p>对于个人O365账号，这里不需要进行权限获取，Microsoft Tenant默认每个客户的SideLoad权限开启。</p>
@@ -1976,7 +1976,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-08 12:35:53" itemprop="dateModified" datetime="2024-02-08T12:35:53+08:00">2024-02-08</time>
+      <time title="修改时间：2025-02-10 21:14:25" itemprop="dateModified" datetime="2025-02-10T21:14:25+08:00">2025-02-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2039,7 +2039,12 @@
 
 <h2 id="CherryPick别的分支commit-x2F-branch"><a href="#CherryPick别的分支commit-x2F-branch" class="headerlink" title="CherryPick别的分支commit&#x2F;branch"></a>CherryPick别的分支commit&#x2F;branch</h2><p>在需要apply的分支上保证没有unstaged change，运行如下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick &lt;commitHash&gt;/&lt;feature branch name&gt;</span><br></pre></td></tr></table></figure>
-<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+<h2 id="github-migration-from-port-22-to-443"><a href="#github-migration-from-port-22-to-443" class="headerlink" title="github migration from port 22 to 443"></a>github migration from port 22 to 443</h2><p>github服务器已经将22端口关闭，git工具需要访问ssh.github.com:443而不是默认的github.com:22 SSH端口。</p>
+<p>需要更新~&#x2F;.ssh&#x2F;config文件如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">HostName ssh.github.com</span><br><span class="line">User git</span><br><span class="line">Port 443</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>测试方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
 
