@@ -238,7 +238,6 @@
     <div class="post-body" itemprop="articleBody">
           <h1 id="宝宝成长记录"><a href="#宝宝成长记录" class="headerlink" title="宝宝成长记录"></a>宝宝成长记录</h1><h2 id="身高体重数据"><a href="#身高体重数据" class="headerlink" title="身高体重数据"></a>身高体重数据</h2>
     <script defer src="https://code.highcharts.com/12.1.2/highcharts.js"></script>
-    <script defer src="https://code.highcharts.com/12.1.2/highcharts-more.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/networkgraph.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/sankey.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/treemap.js"></script>
@@ -251,7 +250,7 @@
         var event = new Event('hexo-blog-decrypt');
         window.dispatchEvent(event);
     })()">HighCharts</button>
-    <div id="highchartsuuid12248388589649615" style="width:800" height:"2000 overflow: auto"></div>
+    <div id="highchartsuuid12311407183381129" style="width:800" height:"2000 overflow: auto"></div>
     <script>
         var op = Object.assign({
 },{
@@ -381,7 +380,7 @@
         ]
     }]
 })
-        var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12248388589649615,op) : console.log("Highcharts undefined");
+        var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12311407183381129,op) : console.log("Highcharts undefined");
         window.addEventListener('hexo-blog-decrypt', function() {
             console.log('decrypted')
             //if (sessionStorage.getItem("encryptState") != "1") {
@@ -524,11 +523,11 @@
                           } else {
                               op.series = res;
                           }
-                          var chart = Highcharts.chart(highchartsuuid12248388589649615,op);
+                          var chart = Highcharts.chart(highchartsuuid12311407183381129,op);
                       }
                   })
               }else{
-            var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12248388589649615,op) : console.log("Highcharts undefined");
+            var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12311407183381129,op) : console.log("Highcharts undefined");
             }
             //  sessionStorage.setItem("encryptState", "1");
             //}
