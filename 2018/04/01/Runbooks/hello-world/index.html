@@ -156,7 +156,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,7 +167,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -385,6 +385,7 @@
 <h3 id="hexo-highcharts-支持绘制highchart原生图"><a href="#hexo-highcharts-支持绘制highchart原生图" class="headerlink" title="hexo-highcharts, 支持绘制highchart原生图"></a>hexo-highcharts, 支持绘制highchart原生图</h3><p>这是一个轻量级的plugin，主要支持在markdown内嵌一段highcharts的配置文件，绘制出相应的图。</p>
 
     <script defer src="https://code.highcharts.com/12.1.2/highcharts.js"></script>
+    <script defer src="https://code.highcharts.com/12.1.2/highcharts-more.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/sankey.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/treemap.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/treegraph.js"></script>
@@ -396,7 +397,7 @@
         var event = new Event('hexo-blog-decrypt');
         window.dispatchEvent(event);
     })()">HighCharts</button>
-    <div id="highchartsuuid01720534561136633" style="width:800" height:"400 overflow: auto"></div>
+    <div id="highchartsuuid122401461162202" style="width:800" height:"400 overflow: auto"></div>
     <script>
         var op = Object.assign({
 },{
@@ -567,7 +568,7 @@
 
 }
 )
-        var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid01720534561136633,op) : console.log("Highcharts undefined");
+        var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid122401461162202,op) : console.log("Highcharts undefined");
         window.addEventListener('hexo-blog-decrypt', function() {
             console.log('decrypted')
             //if (sessionStorage.getItem("encryptState") != "1") {
@@ -751,11 +752,11 @@
                           } else {
                               op.series = res;
                           }
-                          var chart = Highcharts.chart(highchartsuuid01720534561136633,op);
+                          var chart = Highcharts.chart(highchartsuuid122401461162202,op);
                       }
                   })
               }else{
-            var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid01720534561136633,op) : console.log("Highcharts undefined");
+            var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid122401461162202,op) : console.log("Highcharts undefined");
             }
             //  sessionStorage.setItem("encryptState", "1");
             //}
