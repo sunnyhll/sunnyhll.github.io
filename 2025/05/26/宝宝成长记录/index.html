@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sunnyhll.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.16.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="宝宝成长记录身高体重数据                                             HighCharts                   var op &#x3D; Object.assign({ },{     chart: {         type: &#39;line&#39;     },     title: {         text: &#39;嘉嘉豆豆的生长曲线&#39;     }">
+    <meta name="description" content="宝宝成长记录身高体重数据                                                  HighCharts                   var op &#x3D; Object.assign({ },{     chart: {         type: &#39;line&#39;     },     title: {         text: &#39;嘉嘉豆豆的生长曲线&#39;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="宝宝成长记录">
 <meta property="og:url" content="https://sunnyhll.github.io/2025/05/26/%E5%AE%9D%E5%AE%9D%E6%88%90%E9%95%BF%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="微观天下">
-<meta property="og:description" content="宝宝成长记录身高体重数据                                             HighCharts                   var op &#x3D; Object.assign({ },{     chart: {         type: &#39;line&#39;     },     title: {         text: &#39;嘉嘉豆豆的生长曲线&#39;     }">
+<meta property="og:description" content="宝宝成长记录身高体重数据                                                  HighCharts                   var op &#x3D; Object.assign({ },{     chart: {         type: &#39;line&#39;     },     title: {         text: &#39;嘉嘉豆豆的生长曲线&#39;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-26T12:53:51.000Z">
 <meta property="article:modified_time" content="2025-05-26T14:25:14.030Z">
@@ -255,6 +255,7 @@
     <div class="post-body" itemprop="articleBody"><h1 id="宝宝成长记录"><a href="#宝宝成长记录" class="headerlink" title="宝宝成长记录"></a>宝宝成长记录</h1><h2 id="身高体重数据"><a href="#身高体重数据" class="headerlink" title="身高体重数据"></a>身高体重数据</h2>
     <script defer src="https://code.highcharts.com/12.1.2/highcharts.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/highcharts-more.js"></script>
+    <script defer src="https://code.highcharts.com/12.1.2/modules/networkgraph.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/sankey.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/treemap.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/treegraph.js"></script>
@@ -266,7 +267,7 @@
         var event = new Event('hexo-blog-decrypt');
         window.dispatchEvent(event);
     })()">HighCharts</button>
-    <div id="highchartsuuid12240145528646073" style="width:800" height:"2000 overflow: auto"></div>
+    <div id="highchartsuuid12248388589649615" style="width:800" height:"2000 overflow: auto"></div>
     <script>
         var op = Object.assign({
 },{
@@ -396,7 +397,7 @@
         ]
     }]
 })
-        var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12240145528646073,op) : console.log("Highcharts undefined");
+        var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12248388589649615,op) : console.log("Highcharts undefined");
         window.addEventListener('hexo-blog-decrypt', function() {
             console.log('decrypted')
             //if (sessionStorage.getItem("encryptState") != "1") {
@@ -539,11 +540,11 @@
                           } else {
                               op.series = res;
                           }
-                          var chart = Highcharts.chart(highchartsuuid12240145528646073,op);
+                          var chart = Highcharts.chart(highchartsuuid12248388589649615,op);
                       }
                   })
               }else{
-            var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12240145528646073,op) : console.log("Highcharts undefined");
+            var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12248388589649615,op) : console.log("Highcharts undefined");
             }
             //  sessionStorage.setItem("encryptState", "1");
             //}

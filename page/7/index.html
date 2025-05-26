@@ -466,6 +466,7 @@
 
     <script defer src="https://code.highcharts.com/12.1.2/highcharts.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/highcharts-more.js"></script>
+    <script defer src="https://code.highcharts.com/12.1.2/modules/networkgraph.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/sankey.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/treemap.js"></script>
     <script defer src="https://code.highcharts.com/12.1.2/modules/treegraph.js"></script>
@@ -477,7 +478,7 @@
         var event = new Event('hexo-blog-decrypt');
         window.dispatchEvent(event);
     })()">HighCharts</button>
-    <div id="highchartsuuid122401461162202" style="width:800" height:"400 overflow: auto"></div>
+    <div id="highchartsuuid12248389358727812" style="width:800" height:"400 overflow: auto"></div>
     <script>
         var op = Object.assign({
 },{
@@ -648,7 +649,7 @@
 
 }
 )
-        var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid122401461162202,op) : console.log("Highcharts undefined");
+        var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12248389358727812,op) : console.log("Highcharts undefined");
         window.addEventListener('hexo-blog-decrypt', function() {
             console.log('decrypted')
             //if (sessionStorage.getItem("encryptState") != "1") {
@@ -832,11 +833,11 @@
                           } else {
                               op.series = res;
                           }
-                          var chart = Highcharts.chart(highchartsuuid122401461162202,op);
+                          var chart = Highcharts.chart(highchartsuuid12248389358727812,op);
                       }
                   })
               }else{
-            var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid122401461162202,op) : console.log("Highcharts undefined");
+            var chart = !!window.Highcharts ? Highcharts.chart(highchartsuuid12248389358727812,op) : console.log("Highcharts undefined");
             }
             //  sessionStorage.setItem("encryptState", "1");
             //}
