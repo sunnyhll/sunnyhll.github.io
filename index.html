@@ -147,7 +147,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -158,7 +158,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -175,6 +175,125 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2025/06/23/%E6%9E%B6%E6%9E%84/Cloud/Microservices-Deployment-via-Docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="果核&肉肉">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微观天下">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 微观天下">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/23/%E6%9E%B6%E6%9E%84/Cloud/Microservices-Deployment-via-Docker/" class="post-title-link" itemprop="url">Microservices Deployment via Docker/K8S</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-06-23 21:57:20 / 修改时间：21:59:16" itemprop="dateCreated datePublished" datetime="2025-06-23T21:57:20+08:00">2025-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">架构</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9E%B6%E6%9E%84/Cloud/" itemprop="url" rel="index"><span itemprop="name">Cloud</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>微服务是可以快速构建、修改和部署到独立生产环境中的小型代码单元。可以快速进行迭代开发和交付，从而部署应该也具有如下特征：</p>
+<ul>
+<li>自动的——部署应该是能全部自动化的。</li>
+<li>可重复的——部署流程是可以重复的，不因开发人员或环境变化而影响</li>
+<li>完整的——部署成果应该是一个完整的虚拟机或者容器镜像（Docker），能够自包含运行</li>
+<li>不可变的——服务镜像一旦构建运行时配置不应该被修改，修改应该从代码提交开始</li>
+</ul>
+<h1 id="云原生——Docker容器技术"><a href="#云原生——Docker容器技术" class="headerlink" title="云原生——Docker容器技术"></a>云原生——Docker容器技术</h1><p>容器是镜像的运行时实例。容器虚拟化操作系统资源，容器引擎划分操作系统资源（比如进程树，文件系统，网络栈等），将其打包到成为容器的虚拟操作系统中，运行一个应用。<br>容器技术不同于Hypervisor技术，后者将物理资源划分为虚拟机的虚拟版本，前者将操作系统本身划分为容器的虚拟版本。</p>
+<h2 id="容器镜像构建"><a href="#容器镜像构建" class="headerlink" title="容器镜像构建"></a>容器镜像构建</h2><p>Dockerfile是镜像构建的描述文件，以易于阅读的格式准确描述了应用及其依赖。Dockerfile由一系列指令组成，每条指令构建镜像的一层。镜像构建的基础目录就是Dockerfile所在的目录。</p>
+<p>Dockerfile的构建指令包括：</p>
+<ul>
+<li>FROM：指定基础镜像</li>
+<li>RUN：在容器中执行命令</li>
+<li>COPY：复制文件到容器中</li>
+</ul>
+<p>元数据指令包括：</p>
+<ul>
+<li>MAINTAINER：镜像作者</li>
+<li>LABEL：镜像标签</li>
+<li>EXPOSE：容器对外暴露的端口</li>
+<li>ENV：环境变量</li>
+<li>ENTRYPOINT：容器启动时执行的命令</li>
+<li>CMD：容器启动时执行的命令</li>
+<li>VOLUME：容器数据卷</li>
+</ul>
+<p>Docker镜像的构建是分层叠加文件系统的过程，每条指令构建一层，镜像构建完成后，可以运行容器。文件是增量叠加的，删除上层镜像中的文件目录并不能真正的删除文件本身，而是在顶层layout中将文件隐藏，所以镜像文件并不能真正的变小。</p>
+<ul>
+<li>docker inspect命令可以查看镜像的构建过程，包括每一层构建的layer文件和指令。</li>
+<li>docker build命令可以逐行解析运行dockerfile构建镜像。</li>
+<li>docker history命令可以查看构建镜像的所有指令。</li>
+</ul>
+<h3 id="多段构建"><a href="#多段构建" class="headerlink" title="多段构建"></a>多段构建</h3><p>多段构建有多个FROM命令，每一个FROM命令都会构建一个WORKINGDIR，以及一个独立的镜像，这为灵活运用镜像构建WORKSPACE提供了能力，甚至最终的运行时镜像可以引用完全不同的净化的base image，从而构建出与开发环境完全不同的运行时镜像。</p>
+<p>同时也可以用 –target prod-client -f Dockerfile-final来灵活指定构建生产环境的客户端镜像。</p>
+<h2 id="容器网络栈虚拟化"><a href="#容器网络栈虚拟化" class="headerlink" title="容器网络栈虚拟化"></a>容器网络栈虚拟化</h2><p>Docker网络是基于容器网络模型的开源可插拔架构。libnetwork是CNM的实现，提供了docker的核心网络能力。Linux OS层面提供网络虚拟化的基础是VLAN，这是对eth0的拆分，每个VLAN都是一个独立的虚拟网络绑定到eth0.100等等，每个VLAN的流量都是隔离的，这是因为网桥间的隔离。Docker网络虚拟化基于VLAN，但是VLAN的隔离粒度是二层，而Docker网络虚拟化可以支持三层隔离，即每个容器可以拥有独立的IP地址，从而实现容器之间的子网隔离，也就是说在VLAN内部，即使可以将容器放在不同的子网段，保证网络间的相互通信。</p>
+<h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><p>对于操作系统能L2的链路设计，是基于802.11Q扩展协议，让网卡从硬件上支持虚拟化，从而实现VLAN的隔离。VLAN不直连，并不代表两边的容器不同相互通信，如果VLAN是连向公网的，就可以通过公网通信。</p>
+<h3 id="VNET"><a href="#VNET" class="headerlink" title="VNET"></a>VNET</h3><p>虚拟子网一般是一个私网，类似于一个k8s cluster的所有容器都会在同一个VNET中，对于集群向外的通信，不要一个网关（也就是路由器）同时拥有私网IP（一般是网关IP）和公网IP（普通IP）从而可以建立路由规则，将私网向外访问的流量转发到网关，转发出去。类似于cluster的Egress IP。Ingress则是负载均衡的入口，对于外网的客户端，需要访问clkuster内部的应用，必须通过Ingress负载均衡反向代理流量进入容器，从而达到通信的目的，客户端只能发现到Ingress的IP。</p>
+<p><a href="/2025/06/23/%E6%9E%B6%E6%9E%84/Cloud/Microservices-Deployment-via-Docker/k8s.png">k8s</a></p>
+<h1 id="云原生——K8S容器编排技术"><a href="#云原生——K8S容器编排技术" class="headerlink" title="云原生——K8S容器编排技术"></a>云原生——K8S容器编排技术</h1><h1 id="无服务器架构——基于容器的自动化构建和部署管道"><a href="#无服务器架构——基于容器的自动化构建和部署管道" class="headerlink" title="无服务器架构——基于容器的自动化构建和部署管道"></a>无服务器架构——基于容器的自动化构建和部署管道</h1><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1504,135 +1623,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://sunnyhll.github.io/2024/01/31/%E6%9E%B6%E6%9E%84/Cloud/Azure-K8S-runbook/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="果核&肉肉">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微观天下">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 微观天下">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/31/%E6%9E%B6%E6%9E%84/Cloud/Azure-K8S-runbook/" class="post-title-link" itemprop="url">Azure K8S runbook</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-01-31 19:55:39" itemprop="dateCreated datePublished" datetime="2024-01-31T19:55:39+08:00">2024-01-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-01 18:09:24" itemprop="dateModified" datetime="2025-06-01T18:09:24+08:00">2025-06-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">架构</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9E%B6%E6%9E%84/Cloud/" itemprop="url" rel="index"><span itemprop="name">Cloud</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Az-Setup-for-a-oc-cluster-in-single-node"><a href="#Az-Setup-for-a-oc-cluster-in-single-node" class="headerlink" title="Az Setup for a oc cluster in single node"></a>Az Setup for a oc cluster in single node</h1><h2 id="Az-Login"><a href="#Az-Login" class="headerlink" title="Az Login"></a>Az Login</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\loginid&gt; az login</span><br><span class="line">A web browser has been opened at https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize. Please <span class="built_in">continue</span> the login <span class="keyword">in</span> the web browser. If no web browser is available or <span class="keyword">if</span> the web browser fails to open, use device code flow with `az login --use-device-code`.</span><br><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">&quot;cloudName&quot;</span>: <span class="string">&quot;AzureCloud&quot;</span>,</span><br><span class="line">    <span class="string">&quot;homeTenantId&quot;</span>: <span class="string">&quot;85cb24e4-0bcf-4767-b44b-39eae544706e&quot;</span>,</span><br><span class="line">    <span class="string">&quot;id&quot;</span>: <span class="string">&quot;bd435e85-b401-48c5-90ad-96dbefac1503&quot;</span>,</span><br><span class="line">    <span class="string">&quot;isDefault&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;managedByTenants&quot;</span>: [],</span><br><span class="line">    <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Visual Studio Professional&quot;</span>,</span><br><span class="line">    <span class="string">&quot;state&quot;</span>: <span class="string">&quot;Enabled&quot;</span>,</span><br><span class="line">    <span class="string">&quot;tenantId&quot;</span>: <span class="string">&quot;85cb24e4-0bcf-4767-b44b-39eae544706e&quot;</span>,</span><br><span class="line">    <span class="string">&quot;user&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;name&quot;</span>: <span class="string">&quot;sunny_hll@hotmail.com&quot;</span>,</span><br><span class="line">      <span class="string">&quot;type&quot;</span>: <span class="string">&quot;user&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Az-Terraform-example"><a href="#Az-Terraform-example" class="headerlink" title="Az Terraform example"></a>Az Terraform example</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\loginid&gt; az ad sp create-for-rbac --role=<span class="string">&quot;Contributor&quot;</span> --scopes=<span class="string">&quot;/subscriptions/bd435e85-b401-48c5-90ad-96dbefac1503&quot;</span></span><br><span class="line">Creating <span class="string">&#x27;Contributor&#x27;</span> role assignment under scope <span class="string">&#x27;/subscriptions/bd435e85-b401-48c5-90ad-96dbefac1503&#x27;</span></span><br><span class="line">The output includes credentials that you must protect. Be sure that you <span class="keyword">do</span> not include these credentials <span class="keyword">in</span> your code or check the credentials into your <span class="built_in">source</span> control. For more information, see https://aka.ms/azadsp-cli</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;appId&quot;</span>: <span class="string">&quot;414b5739-2c30-4cea-adff-d5c8ff1c6470&quot;</span>,</span><br><span class="line">  <span class="string">&quot;displayName&quot;</span>: <span class="string">&quot;azure-cli-2022-12-09-06-36-24&quot;</span>,</span><br><span class="line">  <span class="string">&quot;password&quot;</span>: <span class="string">&quot;if48Q~Wd6aUHekpKNLrgJWeC3Pr-sstzZHRXfa90&quot;</span>,</span><br><span class="line">  <span class="string">&quot;tenant&quot;</span>: <span class="string">&quot;85cb24e4-0bcf-4767-b44b-39eae544706e&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PS C:\Users\loginid&gt; <span class="variable">$Env</span>:ARM_CLIENT_ID = <span class="string">&quot;414b5739-2c30-4cea-adff-d5c8ff1c6470&quot;</span></span><br><span class="line">PS C:\Users\loginid&gt; <span class="variable">$Env</span>:ARM_CLIENT_SECRET = <span class="string">&quot;if48Q~Wd6aUHekpKNLrgJWeC3Pr-sstzZHRXfa90&quot;</span></span><br><span class="line">PS C:\Users\loginid&gt; <span class="variable">$Env</span>:ARM_SUBSCRIPTION_ID = <span class="string">&quot;bd435e85-b401-48c5-90ad-96dbefac1503&quot;</span></span><br><span class="line">PS C:\Users\loginid&gt; <span class="variable">$Env</span>:ARM_TENANT_ID = <span class="string">&quot;85cb24e4-0bcf-4767-b44b-39eae544706e&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Az-手动创建VM"><a href="#Az-手动创建VM" class="headerlink" title="Az 手动创建VM"></a>Az 手动创建VM</h2><p>查询VM配置的地区Spot资源不太可用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az vm list-skus --location centralus --resource-type virtualMachines --zone --all --output table</span><br></pre></td></tr></table></figure>
-
-<p>VM Login</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/.ssh/oc_key.pem loginid@20.100.44.77</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Az-部署oc"><a href="#Az-部署oc" class="headerlink" title="Az 部署oc"></a>Az 部署oc</h2><p>CRC setup guide: <a target="_blank" rel="noopener" href="https://crc.dev/crc/getting_started/getting_started/using/">https://crc.dev/crc/getting_started/getting_started/using/</a></p>
-<p>Maybe install for ubuntu OS:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-keyring</span><br><span class="line">sudo apt install dbus-x11</span><br><span class="line">sudo snap install kubectl --classic</span><br></pre></td></tr></table></figure>
-
-<h3 id="下载CRC"><a href="#下载CRC" class="headerlink" title="下载CRC"></a>下载CRC</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://developers.redhat.com/content-gateway/rest/mirror/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz -o /var/tmp/crc-linux-amd64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>VPN env network setting:</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/crc-org/crc/wiki/VPN-support--with-an--userland-network-stack">https://github.com/crc-org/crc/wiki/VPN-support--with-an--userland-network-stack</a></p>
-<p>!!reset Disk size t0 128G as crcbundle took more than 30G space.</p>
-<h3 id="启动CRC"><a href="#启动CRC" class="headerlink" title="启动CRC"></a>启动CRC</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#Started the OpenShift cluster.</span></span><br><span class="line">sudo service haproxy stop <span class="comment"># previously broken haproxy bind 443 port....Orz</span></span><br><span class="line">crc start</span><br><span class="line"></span><br><span class="line">The server is accessible via web console at:        </span><br><span class="line">  https://console-openshift-console.apps-crc.testing</span><br><span class="line"></span><br><span class="line">Log <span class="keyword">in</span> as administrator:</span><br><span class="line">  Username: kubeadmin</span><br><span class="line">  Password: i4GM8-VqA42-8Eqix-pAg7h</span><br><span class="line"></span><br><span class="line">Log <span class="keyword">in</span> as user:</span><br><span class="line">  Username: developer</span><br><span class="line">  Password: developer</span><br><span class="line"></span><br><span class="line">Use the <span class="string">&#x27;oc&#x27;</span> <span class="built_in">command</span> line interface:</span><br><span class="line">  $ <span class="built_in">eval</span> $(crc oc-env)</span><br><span class="line">  $ oc login -u developer https://api.crc.testing:6443</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建oc-hello项目"><a href="#创建oc-hello项目" class="headerlink" title="创建oc hello项目"></a>创建oc hello项目</h3><p>环境变量</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># crc 命令</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HOME/bin&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="comment"># oc 命令</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=&quot;/home/loginid/.crc/bin/oc:$PATH&quot;&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;alias k=kubectl&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;oc login -u developer https://api.crc.testing:6443&#x27;</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create project </span></span><br><span class="line">oc new-project my-project</span><br><span class="line"></span><br><span class="line"><span class="comment"># create http server</span></span><br><span class="line">kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.43 -- /agnhost  netexec --tls-cert-file /home/loginid/test.crt --tls-private-key-file /home/loginid/test.key</span><br><span class="line"></span><br><span class="line"><span class="comment"># expose as service</span></span><br><span class="line">oc expose deployment hello-node --port=8080</span><br><span class="line"></span><br><span class="line"><span class="comment"># https://www.baeldung.com/openssl-self-signed-cert</span></span><br><span class="line"><span class="comment"># prepare self-signed key remove -des3</span></span><br><span class="line">openssl genrsa -out test.key 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># create csr</span></span><br><span class="line">openssl req -key test.key -new -out test.csr</span><br><span class="line"></span><br><span class="line"><span class="comment"># sign</span></span><br><span class="line">openssl x509 -signkey test.key -<span class="keyword">in</span> test.csr -req -days 365 -out test.crt</span><br><span class="line"></span><br><span class="line"><span class="comment"># upload</span></span><br><span class="line">scp -i ~/.ssh/oc_key.pem /mnt/d/Git/mypages/test.key loginid@hostip:/home/loginid/test.key</span><br><span class="line"></span><br><span class="line">scp -i ~/.ssh/oc_key.pem /mnt/d/Git/mypages/test.crt loginid@hostip:/home/loginid/test.crt</span><br><span class="line"></span><br><span class="line"><span class="comment"># create secret https://www.baeldung.com/openssl-self-signed-cert</span></span><br><span class="line">oc create secret generic my-cert --from-file=/home/loginid/test.crt --from-file=/home/loginid/test.key</span><br><span class="line"></span><br><span class="line"><span class="comment"># mount secret for deployment pods</span></span><br><span class="line">oc apply -f deploy.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># create route on haproxy from hostName=oc-dev.centralus.cloudapp.azure.com</span></span><br><span class="line">oc create route passthrough test-pass --service=hello-node --port=8080 --hostname=oc-dev.centralus.cloudapp.azure.com.crc.testing</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="本地服务测试"><a href="#本地服务测试" class="headerlink" title="本地服务测试"></a>本地服务测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># pod DNS</span></span><br><span class="line"></span><br><span class="line">curl https://hello-node-7556f558d-psbrp:8080 -k</span><br><span class="line"></span><br><span class="line"><span class="comment"># service DNS</span></span><br><span class="line"></span><br><span class="line">curl https://hello-node-svc.optimus.svc.cluster.local -k</span><br><span class="line"></span><br><span class="line"><span class="comment"># cluster DNS</span></span><br><span class="line"></span><br><span class="line">curl https://oc-dev.centralus.cloudapp.azure.com.crc.testing -k -v</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="远程连接admin-console"><a href="#远程连接admin-console" class="headerlink" title="远程连接admin console"></a>远程连接admin console</h3><p><a target="_blank" rel="noopener" href="https://www.redhat.com/en/blog/accessing-codeready-containers-on-a-remote-server">https://www.redhat.com/en/blog/accessing-codeready-containers-on-a-remote-server</a></p>
-<p>在服务器端，需要利用haproxy做外部网卡IP的端口转发到内部地址127.0.0.1，建立外网网卡与内网之间的网桥.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install haproxy</span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">cp</span> /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加上一下端口转发规则</span></span><br><span class="line"></span><br><span class="line">frontend apps</span><br><span class="line">    <span class="built_in">bind</span> SERVER_IP:80</span><br><span class="line">    <span class="built_in">bind</span> SERVER_IP:443</span><br><span class="line">    option tcplog</span><br><span class="line">    mode tcp</span><br><span class="line">    default_backend apps</span><br><span class="line"></span><br><span class="line">backend apps</span><br><span class="line">    mode tcp</span><br><span class="line">    balance roundrobin</span><br><span class="line">    option ssl-hello-chk</span><br><span class="line">    server webserver1 CRC_IP check</span><br><span class="line"></span><br><span class="line">frontend api</span><br><span class="line">    <span class="built_in">bind</span> SERVER_IP:6443</span><br><span class="line">    option tcplog</span><br><span class="line">    mode tcp</span><br><span class="line">    default_backend api</span><br><span class="line"></span><br><span class="line">backend api</span><br><span class="line">    mode tcp</span><br><span class="line">    balance roundrobin</span><br><span class="line">    option ssl-hello-chk</span><br><span class="line">    server webserver1 CRC_IP:6443 check</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更改IP地址</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> SERVER_IP=$(hostname --ip-address)</span><br><span class="line"><span class="built_in">export</span> CRC_IP=$(crc ip)</span><br><span class="line">sudo sed -i <span class="string">&quot;s/SERVER_IP/<span class="variable">$SERVER_IP</span>/g&quot;</span> haproxy.cfg</span><br><span class="line">sudo sed -i <span class="string">&quot;s/CRC_IP/<span class="variable">$CRC_IP</span>/g&quot;</span> haproxy.cfg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动服务haproxy</span></span><br><span class="line">sudo ststemctl start haproxy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 诊断</span></span><br><span class="line"></span><br><span class="line">sudo apt install net-tools</span><br></pre></td></tr></table></figure>
-
-<h3 id="Java-API创建Route资源"><a href="#Java-API创建Route资源" class="headerlink" title="Java API创建Route资源"></a>Java API创建Route资源</h3><h4 id="Useful-Code-example"><a href="#Useful-Code-example" class="headerlink" title="Useful Code example"></a>Useful Code example</h4><p><a target="_blank" rel="noopener" href="https://github.com/kubernetes-client/java/wiki/3.-Code-Examples">https://github.com/kubernetes-client/java/wiki/3.-Code-Examples</a></p>
-<h4 id="Leader-Election-Example"><a href="#Leader-Election-Example" class="headerlink" title="Leader Election Example"></a>Leader Election Example</h4><p><a target="_blank" rel="noopener" href="https://github.com/kubernetes-client/java/blob/master/examples/examples-release-18/src/main/java/io/kubernetes/client/examples/LeaderElectionExample.java">https://github.com/kubernetes-client/java/blob/master/examples/examples-release-18/src/main/java/io/kubernetes/client/examples/LeaderElectionExample.java</a></p>
-<h2 id="安装-Helm-到-oc-dev的crc-cluster上"><a href="#安装-Helm-到-oc-dev的crc-cluster上" class="headerlink" title="安装 Helm 到 oc-dev的crc cluster上"></a>安装 Helm 到 oc-dev的crc cluster上</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash</span><br><span class="line"></span><br><span class="line">huangsun@oc-dev:~$ helm version</span><br><span class="line">version.BuildInfo&#123;Version:<span class="string">&quot;v3.18.1&quot;</span>, GitCommit:<span class="string">&quot;f6f8700a539c18101509434f3b59e6a21402a1b2&quot;</span>, GitTreeState:<span class="string">&quot;clean&quot;</span>, GoVersion:<span class="string">&quot;go1.24.3&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="helm-chart-开源仓库"><a href="#helm-chart-开源仓库" class="headerlink" title="helm chart 开源仓库"></a>helm chart 开源仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">helm repo add stable https://charts.helm.sh/stable</span><br><span class="line">helm search repo stable</span><br></pre></td></tr></table></figure>
-
-<h3 id="helm-创建一个release"><a href="#helm-创建一个release" class="headerlink" title="helm 创建一个release"></a>helm 创建一个release</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 创建一个空release</span></span><br><span class="line">helm create gsm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成目录</span></span><br><span class="line"></span><br><span class="line">huangsun@oc-dev:~/helm$ <span class="built_in">cd</span> gsm/</span><br><span class="line">huangsun@oc-dev:~/helm/gsm$ <span class="built_in">ls</span></span><br><span class="line">Chart.yaml  charts  templates  values.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># intall release</span></span><br><span class="line"></span><br><span class="line">huangsun@oc-dev:~/helm$ helm install myapp gsm</span><br><span class="line">NAME: myapp</span><br><span class="line">LAST DEPLOYED: Sun Jun  1 10:07:23 2025</span><br><span class="line">NAMESPACE: optimus</span><br><span class="line">STATUS: deployed</span><br><span class="line">REVISION: 1</span><br><span class="line">NOTES:</span><br><span class="line">1. Get the application URL by running these commands:</span><br><span class="line">  <span class="built_in">export</span> POD_NAME=$(kubectl get pods --namespace optimus -l <span class="string">&quot;app.kubernetes.io/name=gsm,app.kubernetes.io/instance=myapp&quot;</span> -o jsonpath=<span class="string">&quot;&#123;.items[0].metadata.name&#125;&quot;</span>)</span><br><span class="line">  <span class="built_in">export</span> CONTAINER_PORT=$(kubectl get pod --namespace optimus <span class="variable">$POD_NAME</span> -o jsonpath=<span class="string">&quot;&#123;.spec.containers[0].ports[0].containerPort&#125;&quot;</span>)</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Visit http://127.0.0.1:8080 to use your application&quot;</span></span><br><span class="line">  kubectl --namespace optimus port-forward <span class="variable">$POD_NAME</span> 8080:<span class="variable">$CONTAINER_PORT</span></span><br><span class="line"><span class="comment">#查看pod状态</span></span><br><span class="line">huangsun@oc-dev:~/helm$ k get po</span><br><span class="line">NAME                         READY   STATUS    RESTARTS      AGE</span><br><span class="line">hello-node-7556f558d-psbrp   1/1     Running   4             537d</span><br><span class="line">myapp-gsm-7f8b95f4-g856s     0/1     Error     3 (29s ago)   50s</span><br><span class="line"><span class="comment">#查看release状态</span></span><br><span class="line">huangsun@oc-dev:~/helm$ helm list</span><br><span class="line">NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION</span><br><span class="line">myapp   optimus         1               2025-06-01 10:07:23.835586443 +0000 UTC deployed        gsm-0.1.0       1.16.0</span><br></pre></td></tr></table></figure><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
 
