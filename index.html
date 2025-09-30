@@ -217,6 +217,13 @@
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-21 10:39:55" itemprop="dateModified" datetime="2025-09-21T10:39:55+08:00">2025-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
@@ -301,9 +308,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-06-23 21:57:20 / 修改时间：22:31:04" itemprop="dateCreated datePublished" datetime="2025-06-23T21:57:20+08:00">2025-06-23</time>
+      <time title="创建时间：2025-06-23 21:57:20" itemprop="dateCreated datePublished" datetime="2025-06-23T21:57:20+08:00">2025-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-30 21:21:03" itemprop="dateModified" datetime="2025-09-30T21:21:03+08:00">2025-09-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -374,7 +387,10 @@
     B --> C[Docker守护进程CLI/API/Image/Network/Storage]</pre>
 
 <h1 id="云原生——K8S容器编排技术"><a href="#云原生——K8S容器编排技术" class="headerlink" title="云原生——K8S容器编排技术"></a>云原生——K8S容器编排技术</h1><p><img src="/2025/06/23/%E6%9E%B6%E6%9E%84/Cloud/Microservices-Deployment-via-Docker/k8s.png" alt="k8s"></p>
-<h1 id="无服务器架构——基于容器的自动化构建和部署管道"><a href="#无服务器架构——基于容器的自动化构建和部署管道" class="headerlink" title="无服务器架构——基于容器的自动化构建和部署管道"></a>无服务器架构——基于容器的自动化构建和部署管道</h1><script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
+<h1 id="无服务器架构——基于容器的自动化构建和部署管道"><a href="#无服务器架构——基于容器的自动化构建和部署管道" class="headerlink" title="无服务器架构——基于容器的自动化构建和部署管道"></a>无服务器架构——基于容器的自动化构建和部署管道</h1><h1 id="Helm–K8S容器打包技术"><a href="#Helm–K8S容器打包技术" class="headerlink" title="Helm–K8S容器打包技术"></a>Helm–K8S容器打包技术</h1><h2 id="HelmChart"><a href="#HelmChart" class="headerlink" title="HelmChart"></a>HelmChart</h2><p>Helm是一种业界常用的容器打包技术，通过templates方式定义了一个服务所需要的资源定义。</p>
+<h1 id="FluxCD–容器部署技术"><a href="#FluxCD–容器部署技术" class="headerlink" title="FluxCD–容器部署技术"></a>FluxCD–容器部署技术</h1><p>FluxCD是gitops repo的执行程序，以函数定义形式定义了定义每一个helm chart的部署定义，但是以目前的FluxCD集成设计模式，是更加机械的容器provision能力，而并没有提供更加灵活的容器阶段式定义。资源映射的的过程更像是资源展开的过程，从Kustomization&#x3D;&gt;HelmChart&#x3D;&gt;HelmRelease&#x3D;&gt;K8S RD的映射过程。</p>
+<h1 id="Ansible-Tower–OS自动化部署技术"><a href="#Ansible-Tower–OS自动化部署技术" class="headerlink" title="Ansible Tower–OS自动化部署技术"></a>Ansible Tower–OS自动化部署技术</h1><p>Ansible是Ansible Automation Platform的简称，提供了灵活的自动化部署过程设计，基本的可部署单元是Ansible Playbook，而不同组需要灵活管理的是自己的playbook repo。而本repo的git tag正是决定了该release的版本，从而能够解耦平台playbook和team playbook的版本发布周期。</p>
+<script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
 
@@ -706,7 +722,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-06-21 22:25:08" itemprop="dateModified" datetime="2025-06-21T22:25:08+08:00">2025-06-21</time>
+      <time title="修改时间：2025-09-30 21:21:03" itemprop="dateModified" datetime="2025-09-30T21:21:03+08:00">2025-09-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -754,12 +770,12 @@
 <li><input disabled="" type="checkbox"> 小宝幼儿园前期准备<ul>
 <li><input checked="" disabled="" type="checkbox"> 4、5月择校，9月正常入学</li>
 <li><input disabled="" type="checkbox"> 语言发展关注，发音纠正</li>
-<li><input disabled="" type="checkbox"> 自主如厕练习</li>
+<li><input checked="" disabled="" type="checkbox"> 自主如厕练习</li>
 <li><input checked="" disabled="" type="checkbox"> 自主吃饭习惯培养</li>
 <li><input disabled="" type="checkbox"> 自主穿脱衣服袜子入睡练习</li>
-<li><input disabled="" type="checkbox"> 认识数字大小数数</li>
+<li><input checked="" disabled="" type="checkbox"> 认识数字大小数数</li>
 <li><input disabled="" type="checkbox"> 认字</li>
-<li><input disabled="" type="checkbox"> 安全意识训练</li>
+<li><input checked="" disabled="" type="checkbox"> 安全意识训练</li>
 </ul>
 </li>
 </ul>
@@ -767,7 +783,7 @@
 <li><input disabled="" type="checkbox"> 职场价值、时间效率提升<ul>
 <li><input disabled="" type="checkbox"> 快速阅读《高效能人士&#x2F;家庭的七个习惯》，自我效能提升</li>
 <li><input disabled="" type="checkbox"> 快速阅读《卡耐基人性的弱点》，学会提升别人的效能</li>
-<li><input disabled="" type="checkbox"> 精读并且实践《How to Lead》，学会面对人工作</li>
+<li><input checked="" disabled="" type="checkbox"> 精读并且实践《How to Lead》，学会面对人工作</li>
 <li><input checked="" disabled="" type="checkbox"> 精读《这就是人性》，学会人性的特点，管理必须基于人性</li>
 </ul>
 </li>
@@ -946,12 +962,204 @@
 <li>善于行动，面向未来生活</li>
 </ul>
 <h4 id="保持专业性"><a href="#保持专业性" class="headerlink" title="保持专业性"></a>保持专业性</h4><ul>
-<li>学习领导力：从周围的优秀领导中学习这种能力，自我领悟</li>
-<li>学习企业内部规则：</li>
-<li>学习通用的专业能力</li>
-<li>学习商业生存法则</li>
+<li><p>学习领导力：从周围的优秀领导中学习这种能力，自我领悟，以下是一些常见学习清单</p>
+<ul>
+<li>与个人互动能力<ul>
+<li>设置目标期望</li>
+<li>提供非正式建议和意见</li>
+<li>提供书面建议和意见</li>
+<li>激励他人</li>
+<li>冲突管理和解决</li>
+<li>提供表扬和认可</li>
 </ul>
-<h3 id="实践领导力"><a href="#实践领导力" class="headerlink" title="实践领导力"></a>实践领导力</h3><h3 id="掌握领导力"><a href="#掌握领导力" class="headerlink" title="掌握领导力"></a>掌握领导力</h3><h2 id="《这就是人性：认知觉醒的底层逻辑》"><a href="#《这就是人性：认知觉醒的底层逻辑》" class="headerlink" title="《这就是人性：认知觉醒的底层逻辑》"></a>《这就是人性：认知觉醒的底层逻辑》</h2><h3 id="人性逻辑：别相信人，要相信人性"><a href="#人性逻辑：别相信人，要相信人性" class="headerlink" title="人性逻辑：别相信人，要相信人性"></a>人性逻辑：别相信人，要相信人性</h3><h4 id="用利益去考验人性，你也许会输"><a href="#用利益去考验人性，你也许会输" class="headerlink" title="用利益去考验人性，你也许会输"></a>用利益去考验人性，你也许会输</h4><ul>
+</li>
+<li>沟通能力<ul>
+<li>演讲能力</li>
+<li>倾听能力</li>
+<li>有效邮件沟通</li>
+<li>有效的报告书写</li>
+<li>处理坏消息能力</li>
+<li>面试能力</li>
+</ul>
+</li>
+<li>管理能力<ul>
+<li>会议管理</li>
+<li>解决各种问题</li>
+<li>协商能力</li>
+<li>维护职业人脉网络能力</li>
+<li>向上管理能力</li>
+<li>时间管理能力</li>
+<li>做决策能力（启发式推进能力）</li>
+<li>长期远景设定和判断力</li>
+<li>团队管理</li>
+<li>委任交由下属处理能力</li>
+<li>危机管理能力</li>
+</ul>
+</li>
+<li>个人行为管理<ul>
+<li>同情心</li>
+<li>对生活的热情</li>
+<li>持久力</li>
+<li>风险承担和管理能力</li>
+<li>礼貌和谦恭</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>学习企业内部规则：每一个企业都有自己的文化，从穿着，运行习惯，从快速晋升的同事身上学习，可以帮助你快速捕捉企业内部规则和上升通道。</p>
+</li>
+<li><p>学习通用的专业能力：</p>
+<ul>
+<li>忠诚</li>
+<li>诚实</li>
+<li>可靠</li>
+<li>有法子的</li>
+<li>充满能量</li>
+<li>对待下属常见弊病：<ul>
+<li>沟通不足</li>
+<li>不客观评论</li>
+<li>政客式偏颇的处理</li>
+<li>霸凌</li>
+<li>坏习惯</li>
+<li>个人主义反馈和冲突</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>冲突扩大化处理流程：</p>
+<ul>
+<li><p>尽量弱化冲突，让冲突自然消退</p>
+</li>
+<li><p>慢慢扩大化冲突，给予私下解决空间</p>
+</li>
+<li><p>和导师寻求帮助，区分针对个人问题和普遍问题</p>
+</li>
+<li><p>向老板寻求裁决，一般也是两头不讨好的下策</p>
+</li>
+<li><p>学习商业生存礼节</p>
+<ul>
+<li>快速回应</li>
+<li>专注力</li>
+<li>礼貌用语</li>
+<li>准时</li>
+<li>增加个人相关元素</li>
+<li>目标是让别人感受到被重视，被尊重。</li>
+</ul>
+</li>
+</ul>
+<h3 id="实践领导力"><a href="#实践领导力" class="headerlink" title="实践领导力"></a>实践领导力</h3><p>管理层的工作模式不再是一个单一维度，而是矩阵式的：</p>
+<ul>
+<li><p>单一生存模式的弊端：</p>
+<ul>
+<li>技术领域的竞争力并不代表领导力和管理能力</li>
+<li>企业洞穴居民，指的公司横向纵向岗位交叉位置上诞生的职工，常常安于现状难于晋升</li>
+<li>企业政治家，善于沾光，不善于承担责任</li>
+<li>护花使者，与政治家不同，常常默默付出，但是由于缺乏表达欲，没有将自己的产出很好的展示出给大家</li>
+<li>独断的领导者，要求下属百分之百的听从指挥，如果没有则是表现不佳</li>
+</ul>
+</li>
+<li><p>如何在矩阵中走出一条成功道路3.5P：</p>
+<ul>
+<li>People关注于人：如何驱动他人去做事，无论有没有正式的权威去控制，激励他人，如何建立良好的职场网络人脉。</li>
+<li>Professional资深领导的核心价值构建：去除工具人的工作模式，逐渐开始练习软实力作为核心竞争力：阅读、写作、谈话、和倾听技巧。</li>
+<li>Positive正能量的：领导者无法避免冲突、模糊不清和风险，正能量的人才需要正确的面对风险、变化和模糊不清，快速的成功或者失败寻找别的出路。</li>
+<li>Performance：必须良好的展示你自己的个人能力，可以很好的出色地解决复杂模糊的问题。</li>
+</ul>
+</li>
+</ul>
+<h4 id="关注于人"><a href="#关注于人" class="headerlink" title="关注于人"></a>关注于人</h4><h5 id="区分下属类型"><a href="#区分下属类型" class="headerlink" title="区分下属类型"></a>区分下属类型</h5><ul>
+<li>X-type下属：不喜欢工作，懒惰，工作是为了谋生，没有归属关</li>
+<li>Y-type下属：可以信任他能够完成任务，赋能和委任是更好的管理合作方式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">管理领域</th>
+<th align="center">X-type manager</th>
+<th align="right">Y-type leader</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">权利基础</td>
+<td align="center">正式权威</td>
+<td align="right">权威和尊重</td>
+</tr>
+<tr>
+<td align="left">控制要点</td>
+<td align="center">合规流程</td>
+<td align="right">结构和输出</td>
+</tr>
+<tr>
+<td align="left">沟通方式</td>
+<td align="center">单向通知</td>
+<td align="right">双向说和听</td>
+</tr>
+<tr>
+<td align="left">成功条件</td>
+<td align="center">不出错</td>
+<td align="right">达到目的</td>
+</tr>
+<tr>
+<td align="left">细节关注程度</td>
+<td align="center">高</td>
+<td align="right">低</td>
+</tr>
+<tr>
+<td align="left">对模糊容忍程度</td>
+<td align="center">低</td>
+<td align="right">高</td>
+</tr>
+<tr>
+<td align="left">政治能力</td>
+<td align="center">中等</td>
+<td align="right">高</td>
+</tr>
+<tr>
+<td align="left">喜欢的组织架构</td>
+<td align="center">等级制</td>
+<td align="right">扁平化</td>
+</tr>
+</tbody></table>
+<h5 id="基本的激励模式"><a href="#基本的激励模式" class="headerlink" title="基本的激励模式"></a>基本的激励模式</h5><ul>
+<li><p>保证下属能力和岗位及待遇平衡，用最理智的思维思考下属的驱动力，基本源自合理的待遇和约定好的假期福利等。这种激励模式的短效的，一旦平衡被打破，交付能力就会下降。</p>
+</li>
+<li><p>关注在下属内在能力的驱动，注重精神上的肯定、工作的价值肯定，并且有一个兼容并包有归属感的工作环境。这样的激励模式是长效的，并且短期的不平衡不会影响表现，同时能够更容易达成拔群效果。</p>
+</li>
+</ul>
+<p>大多数中层领导并不能控制option 1的因素，但是能够最大限度的在option 2上给予下属合理的激励。用中文来讲，下属离职往往就是钱少、干的不开心，也就精确描述了上述两个管理者需要关注的地方。</p>
+<h6 id="马斯洛需求模型"><a href="#马斯洛需求模型" class="headerlink" title="马斯洛需求模型"></a>马斯洛需求模型</h6><ul>
+<li>生理需求: 求生本能是对食物、水的需求，而在职场，待遇就是基本需求。</li>
+<li>安全需求：职位的安全性，是具备匹配职位的能力保证了一个人的职位安全。如果职位发生了变化，随之而来的就是人需要去新的职场去寻求匹配的职位，或者扩展自己的能力去匹配岗位。</li>
+<li>爱：在职场其实应该是兼容并包的氛围体现，让下属对自己的职业规划有期望和兴趣。</li>
+<li>自尊心：确保下属被尊重，公开表扬和私底下批评，同时尽量做到10倍表扬于批评。</li>
+<li>自我实现：成就感，创造被众人认可的产出。</li>
+</ul>
+<p>作为好的团队领导，需要做到一下几点：</p>
+<ul>
+<li>团队领导需要提供清晰的指令，和清晰的目标，从而避免误解猜疑，替下属移除疑虑，并帮助她更容易锁定目标成功。</li>
+<li>团队领导不能过度管理细节，而是结构性的提供建议，避免自己动手去做。</li>
+<li>MBWA，团队领导不能过度关注项目进度，允许一定的自由性，让团队有足够的信任感，和使命感而不是棋子感。</li>
+</ul>
+<h6 id="领导需要帮助把想法变成办法"><a href="#领导需要帮助把想法变成办法" class="headerlink" title="领导需要帮助把想法变成办法"></a>领导需要帮助把想法变成办法</h6><p>下属的核心关注点和期望值是：</p>
+<p>明面上：</p>
+<ul>
+<li>领导关心我的职业发展<ul>
+<li>我负责产出领导指令结果</li>
+<li>领导关照我的职位提升和待遇</li>
+</ul>
+</li>
+<li>领导对我的项目产出坦诚</li>
+<li>领导给出明确项目规划</li>
+<li>领导的规划价值明确</li>
+<li>领导认可我的贡献</li>
+</ul>
+<p>暗地里：</p>
+<ul>
+<li>我的待遇不错</li>
+<li>我的私人生活可以平衡</li>
+</ul>
+<h4 id="正能量"><a href="#正能量" class="headerlink" title="正能量"></a>正能量</h4><h4 id="构建领导者核心价值"><a href="#构建领导者核心价值" class="headerlink" title="构建领导者核心价值"></a>构建领导者核心价值</h4><h3 id="掌握领导力"><a href="#掌握领导力" class="headerlink" title="掌握领导力"></a>掌握领导力</h3><h2 id="《这就是人性：认知觉醒的底层逻辑》"><a href="#《这就是人性：认知觉醒的底层逻辑》" class="headerlink" title="《这就是人性：认知觉醒的底层逻辑》"></a>《这就是人性：认知觉醒的底层逻辑》</h2><h3 id="人性逻辑：别相信人，要相信人性"><a href="#人性逻辑：别相信人，要相信人性" class="headerlink" title="人性逻辑：别相信人，要相信人性"></a>人性逻辑：别相信人，要相信人性</h3><h4 id="用利益去考验人性，你也许会输"><a href="#用利益去考验人性，你也许会输" class="headerlink" title="用利益去考验人性，你也许会输"></a>用利益去考验人性，你也许会输</h4><ul>
 <li>趋利避害是人性，所以义才可贵<ul>
 <li>利是人类社会发展的动力，也是生存下去的根本。义是需要的，是人类社会得以稳固的基础，也是一个人处世的根本。这对矛盾从人出生开始就有，而能人往往能在矛盾中平和的生活。</li>
 </ul>
@@ -1129,6 +1337,8 @@
 <li>解决问题也是解决本质的问题，而不是在复杂的题面上纠结原因</li>
 <li>避免精神内耗的本质是课题分离，并且看清内耗的本质是什么，专注眼下的事情</li>
 </ul>
+<h2 id="lt-lt-人的小我和大我-gt-gt"><a href="#lt-lt-人的小我和大我-gt-gt" class="headerlink" title="&lt;&lt; 人的小我和大我 &gt;&gt;"></a>&lt;&lt; 人的小我和大我 &gt;&gt;</h2><p>这是观看一篇访谈的观后感，文中讲述了在中国特殊时期发生的意外事件，在群众价值观极度扭曲和对立的状态下，一个人从小我的思考角度和大我的思考角度下做出截然不同的决策后产生的完全相反的结局。和平时代的大多数我们是不会面临这样的抉择，并且我们已经习惯于从自己个人利益出发去思考，而不会站在历史宏观的角度去思考，如果我这么做了，会不会让眼下的自己过得更舒服，而让历史上的自己彻底成为了一个小人。</p>
+<p>宋的模棱两可让自己成为了红色领袖的青年典范，而她的奋斗目标正是出人头地，追求卓越，上进好青年，无视成为政治符号后带来的巨大影响力。让一个个人作秀成为了历史上一个悲剧的开始，一场群体运动的开始，将生活常态中的师生矛盾变成了敌我矛盾，曾经的批评打骂变成了血肉之躯之间的战斗，心理的不愉快演变成了生与死的别离。50年后，一众花白头发的老人回首当年的矛盾，已经不能再次激起社会的千层浪。当年的怨恨和心结却实让人难以了解，还能鼓起勇气去面对当时的冲突，在沙发上平静的讲述当年的不满和错误，可能大多数的人都无法做到。在当年那个一念天地之差的时代，经历过了血雨腥风，到现在的和平年代去讲述还是会有种种犹豫和担忧。小小的个人利益，和宏大的国家社会利益之间相冲突，我们能够做正确的事情是一个非常难以从当下的视角判断清楚的。只希望我们在每天、每周的回顾时候，能够修正行为上的偏差、让最终的结果达到最大化的美好。</p>
 <script type="text&#x2F;javascript" src="https://unpkg.com/kity@2.0.4/dist/kity.min.js"></script><script type="text&#x2F;javascript" src="https://unpkg.com/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text&#x2F;javascript" src="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text&#x2F;css" href="https://unpkg.com/hexo-simple-mindmap@0.8.0/dist/mindmap.min.css">
       
     </div>
